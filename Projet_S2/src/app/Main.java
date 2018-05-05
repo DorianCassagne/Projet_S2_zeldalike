@@ -16,7 +16,7 @@ public class Main extends Application {
         try {
 
         FXMLLoader loader = new FXMLLoader();
-        URL url = new File("src/gui/GUIView.fxml").
+        URL url = new File("src/gui/GuiView.fxml").
         toURI().toURL();
         loader.setLocation(url);
         System.out.println(loader.getLocation());
