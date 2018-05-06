@@ -1,12 +1,12 @@
 package model;
 
 public class Map {
-	int[][] map;
+	title[][] map;
 	
-	public Map(int[][] map) {
+	public Map(title[][] map) {
 		this.map=map;
 	}
-	public Map(int[][] map, Npc[][] npc ) {
+	public Map(title[][] map, Npc[][] npc ) {
 		this(map);
 		
 	}
