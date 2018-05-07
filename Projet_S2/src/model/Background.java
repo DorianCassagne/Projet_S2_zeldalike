@@ -24,7 +24,7 @@ public class Background implements WithImageDefiner{
 		}
 	}
 	
-	
+	@Override
 	public String toString() {
 		return SIGNIFICATIONS[this.value] ;
 	}

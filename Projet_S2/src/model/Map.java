@@ -1,13 +1,13 @@
 package model;
 
 public class Map {
-	title[][] map;
+	private static int mapWidth ;
 	
-	public Map(title[][] map) {
-		this.map=map;
+	public Map(int width) {
+		mapWidth = width;
 	}
-	public Map(title[][] map, Npc[][] npc ) {
-		this(map);
-		
+	
+	public static int getMapWidth() {
+		return mapWidth;
 	}
 }
