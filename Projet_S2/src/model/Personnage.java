@@ -9,6 +9,8 @@ public abstract class Personnage {
 	private String nom;
 	private StringProperty representationImage;
 	private boolean movementPossible;
+	
+	
 	public Personnage(String nom,int posX,int posY) {
 		if(posX >= 0 && posY >= 0 && nom != null) {
 			this.posX = new SimpleIntegerProperty(posX);
