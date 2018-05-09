@@ -1,7 +1,9 @@
 package model;
 
+import Character.Npc;
+
 public class Map {
-	title[][] map;
+	Square[][] map;
 	
 	public Map(int[][] backMap, int[][] itemMap,Npc[][] npcMap) {
 		

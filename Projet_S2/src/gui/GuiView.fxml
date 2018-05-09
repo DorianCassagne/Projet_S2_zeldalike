@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1">
-	<!-- TODO Add Nodes -->
-</AnchorPane>
-
+<Pane fx:id="paneWindow" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.controler.MenuControler">
+   <children>
+      <Pane fx:id="paneGame" prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <Pane fx:id="PaneGround" prefHeight="418.0" prefWidth="616.0" />
+            <Pane fx:id="PaneSolid" prefHeight="418.0" prefWidth="616.0" />
+            <Pane fx:id="EntityPane" prefHeight="418.0" prefWidth="616.0" />
+            <Pane fx:id="PaneTop" prefHeight="418.0" prefWidth="616.0" />
+         </children>
+      </Pane>
+      <Pane fx:id="PaneHUD" prefHeight="400.0" prefWidth="600.0" />
+   </children>
+</Pane>

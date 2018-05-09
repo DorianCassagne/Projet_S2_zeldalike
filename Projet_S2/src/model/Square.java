@@ -1,5 +1,9 @@
 package model;
 
-public class Square {
+import Character.GameCharacteur;
 
+public class Square {
+	private BackgroundMap back;
+	private Item item;
+	private GameCharacteur charac;
 }
