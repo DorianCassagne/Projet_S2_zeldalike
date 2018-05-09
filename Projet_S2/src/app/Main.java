@@ -22,7 +22,7 @@ public class Main extends Application {
         System.out.println(loader.getLocation());
         AnchorPane root = new AnchorPane(); 
         root=loader.load(); 
-         Scene scene = new Scene(root,600,400);
+        Scene  scene = new Scene(root,600,400);
         primaryStage.setScene(scene);
         primaryStage.show();
         } catch (Exception e) {
@@ -32,6 +32,8 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
+        
+       
     }
 }
 

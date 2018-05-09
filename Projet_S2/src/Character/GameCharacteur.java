@@ -1,13 +1,13 @@
 package Character;
 
-import java.awt.image.BufferedImage;
+import javafx.scene.image.ImageView;
 
 public abstract class GameCharacteur  {
 
 	protected int pv;
 	protected int pvMax;
 	protected int def;
-	protected BufferedImage img;
+	protected ImageView img;
 	boolean dead;
 	
 	

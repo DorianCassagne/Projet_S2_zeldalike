@@ -1,4 +1,4 @@
 package Character;
 
-public class Npc implements GameCharacteur{
+public class Npc extends GameCharacteur{
 }
