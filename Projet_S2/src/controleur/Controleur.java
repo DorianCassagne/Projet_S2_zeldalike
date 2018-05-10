@@ -43,7 +43,7 @@ public class Controleur implements Initializable{
 //		mainAnchorPane.getChildren().add(img);
 //		img.relocate(10, 10);
 //		img.setTranslateX(100);
-		int[][] tab = {{1233,505,1233},{505,1233,505},{1233,505,1233}};
+		int[][] tab = {{1115,1123,1131},{1116,1124,1132},{1117,1125,1133}};
 		GameMap map =new GameMap( tab );/*, {{94,94,94},{94,94,94},{94,94,94}} , {null,null,null} */
 			
 		ArrayList<ImageView> ar= map.getTexture();

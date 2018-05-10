@@ -10,6 +10,7 @@ public class Square {
 	private GameCharacteur charac;
 	public Square(int x, int y,int back, int item, GameCharacteur charac, TexturePack tp) {
 		this.back= new BackgroundMap(back, tp, x, y);
+		this.item= new Item(item, tp, x, y);
 	}
 	public ImageView getBackText() {
 		return back.getImg();

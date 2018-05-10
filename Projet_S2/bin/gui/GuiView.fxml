@@ -5,7 +5,7 @@
 
 
 <AnchorPane fx:id="mainAnchorPane" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="100.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/9.0.1" fx:controller="controleur.Controleur">
-   <children>
+<!--    <children>
       <Button fx:id="butO" layoutX="34.0" layoutY="25.0" mnemonicParsing="false" onAction="#test" text="Button" />
    </children>
-</AnchorPane>
+ --></AnchorPane>
