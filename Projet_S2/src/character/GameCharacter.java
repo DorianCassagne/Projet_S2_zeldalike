@@ -1,7 +1,7 @@
 package character;
 
 import javafx.scene.image.ImageView;
-import model.GameMap;
+import map.GameMap;
 
 public abstract class GameCharacter  {
 

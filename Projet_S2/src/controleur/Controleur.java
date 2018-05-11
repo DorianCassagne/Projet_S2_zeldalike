@@ -11,7 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import model.GameMap;
+import map.GameMap;
 import texture.TexturePack;
 
 public class Controleur implements Initializable{
