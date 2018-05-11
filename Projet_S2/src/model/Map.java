@@ -9,6 +9,7 @@ public class Map {
 			MapReader map = new MapReader(mapName);
 			initialiseCases(map);
 		}catch(Exception e) {
+			e.printStackTrace();
 			throw new IllegalArgumentException("Invalid Map");
 		}
 	}
@@ -33,7 +34,7 @@ public class Map {
 	}
 	
 	
-	public Case getCase(int row,int column) {
-		return this.cases[row][column];
+	public Background getBackground(int row,int column) {
+		return this.cases[row][column].getBackground();
 	}
 }

@@ -1,6 +1,6 @@
 package model;
 
-public class Decoration implements WithImageDefiner{
+public class Decoration {
 
 	static enum Signification{
 		NEIGE,PIERRE

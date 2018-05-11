@@ -3,7 +3,7 @@ package model;
 public class Background {
 	private Signification value;
 	static enum Signification {
-		back1(false,1),
+		back1(false,0),
 		back2(true,1539),
 		table1(false,963),
 		table2(false,964),
@@ -16,9 +16,10 @@ public class Background {
 		cuisine3(false,1728),
 		cuisine4(false,1536),
 		cuisine5(false,1538),
-		cuisine6(false,1344),
-		cuisine7(false,1345),
-		cuisine8(false,1346),
+		cuisine6(false,1537),
+		cuisine7(false,1344),
+		cuisine8(false,1345),
+		cuisine9(false,1346),
 		frigo(false,768),
 		frigo2(false,960);
 		;

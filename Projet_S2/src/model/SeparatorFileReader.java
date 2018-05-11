@@ -4,11 +4,12 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 public class SeparatorFileReader {
-	public static BufferedReader openTextFile(String path) throws IOException{
-		File file = new File(path);
+	public static BufferedReader openTextFile(String path) throws IOException, URISyntaxException{
+		File file = new File(SeparatorFileReader.class.getResource(path).toURI().toURL().getPath());
 		FileReader fileReader = new FileReader(file);
 		BufferedReader reader = new BufferedReader(fileReader);
 		return reader;

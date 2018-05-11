@@ -14,6 +14,7 @@ import javafx.scene.image.PixelReader;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.TilePane;
+import model.Background;
 import model.Case;
 import model.Game;
 import model.Map;
@@ -44,10 +45,10 @@ public class Controleur implements Initializable{
 		mapPane.setPrefRows(this.map.getMapWidth());
 		WritableImage sizedImage;
 		for(int i = 0 ; i < tileMapImage.length;i++) {
-			for(ImageView viewer : tileMapImage[i]) {
-				 image = getImageForCase(i,j,imageReader);
-				 viewer = new ImageView(image);
-				 this.mapPane.getChildren().add(viewer);
+			for(int j = 0 ; j < tileMapImage[i].length;j++) {
+				 sizedImage = getImageForCase(i,j,imageReader);
+				 tileMapImage[i][j] = new ImageView(sizedImage);
+				 this.mapPane.getChildren().add(tileMapImage[i][j]);
 			}
 		}
 
@@ -55,14 +56,14 @@ public class Controleur implements Initializable{
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-
+		initialiseCurrentMap();
 	}
 	
 	
-	private Image getImageForCase(int row,int column,PixelReader imageReader) {
-		Case caseMap = this.map.getCase(row, column);
-		int xi = caseMap.getBackground().getTile()[0] ;
-		int yi = caseMap.getBackground().getTile()[1];
+	private WritableImage getImageForCase(int row,int column,PixelReader imageReader) {
+		Background caseBackground = this.map.getBackground(row, column);
+		int xi = caseBackground.getTile()[0] ;
+		int yi = caseBackground.getTile()[1];
 		int xf = xi + MapReader.TILESDIMENSION;
 		int yf = yi + MapReader.TILESDIMENSION;
 		return new WritableImage(imageReader,xi,yi,xf,yf);
