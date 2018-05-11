@@ -3,7 +3,7 @@ package Character;
 import javafx.scene.image.ImageView;
 import model.GameMap;
 
-public abstract class GameCharacteur  {
+public abstract class GameCharacter  {
 
 	protected int pv;
 	protected int pvMax;

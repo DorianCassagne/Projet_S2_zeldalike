@@ -23,7 +23,6 @@ public class Controleur implements Initializable{
 	private AnchorPane mainAnchorPane;
 
 	@FXML
-	ImageView img;
 	static TexturePack textu;
 	private DoubleProperty decalMapX;
 
@@ -62,6 +61,11 @@ public class Controleur implements Initializable{
 		   
 	}
 	
+	public void MouveMap(int x, int y) {
+		decalMapX.set(x*32+decalMapX.get()); 
+		decalMapY.set(y*32+decalMapY.get()); 
+	}
+	
 
 	
 	
@@ -84,11 +88,5 @@ public class Controleur implements Initializable{
 //		img.setImage(textu.getImg(2));
 //	}
 
-		@FXML
-		private void test(ActionEvent event) {
-		img.setTranslateX(10+img.getTranslateX());
-		
 
-		img.setImage(textu.getImg(2));
-	}
 }
