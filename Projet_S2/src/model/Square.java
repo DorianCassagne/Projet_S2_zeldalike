@@ -18,4 +18,15 @@ public class Square {
 	public ImageView getItemText() {
 		return back.getImg();
 	}
+	public GameCharacter removeCharater() {
+		GameCharacter c = charac;
+		charac=null;
+		return c;
+	}
+	public void addCharacter() {
+		if(charac != null && charac.isDead()) {
+			throw new Error("impossible dajouter nouveau personage a la case");
+		}
+	}
+	
 }

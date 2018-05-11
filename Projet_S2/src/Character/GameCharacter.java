@@ -14,8 +14,6 @@ public abstract class GameCharacter  {
 	boolean dead;
 	
 	
-	
-	
 	public void getDmg(Attack att) {
 		pv-=att.getDamage()*(100/def+100);
 		if (pv<=0) {
@@ -37,7 +35,11 @@ public abstract class GameCharacter  {
 	public int[] actionTurn(GameMap map) {
 		int[] tab = {x,y};
 		return tab;
-		
 	}
+	
+	public boolean isDead() {
+		return dead;
+	}
+	
 	
 }
