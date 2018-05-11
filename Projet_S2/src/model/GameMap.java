@@ -2,7 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
-import Character.Npc;
+import character.Npc;
 import javafx.scene.image.ImageView;
 import texture.TexturePack;
 

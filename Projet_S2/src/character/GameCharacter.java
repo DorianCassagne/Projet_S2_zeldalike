@@ -1,4 +1,4 @@
-package Character;
+package character;
 
 import javafx.scene.image.ImageView;
 import model.GameMap;

@@ -1,6 +1,6 @@
 package model;
 
-import Character.GameCharacter;
+import character.GameCharacter;
 import javafx.scene.image.ImageView;
 import texture.TexturePack;
 
@@ -23,10 +23,14 @@ public class Square {
 		charac=null;
 		return c;
 	}
-	public void addCharacter() {
+	public void addCharacter(GameCharacter newPlayer) {
 		if(charac != null && charac.isDead()) {
 			throw new Error("impossible dajouter nouveau personage a la case");
 		}
+		charac=newPlayer;
+	}
+	public boolean isWalkable() {
+		return back.isWalkable()&&item.isWalkable()&&(charac == null || charac.isDead());
 	}
 	
 }
