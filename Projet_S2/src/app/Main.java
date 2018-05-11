@@ -22,10 +22,10 @@ public class Main extends Application {
         loader.setLocation(url);
         BorderPane root ; 
         root=loader.load(); 
-        Scene scene = new Scene(root,640,432);
+        Scene scene = new Scene(root,480,432);
         primaryStage.setScene(scene);
         primaryStage.show();
-        } catch (Exception e) {
+       } catch (Exception e) {
             e.printStackTrace();
         }
     }
