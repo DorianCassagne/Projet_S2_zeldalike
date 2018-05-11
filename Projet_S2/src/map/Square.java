@@ -13,10 +13,14 @@ public class Square {
 		this.item= new Item(item, tp, x, y);
 	}
 	public ImageView getBackText() {
-		return back.getImg();
+		if(item!=null)
+			return back.getImg();
+		return null;
 	}
 	public ImageView getItemText() {
-		return back.getImg();
+		if(item!=null)
+			return item.getImg();
+		return null;
 	}
 	public GameCharacter removeCharater() {
 		GameCharacter c = charac;

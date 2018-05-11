@@ -2,7 +2,7 @@ package map;
 
 import java.util.ArrayList;
 
-import character.Npc;
+import character.GameCharacter;
 import javafx.scene.image.ImageView;
 import texture.TexturePack;
 
@@ -24,7 +24,8 @@ public class GameMap {
 		}
 
 	}
-	public GameMap(int[][] backMap, int[][] itemMap,Npc[][] npcMap) {
+	public GameMap(int[][] backMap, int[][] itemMap,GameCharacter[][] npcMap) {
+		map= new Square[backMap.length][backMap[0].length];
 		
 	}
 	
@@ -35,6 +36,14 @@ public class GameMap {
 				ar.add(square.getBackText());
 			}
 		}
+		for (Square[] squares : map) {
+			for (Square square : squares) {
+				if (square.getBackText()!=null)
+					ar.add(square.getBackText());
+			}
+		}
 		return ar;
 	}
+	
+	
 }
