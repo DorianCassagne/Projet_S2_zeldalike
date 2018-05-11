@@ -6,25 +6,17 @@ public class Case {
 	private Item item;
 	private Decoration decoration;
 	
-	public Case(int backgroundCode,int decorationCode,int itemCode) {
+	/*
+	 * Une case ne peut contenir qu'un item ou une decoration, pas les deux en même temps
+	 */
+	
+	public Case(int backgroundCode) {
 		this.background = new Background(backgroundCode);
-		this.decoration = new Decoration(decorationCode);
 	}
 	
-	public Case(String backgroundValue,int decorationCode,int itemCode) {
-		this.background = new Background(backgroundValue);
-		this.decoration = new Decoration(decorationCode);
-	}
-	
-	public Case(String backgroundValue,String decorationValue,int itemCode) {
-		this.background = new Background(backgroundValue);
-		this.decoration = new Decoration(decorationValue);
-	}
-	
-	public Case(int backgroundValue,String decorationValue,String itemValue) {
-		this.background = new Background(backgroundValue);
-		this.decoration = new Decoration(decorationValue);
-	}
+	public Case(Integer backgroundCode,Integer decorationCode,Integer itemCode) {
+		
+	}	
 	
 	
 	public boolean estVide() {
@@ -41,5 +33,9 @@ public class Case {
 	public void viderCase() {
 		this.currentChar = null;
 	}
-
+	
+	public Background getBackground() {
+		return this.background;
+	}
+	
 }

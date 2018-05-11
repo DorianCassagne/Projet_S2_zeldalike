@@ -1,12 +1,13 @@
 package app;
 
 import java.io.File;
+
 import java.net.URL;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -19,10 +20,9 @@ public class Main extends Application {
         URL url = new File("src/gui/GuiView.fxml").
         toURI().toURL();
         loader.setLocation(url);
-        System.out.println(loader.getLocation());
-        AnchorPane root = new AnchorPane(); 
+        BorderPane root ; 
         root=loader.load(); 
-         Scene scene = new Scene(root,600,400);
+        Scene scene = new Scene(root,640,432);
         primaryStage.setScene(scene);
         primaryStage.show();
         } catch (Exception e) {
