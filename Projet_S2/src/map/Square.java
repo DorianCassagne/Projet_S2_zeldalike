@@ -28,7 +28,7 @@ public class Square {
 		return c;
 	}
 	public void addCharacter(GameCharacter newPlayer) {
-		if(charac != null && charac.isDead()) {
+		if(charac != null && !charac.isDead()) {
 			throw new Error("impossible dajouter nouveau personage a la case");
 		}
 		charac=newPlayer;

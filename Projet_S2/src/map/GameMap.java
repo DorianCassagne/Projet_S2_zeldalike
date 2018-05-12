@@ -19,31 +19,45 @@ public class GameMap {
 		for (int i =0 ; i<backMap.length; i++) {
 
 			for (int j =0 ; j<backMap[0].length; j++) {
-				map[i][j]=new Square(i*32,j*32,backMap[i][j],0,null,textu);
+				map[i][j]=new Square(i*32,j*32,backMap[i][j],95,null,textu);
 			}
 		}
 
 	}
-	public GameMap(int[][] backMap, int[][] itemMap,GameCharacter[][] npcMap) {
-		map= new Square[backMap.length][backMap[0].length];
-		
+	public GameMap(int[][] backMap, int[][] itemMap,GameCharacter[][] npcMap, TexturePack textu) {
+		this.textu=textu;
+		for (int i =0 ; i<backMap.length; i++) {
+
+			for (int j =0 ; j<backMap[0].length; j++) {
+				map[i][j]=new Square(i*32,j*32,backMap[i][j],itemMap[i][j],npcMap[i][j],textu);
+			}
+		}
 	}
 	
 	public ArrayList<ImageView> getTexture(){
 		ArrayList<ImageView> ar= new ArrayList<ImageView>();
 		for (Square[] squares : map) {
 			for (Square square : squares) {
-				ar.add(square.getBackText());
+				if (square.getItemText()!=null)
+					ar.add(square.getBackText());
 			}
 		}
 		for (Square[] squares : map) {
 			for (Square square : squares) {
-				if (square.getBackText()!=null)
-					ar.add(square.getBackText());
+				if (square.getItemText()!=null)
+					ar.add(square.getItemText());
 			}
 		}
 		return ar;
 	}
+	
+	public void addCharac(GameCharacter gChar) {
+		map[gChar.getX()][gChar.getY()].addCharacter(gChar);
+	}
+	public GameCharacter takeCharac(int x, int y) {
+		return map[x][y].removeCharater();
+	}
+	
 	
 	
 }

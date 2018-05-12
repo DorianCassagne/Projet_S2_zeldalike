@@ -5,29 +5,29 @@ import map.GameMap;
 
 public abstract class GameCharacter  {
 
-	protected int pv;
+	protected int hp;
 	protected int pvMax;
 	protected int def;
 	protected int x;
 	protected int y;
 	protected ImageView img;
-	boolean dead;
+	protected boolean dead;
 	
 	
 	public void getDmg(Attack att) {
-		pv-=att.getDamage()*(100/def+100);
-		if (pv<=0) {
+		hp-=att.getDamage()*(100/def+100);
+		if (hp<=0) {
 			dead = true;
 		}
 	}
 	
 	public void getHeal(int heal) {
 		if (!dead) {
-			if(pv+heal>pvMax) {
-				pv=pvMax;
+			if(hp+heal>pvMax) {
+				hp=pvMax;
 			}
 			else {
-				pv+=heal;
+				hp+=heal;
 			}
 		}
 	}
@@ -40,6 +40,15 @@ public abstract class GameCharacter  {
 	public boolean isDead() {
 		return dead;
 	}
+	public int getX() {
+		return x;
+	}
+	public int getY() {
+		return y;
+	}
 	
-	
+	public void relocate(int x,int y) {
+		this.x=x;
+		this.y=y;
+	}
 }
