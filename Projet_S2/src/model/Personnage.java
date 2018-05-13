@@ -3,64 +3,61 @@ package model;
 import javafx.beans.property.*;
 
 public abstract class Personnage {
-	private final static String[] IMAGESNAMES = {"fairyBbackHilight.png","fairyface.png","fairyprofil.png"};
 	private String nom;
-	private IntegerProperty caseProperty;
 	private StringProperty representationImage;
-	private boolean movementPossible;
+	private StringProperty copyOfRepresentationImage;
+	private Map myMap ;
 	
-	
-	public Personnage(String nom) {
-		if(nom != null) {
+	public Personnage(String nom,String startImage,Map map,int caseDebutX,int caseDebutY) {
+		if(nom != null && map != null) {
 			this.nom = nom;
-			this.representationImage = new SimpleStringProperty(IMAGESNAMES[0]);
-			this.movementPossible = true;
+			this.representationImage = new SimpleStringProperty(startImage);
+			this.myMap = map;
+			this.myMap.addToList(this, caseDebutX, caseDebutY);
 		}
 	}
 	
-	final IntegerProperty caseProperty() {
-		IntegerProperty property = new SimpleIntegerProperty();
-		property.bind(this.caseProperty);
-		return property;
+	
+	public StringProperty representationImageProperty() {
+		this.copyOfRepresentationImage = new SimpleStringProperty();
+		copyOfRepresentationImage.bind(this.representationImage);
+		return copyOfRepresentationImage;
 	}
 	
-	public abstract void bouger() ;
 	
 	private void setRepresentationImage(String imageName) {
 		if(imageName != null)
 			representationImage.set(imageName);
 	}
 	
-	public void toTop() {
-		setRepresentationImage(getTopImage());
+	public  void toTop() {
+		this.setRepresentationImage(this.getTopImage());
+		this.myMap.etablirDeplacement(this, Map.Deplacement.TOP);
+	}
+	public  void toLeft() {
+		this.setRepresentationImage(this.getLeftImage());
+		this.myMap.etablirDeplacement(this, Map.Deplacement.LEFT);
 	}
 	
-	public void toRight() {
-		setRepresentationImage(getRightImage());
+	public  void toBottom() {
+		this.setRepresentationImage(this.getBottomImage());
+		this.myMap.etablirDeplacement(this, Map.Deplacement.BOTTOM);
 	}
 	
-	public void toBottom() {
-		setRepresentationImage(getBottomImage());
+	public  void toRight() {
+		this.setRepresentationImage(this.getRightImage());
+		this.myMap.etablirDeplacement(this, Map.Deplacement.RIGHT);
 	}
 	
-	public void toLeft() {
-		setRepresentationImage(getLeftImage());
+	
+	public abstract String getTopImage();
+	public abstract String getBottomImage();
+	public abstract String getLeftImage();
+	public abstract String getRightImage();
+	
+	public String getNom() {
+		return this.nom;
 	}
-	
-	protected abstract String getTopImage() ;
-	
-	protected abstract String getRightImage() ;
-	
-	protected abstract String getBottomImage() ;
-	
-	protected abstract String getLeftImage() ;
-	
-	
-	@Override
-	public String toString() {
-		return " a pour nom : " + this.nom;
-	}
-	
 	
 	
 

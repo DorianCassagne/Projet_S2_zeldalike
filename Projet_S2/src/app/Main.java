@@ -4,6 +4,7 @@ import java.io.File;
 
 import java.net.URL;
 
+import controleur.Controleur;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -17,12 +18,18 @@ public class Main extends Application {
         try {
 
         FXMLLoader loader = new FXMLLoader();
+        
         URL url = new File("src/gui/GuiView.fxml").
         toURI().toURL();
         loader.setLocation(url);
         BorderPane root ; 
-        root=loader.load(); 
+
+
+        root=loader.load();
+        Controleur controller= loader.getController(); 
         Scene scene = new Scene(root,480,432);
+        controller.startScene(scene);
+
         primaryStage.setScene(scene);
         primaryStage.show();
        } catch (Exception e) {

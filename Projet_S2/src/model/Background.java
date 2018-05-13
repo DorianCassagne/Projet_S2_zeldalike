@@ -22,7 +22,6 @@ public class Background {
 		cuisine9(false,1346),
 		frigo(false,768),
 		frigo2(false,960);
-		;
 		
 		private boolean estTraversable;
 		private int numero ;
