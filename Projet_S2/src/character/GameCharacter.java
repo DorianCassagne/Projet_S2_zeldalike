@@ -2,6 +2,7 @@ package character;
 
 import javafx.scene.image.ImageView;
 import map.GameMap;
+import texture.TexturePack;
 
 public abstract class GameCharacter  {
 
@@ -32,7 +33,7 @@ public abstract class GameCharacter  {
 		}
 	}
 	
-	public int[] actionTurn(GameMap map) {
+	public int[] actionTurn(GameMap map, TexturePack textu) {
 		int[] tab = {x,y};
 		return tab;
 	}

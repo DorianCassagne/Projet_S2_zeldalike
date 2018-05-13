@@ -1,6 +1,8 @@
 package app;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import javafx.application.Application;
@@ -13,21 +15,26 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        try {
 
         FXMLLoader loader = new FXMLLoader();
-        URL url = new File("src/gui/GuiView.fxml").
-        toURI().toURL();
+        URL url=null;
+		try {
+			url = new File("src/gui/GuiView.fxml").toURI().toURL();
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+			throw new Error("Error path to fxml file");
+		}
         loader.setLocation(url);
-        System.out.println(loader.getLocation());
         AnchorPane root = new AnchorPane(); 
-        root=loader.load(); 
+        try {
+			root=loader.load();
+		} catch (IOException e) {
+			e.printStackTrace();
+			throw new Error("Error loading javaFX");
+		} 
         Scene  scene = new Scene(root,600,400);
         primaryStage.setScene(scene);
         primaryStage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     public static void main(String[] args) {

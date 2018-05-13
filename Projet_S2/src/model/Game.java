@@ -39,7 +39,7 @@ public class Game {
 		if(charTaken!=gChar) {
 			throw new Error("mauvais placement joueur");
 		}
-		gChar.actionTurn(map);
+		gChar.actionTurn(map, textu);
 		map.addCharac(gChar);
 		
 	}

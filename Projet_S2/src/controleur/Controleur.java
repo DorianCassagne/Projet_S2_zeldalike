@@ -57,7 +57,7 @@ public class Controleur implements Initializable{
 		   
 	}
 	
-	public void MouveMap(int x, int y) {
+	public void MewMap(int x, int y) {
 		decalMapX.set(x*32+decalMapX.get()); 
 		decalMapY.set(y*32+decalMapY.get()); 
 	}

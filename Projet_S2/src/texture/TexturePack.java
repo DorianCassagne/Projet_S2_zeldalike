@@ -11,9 +11,9 @@ import javafx.scene.image.WritableImage;
 
 public class TexturePack {
 
-	int titlePaneWidth;
-	int titlePx;
-	BufferedImage titleImg;
+	private int titlePaneWidth;
+	private int titlePx;
+	private BufferedImage titleImg;
 	public TexturePack(String imagePath, int titlePaneWith, int titlePx) {
 		try {
 			titleImg= ImageIO.read(new File(imagePath).toURI().toURL());
