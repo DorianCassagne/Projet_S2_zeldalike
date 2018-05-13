@@ -28,6 +28,8 @@ public class TexturePack {
 	
 	
 	public WritableImage getImg(int val) {
+		if (val ==-1)
+			return getImg(1606);
 		return SwingFXUtils.toFXImage(titleImg.getSubimage(val%titlePaneWidth*titlePx, (int)val/titlePaneWidth*titlePx, titlePx, titlePx), null);
 		//return SwingFXUtils.toFXImage(titleImg.getSubimage(00, 00, 100,100),null);
 

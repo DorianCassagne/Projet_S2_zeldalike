@@ -26,10 +26,17 @@ public class GameMap {
 	}
 	public GameMap(int[][] backMap, int[][] itemMap,GameCharacter[][] npcMap, TexturePack textu) {
 		this.textu=textu;
+		map=new Square[backMap.length][backMap[0].length];
 		for (int i =0 ; i<backMap.length; i++) {
-
 			for (int j =0 ; j<backMap[0].length; j++) {
-				map[i][j]=new Square(i*32,j*32,backMap[i][j],itemMap[i][j],npcMap[i][j],textu);
+//				System.out.println(i+" "+j);
+//				System.out.println(backMap[i][j]);
+//
+//				System.out.println(itemMap[i][j]);
+//
+//				System.out.println(npcMap[i][j]);
+//				
+				map[i][j]=new Square(j*32,i*32,backMap[i][j],itemMap[i][j],null,textu);
 			}
 		}
 	}

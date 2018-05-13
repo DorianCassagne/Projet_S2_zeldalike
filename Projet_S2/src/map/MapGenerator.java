@@ -12,13 +12,20 @@ import java.net.URISyntaxException;
 public class MapGenerator {
 
 	public static int[][] getBackMap(String path){
+		System.out.println(path);
 		return readAllIntLines(path+"1.csv", ",");
+
+//		int[][] tab = {{1115,1123,1131},{1116,1124,1132},{1117,1125,1133}};
+//		return tab;
 	}
 	public static int[][] getItemMap(String path){
+//		int[][] tab = {{0,0,0},{0,0,0},{0,0,0}};
+//		return tab;
 		return readAllIntLines(path+"2.csv", ",");
 		//TODO:
 	}
 	public static GameCharacter[][] getCharacMap(String path, ArrayList<GameCharacter> ar){
+		GameCharacter[][] tab= {{null,null,null},{null,null,null},{null,null,null}};
 		return null;
 		//TODO:doit ajouter dans la liste de GameCharacter a l'indice 0 un Game character qui doneras lemplacement du jouer en entrée de map
 	}

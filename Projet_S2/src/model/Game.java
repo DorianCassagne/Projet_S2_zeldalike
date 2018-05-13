@@ -3,6 +3,7 @@ import java.util.ArrayList;
 
 import character.GameCharacter;
 import character.Hero;
+import javafx.scene.image.ImageView;
 import map.GameMap;
 import texture.TexturePack;
 import map.MapGenerator;
@@ -24,7 +25,7 @@ public class Game {
 		players= new ArrayList<>();
 		hero= new Hero();
 		map=new GameMap(MapGenerator.getBackMap(mapList.get(0)), MapGenerator.getItemMap(mapList.get(0)), MapGenerator.getCharacMap(mapList.get(0), players), textu);
-		hero.relocate(players.get(0).getX(),players.get(0).getY());
+		//hero.relocate(players.get(0).getX(),players.get(0).getY());
 	}
 	public boolean turn() {
 		charPlay(hero);
@@ -42,6 +43,9 @@ public class Game {
 		gChar.actionTurn(map, textu);
 		map.addCharac(gChar);
 		
+	}
+	public ArrayList<ImageView> getAllText() {
+		return map.getTexture();
 	}
 	
 	
