@@ -17,6 +17,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.util.Duration;
 import model.Background;
@@ -31,11 +32,13 @@ public class Controleur implements Initializable{
 	@FXML private AnchorPane underMapPane;
 	@FXML private ImageView testView;
 	
+	private final static int SHOWNROW = 27;
+	private final static int SHOWNCOLUMN = 30;
 	private final static int OLDVALUEINDEX = 0;
 	private final static int NEWVALUEINDEX = 1 ; 
 	private final static int STEPTIME = 400 ;
 	private final static Image MAINIMAGE = new Image(Game.IMAGESPATH + "pokemonTiles.png");
-	private final static String MAPFILENAME = "mapTest.csv";
+	private final static String MAPFILENAME = "newMap.csv";
 	private ImageView[][] tileMapImage;
 	private Game game;
 	private HashMap<Integer,ImageView> persoMap;
@@ -54,7 +57,7 @@ public class Controleur implements Initializable{
 			this.mouvementPersonnagePossible = true;
 		});
 		timeline.setAutoReverse(false);
-
+		
 	}
 
 	
@@ -75,7 +78,7 @@ public class Controleur implements Initializable{
 
 	public void startScene(Scene scene) {
 		scene.setOnKeyPressed(
-				e -> handleKey(e)
+			e -> handleKey(e)
 		);
 	}
 	
@@ -127,15 +130,40 @@ public class Controleur implements Initializable{
 					viewer.setImage(image);
 				}
 		);
-		viewer.setLayoutY(convertToViewSize(startLocation[model.Map.ROWINDEX]));
-		viewer.setLayoutX(convertToViewSize(startLocation[model.Map.COLUMNINDEX]));
 		this.persoMap.put(key, viewer);
 		this.underMapPane.getChildren().add(viewer);
+		if(key == Game.HEROKEY) {
+			viewer.layoutXProperty().addListener(
+				(obs,oldValue,newValue)->{
+					double x = newValue.doubleValue();
+					if(x >= this.convertToViewSize(SHOWNCOLUMN/2) ) {
+						if(x <= this.convertToViewSize(this.game.getMapWidth() - (SHOWNCOLUMN+1)/2))
+							this.underMapPane.setLayoutX(convertToViewSize(SHOWNCOLUMN/2) - newValue.doubleValue() );
+					}
+				}	
+			);	
+			
+			viewer.layoutYProperty().addListener(
+					(obs,oldValue,newValue)->{
+						double y = newValue.doubleValue();
+						if(y >= this.convertToViewSize(SHOWNROW/2) ) {
+							if(y <= this.convertToViewSize(this.game.getMapHeight() - ((SHOWNROW + 1)/2)))
+								this.underMapPane.setLayoutY(convertToViewSize(SHOWNROW/2) - newValue.doubleValue()  );
+						}
+					}	
+				);	
+
+		}
+		
+		viewer.setLayoutY(convertToViewSize(startLocation[model.Map.ROWINDEX]));
+		viewer.setLayoutX(convertToViewSize(startLocation[model.Map.COLUMNINDEX]));
+
 	}
 	
 	private int convertToViewSize(int rowNumber) {
 		return rowNumber * MapReader.TILESDIMENSION;
 	}
+	
 	
 	private void movePersonnage() {
 		Integer key = this.game.getLastChangedId();
@@ -159,9 +187,9 @@ public class Controleur implements Initializable{
 			timeline.getKeyFrames().clear();
 			timeline.getKeyFrames().addAll(
 					new KeyFrame(Duration.ZERO, new KeyValue(layoutXProperty,layoutXProperty.get())),
-					new KeyFrame(rightMovingEndDuration,new KeyValue(layoutXProperty,layoutXProperty.get() - movementADroite * MapReader.TILESDIMENSION)),
+					new KeyFrame(rightMovingEndDuration,new KeyValue(layoutXProperty,layoutXProperty.get() - convertToViewSize(movementADroite))),
 					new KeyFrame(rightMovingEndDuration, new KeyValue(layoutYProperty,layoutYProperty.get())),
-					new KeyFrame(new Duration(rightMovingEndDuration.toMillis() + STEPTIME * Math.abs(movementEnBas)),new KeyValue(layoutYProperty,layoutYProperty.get() - movementEnBas * MapReader.TILESDIMENSION))
+					new KeyFrame(new Duration(rightMovingEndDuration.toMillis() + STEPTIME * Math.abs(movementEnBas)),new KeyValue(layoutYProperty,layoutYProperty.get() - convertToViewSize(movementEnBas)))
 			);
 			timeline.playFromStart();
 		}
@@ -169,7 +197,14 @@ public class Controleur implements Initializable{
 		this.caseChangeList[NEWVALUEINDEX] = null;
 	}
 
-	
+	private  void defineWidthAndHeight(Pane pane,int maxWidth,int maxHeight) {
+		pane.setMinHeight(convertToViewSize(maxHeight));
+		pane.setMaxHeight(convertToViewSize(maxHeight));
+		pane.setMinWidth(convertToViewSize(maxWidth));
+		pane.setMaxWidth(convertToViewSize(maxWidth));
+		pane.setLayoutX(0);
+		pane.setLayoutY(0);
+	}
 	
 	public void initialiseCurrentMap() {
 		int maxHeight = this.game.getMapHeight();
@@ -177,11 +212,9 @@ public class Controleur implements Initializable{
 		tileMapImage = new ImageView[maxHeight][maxWidth];
 		mapPane.setPrefRows(maxHeight);
 		mapPane.setPrefColumns(maxWidth);
-		this.mapPane.setMinHeight(maxHeight*MapReader.TILESDIMENSION);
-		this.mapPane.setMaxHeight(maxHeight*MapReader.TILESDIMENSION);
-		this.mapPane.setMinWidth(maxWidth*MapReader.TILESDIMENSION);;
-		this.mapPane.setMaxWidth(maxWidth*MapReader.TILESDIMENSION);
-	
+		this.defineWidthAndHeight(underMapPane, maxWidth, maxHeight);
+		
+		
 		for(int i = 0 ; i < tileMapImage.length;i++) {
 			for(int j = 0 ; j < tileMapImage[i].length;j++) {
 				this.tileMapImage[i][j]  = new ImageView(MAINIMAGE);

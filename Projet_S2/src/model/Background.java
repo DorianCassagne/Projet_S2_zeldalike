@@ -5,6 +5,7 @@ public class Background {
 	static enum Signification {
 		back1(false,0),
 		back2(true,1539),
+		back3(true,1),
 		table1(false,963),
 		table2(false,964),
 		table3(false,962),

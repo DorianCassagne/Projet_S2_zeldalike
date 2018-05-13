@@ -47,6 +47,7 @@ public class Map {
 			this.trash = new Case(0);
 			initialiseCases(map);
 		}catch(Exception e) {
+			e.printStackTrace();
 			throw new IllegalArgumentException("Invalid Map");
 		}
 	}
@@ -172,7 +173,7 @@ public class Map {
 			else
 				throw new IllegalArgumentException("Case non vide");
 		}catch(ArrayIndexOutOfBoundsException e) {
-			
+			throw new IllegalArgumentException("Limite atteinte");
 		}
 	}
 	
