@@ -2,7 +2,12 @@ package map;
 
 import java.util.ArrayList;
 
+import character.CharacterGenerator;
 import character.GameCharacter;
+import character.Hero;
+import javafx.beans.property.StringProperty;
+import texture.TexturePack;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -24,10 +29,21 @@ public class MapGenerator {
 		return readAllIntLines(path+"2.csv", ",");
 		//TODO:
 	}
-	public static GameCharacter[][] getCharacMap(String path, ArrayList<GameCharacter> ar){
-		GameCharacter[][] tab= {{null,null,null},{null,null,null},{null,null,null}};
-		return null;
-		//TODO:doit ajouter dans la liste de GameCharacter a l'indice 0 un Game character qui doneras lemplacement du jouer en entrée de map
+	public static GameCharacter[][] getCharacMap(String path, ArrayList<GameCharacter> ar, GameMap map,TexturePack textu, Hero hero){
+		int[][] tab= readAllIntLines(path+"3.csv", ",");
+		GameCharacter[][] gctab=new GameCharacter[tab.length][tab[0].length];
+		for (int i = 0; i < tab.length; i++) {
+			for (int j = 0; j < tab[0].length; j++) {
+				gctab[i][j]=CharacterGenerator.genChar(tab[i][j], map, textu,hero,j,i);
+				if(gctab[i][j]!=null) {
+					if(gctab[i][j].getClass()==Hero.class)
+						ar.add(0, gctab[i][j]);
+					else
+						ar.add(gctab[i][j]);
+				}
+			}
+		}
+		return gctab;
 	}
 	
 	

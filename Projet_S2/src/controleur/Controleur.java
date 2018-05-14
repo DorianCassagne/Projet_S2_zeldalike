@@ -3,8 +3,13 @@ package controleur;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import character.ThreadTime;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
@@ -13,7 +18,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import map.GameMap;
 import model.Game;
 import texture.TexturePack;
 
@@ -32,40 +36,29 @@ public class Controleur implements Initializable{
 	private DoubleProperty decalMapX;
 
 	private DoubleProperty decalMapY;
+	private StringProperty KeyboardInput;
+	
+	public final static int MAPWIDTH=8;
+	public final static int SIZETILE=32;
+	
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		textu = new TexturePack("img/tile.png", 8, 32);
-		
-		
-		
+		textu = new TexturePack("img/tile.png", MAPWIDTH, SIZETILE);
+		KeyboardInput = new SimpleStringProperty();
 		decalMapX = new SimpleDoubleProperty();
 		decalMapY = new SimpleDoubleProperty();
-		System.out.println("test");
 		 ArrayList<String> arPath= new ArrayList<String>();
 		arPath.add("/file/test");
-		game = new Game(arPath, "img/tile.png", 8);
+		game = new Game(arPath, "img/tile.png", MAPWIDTH, this,this.KeyboardInput);
 		
-		//int[][] tab = {{1115,1123,1131},{1116,1124,1132},{1117,1125,1133}};
-		//GameMap map =new GameMap( tab );/*, {{94,94,94},{94,94,94},{94,94,94}} , {null,null,null} */
-			
 		ArrayList<ImageView> ar= game.getAllText();
 		for (ImageView imageView : ar) {
 			imageView.translateXProperty().bind(decalMapX);
 			imageView.translateYProperty().bind(decalMapY);
 		}
 
-		System.out.println("test");
 		mainAnchorPane.getChildren().addAll(ar);
-		//mainAnchorPane.getChildren().clear();
-		//map.getTexture().get(1).relocate(100, 100);
-//		app.Main.scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-//
-//			public void handle(KeyEvent event) {
-//				System.out.println("test");
-//				
-//			}
-//		});
 		
 		   
 	}
@@ -79,20 +72,26 @@ public class Controleur implements Initializable{
 		KeyCode code = event.getCode();
 		try {
 			if(code.equals(KeyCode.UP)) {
-				System.out.println("top");
+				KeyboardInput.set("up");
+				//System.out.println("uppp");
 			}
 			else if(code.equals(KeyCode.LEFT)) {
-				System.out.println("top");
+				KeyboardInput.set("left");
 			}
 			else if(code.equals(KeyCode.RIGHT)) {
-				System.out.println("top");
+				KeyboardInput.set("right");
 			}
 			else if(code.equals(KeyCode.DOWN)) {
-				System.out.println("top");
+				KeyboardInput.set("down");
 			}
-		
+			else if(code.equals(KeyCode.S)) {
+				System.out.println("test");
+				ThreadTime tr=new ThreadTime(game);
+				tr.start();
+			}
 			}catch(IllegalArgumentException e) {
 			}
+		
 		
 	}
 	
@@ -100,32 +99,19 @@ public class Controleur implements Initializable{
 		decalMapX.set(x*32+decalMapX.get()); 
 		decalMapY.set(y*32+decalMapY.get()); 
 	}
-	@FXML
 	public void loadMap() {
 		
 	}
 	
+//	@FXML
+//	public void test(Event e) {
+//		//System.out.println("test");
+//		ThreadTime tr=new ThreadTime(game);
+//		tr.start();
+//	}
+	
 
 	
-	
-//	private EventHandler<KeyEvent> keyListener = new EventHandler<KeyEvent>() {
-//		    public void keyReleased(KeyEvent event) {
-//
-//	    		System.out.println("test");    
-//		    	if(event.getCode() == KeyCode.SPACE) {
-//		    		System.out.println("test");
-//		    		img.setTranslateX(img.getTranslateX()+10);
-//		    	}
-//		    	event.consume();
-//		    }
-//	    };
-//	    @FXML
-//		private void testKey(KeyEvent event) {
-//	    	System.out.println("test");
-//
-//
-//		img.setImage(textu.getImg(2));
-//	}
 
 
 }

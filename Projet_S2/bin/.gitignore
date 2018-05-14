@@ -1,8 +1,8 @@
-/map/
 /app/
 /controleur/
-/gui/
-/character/
-/file/
 /model/
-/img/
+/character/
+/texture/
+/file/
+/map/
+/gui/

@@ -29,7 +29,7 @@ public class GameMap {
 		map=new Square[backMap.length][backMap[0].length];
 		for (int i =0 ; i<backMap.length; i++) {
 			for (int j =0 ; j<backMap[0].length; j++) {
-				map[i][j]=new Square(j*32,i*32,backMap[i][j],itemMap[i][j],null,textu);
+				map[i][j]=new Square(j*32,i*32,backMap[i][j],itemMap[i][j],npcMap[i][j],textu);
 			}
 		}
 	}
@@ -52,7 +52,7 @@ public class GameMap {
 	}
 	
 	public void addCharac(GameCharacter gChar) {
-		map[gChar.getX()][gChar.getY()].addCharacter(gChar);
+		map[gChar.getY()][gChar.getX()].addCharacter(gChar);
 	}
 	public GameCharacter takeCharac(int x, int y) {
 		return map[x][y].removeCharater();
