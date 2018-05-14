@@ -1,7 +1,10 @@
 package model;
 
+import cell.Background;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.StringProperty;
+import mapZelda.Map;
+import personnage.Hero;
 
 public class Game {
 	public final static String IMAGESPATH = "/img/";
@@ -23,12 +26,17 @@ public class Game {
 	}
 	
 	public char getLastCharChangeCategory() {
-		return this.currentMap.getCaseChangeCategory(this.currentMap.changeProperty().get());
+		return this.currentMap.getCellChangeCategory(this.currentMap.changeProperty().get());
 	}
 	
+	public Integer getLastChangedId() {
+		return this.currentMap.getLastChangedCharacterId();
+	}
+
 	
-	public StringProperty getPersonnageImage(Integer key) {
-		return this.currentMap.getPersonnageStringProperty(key);
+	
+	public StringProperty characterImageNameProperty(Integer key) {
+		return this.currentMap.getCharacterImageProperty(key);
 	}
 	
 	public int getMapWidth() {
@@ -43,19 +51,16 @@ public class Game {
 		return this.currentMap.getBackground(row, column);
 	}
 	
-	public Integer getLastChangedId() {
-		return this.currentMap.getLastChangeId();
-	}
 	
-	public int[] convertFromCaseId(int caseId) {
-		return this.currentMap.convertFromCaseId(caseId);
+	public int[] convertFromCellId(int caseId) {
+		return this.currentMap.convertFromCellId(caseId);
 	}
-	public int convertToCaseId(int row,int column) {
-		return this.currentMap.convertToCaseId(row, column);
+	public int convertToCellId(int row,int column) {
+		return this.currentMap.convertToCellId(row, column);
 	}
 	
 	
-	public boolean isFromTrash(int ... values) {
+	public boolean isFromVoidCell(int ... values) {
 		for(int value : values) {
 			if(value == Map.TRASHINDEX) {
 				return true;
@@ -64,17 +69,18 @@ public class Game {
 		return false;
 	}
 
+	
+	
 	public void toTop(Integer key) {
-		this.currentMap.getPersonnageByKey(key).toTop();
+		this.currentMap.getCharacterByKey(key).toTop();
 	}
-
 	public void toLeft(Integer key) {
-		this.currentMap.getPersonnageByKey(key).toLeft();
+		this.currentMap.getCharacterByKey(key).toLeft();
 	}
 	public void toBottom(Integer key) {
-		this.currentMap.getPersonnageByKey(key).toBottom();;
+		this.currentMap.getCharacterByKey(key).toBottom();;
 	}
 	public void toRight(Integer key) {
-		this.currentMap.getPersonnageByKey(key).toRight();
+		this.currentMap.getCharacterByKey(key).toRight();
 	}
 }

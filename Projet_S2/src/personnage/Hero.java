@@ -1,31 +1,33 @@
-package model;
+package personnage;
 
-public class Hero extends Personnage{
-	private final static String[] IMAGEZELDA = {"fairyback.png","fairyprofil.png","fairyface.png","fairyprofil.png"};
+import mapZelda.Map;
+
+public class Hero extends GameCharacter{
+	private final static String[] ZELDAIMAGE = {"fairyback.png","fairyprofil.png","fairyface.png","fairyprofil.png"};
 	
-	public Hero(Map map,int caseDebutX,int caseDebutY) {
-		super("Fairy",IMAGEZELDA[3],map,caseDebutX,caseDebutY);
+	public Hero(Map map,int startRow,int startColumn) {
+		super("Fairy",ZELDAIMAGE[3],map,startRow,startColumn);
 	}
 
 
 	@Override
 	public String getTopImage() {
-		return IMAGEZELDA[0];
+		return ZELDAIMAGE[0];
 	}
 
 	@Override
 	public String getBottomImage() {
-		return IMAGEZELDA[2];
+		return ZELDAIMAGE[2];
 	}
 
 	@Override
 	public String getLeftImage() {
-		return IMAGEZELDA[3];	
+		return ZELDAIMAGE[3];	
 	}
 
 	@Override
 	public String getRightImage() {
-		return IMAGEZELDA[1];
+		return ZELDAIMAGE[1];
 	}
 
 

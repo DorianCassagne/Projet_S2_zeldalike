@@ -1,89 +1,77 @@
-package model;
+package mapZelda;
 
 import java.util.HashMap;
 
+import additionalMethods.ErrorCodes;
+import cell.Background;
+import cell.Cell;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.StringProperty;
+import personnage.GameCharacter;
 
 public class Map {
 
 	public final static int ROWINDEX = 0;
 	public final static int COLUMNINDEX = 1;
-	
-	public static enum Deplacement{
-		TOP(-PAS,0),
-		BOTTOM(PAS,0),
-		LEFT(0,-PAS),
-		RIGHT(0,PAS);
-		
-		private int verticaly;
-		private int horizontaly;
-		Deplacement(int verticaly,int horizontaly){
-			this.verticaly = verticaly;
-			this.horizontaly = horizontaly;
-		}
-		
-	}
-	
-	private static final int PAS = 1 ;
+	public static final int STEP = 1 ;
 	public final static int TRASHINDEX = Integer.MAX_VALUE;
-	private final static int INVALIDINDEX = -1;
-	private Case[][] cases ;
-	private HashMap<Integer,Personnage> listePerso ;
+	
+	private Cell[][] cells ;
+	private HashMap<Integer,GameCharacter> charList ;
 	private IntegerProperty changeProperty;
 	private final IntegerProperty safeProperty;
-	private int idPersonnage;
-	private Case trash;
+	private int idCharacter;
+	private Cell voidCell;
 	
 	
-	public Map(String mapName)  {
-		try {
-			this.safeProperty = new SimpleIntegerProperty();
-			MapReader map = new MapReader(mapName);
-			this.changeProperty = new SimpleIntegerProperty();
-			this.listePerso = new HashMap<Integer,Personnage>();
-			this.idPersonnage = 0;
-			this.trash = new Case(0);
-			initialiseCases(map);
-		}catch(Exception e) {
-			e.printStackTrace();
-			throw new IllegalArgumentException("Invalid Map");
-		}
+	
+	public Map(String mapName) throws IllegalArgumentException {
+		this.safeProperty = new SimpleIntegerProperty();
+		MapReader map = new MapReader(mapName);
+		this.changeProperty = new SimpleIntegerProperty();
+		this.charList = new HashMap<Integer,GameCharacter>();
+		this.idCharacter = 0;
+		this.voidCell = new Cell(0);
+		initialiseCells(map);
 	}
 	
 	
-	public boolean addToList(Personnage personnage,int startCaseX,int startCaseY) {
+	public boolean addToCharList(GameCharacter character,int startCellRow,int startCaseY) {
 		boolean added = false;
-		if(!this.listePerso.containsValue(personnage)) {
-			this.listePerso.put(this.idPersonnage, personnage);
+		if(!this.charList.containsValue(character)) {
+			this.charList.put(this.idCharacter, character);
 			try {
-				this.trash.viderCase();
-				this.cases[startCaseX][startCaseY].ajouterPersonnage(personnage);
-			}catch(IllegalArgumentException e) {}
-			this.idPersonnage++;
+				this.voidCell.emptyCell();
+				this.cells[startCellRow][startCaseY].addCharacter(character);
+			}catch(IllegalArgumentException e) {
+				this.charList.remove(this.idCharacter);
+			}
+			this.idCharacter++;
 			added = true;
 		}
 		return added;
 	}
 	
-	private void initialiseCases(MapReader map) {
+	private void initialiseCells(MapReader map) {
 		int mapHeight = map.getNbTilesHeight();
 		int mapWidth = map.getNbTilesWidth();
-		this.cases = new Case[mapHeight][mapWidth];
-		this.trash.changeProperty().addListener(
+		this.cells = new Cell[mapHeight][mapWidth];
+		this.voidCell.changeProperty().addListener(
 				(obs,oldValue,newValue)->{
 					this.changeProperty.set(TRASHINDEX);
 				}
 		);
+		
+		
 		for(int i = 0 ; i < mapHeight;i++) {
 			int row = i;
 			for(int j = 0 ; j < mapWidth;j++) {
 				int column = j;
-				this.cases[i][j] = new Case(map.getRepresentation(i, j));	
-				this.cases[i][j].changeProperty().addListener(
+				this.cells[i][j] = new Cell(map.getRepresentation(i, j));	
+				this.cells[i][j].changeProperty().addListener(
 						(obs,oldValue,newValue)->{
-							this.changeProperty.set(convertToCaseId(row, column));
+							this.changeProperty.set(convertToCellId(row, column));
 						}
 				);
 			}
@@ -93,33 +81,33 @@ public class Map {
 	}
 	
 	public int getMapWidth() {
-		if(this.cases.length > 0)
-			return this.cases[0].length;
+		if(this.cells.length > 0)
+			return this.cells[0].length;
 		else
 			return 0;
 	}
 	
 	public int getMapHeight() {
-		return this.cases.length;
+		return this.cells.length;
 	}
 	
 	
 	public Background getBackground(int row,int column) {
-		return this.cases[row][column].getBackground();
+		return this.cells[row][column].getBackground();
 	}
 	
-	public StringProperty personnageImageNameProperty(int keyPerso) {
-		return this.listePerso.get(keyPerso).representationImageProperty();
+	public StringProperty characterImageNameProperty(int keyPerso) {
+		return this.charList.get(keyPerso).representationImageProperty();
 	}
 	
-	public char getCaseChangeCategory(int caseIndex) {
+	public char getCellChangeCategory(int caseIndex) {
 		if(caseIndex == TRASHINDEX) {
-			return this.trash.getChangeCategory();
+			return this.voidCell.getChangeCategory();
 		}
-		int[] coordonnees = this.convertFromCaseId(caseIndex);
-		int row = coordonnees[ROWINDEX];
-		int column = coordonnees[COLUMNINDEX];
-		return this.cases[row][column].getChangeCategory();
+		int[] position = this.convertFromCellId(caseIndex);
+		int row = position[ROWINDEX];
+		int column = position[COLUMNINDEX];
+		return this.cells[row][column].getChangeCategory();
 	}
 	
 	
@@ -129,7 +117,7 @@ public class Map {
 		return this.safeProperty;
 	}
 	
-	void addPersonnage(Personnage p) {
+	void addCharacter(GameCharacter p) {
 		boolean set = false;
 		Double d;
 		while(!set) {
@@ -137,104 +125,112 @@ public class Map {
 			int startX = d.intValue() ;
 			d = Math.random() * this.getMapWidth() ;
 			int startY = d.intValue();
-			set = this.addToList(p, startX, startY);
+			set = this.addToCharList(p, startX, startY);
 		}
 	}
 	
 	
 	
-	public void etablirDeplacement(Personnage p,Deplacement deplacement) {
-		setLastPersonnage(p);
-		if(this.idPersonnage != INVALIDINDEX) {	
-			int[] coordonneesDepart = getCurrentPlace(p);
-			System.out.println(coordonneesDepart[0] + "->" + coordonneesDepart[1]);
-			int[] coordonneesArrive = {coordonneesDepart[ROWINDEX] + deplacement.verticaly,coordonneesDepart[COLUMNINDEX] + deplacement.horizontaly};
-			this.deplacerPersonnage(p,coordonneesDepart,coordonneesArrive);
+	public void moveCharacter(GameCharacter currentCharacter,Move move) throws IllegalArgumentException {
+		setLastCharacter(currentCharacter);
+		if(this.idCharacter != ErrorCodes.INVALIDINDEX) {	
+			int[] startLocation = getCurrentLocation(currentCharacter);
+			int[] endLocation = {startLocation[ROWINDEX] + move.getVerticalIncrement(),startLocation[COLUMNINDEX] + move.getHorizontalIncrement()};
+			this.moveCharacterTo(currentCharacter,startLocation,endLocation);
 		}else {
+			throw new IllegalArgumentException(ErrorCodes.IMPOSSIBLEMOVE);
+		}
+	}
+	
+	
+	
+	private void moveCharacterTo(GameCharacter currentCharacter, int[] startLocation,int[] endLocation) throws IllegalArgumentException,ArrayIndexOutOfBoundsException{
+		
+		int xi = startLocation[ROWINDEX];
+		int yi = startLocation[COLUMNINDEX];
+		int xf = endLocation[ROWINDEX];
+		int yf = endLocation[COLUMNINDEX];
+		
+		try {
+			
+			Cell currentCell = this.cells[xi][yi];
+			Cell nextCell = this.cells[xf][yf];
+			
+			if(nextCell.isEmpty()) {
+				currentCell.emptyCell();
+				nextCell.addCharacter(currentCharacter);
+			}
+			
+			else
+				throw new IllegalArgumentException(ErrorCodes.IMPOSSIBLEMOVE);
+		
+		}catch(ArrayIndexOutOfBoundsException e) {
 			throw new IllegalArgumentException();
 		}
 	}
 	
 	
-	
-	private void deplacerPersonnage(Personnage p, int[] depart,int[] arrive){
+	private int[] getCurrentLocation(GameCharacter currentCharacter) throws IllegalArgumentException {
 		
-		int xi = depart[ROWINDEX];
-		int yi = depart[COLUMNINDEX];
-		int xf = arrive[ROWINDEX];
-		int yf = arrive[COLUMNINDEX];
-		try {
-			Case caseCourante = this.cases[xi][yi];
-			Case caseArrivee = this.cases[xf][yf];
-			if(caseArrivee.estVide()) {
-				caseCourante.viderCase();
-				caseArrivee.ajouterPersonnage(p);
-			}
-			else
-				throw new IllegalArgumentException("Case non vide");
-		}catch(ArrayIndexOutOfBoundsException e) {
-			throw new IllegalArgumentException("Limite atteinte");
-		}
-	}
-	
-	
-	private int[] getCurrentPlace(Personnage p) {
-		for(int i = 0 ; i < this.getMapHeight();i++) {
-			for(int j = 0 ; j < this.getMapWidth();j++) {
-				if(this.cases[i][j].contientPersonnage(p)) {
-					int[] coordonnees = {i,j};
-					return coordonnees;
+		for(int row = 0 ; row < this.getMapHeight();row++) {
+			for(int column = 0 ; column < this.getMapWidth();column++) {
+				if(this.cells[row][column].containsCharacter(currentCharacter)) {
+					int[] location = {row,column};
+					return location;
 				}
 			}
 		}
-		throw new IllegalArgumentException();
+		
+		throw new IllegalArgumentException(ErrorCodes.NOTFOUNDCODE);
 	}
 	
-	private void setLastPersonnage(Personnage p) {
-		this.idPersonnage = this.getPersoIndex(p);
+	private void setLastCharacter(GameCharacter currentCharacter) {
+		this.idCharacter = this.getPersoIndex(currentCharacter);
 	}
 	
-	public int getPersoIndex(Personnage p) {
-		for(Integer key : this.listePerso.keySet()) {
-			if(this.listePerso.get(key) == p) {
+	public int getPersoIndex(GameCharacter p) {
+		
+		for(Integer key : this.charList.keySet()) {
+			if(this.charList.get(key) == p) {
 				return key;
 			}
 		}
-		return INVALIDINDEX;
+		
+		return ErrorCodes.INVALIDINDEX;
 	}
 	
-	public int getLastChangeId() {
-		return this.idPersonnage;
+	public int getLastChangedCharacterId() {
+		return this.idCharacter;
 	}
 	
-	public Integer[] getListePersoKeys() {
-		return this.listePerso.keySet().toArray(new Integer[this.listePerso.keySet().size()]);
+	public Integer[] getCharacterListKeys() {
+		return this.charList.keySet().toArray(new Integer[this.charList.keySet().size()]);
 	}
 	
-	public StringProperty getPersonnageStringProperty(Integer key) {
-		return this.listePerso.get(key).representationImageProperty();
+	public StringProperty getCharacterImageProperty(Integer key) {
+		return this.charList.get(key).representationImageProperty();
 	}
 	
-	public char getLastChangeType(int caseId) {
-		int[] coordonnees =  this.convertFromCaseId(caseId);
-		int row = coordonnees[0];
-		int column = coordonnees[1];
-		return this.cases[row][column].getChangeCategory();
+	public char getLastChangeType(int cellId) {
+		int[] location =  this.convertFromCellId(cellId);
+		int row = location[0];
+		int column = location[1];
+		return this.cells[row][column].getChangeCategory();
 	}
 	
-	public int[] convertFromCaseId(int caseId) {
+	public int[] convertFromCellId(int caseId) {
 		int row = caseId / this.getMapWidth();
 		int column = caseId % this.getMapWidth();
 		int[] converted = {row,column};
 		return converted;
 	}
 	
-	public int convertToCaseId(int row,int column) {
+	public int convertToCellId(int row,int column) {
 		return row * this.getMapWidth() + column;
 	}
 	
-	public Personnage getPersonnageByKey(Integer key) {
-		return this.listePerso.get(key);
+	public GameCharacter getCharacterByKey(Integer key) {
+		return this.charList.get(key);
 	}
 	
 }

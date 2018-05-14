@@ -1,8 +1,11 @@
-package model;
+package cell;
+
+import additionalMethods.ErrorCodes;
+import additionalMethods.Tile;
 
 public class Background {
-	private Signification value;
-	static enum Signification {
+	
+	static enum BackgroundMeaning {
 		back1(false,0),
 		back2(true,1539),
 		back3(true,1),
@@ -24,17 +27,17 @@ public class Background {
 		frigo(false,768),
 		frigo2(false,960);
 		
-		private boolean estTraversable;
-		private int numero ;
+		private boolean canWalk;
+		private int id ;
 		
-		Signification(boolean traversable,int numero) {
-			this.estTraversable = traversable;
-			this.numero = numero;
+		BackgroundMeaning(boolean canWalk,int id) {
+			this.canWalk = canWalk;
+			this.id = id;
 		}
 		
-		public static Signification getSignification(int value) {
-			for(Signification sign : values()){
-				if(sign.numero == value)
+		public static BackgroundMeaning getMeaningFromIntegerValue(int value) {
+			for(BackgroundMeaning sign : values()){
+				if(sign.id == value)
 					return sign;
 			}
 			return null;
@@ -43,30 +46,33 @@ public class Background {
 	
 	};	
 	
-	public Background(Signification value) {
-		if(value != null) {
-			this.value = value;
+	private BackgroundMeaning backgroundValue;
+
+	
+	public Background(BackgroundMeaning backgroundValue) {
+		if(backgroundValue != null) {
+			this.backgroundValue = backgroundValue;
 		}
 		else 
 			throw new IllegalArgumentException(ErrorCodes.INVALIDNAMECODE);
 	}
 	
-	public Background(int value) {
-		this(Signification.getSignification(value));
+	public Background(int backgroundValue) {
+		this(BackgroundMeaning.getMeaningFromIntegerValue(backgroundValue));
 	}
 		
 	@Override
 	public String toString() {
-		return this.value.toString() ;
+		return this.backgroundValue.toString() ;
 	}
 	
 	
 	public boolean estTraversable() {
-		return this.value.estTraversable;
+		return this.backgroundValue.canWalk;
 	}
 
 	public int[] getTile() {
-		return Tile.getTileInImage(this.value.numero);
+		return Tile.getTileInImage(this.backgroundValue.id);
 	}
 
 	

@@ -1,19 +1,23 @@
-package model;
+package personnage;
 
 import javafx.beans.property.*;
+import mapZelda.Map;
+import mapZelda.Map.Deplacement;
+import mapZelda.Move;
 
-public abstract class Personnage {
-	private String nom;
+public abstract class GameCharacter {
+
+	private String name;
 	private StringProperty representationImage;
 	private StringProperty copyOfRepresentationImage;
 	private Map myMap ;
 	
-	public Personnage(String nom,String startImage,Map map,int caseDebutX,int caseDebutY) {
-		if(nom != null && map != null) {
-			this.nom = nom;
+	public GameCharacter(String name,String startImage,Map map,int startRow,int startColumn) {
+		if(name != null && map != null) {
+			this.name = name;
 			this.representationImage = new SimpleStringProperty(startImage);
 			this.myMap = map;
-			this.myMap.addToList(this, caseDebutX, caseDebutY);
+			this.myMap.addToCharList(this, startRow, startColumn);
 		}
 	}
 	
@@ -32,21 +36,22 @@ public abstract class Personnage {
 	
 	public  void toTop() {
 		this.setRepresentationImage(this.getTopImage());
-		this.myMap.etablirDeplacement(this, Map.Deplacement.TOP);
+		this.myMap.moveCharacter(this, Move.TOP);
 	}
+	
 	public  void toLeft() {
 		this.setRepresentationImage(this.getLeftImage());
-		this.myMap.etablirDeplacement(this, Map.Deplacement.LEFT);
+		this.myMap.moveCharacter(this, Move.LEFT);
 	}
 	
 	public  void toBottom() {
 		this.setRepresentationImage(this.getBottomImage());
-		this.myMap.etablirDeplacement(this, Map.Deplacement.BOTTOM);
+		this.myMap.moveCharacter(this, Move.BOTTOM);
 	}
 	
 	public  void toRight() {
 		this.setRepresentationImage(this.getRightImage());
-		this.myMap.etablirDeplacement(this, Map.Deplacement.RIGHT);
+		this.myMap.moveCharacter(this, Move.RIGHT);
 	}
 	
 	
@@ -56,7 +61,7 @@ public abstract class Personnage {
 	public abstract String getRightImage();
 	
 	public String getNom() {
-		return this.nom;
+		return this.name;
 	}
 	
 	

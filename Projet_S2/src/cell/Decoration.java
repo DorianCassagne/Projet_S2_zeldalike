@@ -1,26 +1,27 @@
-package model;
+package cell;
+
+import additionalMethods.ErrorCodes;
 
 public class Decoration {
 
-	static enum Signification{
+	static enum DecorationMeaning{
 		NEIGE,PIERRE
 	}
 	
 	
+	private DecorationMeaning decorationValue;
 	
-	private Signification value;
-	
-	public Decoration(Signification value) {
+	public Decoration(DecorationMeaning value) {
 		if(value != null)
-			this.value = value;
+			this.decorationValue = value;
 		else
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException(ErrorCodes.INVALIDNAMECODE);
 	}
 	
 	
 	@Override 
 	public String toString() {
-		return this.value.toString();
+		return this.decorationValue.toString();
 	}
 	
 

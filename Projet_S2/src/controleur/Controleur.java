@@ -4,6 +4,8 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
+import cell.Background;
+import cell.Cell;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -20,23 +22,20 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.util.Duration;
-import model.Background;
-import model.Case;
+import mapZelda.Map;
+import mapZelda.MapReader;
 import model.Game;
-import model.Map;
-import model.MapReader;
 
 public class Controleur implements Initializable{
 	
 	@FXML private TilePane mapPane;
 	@FXML private AnchorPane underMapPane;
-	@FXML private ImageView testView;
 	
-	private final static int SHOWNROW = 27;
-	private final static int SHOWNCOLUMN = 30;
+	private final static int SHOWNROW = 10;
+	private final static int SHOWNCOLUMN = 10;
 	private final static int OLDVALUEINDEX = 0;
 	private final static int NEWVALUEINDEX = 1 ; 
-	private final static int STEPTIME = 400 ;
+	private final static int STEPTIME = 200 ;
 	private final static Image MAINIMAGE = new Image(Game.IMAGESPATH + "pokemonTiles.png");
 	private final static String MAPFILENAME = "newMap.csv";
 	private ImageView[][] tileMapImage;
@@ -46,6 +45,9 @@ public class Controleur implements Initializable{
 	private boolean mouvementPersonnagePossible;
 	private Timeline timeline;
 
+	private int getTileDimension() {
+		return 16;
+	}
 	
 	public Controleur() {
 		this.game = new Game(MAPFILENAME);
@@ -67,8 +69,8 @@ public class Controleur implements Initializable{
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		this.mapPane.setPrefTileHeight(MapReader.TILESDIMENSION);
-		this.mapPane.setPrefTileWidth(MapReader.TILESDIMENSION);
+		this.mapPane.setPrefTileHeight(getTileDimension());
+		this.mapPane.setPrefTileWidth(getTileDimension());
 		this.game.changeProperty().addListener(
 				(obs,oldValue,newValue)->executeAction(newValue.intValue())
 		);
@@ -108,7 +110,7 @@ public class Controleur implements Initializable{
 	}
 	
 	private void executeAction(Integer newValue) {
-		if(this.game.getLastCharChangeCategory() == Case.CHARCHANGE) {
+		if(this.game.getLastCharChangeCategory() == Cell.CHARCHANGE) {
 			if(this.caseChangeList[OLDVALUEINDEX] == null)
 				this.caseChangeList[OLDVALUEINDEX] = newValue;
 			else if(this.caseChangeList[NEWVALUEINDEX] == null) {
@@ -120,10 +122,12 @@ public class Controleur implements Initializable{
 
 	
 	private void addPersonnageToList(Integer key,int[] startLocation) {
-		ImageView viewer = new ImageView(new Image(Game.IMAGESPATH + this.game.getPersonnageImage(key).get()));
-		viewer.prefWidth(MapReader.TILESDIMENSION);
-		viewer.prefHeight(MapReader.TILESDIMENSION);
-		this.game.getPersonnageImage(key).addListener(
+		ImageView viewer = new ImageView(new Image(Game.IMAGESPATH + this.game.characterImageNameProperty(key).get()));
+		viewer.prefWidth(getTileDimension());
+		viewer.prefHeight(getTileDimension());
+		viewer.setScaleX(1.8);
+		viewer.setScaleY(1.8);
+		this.game.characterImageNameProperty(key).addListener(
 				(obs,oldValue,newValue)->{
 					Image image = new Image(Game.IMAGESPATH +  newValue);
 					
@@ -155,25 +159,25 @@ public class Controleur implements Initializable{
 
 		}
 		
-		viewer.setLayoutY(convertToViewSize(startLocation[model.Map.ROWINDEX]));
-		viewer.setLayoutX(convertToViewSize(startLocation[model.Map.COLUMNINDEX]));
+		viewer.setLayoutY(convertToViewSize(startLocation[mapZelda.Map.ROWINDEX]));
+		viewer.setLayoutX(convertToViewSize(startLocation[mapZelda.Map.COLUMNINDEX]));
 
 	}
 	
 	private int convertToViewSize(int rowNumber) {
-		return rowNumber * MapReader.TILESDIMENSION;
+		return rowNumber * getTileDimension();
 	}
 	
 	
 	private void movePersonnage() {
 		Integer key = this.game.getLastChangedId();
-		int[] newLocation = this.game.convertFromCaseId(this.caseChangeList[NEWVALUEINDEX]);
-		int[] oldLocation = this.game.convertFromCaseId(this.caseChangeList[OLDVALUEINDEX]);
-		if(this.game.isFromTrash(this.caseChangeList[OLDVALUEINDEX])) {
+		int[] newLocation = this.game.convertFromCellId(this.caseChangeList[NEWVALUEINDEX]);
+		int[] oldLocation = this.game.convertFromCellId(this.caseChangeList[OLDVALUEINDEX]);
+		if(this.game.isFromVoidCell(this.caseChangeList[OLDVALUEINDEX])) {
 			this.addPersonnageToList(key,newLocation);
 		}
 		
-		else if(this.game.isFromTrash(this.caseChangeList[1])) {
+		else if(this.game.isFromVoidCell(this.caseChangeList[1])) {
 			//TODO
 		}
 		
@@ -230,6 +234,9 @@ public class Controleur implements Initializable{
 		int yi = caseBackground.getTile()[1] * MapReader.TILESDIMENSION;
 		Rectangle2D rectangle = new Rectangle2D(xi, yi, MapReader.TILESDIMENSION, MapReader.TILESDIMENSION);
 		this.tileMapImage[row][column].setViewport(rectangle);
+		this.tileMapImage[row][column].setScaleY(getTileDimension()*1.0/MapReader.TILESDIMENSION);
+		this.tileMapImage[row][column].setScaleX(getTileDimension()*1.0/MapReader.TILESDIMENSION);
+
 	}
 
 }

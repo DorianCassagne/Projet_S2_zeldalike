@@ -1,4 +1,4 @@
-package model;
+package personnage;
 /*
  * Cette classe représente les points d'un personnage (Ses points de vie par exemple).
  * Cette classe a pour résponsabilités : 
@@ -10,6 +10,7 @@ package model;
  */
 
 
+import additionalMethods.ErrorCodes;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -24,58 +25,60 @@ public class Points {
 	//Le nombre initial de points est inchangé
 	private double initialVal;
 	
-	private DoubleProperty currentVal;
+	private DoubleProperty currentValue;
 	
 	//Le nom ne peut pas être null
 	private String name;
 	
-	public Points(double initialVal ,String nom) {
-		if(initialVal < 0 || nom == null) {
-			throw new IllegalArgumentException("Nombre de points invalide");
+	public Points(double initialValue ,String name) throws IllegalArgumentException {
+		if(initialValue < 0 || name == null) {
+			throw new IllegalArgumentException(ErrorCodes.ILLEGALARGUMENTCODE);
 		}else {
-			this.initialVal = initialVal;
-			this.currentVal = new SimpleDoubleProperty(initialVal);
-			this.name = nom;
+			this.initialVal = initialValue;
+			this.currentValue = new SimpleDoubleProperty(initialValue);
+			this.name = name;
 		}
 	}
 	
 	//Le pourcentage doit toujours être supérieur à 100.  
-	public void modifierDePourcentage(int percent) {
+	public void increaseByPercent(int percent) throws IllegalArgumentException{
 		if(percent > 0)
-			this.currentVal.set((percent * initialVal)/100);
+			this.currentValue.set((percent * initialVal)/100);
 		else
-			throw new IllegalArgumentException("Le pourcentage doit être > 0");
+			throw new IllegalArgumentException(ErrorCodes.LESSTHANZEROCODE);
 	}
 	
 	//Içi le paramètre valeur doit être supérieur à (-currentVal)
-	public void augmenterPoints(double valeur) {
-		if(valeur >= 0 )
-			this.currentVal.set(this.currentVal.get() + valeur);
+	public void increaseByValue(double incrementValue) throws IllegalArgumentException{
+		if(incrementValue >= 0 )
+			this.currentValue.set(this.currentValue.get() + incrementValue);
 		else
-			throw new IllegalArgumentException("La valeur doit être >= 0");
+			throw new IllegalArgumentException(ErrorCodes.LESSTHANZEROCODE);
 	}
 	
 	
 	//Içi le nombre de points à réduire doit être inférieur à currentVal 
-	public void reduirePoints(double valeur) {
-		if(valeur >= 0 && valeur <= this.currentVal.get())
-			this.currentVal.set(this.currentVal.get() - valeur);
+	
+	public void reducePointByValue(double valeur) throws IllegalArgumentException{
+		if(valeur >= 0 && valeur <= this.currentValue.get())
+			this.currentValue.set(this.currentValue.get() - valeur);
 		else
 			throw new IllegalArgumentException("La valeur doit être >= 0");
 	}
 	
-	public boolean estNul() {
-		return this.currentVal.get() == 0;
+	public boolean isZero() {
+		return this.currentValue.get() == 0;
 	}
 	
 	@Override
 	public String toString() {
-		return this.name + " : " + this.currentVal.get() + "(" +getPercent() +  "%)" + " pts";
+		//@TODO
+		return null;
 	}
 	
 	
 	public int getPercent() {
-		Double d = new Double(this.currentVal.get()*100/this.initialVal);
+		Double d = new Double(this.currentValue.get()*100/this.initialVal);
 		return d.intValue();
 	}
 	

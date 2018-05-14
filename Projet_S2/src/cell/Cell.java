@@ -1,43 +1,49 @@
-package model;
+package cell;
 
+import additionalMethods.ErrorCodes;
+import item.Item;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import personnage.GameCharacter;
 
-public class Case {
+public class Cell {
 	public final static char CHARCHANGE = 'c';
 	public final static char ITEMCHANGE = 'i';
 	public final static char DECORATIONCHANGE = 'd';
+	public final static char INSIGNIFICANTCHAR = ' ';
 	
 	private Background background;
-	private Personnage currentChar;
+	private GameCharacter currentChar;
 	private Item item;
 	private Decoration decoration;
 	private BooleanProperty changeProperty;
 	private final BooleanProperty safeProperty;
 	private char lastChange;
+	
 	/*
 	 * Une case ne peut contenir qu'un item ou une decoration, pas les deux en même temps
 	 */
 	
-	public Case(int backgroundCode) {
+	public Cell(int backgroundCode) {
 		this.safeProperty = new SimpleBooleanProperty();
 		this.background = new Background(backgroundCode);
 		this.changeProperty = new SimpleBooleanProperty();
+		this.lastChange = INSIGNIFICANTCHAR;
 		
 	}
 	
-	public Case(Integer backgroundCode,Integer decorationCode,Integer itemCode) {
+	public Cell(Integer backgroundCode,Integer decorationCode,Integer itemCode) {
 		this.safeProperty = new SimpleBooleanProperty();
 	}	
 	
 	
-	public boolean estVide() {
-		return this.currentChar == null && this.item == null && background.estTraversable();
+	public boolean isEmpty() {
+		return this.currentChar == null && this.background.estTraversable();
 	}
 	
-	public void ajouterPersonnage(Personnage character) throws IllegalArgumentException{
-		if(!this.estVide() )
-			throw new IllegalArgumentException("Cette colonne n'est pas traversable");
+	public void addCharacter(GameCharacter character) throws IllegalArgumentException{
+		if(!this.isEmpty() )
+			throw new IllegalArgumentException(ErrorCodes.IMPOSSIBLEMOVE);
 		else {
 			this.currentChar = character;
 			this.triggerChange(CHARCHANGE);
@@ -57,7 +63,7 @@ public class Case {
 	}
 	
 	
-	public void viderCase() {
+	public void emptyCell() {
 		this.currentChar = null;
 		this.triggerChange(CHARCHANGE);
 	}
@@ -70,7 +76,7 @@ public class Case {
 		return this.lastChange;
 	}
 	
-	public boolean contientPersonnage(Personnage personnage) {
-		return this.currentChar == personnage;
+	public boolean containsCharacter(GameCharacter gameCharacter) {
+		return this.currentChar == gameCharacter;
 	}
 }
