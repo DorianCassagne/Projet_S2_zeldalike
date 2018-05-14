@@ -1,11 +1,15 @@
 package character;
 
 public class Hero extends GameCharacter{
-	private boolean endMap;
-	
-	public Hero() {
+	public Hero(int hpMax) {
+		super(hpMax);
 		this.onANewMapp();
 	}
+	private boolean endMap;
+	
+//	public Hero() {
+//		this.onANewMapp();
+//	}
 
 	
 	public void onANewMapp(){

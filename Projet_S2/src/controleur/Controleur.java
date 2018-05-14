@@ -7,8 +7,11 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import map.GameMap;
 import model.Game;
@@ -63,7 +66,34 @@ public class Controleur implements Initializable{
 //				
 //			}
 //		});
+		
 		   
+	}
+	
+	public void startScene(Scene scene) {
+		scene.setOnKeyPressed(
+			e -> handleKey(e)
+		);
+	}
+	private void handleKey(KeyEvent event) {
+		KeyCode code = event.getCode();
+		try {
+			if(code.equals(KeyCode.UP)) {
+				System.out.println("top");
+			}
+			else if(code.equals(KeyCode.LEFT)) {
+				System.out.println("top");
+			}
+			else if(code.equals(KeyCode.RIGHT)) {
+				System.out.println("top");
+			}
+			else if(code.equals(KeyCode.DOWN)) {
+				System.out.println("top");
+			}
+		
+			}catch(IllegalArgumentException e) {
+			}
+		
 	}
 	
 	public void MewMap(int x, int y) {

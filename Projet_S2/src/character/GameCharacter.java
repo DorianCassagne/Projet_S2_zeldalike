@@ -14,6 +14,10 @@ public abstract class GameCharacter  {
 	protected ImageView img;
 	protected boolean dead;
 	
+	public GameCharacter(int hpMax) {
+		
+	}
+	
 	
 	public void getDmg(Attack att) {
 		hp-=att.getDamage()*(100/def+100);

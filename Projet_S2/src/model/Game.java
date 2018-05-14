@@ -23,7 +23,7 @@ public class Game {
 		this.mapList=mapList;
 		textu = new TexturePack(textuPath, textWidth, 32);
 		players= new ArrayList<>();
-		hero= new Hero();
+		hero= new Hero(100);
 		map=new GameMap(MapGenerator.getBackMap(mapList.get(0)), MapGenerator.getItemMap(mapList.get(0)), MapGenerator.getCharacMap(mapList.get(0), players), textu);
 		//hero.relocate(players.get(0).getX(),players.get(0).getY());
 	}
