@@ -1,5 +1,5 @@
 package model.map;
 
-public interface Item {
+public abstract class Item {
 	
 }

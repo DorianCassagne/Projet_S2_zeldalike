@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-
-import controleur.Controleur;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -34,7 +32,7 @@ public class Main extends Application {
 			throw new Error("Error loading javaFX");
 		} 
 
-        Controleur controller= loader.getController();
+        //Controleur controller= loader.getController();
 
         Scene  scene = new Scene(root,600,400);
 
