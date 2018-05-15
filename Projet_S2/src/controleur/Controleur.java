@@ -37,6 +37,7 @@ public class Controleur implements Initializable{
 
 	private DoubleProperty decalMapY;
 	private StringProperty KeyboardInput;
+	private ThreadTime tr;
 	
 	public final static int MAPWIDTH=8;
 	public final static int SIZETILE=32;
@@ -59,7 +60,8 @@ public class Controleur implements Initializable{
 		}
 
 		mainAnchorPane.getChildren().addAll(ar);
-		
+
+		tr=new ThreadTime(game);
 		   
 	}
 	
@@ -86,7 +88,6 @@ public class Controleur implements Initializable{
 			}
 			else if(code.equals(KeyCode.S)) {
 				System.out.println("test");
-				ThreadTime tr=new ThreadTime(game);
 				tr.start();
 			}
 			}catch(IllegalArgumentException e) {
