@@ -1,6 +1,6 @@
 package model.movable;
 
-public class Hero extends Personnage{
+public class Hero extends GameCharacter{
 
 
 

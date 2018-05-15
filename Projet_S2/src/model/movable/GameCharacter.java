@@ -1,6 +1,6 @@
 package model.movable;
 
-public abstract class Personnage {
+public abstract class GameCharacter extends Movable{
 	
 	
 	
