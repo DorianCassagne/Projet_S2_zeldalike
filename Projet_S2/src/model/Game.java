@@ -83,4 +83,8 @@ public class Game {
 	public void toRight(Integer key) {
 		this.currentMap.getCharacterByKey(key).toRight();
 	}
+	
+	public int getWalkTime(Integer key) {
+		return this.currentMap.getCharacterByKey(key).getWalkTime();
+	}
 }

@@ -3,10 +3,13 @@ package personnage;
 import mapZelda.Map;
 
 public class Hero extends GameCharacter{
-	private final static String[] ZELDAIMAGE = {"fairyback.png","fairyprofil.png","fairyface.png","fairyprofil.png"};
+	private final static String[] ZELDAIMAGE = {"Piskel1.png","fairyprofil.png","fairyface.png","fairyprofil.png"};
+
+	private int walkSpeed ;
 	
 	public Hero(Map map,int startRow,int startColumn) {
 		super("Fairy",ZELDAIMAGE[3],map,startRow,startColumn);
+		this.walkSpeed = 10;
 	}
 
 
@@ -28,6 +31,12 @@ public class Hero extends GameCharacter{
 	@Override
 	public String getRightImage() {
 		return ZELDAIMAGE[1];
+	}
+
+
+	@Override
+	protected int getWalkSpeed() {
+		return this.walkSpeed;
 	}
 
 

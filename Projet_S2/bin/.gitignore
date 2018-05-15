@@ -1,6 +1,6 @@
-/app/
-/controleur/
-/gui/
-/img/
-/map/
+/additionalMethods/
 /model/
+/mapZelda/
+/controleur/
+/personnage/
+/app/

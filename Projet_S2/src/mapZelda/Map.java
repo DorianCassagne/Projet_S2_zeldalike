@@ -37,13 +37,13 @@ public class Map {
 	}
 	
 	
-	public boolean addToCharList(GameCharacter character,int startCellRow,int startCaseY) {
+	public boolean addToCharList(GameCharacter character,int startCellRow,int startCellColumn) {
 		boolean added = false;
 		if(!this.charList.containsValue(character)) {
 			this.charList.put(this.idCharacter, character);
 			try {
 				this.voidCell.emptyCell();
-				this.cells[startCellRow][startCaseY].addCharacter(character);
+				this.cells[startCellRow][startCellColumn].addCharacter(character);
 			}catch(IllegalArgumentException e) {
 				this.charList.remove(this.idCharacter);
 			}

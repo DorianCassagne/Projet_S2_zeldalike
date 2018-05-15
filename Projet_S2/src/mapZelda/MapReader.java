@@ -35,7 +35,7 @@ public class MapReader {
 	
 	public int getNbTilesWidth() {
 		int width = 0;
-		if(this.map.isEmpty())
+		if(!this.map.isEmpty())
 			width = this.map.get(0).length;
 		return width;
 	}

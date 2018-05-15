@@ -28,7 +28,7 @@ public class Main extends Application {
 
         root=loader.load();
         Controleur controller= loader.getController(); 
-        Scene scene = new Scene(root,480,432);
+        Scene scene = new Scene(root,720,450);
         controller.startScene(scene);
         primaryStage.setScene(scene);
         primaryStage.show();

@@ -1,12 +1,24 @@
 package personnage;
 
+import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
+
+import additionalMethods.ErrorCodes;
 import javafx.beans.property.*;
+
 import mapZelda.Map;
-import mapZelda.Map.Deplacement;
 import mapZelda.Move;
 
 public abstract class GameCharacter {
 
+    private ScheduledExecutorService scheduler ;
+	public static final int CHARACTERDEFAULTSIZE = 16;
+	protected final static int ONESPEEDPOINTTOTIME = 25;
+	private TimerTask characterMoveFreezeTask;
+	private boolean isWalkingPossible;
 	private String name;
 	private StringProperty representationImage;
 	private StringProperty copyOfRepresentationImage;
@@ -18,7 +30,19 @@ public abstract class GameCharacter {
 			this.representationImage = new SimpleStringProperty(startImage);
 			this.myMap = map;
 			this.myMap.addToCharList(this, startRow, startColumn);
+			this.scheduler= Executors.newScheduledThreadPool(1);
+			this.isWalkingPossible = true;
+			this.characterMoveFreezeTask = new TimerTask() {
+				@Override
+				public void run() {
+					GameCharacter.this.isWalkingPossible = true;
+					this.cancel();
+				}
+			};
+
 		}
+		else
+			throw new IllegalArgumentException(ErrorCodes.NULLCODE);
 	}
 	
 	
@@ -34,31 +58,54 @@ public abstract class GameCharacter {
 			representationImage.set(imageName);
 	}
 	
+	private void stopAction() {
+		this.isWalkingPossible = false;
+		 this.scheduler.schedule(characterMoveFreezeTask, this.getWalkTime() + 60, TimeUnit.MILLISECONDS);
+	}
+	
 	public  void toTop() {
-		this.setRepresentationImage(this.getTopImage());
-		this.myMap.moveCharacter(this, Move.TOP);
+		if(this.isWalkingPossible) {
+			this.setRepresentationImage(this.getTopImage());
+			this.myMap.moveCharacter(this, Move.TOP);
+			this.stopAction();
+		}
 	}
 	
 	public  void toLeft() {
-		this.setRepresentationImage(this.getLeftImage());
-		this.myMap.moveCharacter(this, Move.LEFT);
+		if(this.isWalkingPossible) {
+			this.setRepresentationImage(this.getLeftImage());
+			this.myMap.moveCharacter(this, Move.LEFT);
+			this.stopAction();
+		}
+
 	}
 	
 	public  void toBottom() {
-		this.setRepresentationImage(this.getBottomImage());
-		this.myMap.moveCharacter(this, Move.BOTTOM);
+		if(this.isWalkingPossible) {
+			this.setRepresentationImage(this.getBottomImage());
+			this.myMap.moveCharacter(this, Move.BOTTOM);
+			this.stopAction();
+
+		}
 	}
 	
 	public  void toRight() {
-		this.setRepresentationImage(this.getRightImage());
-		this.myMap.moveCharacter(this, Move.RIGHT);
+		if(this.isWalkingPossible) {
+			this.setRepresentationImage(this.getRightImage());
+			this.myMap.moveCharacter(this, Move.RIGHT);
+			this.stopAction();
+		}
 	}
-	
-	
+		
 	public abstract String getTopImage();
 	public abstract String getBottomImage();
 	public abstract String getLeftImage();
 	public abstract String getRightImage();
+	protected abstract int getWalkSpeed();
+	
+	public int getWalkTime() {
+		return this.getWalkSpeed() * ONESPEEDPOINTTOTIME;
+	}
 	
 	public String getNom() {
 		return this.name;
