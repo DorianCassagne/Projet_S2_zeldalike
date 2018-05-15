@@ -2,7 +2,7 @@ package model.map;
 
 
 public class Map {
-	Cell[][] squareList;
+	Cell[][] cellList;
 	Item item;
 	
 }
