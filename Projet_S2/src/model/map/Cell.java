@@ -1,7 +1,7 @@
 package model.map;
 
 
-public class Square {
+public class Cell {
 	
 	
 }
