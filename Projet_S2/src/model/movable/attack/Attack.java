@@ -5,8 +5,8 @@ import model.movable.Movable;
 
 public class Attack extends Movable{
 
-	public Attack(GameMap map) {
-		super(map);
+	public Attack(GameMap map, int key) {
+		super(map, key);
 	}
 
 }

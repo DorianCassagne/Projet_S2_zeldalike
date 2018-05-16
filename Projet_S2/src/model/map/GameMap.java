@@ -1,5 +1,6 @@
 package model.map;
 
+import javafx.beans.property.IntegerProperty;
 import model.ModelConst;
 import model.map.cell.Cell;
 import model.map.cell.item.ItemFactory;
@@ -24,6 +25,14 @@ public class GameMap {
 			if(backgroundValues[i]!=-1)
 				cellList[i].setItem(ItemFactory.createItem(backgroundValues[i]));
 		}
+	}
+	
+	public IntegerProperty[] getMapChange() {
+	IntegerProperty[] changedList = new IntegerProperty[cellList.length];
+		for(int i = 0; i<cellList.length;i++) {
+			changedList[i]=cellList[i].getChangeValue();
+		}
+		return changedList;
 	}
 	
 }

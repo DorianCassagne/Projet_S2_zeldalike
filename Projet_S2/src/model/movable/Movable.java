@@ -5,16 +5,20 @@ import model.map.GameMap;
 
 public abstract class Movable {
 
+	private int key;
 	private int xValue;
 	private int yValue;
 	protected GameMap map;
 	
-	public Movement play() {
-		return null;
+	
+	
+	public Movable(GameMap map, int key) {
+		this.map=map;
+		this.key=key;
 	}
 	
-	public Movable(GameMap map) {
-		this.map=map;
+	public Movement play() {
+		return null;
 	}
 
 	protected int getxValue() {
@@ -32,4 +36,9 @@ public abstract class Movable {
 	protected void setyValue(int yValue) {
 		this.yValue = yValue;
 	}
+
+	public int getKey() {
+		return key;
+	}
+
 }
