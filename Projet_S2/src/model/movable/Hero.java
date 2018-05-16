@@ -7,7 +7,6 @@ public class Hero extends GameCharacter{
 	public Hero(GameMap map) {
 		super(map, 1);
 	}
-
-
-
+	
+	
 }

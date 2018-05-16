@@ -5,9 +5,11 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import controleur.Controleur;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -25,7 +27,7 @@ public class Main extends Application {
 			throw new Error("Error path to fxml file");
 		}
         loader.setLocation(url);
-        BorderPane root = new BorderPane(); 
+        AnchorPane root = new AnchorPane(); 
         try {
 			root=loader.load();
 		} catch (IOException e) {
@@ -33,11 +35,11 @@ public class Main extends Application {
 			throw new Error("Error loading javaFX");
 		} 
 
-        //Controleur controller= loader.getController();
+        Controleur controller= loader.getController();
 
         Scene  scene = new Scene(root,600,400);
 
-        //controller.startScene(scene);
+        controller.startScene(scene);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
