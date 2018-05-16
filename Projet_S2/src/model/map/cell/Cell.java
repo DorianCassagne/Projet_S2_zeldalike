@@ -1,7 +1,9 @@
-package model.map;
+package model.map.cell;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import model.map.cell.background.Background;
+import model.map.cell.item.Item;
 import model.movable.GameCharacter;
 
 public class Cell {

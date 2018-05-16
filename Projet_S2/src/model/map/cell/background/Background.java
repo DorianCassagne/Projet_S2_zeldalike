@@ -1,4 +1,4 @@
-package model.map;
+package model.map.cell.background;
 
 public class Background {
 	private int textureVal;

@@ -1,5 +1,6 @@
 package model.movable;
 
+import controleur.Movement;
 import model.map.GameMap;
 
 public abstract class Movable {
@@ -7,6 +8,10 @@ public abstract class Movable {
 	private int xValue;
 	private int yValue;
 	protected GameMap map;
+	
+	public Movement play() {
+		return null;
+	}
 	
 	public Movable(GameMap map) {
 		this.map=map;

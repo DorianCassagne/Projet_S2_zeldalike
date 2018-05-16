@@ -4,10 +4,11 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -18,13 +19,13 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader();
         URL url=null;
 		try {
-			url = new File("src/vue/GuiView.fxml").toURI().toURL();
+			url = new File("src/vue/src/GuiView.fxml").toURI().toURL();
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 			throw new Error("Error path to fxml file");
 		}
         loader.setLocation(url);
-        AnchorPane root = new AnchorPane(); 
+        BorderPane root = new BorderPane(); 
         try {
 			root=loader.load();
 		} catch (IOException e) {

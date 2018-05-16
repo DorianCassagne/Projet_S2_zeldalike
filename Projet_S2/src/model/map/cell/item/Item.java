@@ -1,4 +1,4 @@
-package model.map;
+package model.map.cell.item;
 
 import model.movable.Hero;
 
