@@ -95,9 +95,9 @@ public class Controleur implements Initializable{
 					Controleur.playGameLoop();
 					running=!running;
 				}
-				
 			}
 			}catch(IllegalArgumentException e) {
+				
 			}
 		
 		

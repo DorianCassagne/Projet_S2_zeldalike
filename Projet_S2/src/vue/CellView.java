@@ -21,7 +21,7 @@ public class CellView extends StackPane {
 	public void check() {
 		if (change.get() != 0) {
 			if(change.get()>=300*VueConst.TILEMAPWHIDTH)
-			
+			 
 			
 			change.set(0);
 		}
