@@ -1,3 +1,5 @@
+package model.gameMap.cell;
+
 
 public class Background {
 
@@ -22,13 +24,17 @@ public class Background {
 		public int getValue() {
 			return value;
 		}
+		public Background(int imageValue) {
+			this.imageValue=imageValue;
+			
+		}
 		
 		//retourne vrai si le fond est traversable, sinon renvoie faux.
 		public boolean getIsWalkable () {
 			return isWalkable;
 		}
 
-		//renvoie l’image qui renvoie la valeur de l’image
+		//renvoie lï¿½image qui renvoie la valeur de lï¿½image
 		public int getImageValue() { 
 			return this.imageValue;
 		}

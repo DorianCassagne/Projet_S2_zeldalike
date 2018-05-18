@@ -28,7 +28,7 @@ public class Cell {
 		if (this.movable!=null)
 			return false;
 		this.movable=movable;
-		return true;.
+		return true;
 	}
 
 	public Byte attack(Attack attack) {
