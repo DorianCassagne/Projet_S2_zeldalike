@@ -1,4 +1,4 @@
-package additionalClass;
+package resources.additionalClass;
 
 import java.io.BufferedReader;
 import java.io.File;

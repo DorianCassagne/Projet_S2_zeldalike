@@ -1,14 +1,21 @@
 package model.gameMap.cell;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import model.character.Movable;
 import model.character.attack.Attack;
 import model.character.item.Item;
+import model.gameMap.GameMap;
 
 public class Cell {
 
-	Background background;
-	Item item;
-	Movable movable;
+	
+	private Background background;
+	private Item item;
+	private Movable movable;
+	private IntegerProperty changeProperty;
+	private IntegerProperty safeProperty;
+	
 	public Cell(int backgroundValue){
 		this.background = new Background(backgroundValue);
 	}
@@ -16,6 +23,9 @@ public class Cell {
 	public Cell(int backgroundValue,Item item) {
 		this(backgroundValue);
 		this.item=item;
+		this.changeProperty = new SimpleIntegerProperty();
+		this.safeProperty = new SimpleIntegerProperty();
+		this.safeProperty.bind(changeProperty);
 	}
 
 	public Movable removeMovable() {
@@ -28,10 +38,10 @@ public class Cell {
 		if (this.movable!=null)
 			return false;
 		this.movable=movable;
-		return true;.
+		return true;
 	}
 
-	public Byte attack(Attack attack) {
+	public byte attack(Attack attack) {
 		byte number=0;
 		if(this.movable!=null) {
 			attack.attackCharacter(this.movable);
@@ -45,6 +55,7 @@ public class Cell {
 		if (this.item!=null) 
 			return false;
 		this.item=item;
+		this.changeProperty.set(item.getImageName());
 		return true;
 	}
 
@@ -54,5 +65,9 @@ public class Cell {
 
 	public int getBackgroundRepresentation() {
 		return this.background.getImage();
+	}
+	
+	public final IntegerProperty changeProperty() {
+		return this.changeProperty();
 	}
 }
