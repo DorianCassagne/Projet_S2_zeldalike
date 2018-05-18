@@ -1,5 +1,6 @@
 package model.character.attack;
 
+import model.character.GameCharacter;
 import model.gameMap.GameMap;
 
 public abstract class Attack {
@@ -21,5 +22,5 @@ public abstract class Attack {
 			this.attackMap = attackMap;
 		}
 	}
-	
+	public abstract void target(GameCharacter gameCharacter) ;
 }
