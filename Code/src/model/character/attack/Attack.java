@@ -1,4 +1,6 @@
-package map.character;
+package model.character.attack;
+
+import model.gameMap.GameMap;
 
 public abstract class Attack {
 	
@@ -11,7 +13,7 @@ public abstract class Attack {
 			throw new IllegalArgumentException("CastTime must be higher than 0");
 		else if(effectTime < 0)
 			throw new IllegalArgumentException("EffectTime must be higher than 0");
-		else if(map == null)
+		else if(attackMap == null)
 			throw new IllegalArgumentException("The map must not be null");
 		else {
 			this.castTime = castTime;

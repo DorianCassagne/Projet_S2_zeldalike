@@ -1,11 +1,15 @@
-package app.model;
+package model.gameMap.cell;
+
+import model.character.Movable;
+import model.character.attack.Attack;
+import model.character.item.Item;
 
 public class Cell {
 
 	Background background;
 	Item item;
 	Movable movable;
-	public Cell(int backgroundValue) {
+	public Cell(int backgroundValue){
 		this.background = new Background(backgroundValue);
 	}
 
@@ -28,12 +32,12 @@ public class Cell {
 	}
 
 	public Byte attack(Attack attack) {
-		Byte byte=0;
+		byte number=0;
 		if(this.movable!=null) {
 			attack.attackCharacter(this.movable);
-			byte+=1;
+			number+=1;
 		}
-		return byte;
+		return number;
 			
 	}
 
@@ -45,7 +49,7 @@ public class Cell {
 	}
 
 	public int isWalkable() {
-		return this.(this.background.isWalkable()&&this.movable==null);
+		return (this.background.isWalkable() && this.movable==null);
 	}
 
 	public int getBackgroundRepresentation() {
