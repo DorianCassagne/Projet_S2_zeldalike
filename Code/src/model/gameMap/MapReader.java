@@ -12,7 +12,7 @@ public class MapReader {
 	public final static String SEPARATOR = ",";
 	public final static int MAPLENGTH = 100;
 	
-	public int[] readAndConvertMapFile(String path) {
+	public static int[]  readAndConvertMapFile(String path) {
 		BufferedReader reader = SeparatorFileReader.openTextFile(MAPFILEPATH + path);
 		int[] result = SeparatorFileReader.readAllIntLines(reader, SEPARATOR, MAPLENGTH);
 		return result;

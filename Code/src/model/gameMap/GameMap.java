@@ -12,27 +12,37 @@ public class GameMap {
 	public final static int STARTATTACKINDEX = 200 * LINELENGTH;
 	public final static int STARTWALKABLEINDEX = 300 * LINELENGTH;
 	public final static int STARTNONWALKABLEINDEX = 400 * LINELENGTH;
-
+	public final static int CHANGEPARTWITHCELLID = 9;
 	
 	private IntegerProperty changeProperty;
 	private Cell[] cells ;
-	public GameMap() {
-		this.changeProperty = new SimpleIntegerProperty();
+	private HashMap<Integer,Movable> movableList;
+	
+	public GameMap(String mapPath) {
+		int[] values = MapReader.readAndConvertMapFile(mapPath);
+		initialiseCells(values);
 	
 	}
 	
-	public void initialiseCell() {
-		this.cells = new Cell[MapReader.MAPLENGTH];
-		for(int row = 0;row < MapReader.MAPLENGTH;row++) {
-			for(int column = 0 ; column < MapReader.MAPLENGTH; column++) {
-				this.cells[row * MapReader.MAPLENGTH + column ] = new Cell(1);
-				this.cells[row * MapReader.MAPLENGTH + column ].changeProperty().addListener(
-						(obs,oldValue,newValue)->{
-							changeProperty.set(15);
-						}
-						);
-				
-			}
+	public Move[] turn() {
+		
+	}
+	
+	
+	private void initialiseCells(int[] values) {
+		this.cells = new Cell[MapReader.MAPLENGTH*MapReader.MAPLENGTH];
+		Cell currentCell;
+
+		for(int i = 0 ; i < values.length ;i++) {
+			final int cellId = i;
+			currentCell = cells[cellId];
+			currentCell = new Cell(values[cellId]);
+			currentCell.changeProperty().addListener(
+					(obs,oldValue,newValue)->{
+						this.changeProperty.set(newValue.intValue()<< CHANGEPARTWITHCELLID + cellId);
+					}
+			);
+
 		}
 	}
 }
