@@ -1,7 +1,10 @@
 package model.gameMap;
 
+import java.util.HashMap;
+
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import model.character.Movable;
 import model.gameMap.cell.Cell;
 
 public class GameMap {
