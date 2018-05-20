@@ -1,4 +1,4 @@
-package app.model;
+package model;
 
 public class Game {
 
