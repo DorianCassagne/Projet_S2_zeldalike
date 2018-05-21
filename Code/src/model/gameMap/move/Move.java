@@ -1,4 +1,4 @@
-package model;
+*package model.gameMap.move;
 
 public class Move {
 	private int movableId;

@@ -3,6 +3,7 @@ package app;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 
 import controler.Controleur;
@@ -21,11 +22,14 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader();
         URL url=null;
 		try {
-			url = new File("src/vue/src/GuiView.fxml").toURI().toURL();
+			url = Main.class.getResource("/vue/GuiView.fxml").toURI().toURL();
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 			throw new Error("Error path to fxml file");
+		}catch (URISyntaxException e) {
+			e.printStackTrace();
 		}
+
         loader.setLocation(url);
         AnchorPane root = new AnchorPane(); 
         try {

@@ -15,7 +15,7 @@ public class Background {
 		else if(value >= GameMap.STARTWALKABLEINDEX && value < GameMap.STARTWALKABLEINDEX + GameMap.CATEGORYLENGTH)
 			this.isWalkable = true;
 		else
-			throw new IllegalArgumentException("UNKNOWN BACKGROUND ID");
+			throw new IllegalArgumentException("UNKNOWN BACKGROUND ID" + value);
 		this.image = value;
 	}	
 	
@@ -24,7 +24,7 @@ public class Background {
 	}
 
 	//retourne vrai si le fond est traversable, sinon renvoie faux.
-	public boolean getIsWalkable () {
+	public boolean isWalkable () {
 		return isWalkable;
 	}
 

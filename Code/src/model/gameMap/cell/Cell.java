@@ -18,14 +18,15 @@ public class Cell {
 	
 	public Cell(int backgroundValue){
 		this.background = new Background(backgroundValue);
+		this.changeProperty = new SimpleIntegerProperty();
+		this.safeProperty = new SimpleIntegerProperty();
+		this.safeProperty.bind(changeProperty);
+
 	}
 
 	public Cell(int backgroundValue,Item item) {
 		this(backgroundValue);
 		this.item=item;
-		this.changeProperty = new SimpleIntegerProperty();
-		this.safeProperty = new SimpleIntegerProperty();
-		this.safeProperty.bind(changeProperty);
 	}
 
 	public Movable removeMovable() {
@@ -44,7 +45,7 @@ public class Cell {
 	public byte attack(Attack attack) {
 		byte number=0;
 		if(this.movable!=null) {
-			attack.attackCharacter(this.movable);
+			//attack.attackCharacter(this.movable);
 			number+=1;
 		}
 		return number;
@@ -59,7 +60,7 @@ public class Cell {
 		return true;
 	}
 
-	public int isWalkable() {
+	public boolean isWalkable() {
 		return (this.background.isWalkable() && this.movable==null);
 	}
 
@@ -68,6 +69,10 @@ public class Cell {
 	}
 	
 	public final IntegerProperty changeProperty() {
-		return this.changeProperty();
+		return this.safeProperty;
+	}
+	
+	public boolean contains(Movable movable) {
+		return this.movable == movable;
 	}
 }
