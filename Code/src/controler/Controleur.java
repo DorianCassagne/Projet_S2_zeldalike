@@ -1,6 +1,7 @@
 package controler;
 
 import java.net.URL;
+
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
@@ -9,9 +10,11 @@ import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
@@ -19,10 +22,14 @@ import javafx.util.Duration;
 import model.Game;
 import model.gameMap.GameMap;
 import model.gameMap.additional.MapReader;
+import model.gameMap.additional.NewCharacter;
+import model.gameMap.move.Move;
 
 public class Controleur implements Initializable{
 	
-	private final static int TILEDIMENSION = 32;
+	final static int TILEDIMENSION = 32;
+	final static int ROWINDEX = 0;
+	final static int COLUMNINDEX = 1 ;
 	private static Image TILESETIMAGE ;
 	private final static String TILESETPATH = "/resources/tileset/test.png";
 	
@@ -62,6 +69,33 @@ public class Controleur implements Initializable{
 		initialiseGameLoop();
 	}
 	
+	
+	
+	
+	
+	public void startScene(Scene scene) {
+		scene.setOnKeyPressed(e->handleKey(e));
+	}
+	
+	private void handleKey(KeyEvent event) {
+		switch(event.getCode()) {
+		case UP : 
+			System.out.println("Up");
+			break;
+		case DOWN:
+			System.out.println("Down");
+			break;
+		case LEFT:
+			System.out.println("LEFT");
+			break;
+		case RIGHT: 
+			System.out.println("RIGHT");
+			break;
+		default :
+			System.out.println("Unknown key");
+		}
+	}
+	
 	private void initialiseGameLoop() {
 		this.gameLoop = new Timeline();
 		gameLoop.setCycleCount(Timeline.INDEFINITE);
@@ -73,16 +107,23 @@ public class Controleur implements Initializable{
 					}
 					else {
 						addPlayers(this.myGame.getNewPlayers());
+						playMoves(this.myGame.turn());
 					}
 				})
 				);
 	}
+
+	private void playMoves(Move[] moves ) {
+		for (Move move : moves) {
+			MovableView movable = this.movableList.get(move.getMovableId());
+			movable.moveTo(move.getEndCellId(), move.getImageValue(),move.getSpeed());
+		}
+	}
 	
-	private void addPlayers(Integer[] newPlayers) {
-		for(Integer playerId : newPlayers) {
-			int charCell = this.myGame.getCharCell(playerId);
-			MovableView newMovable = new MovableView(charCell);
-			this.movableList.put(playerId, newMovable);
+	private void addPlayers(NewCharacter[] newPlayers) {
+		for(NewCharacter newPlayer : newPlayers) {
+			MovableView newMovable = new MovableView(newPlayer.getCellId(),newPlayer.getImageValue());
+			this.movableList.put(newPlayer.getKey(), newMovable);
 		}
 		
 	}
@@ -107,10 +148,17 @@ public class Controleur implements Initializable{
 		}
 	}
 	
-	private static void setViewPort(ImageView viewer,int imageId) {
+	static void setViewPort(ImageView viewer,int imageId) {
 		int row = imageId * TILEDIMENSION / GameMap.LINELENGTH ;
 		int column = (imageId  % GameMap.LINELENGTH)*TILEDIMENSION;
 		viewer.setViewport(new Rectangle2D(row, column, 32, 32));
+	
 	}
 	
+	public static int[] convertToViewSize(int cellId) {
+		int row = (cellId / MapReader.MAPLENGTH)*TILEDIMENSION;
+		int column = (cellId*TILEDIMENSION - row);
+		int[] position = {row,column};
+		return position;
+	}
 }

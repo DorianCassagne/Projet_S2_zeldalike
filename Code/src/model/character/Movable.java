@@ -10,10 +10,11 @@ import resources.additionalClass.UsefulMethods;
 public abstract class Movable {
 	public final static char HEROTYPE = 'H';
 	public final static char ENEMYTYPE = 'E';
+	public final static int DEFAULTIMAGEINDEX = 0;
 	
 	private final static HashMap<Movable,Character> MOVABLETYPE;
 	private int speed;
-	private GameMap map;
+	
 	
 	static {
 		MOVABLETYPE = new HashMap<Movable,Character>();
@@ -24,29 +25,15 @@ public abstract class Movable {
 	}
 	
 	
-	public Movable(char type,int speed,GameMap map) {
+	public Movable(char type,int speed) {
 		if(speed < 0)
 			throw new IllegalArgumentException("Speed must be greater than 0");
 		else if(!UsefulMethods.isCharInCharList(type, HEROTYPE,ENEMYTYPE))
 			throw new IllegalArgumentException("Undefined type");
 		this.speed = speed;
 		MOVABLETYPE.put(this, type);
-		this.map = map;
 	}
 	
-	
-	
-	public final boolean setMap(GameMap newMap) {
-		boolean set = (this.map == null);
-		if(set)
-			this.map = newMap;
-		return set;
-	}
-	
-	
-	public final void deleteFromMap() {
-		this.map = null;
-	}
 		
 	public final int getSpeed() {
 		return this.speed;
@@ -56,6 +43,8 @@ public abstract class Movable {
 		
 		return null;
 	}
+	
+	public abstract int getDefaultImage() ;
 	
 	
 }

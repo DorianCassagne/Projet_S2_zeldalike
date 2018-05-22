@@ -10,23 +10,23 @@ import model.gameMap.GameMap;
 
 public abstract class GameCharacter extends Movable{
 
-	private char type; 	// limité, à revoir dans le constructeur, en fonction d'une enumération de type
 	private int hp; 	
 	private int def;	// comportement de la defense avoir avec Dorian atk*def/100 ??
-
+	private GameMap map;
 
 	//Crée un deplaçable ayant les propriétées voulue. Déclenche une erreur si l'une des propriétés est invalid (négatif ou null)
 	
-	public GameCharacter(GameMap map,int speed, char type, int hp, int def) {
-		super(Movable.HEROTYPE,speed,map);
+	public GameCharacter(GameMap map,int speed, char type, int hp, int def,int startRow,int startColumn) {
+		super(type,speed);
 		
 		if( map == null || hp <= 0 || def < 0) {
 			throw new IllegalArgumentException("ARGUMENT INVALID on GAMECHARACTER ");
 		}
 		else {
-			this.type=type;
+			this.map = map;
 			this.hp=hp;
 			this.def=def;
+			this.map.addCharacter(this, startRow, startColumn);
 		}
 
 	}
@@ -35,6 +35,7 @@ public abstract class GameCharacter extends Movable{
 	public int getHp() {
 		return this.hp;
 	}
+	
 	public void setHp(int hp) {
 		if(hp <= 0 ) {
 			throw new IllegalArgumentException("ARGUMENT 'HP' INVALID on GAMECHARACTER ");
@@ -52,10 +53,7 @@ public abstract class GameCharacter extends Movable{
 		this.def=def;
 	}
 	
-	public char getType() {
-		return this.type;
-	}
-	//getters settesr end
+	//getters setters end
 	
 	//blesse le personnage exeption si dmg < 0.
 	//j'aime pas beaucoup le nom de la methode "getDmg" 
@@ -80,5 +78,6 @@ public abstract class GameCharacter extends Movable{
 
 	}
 	 */
+	
 
 }

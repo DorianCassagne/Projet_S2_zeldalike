@@ -39,11 +39,11 @@ public class Main extends Application {
 			throw new Error("Error loading javaFX");
 		} 
 
-        //Controleur controller= loader.getController();
-
+        Controleur controller = loader.getController();
+        
         Scene  scene = new Scene(root,600,400);
 
-        //controller.startScene(scene);
+        controller.startScene(scene);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
