@@ -6,7 +6,7 @@ public class Move {
 	private int speed;
 	private int imageValue;
 	
-	/**
+	/*
 	 * permet d'indiquer un mouvement de movable
 	 * @param movableId 
 	 * @param startCellId

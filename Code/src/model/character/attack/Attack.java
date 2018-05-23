@@ -1,26 +1,47 @@
 package model.character.attack;
 
 import model.character.GameCharacter;
+import model.character.Movable;
 import model.gameMap.GameMap;
+import model.gameMap.move.Move;
+import model.gameMap.move.Movement;
 
-public abstract class Attack {
+public abstract class Attack extends Movable {
 	
-	private int castTime;
-	private int effectTime;
-	private GameMap attackMap;
+	private Movement direction;
+	private int damage;
+	private int cellPerTurn;
 	
-	public Attack (int castTime,int effectTime, GameMap attackMap) {
-		if(castTime < 0 )
-			throw new IllegalArgumentException("CastTime must be higher than 0");
-		else if(effectTime < 0)
-			throw new IllegalArgumentException("EffectTime must be higher than 0");
-		else if(attackMap == null)
-			throw new IllegalArgumentException("The map must not be null");
-		else {
-			this.castTime = castTime;
-			this.effectTime = effectTime;
-			this.attackMap = attackMap;
-		}
+	public Attack(GameMap map, int cycle, int row, int column,Movement direction,int damage,int cellPerTurn) {
+		
+		super(map, cycle, row, column);
+		this.direction = direction;
+		this.damage = damage;
+		this.cellPerTurn = cellPerTurn;
+		this.getMyMap().addAttack(this, row, column);
+
 	}
-	public abstract void target(GameCharacter gameCharacter) ;
+	
+
+	public final int establishMove() {
+		int row = this.getRow() + this.cellPerTurn * this.direction.getVerticalIncrement();
+		int column = this.getColumn() + this.cellPerTurn * this.direction.getHorizontalIncrement() ;
+		this.setCellId(row, column);
+		return GameMap.convertToCellId(row, column);
+	}
+	
+	public  void target(GameCharacter gameCharacter) {
+		gameCharacter.attaquer(this);
+	}
+	
+	public int getDamage() {
+		return this.damage;
+	}
+
+	@Override
+	public boolean isAlive() {
+		return true;
+	}
+
+	
 }

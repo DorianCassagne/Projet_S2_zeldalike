@@ -6,9 +6,9 @@ public enum Movement {
 	
 
 	TOP(-GameMap.STEP,0),
+	RIGHT(0,GameMap.STEP),
 	BOTTOM(GameMap.STEP,0),
-	LEFT(0,-GameMap.STEP),
-	RIGHT(0,GameMap.STEP);
+	LEFT(0,-GameMap.STEP);
 	
 	private int verticaly;
 	private int horizontaly;

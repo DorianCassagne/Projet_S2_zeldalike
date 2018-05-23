@@ -1,9 +1,12 @@
 package model;
 
+import model.character.Dolphin;
 import model.character.Hero;
+import model.character.attack.Attack;
 import model.gameMap.GameMap;
-import model.gameMap.additional.NewCharacter;
+import model.gameMap.additional.NewMovable;
 import model.gameMap.move.Move;
+import model.gameMap.move.Movement;
 
 public class Game {
 	private final static String mapName = "testMap.csv";
@@ -16,6 +19,8 @@ public class Game {
 	public Game() {
 		myMap = new GameMap(mapName);
 		this.hero = new Hero(myMap, 10, 10);
+		new Dolphin(myMap,9,10);
+
 	}
 	
 	//renvoie l'identifiant du fond pour une cellude donnée.
@@ -24,7 +29,7 @@ public class Game {
 	}
 	
 	//renvoie la liste des caractères crées pendant un tour 
-	public NewCharacter[] getNewPlayers() {
+	public NewMovable[] getNewPlayers() {
 		return this.myMap.getNewCharList();
 	}
 	
@@ -40,6 +45,10 @@ public class Game {
 	
 	public void communiquerMovement(char moveChar) {
 		hero.setNextMove(moveChar);
+	}
+	
+	public int[] getRemovedMovable() {
+		return this.myMap.getRemovedCharacter();
 	}
 	
 	/*

@@ -2,6 +2,7 @@ package model.gameMap.cell;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import model.character.GameCharacter;
 import model.character.Movable;
 import model.character.attack.Attack;
 import model.character.item.Item;
@@ -12,7 +13,7 @@ public class Cell {
 	
 	private Background background;
 	private Item item;
-	private Movable movable;
+	private GameCharacter gameCharacter;
 	private IntegerProperty changeProperty;
 	private IntegerProperty safeProperty;
 	
@@ -30,21 +31,22 @@ public class Cell {
 	}
 
 	public void removeMovable() {
-		this.movable=null;
+		this.gameCharacter=null;
 	}
 
-	public boolean addMovable(Movable movable) {
-		if (this.movable != null)
+	public boolean addMovable(GameCharacter movable) {
+		if (this.gameCharacter != null)
 			return false;
-		this.movable = movable;
+		this.gameCharacter = movable;
 		return true;
 	}
 
 	public byte attack(Attack attack) {
-		byte number=0;
-		if(this.movable!=null) {
-			//attack.attackCharacter(this.movable);
-			number+=1;
+		byte number = 0;
+		if(this.gameCharacter!=null) {
+			this.gameCharacter.attaquer(attack);
+			System.out.println("The character was attacked");
+			number += 1;
 		}
 		return number;
 			
@@ -59,7 +61,7 @@ public class Cell {
 	}
 
 	public boolean isWalkable() {
-		return (this.background.isWalkable() && this.movable==null);
+		return (this.background.isWalkable() && this.gameCharacter==null);
 	}
 
 	public int getBackgroundRepresentation() {

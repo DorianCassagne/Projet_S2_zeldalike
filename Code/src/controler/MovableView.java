@@ -6,20 +6,18 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
+import resources.additionalClass.UsefulMethods;
 
 public class MovableView extends ImageView{
 	
-	private static final int MINSPEEDBYCELL = 2000;
-	private TranslateTransition translation;
+	private double avancementX;
+	private double avancementY;
+	private int progress;
 	
 	public MovableView(int cellId,int imageId,AnchorPane characterPane) {
-		this.translation = new TranslateTransition();
 		this.setImage(Controleur.TEXTURE.getImg(imageId));
 		this.setPosition(cellId);
-		this.translation.setAutoReverse(false);
-		this.translation.setCycleCount(0);
-		this.translation.setDelay(Duration.ZERO);
-		this.translation.setNode(this);
+		this.progress = 0;
 	}
 	
 	
@@ -27,22 +25,22 @@ public class MovableView extends ImageView{
 		int[] position = Controleur.convertToViewSize(cellId);
 		double row = position[Controleur.ROWINDEX] - this.getLayoutY();
 		double column = position[Controleur.COLUMNINDEX] - this.getLayoutX();
-		this.translation.setDuration(Duration.millis(MINSPEEDBYCELL/speed));
 		this.setImage(Controleur.TEXTURE.getImg(imageId));
-		this.translation.setToX(column);
-		this.translation.setToY(row);
-		this.translation.play();
+		this.avancementX = column/speed;
+		this.avancementY = row/speed;
+		this.progress = speed;
+	}
+	
+	
+	public void tick() {
+		if( this.progress > 0) {
+			this.setLayoutY(this.avancementY + this.getLayoutY());
+			this.setLayoutX(this.avancementX + this.getLayoutX());
+			this.progress--;
+		}
+	}
+	
 		
-	}
-
-	public double getNewLayoutY() {
-		return this.getLayoutY() + this.translation.getToY();
-	}
-	
-	public double getNewLayoutX() {
-		return this.getLayoutX() + this.translation.getToX();
-	}
-	
 	private void setPosition(int cellId) {
 		int[] position = Controleur.convertToViewSize(cellId);
 		this.setLayoutX(position[Controleur.COLUMNINDEX]);

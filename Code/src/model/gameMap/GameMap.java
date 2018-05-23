@@ -1,15 +1,19 @@
 package model.gameMap;
 
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.function.Consumer;
 
+import javafx.application.Platform;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import model.character.GameCharacter;
 import model.character.Movable;
 import model.character.attack.Attack;
 import model.gameMap.additional.MapReader;
-import model.gameMap.additional.NewCharacter;
+import model.gameMap.additional.NewMovable;
 import model.gameMap.cell.Cell;
 import model.gameMap.move.Move;
 import model.gameMap.move.Movement;
@@ -30,7 +34,9 @@ public class GameMap {
 	private final IntegerProperty safeChangeProperty;
 	private Cell[] cells ;
 	private HashMap<Movable,Integer> movableList;
-	private ArrayList<NewCharacter> addedCharacter;
+	private ArrayList<NewMovable> addedCharacter;
+	private ArrayList<Movable> removedMovable;
+	
 	
 	static {
 		movableId = 0;
@@ -44,8 +50,9 @@ public class GameMap {
 		this.safeChangeProperty = new SimpleIntegerProperty();
 		this.safeChangeProperty.bind(this.changeProperty);
 		initialiseCells(values);
-		this.addedCharacter = new ArrayList<NewCharacter>();
+		this.addedCharacter = new ArrayList<NewMovable>();
 		this.movableList = new HashMap<Movable,Integer>();
+		this.removedMovable = new ArrayList<Movable>();
 	}
 	
 	
@@ -57,7 +64,6 @@ public class GameMap {
 			this.cells[startCellId].removeMovable();
 			this.cells[endCellId].addMovable(character);
 			character.setCellId(endRow, endColumn);
-			System.out.println("success Move " + this.cells[endCellId].getBackgroundRepresentation());
 		}
 		
 		return changed;
@@ -69,6 +75,7 @@ public class GameMap {
 	public Move[] turn() {
 		ArrayList<Move> moves = new ArrayList<Move>();
 		Move move;
+		Iterator<Movable> iterator = this.movableList.keySet().iterator();
 		for(Movable movable : this.movableList.keySet()) {
 			move = movable.turn();
 			if(move != null) {
@@ -76,18 +83,34 @@ public class GameMap {
 				moves.add(move);
 			}
 		}
+
 		Move[] movesArray = new Move[moves.size()];
 		movesArray = moves.toArray(movesArray);
 		return movesArray;
 	}
 	
+	
+	
 	//Renvoie la liste des nouveaux caractères introduit dans le jeu
-	public NewCharacter[] getNewCharList() {
-		NewCharacter[] newChars = new NewCharacter[this.addedCharacter.size()];
+	public NewMovable[] getNewCharList() {
+		NewMovable[] newChars = new NewMovable[this.addedCharacter.size()];
 		newChars = this.addedCharacter.toArray(newChars);
 		this.addedCharacter.clear();
 		return newChars;
 	}
+	
+	
+	public int[] getRemovedCharacter() {
+		int[] removedCharacter = new int[this.removedMovable.size()];
+		for(int i = 0 ; i < this.removedMovable.size();i++) {
+			removedCharacter[i] = this.movableList.get(this.removedMovable.get(i));		
+			this.movableList.remove(this.removedMovable.get(i));
+		}
+		
+		this.removedMovable.clear();
+		return removedCharacter;
+	}
+
 	
 	
 	//Ajout un caractère à la map en le plaçant sur la case reçue en paramètre
@@ -96,25 +119,47 @@ public class GameMap {
 		int cellId = row*MapReader.MAPLENGTH + column;
 		boolean correctlyPlaced = this.cells[cellId].addMovable(movable);
 		if(correctlyPlaced) {
-			this.movableList.put(movable, movableId);
-			this.addedCharacter.add(new NewCharacter(movableId,cellId,movable.getDefaultImage()));
-			movableId++;
+			addMovable(movable,cellId);
 		}
 		return correctlyPlaced;
 	}
 	
-	//Enleve une attaque de la map 
-	//TODO à discuter
-	public void delAttack(Attack attack) {
-		this.movableList.remove(attack);
-	}
-
 	
+	
+	
+	public void  addAttack(Attack attack,int row,int column) {
+		this.addMovable(attack,convertToCellId(row, column));
+		
+	}
+	
+	public void playAttack(Attack attack,int endCell) {
+		byte value = this.cells[endCell].attack(attack);
+		System.out.println(value);
+	}
+	
+	
+	public void delMovable(Movable movable,int row,int column) {
+		if(this.movableList.containsKey(movable)) {
+			Integer id = this.movableList.get(movable);
+			this.removedMovable.add(movable);
+		}
+		
+	}
 	
 	//Renvoie l'indice du fond
 	public int getBackgroundImage(int cellId) {
 		return this.cells[cellId].getBackgroundRepresentation();
 	}
+
+	
+	private void addMovable(Movable movable,int cellId) {
+		this.movableList.put(movable,movableId);	 
+		this.addedCharacter.add(new NewMovable(movableId,cellId,movable.getDefaultImage()));
+		movableId++;
+	}
+
+
+	
 	
 	//Initialise l'ensemble des celluls de la map
 	private void initialiseCells(int[] values) {

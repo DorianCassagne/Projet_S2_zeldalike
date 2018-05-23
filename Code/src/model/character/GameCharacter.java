@@ -6,26 +6,47 @@
 
 
 package model.character;
+import java.util.HashMap;
+
+import model.character.attack.Attack;
 import model.gameMap.GameMap;
+import resources.additionalClass.UsefulMethods;
 
 public abstract class GameCharacter extends Movable{
 
+	public final static char HEROTYPE = 'H';
+	public final static char ENEMYTYPE = 'E';
+	private final static HashMap<Movable,Character> CHARACTERTYPE;
+	
 	private int hp; 	
 	private int def;	// comportement de la defense avoir avec Dorian atk*def/100 ??
 
 	//Crée un deplaçable ayant les propriétées voulue. Déclenche une erreur si l'une des propriétés est invalid (négatif ou null)
 	
-	public GameCharacter(GameMap map,int speed, char type, int hp, int def,int startRow,int startColumn,int cycle) {
-		super(map,type,speed,cycle,startRow,startColumn);
+	
+	static {
+		CHARACTERTYPE = new HashMap<Movable,Character>();
+	}
+	
+	public static final char getType(Movable movable) {
+		return CHARACTERTYPE.get(movable);
+	}
+	
+	
+	public GameCharacter(GameMap map, char type, int hp, int def,int startRow,int startColumn,int cycle) {
+		super(map,cycle,startRow,startColumn);
 		
 		if( map == null || hp <= 0 || def < 0) {
 			throw new IllegalArgumentException("ARGUMENT INVALID on GAMECHARACTER ");
 		}
+		else if(!UsefulMethods.isCharInCharList(type, HEROTYPE,ENEMYTYPE))
+			throw new IllegalArgumentException("Undefined type");
 		else {
-			this.getMyMap().addCharacter(this, startRow, startColumn);
 			this.hp=hp;
 			this.def=def;
+			CHARACTERTYPE.put(this, type);
 		}
+		this.getMyMap().addCharacter(this, startRow, startColumn);
 
 	}
 	
@@ -34,16 +55,14 @@ public abstract class GameCharacter extends Movable{
 		return this.hp;
 	}
 	
-	public void setHp(int hp) {
-		if(hp <= 0 ) {
-			throw new IllegalArgumentException("ARGUMENT 'HP' INVALID on GAMECHARACTER ");
-		}
-		this.hp=hp;
+	public void attaquer(Attack attack) {
+		getDmg(attack.getDamage());
 	}
 	
 	public int getDef() {
 		return this.def;
 	}
+
 	public void setDef(int def) {
 		if(def < 0 ) {
 			throw new IllegalArgumentException("ARGUMENT 'DEF' INVALID on GAMECHARACTER ");
@@ -56,10 +75,13 @@ public abstract class GameCharacter extends Movable{
 	//blesse le personnage exeption si dmg < 0.
 	//j'aime pas beaucoup le nom de la methode "getDmg" 
 	//fait penser a un getter alors que ce n'est pas un attribut
-	public void getDmg(int dmg) {
+	
+	private void getDmg(int dmg) {
 		if (dmg < 0) {
 			throw new IllegalArgumentException("DMG on getDMG is < 0");
 		}
+		dmg = dmg*(100/(100+this.def));
+		System.out.println(dmg);
 		if(dmg > this.hp) {
 			this.hp = 0;
 		}
@@ -69,13 +91,10 @@ public abstract class GameCharacter extends Movable{
 	}
 	
 	
-
-	//peu etre negatif ou positif) a faire plus tard, voir si pertinent ou non
-	/*
-	Public void changeDef(int def) {
-
+	public boolean isAlive() {
+		return this.hp != 0;
 	}
-	 */
+
 	
 
 }

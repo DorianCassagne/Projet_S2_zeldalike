@@ -1,52 +1,33 @@
 package model.character;
 
-import java.util.HashMap;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+
 import model.gameMap.GameMap;
 import model.gameMap.move.Move;
-import resources.additionalClass.UsefulMethods;
 
 public abstract class Movable {
-	public final static char HEROTYPE = 'H';
-	public final static char ENEMYTYPE = 'E';
+
 	public final static int DEFAULTIMAGEINDEX = 0;
 	public final static int TOPIMAGEINDEX = 0;
 	public final static int LEFTIMAGEINDEX = 3;
 	public final static int RIGHTIMAGEINDEX = 1;
 	public final static int BOTTOMIMAGEINDEX = 2;	
-	private final static HashMap<Movable,Character> MOVABLETYPE;
 	
-	private int speed;
 	private int row;
 	private int column;
 	private GameMap map;
 	private int cycle;
 	private int tour ;
 	
-	static {
-		MOVABLETYPE = new HashMap<Movable,Character>();
-	}
-	
-	public static final char getType(Movable movable) {
-		return MOVABLETYPE.get(movable);
-	}
 	
 	
-	public Movable(GameMap map,char type,int speed,int cycle, int row, int column) {
-		if(speed < 0)
+	public Movable(GameMap map,int cycle, int row, int column) {
+		if(cycle < 0)
 			throw new IllegalArgumentException("Speed must be greater than 0");
-		else if(!UsefulMethods.isCharInCharList(type, HEROTYPE,ENEMYTYPE))
-			throw new IllegalArgumentException("Undefined type");
 		this.cycle = cycle;
-		System.out.println("cycle = "+ cycle);
 		this.tour = 0;
-		this.speed = speed;
 		this.row = row;
 		this.column = column;
-		MOVABLETYPE.put(this, type);
 		this.map = map;
-		
 	}
 	
 	protected int getRow() {
@@ -67,13 +48,15 @@ public abstract class Movable {
 	}	
 	
 	
-	public final int getSpeed() {
-		return this.speed;
-	}
-	
 	public void oneTurn() {
+		if(!this.isAlive())
+			this.getMyMap().delMovable(this, this.row, this.column);
 		if(this.tour != cycle)
 			this.tour++;
+	}
+	
+	protected int getCycle() {
+		return this.cycle;
 	}
 	
 	protected boolean canAct() {
@@ -85,6 +68,9 @@ public abstract class Movable {
 		return canAct;
 	}
 	
+	
+	
+	public abstract boolean isAlive();
 	public abstract Move turn();
 	public abstract int getDefaultImage() ;
 	

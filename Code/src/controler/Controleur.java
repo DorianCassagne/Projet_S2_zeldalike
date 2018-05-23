@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
+import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
@@ -21,7 +22,7 @@ import model.Game;
 import model.character.Hero;
 import model.gameMap.GameMap;
 import model.gameMap.additional.MapReader;
-import model.gameMap.additional.NewCharacter;
+import model.gameMap.additional.NewMovable;
 import model.gameMap.move.Move;
 import vue.TexturePack;
 
@@ -31,6 +32,8 @@ public class Controleur implements Initializable{
 	final static int ROWINDEX = 0;
 	final static int COLUMNINDEX = 1 ;
 	final static TexturePack TEXTURE ;
+	public final static int FRAMEDURATION = 17;
+	
 	private final static String TILESETPATH = "src/resources/tileset/futuretileset.png";
 	
 	@FXML
@@ -85,6 +88,10 @@ public class Controleur implements Initializable{
 		case RIGHT: 
 			this.myGame.communiquerMovement(Hero.MOVERIGHT);
 			break;
+		case A :
+			this.myGame.communiquerMovement(Hero.ATTACK);
+			System.out.println("Attacl");
+			break;
 		default :
 			System.out.println("Unknown key");
 		}
@@ -94,14 +101,17 @@ public class Controleur implements Initializable{
 		this.gameLoop = new Timeline();
 		gameLoop.setCycleCount(Timeline.INDEFINITE);
 		KeyFrame frame = new KeyFrame(
-				Duration.seconds(0.017),
+				Duration.millis(FRAMEDURATION),
 				(ev->{
 					if(this.myGame.end()) {
 						gameLoop.stop();
 					}
 					else {
 						addPlayers(this.myGame.getNewPlayers());
+						removePlayers(this.myGame.getRemovedMovable());
 						playMoves(this.myGame.turn());
+						
+						allTick();
 					}
 				})
 		);
@@ -109,6 +119,26 @@ public class Controleur implements Initializable{
 		gameLoop.playFromStart();
 	}
 
+	
+	private void removePlayers(int[] playersId) {
+	    FadeTransition ft = new FadeTransition(Duration.millis(2000));
+	    ft.setFromValue(1.0);
+		for(Integer playerId : playersId) {
+			MovableView current = this.movableList.get(playerId);
+			ft.setToValue(0);
+			ft.setNode(current);
+			ft.play();
+			this.movableList.remove(playerId);
+			ft.setOnFinished(e->this.characterAnchorPane.getChildren().remove(current));
+		}
+	}
+	
+	private void allTick() {
+		for(MovableView viewMovabe : this.movableList.values()) {
+			viewMovabe.tick();
+		}
+	}
+	
 	private void playMoves(Move[] moves ) {
 		for (Move move : moves) {
 				MovableView movable = this.movableList.get(move.getMovableId());
@@ -116,8 +146,8 @@ public class Controleur implements Initializable{
 		}
 	}
 	
-	private void addPlayers(NewCharacter[] newPlayers) {
-		for(NewCharacter newPlayer : newPlayers) {
+	private void addPlayers(NewMovable[] newPlayers) {
+		for(NewMovable newPlayer : newPlayers) {
 			MovableView newMovable = new MovableView(newPlayer.getCellId(),newPlayer.getImageValue(),this.characterAnchorPane);
 			this.characterAnchorPane.getChildren().add(newMovable);
 			this.movableList.put(newPlayer.getKey(), newMovable);
