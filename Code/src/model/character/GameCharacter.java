@@ -12,21 +12,19 @@ public abstract class GameCharacter extends Movable{
 
 	private int hp; 	
 	private int def;	// comportement de la defense avoir avec Dorian atk*def/100 ??
-	private GameMap map;
 
 	//Crée un deplaçable ayant les propriétées voulue. Déclenche une erreur si l'une des propriétés est invalid (négatif ou null)
 	
-	public GameCharacter(GameMap map,int speed, char type, int hp, int def,int startRow,int startColumn) {
-		super(type,speed);
+	public GameCharacter(GameMap map,int speed, char type, int hp, int def,int startRow,int startColumn,int cycle) {
+		super(map,type,speed,cycle,startRow,startColumn);
 		
 		if( map == null || hp <= 0 || def < 0) {
 			throw new IllegalArgumentException("ARGUMENT INVALID on GAMECHARACTER ");
 		}
 		else {
-			this.map = map;
+			this.getMyMap().addCharacter(this, startRow, startColumn);
 			this.hp=hp;
 			this.def=def;
-			this.map.addCharacter(this, startRow, startColumn);
 		}
 
 	}

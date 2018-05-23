@@ -12,6 +12,7 @@ import model.gameMap.additional.MapReader;
 import model.gameMap.additional.NewCharacter;
 import model.gameMap.cell.Cell;
 import model.gameMap.move.Move;
+import model.gameMap.move.Movement;
 
 public class GameMap {
 	public final static int LINELENGTH = 8;
@@ -44,14 +45,36 @@ public class GameMap {
 		this.safeChangeProperty.bind(this.changeProperty);
 		initialiseCells(values);
 		this.addedCharacter = new ArrayList<NewCharacter>();
+		this.movableList = new HashMap<Movable,Integer>();
+	}
+	
+	
+	public boolean changeCell(GameCharacter character,int currentRow,int currentColumn,int endRow,int endColumn) {
+		int endCellId = convertToCellId(endRow,endColumn);
+		boolean changed = this.cells[endCellId].isWalkable();
+		if(changed) {
+			int startCellId = convertToCellId(currentRow,currentColumn);
+			this.cells[startCellId].removeMovable();
+			this.cells[endCellId].addMovable(character);
+			character.setCellId(endRow, endColumn);
+			System.out.println("success Move " + this.cells[endCellId].getBackgroundRepresentation());
+		}
+		
+		return changed;
+		
 	}
 	
 	
 	//Renvoie la liste des movements effectués pendant un tour
 	public Move[] turn() {
 		ArrayList<Move> moves = new ArrayList<Move>();
+		Move move;
 		for(Movable movable : this.movableList.keySet()) {
-			moves.add(movable.turn());
+			move = movable.turn();
+			if(move != null) {
+				move.setMovableId(this.movableList.get(movable));
+				moves.add(move);
+			}
 		}
 		Move[] movesArray = new Move[moves.size()];
 		movesArray = moves.toArray(movesArray);
@@ -85,37 +108,7 @@ public class GameMap {
 	public void delAttack(Attack attack) {
 		this.movableList.remove(attack);
 	}
-	
-	/*
-	 //Retourne la position d'un caractère à l'aide de sa clé
-	
-	public int getCharacterPosition(Integer charKey) {
-		return this.getMovablePosition(this.findCharacter(charKey));
-	}
-	
-	//Retourne la première occurence du caractère ayant l'identifiant reçu en paramètre
-	private Movable findCharacter(Integer charKey) {
-		for(Movable movable : movableList.keySet()) {
-			if(this.movableList.get(movable) == charKey) {
-				return movable;
-			}
-		}
-		return null;
-	}
-	*/
-	
-	//Retourne l'indice de la cellule contenant le caractère reçu en paramètre
-	//Renvoie -1 si le caractère est introuvable
-	private int getMovablePosition(Movable movable) {
-		int cellId = -1 ;
-		int counter = 0;
-		while(cellId == -1 && counter < this.cells.length) {
-			if(this.cells[counter].contains(movable)) {
-				cellId = counter; 
-			}
-		}
-		return cellId;
-	}
+
 	
 	
 	//Renvoie l'indice du fond
@@ -137,5 +130,9 @@ public class GameMap {
 			);
 
 		}
+	}
+	
+	public static int convertToCellId(int row,int column) {
+		return row * MapReader.MAPLENGTH + column;
 	}
 }

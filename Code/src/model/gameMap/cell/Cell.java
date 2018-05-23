@@ -29,16 +29,14 @@ public class Cell {
 		this.item=item;
 	}
 
-	public Movable removeMovable() {
-		Movable mov=this.movable;
+	public void removeMovable() {
 		this.movable=null;
-		return mov;
 	}
 
 	public boolean addMovable(Movable movable) {
-		if (this.movable!=null)
+		if (this.movable != null)
 			return false;
-		this.movable=movable;
+		this.movable = movable;
 		return true;
 	}
 
@@ -72,7 +70,4 @@ public class Cell {
 		return this.safeProperty;
 	}
 	
-	public boolean contains(Movable movable) {
-		return this.movable == movable;
-	}
 }

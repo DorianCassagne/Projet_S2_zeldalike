@@ -2,7 +2,6 @@ package model.gameMap.move;
 
 public class Move {
 	private int movableId;
-	private int startCellId;
 	private int endCellId;
 	private int speed;
 	private int imageValue;
@@ -15,21 +14,24 @@ public class Move {
 	 * @param speed
 	 * @param imageValue
 	 */
-	public Move(int movableId, int startCellId, int endCellId,int speed,int imageValue) {
-		this.endCellId=endCellId;
+	
+	
+	public Move(int endCellId,int speed,int imageValue) {
+		this.endCellId = endCellId;
 		this.imageValue=imageValue;
-		this.movableId=movableId;
 		this.speed=speed;
-		this.startCellId=startCellId;
 	}
+	
+	public void setMovableId(int movableId) {
+		this.movableId = movableId;
+	}
+	
+	
 	
 	public int getMovableId() {
 		return this.movableId;
 	}
 	
-	public int getStartCellId() {
-		return this.startCellId;
-	}
 	
 	public int getEndCellId() {
 		return this.endCellId;

@@ -9,9 +9,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -20,18 +18,20 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
 import javafx.util.Duration;
 import model.Game;
+import model.character.Hero;
 import model.gameMap.GameMap;
 import model.gameMap.additional.MapReader;
 import model.gameMap.additional.NewCharacter;
 import model.gameMap.move.Move;
+import vue.TexturePack;
 
 public class Controleur implements Initializable{
 	
 	final static int TILEDIMENSION = 32;
 	final static int ROWINDEX = 0;
 	final static int COLUMNINDEX = 1 ;
-	private static Image TILESETIMAGE ;
-	private final static String TILESETPATH = "/resources/tileset/test.png";
+	final static TexturePack TEXTURE ;
+	private final static String TILESETPATH = "src/resources/tileset/futuretileset.png";
 	
 	@FXML
 	private AnchorPane mainAnchorPane;
@@ -46,14 +46,8 @@ public class Controleur implements Initializable{
 	private Timeline gameLoop;
 	
 	static {
-		try {
-			TILESETIMAGE = new Image(Controleur.class.getResource(TILESETPATH).toURI().toURL().toExternalForm());
-		}catch(Exception e) {
-			TILESETIMAGE = null;
-			Alert alert = new Alert(Alert.AlertType.ERROR,"L'image n'a pas pu être lue ");
-			alert.show();
-		}
-	}	
+		TEXTURE = new TexturePack(TILESETPATH,GameMap.LINELENGTH, TILEDIMENSION);
+	}
 	
 	public Controleur() {
 		myGame = new Game();
@@ -80,16 +74,16 @@ public class Controleur implements Initializable{
 	private void handleKey(KeyEvent event) {
 		switch(event.getCode()) {
 		case UP : 
-			System.out.println("Up");
+			this.myGame.communiquerMovement(Hero.MOVEUP);
 			break;
 		case DOWN:
-			System.out.println("Down");
+			this.myGame.communiquerMovement(Hero.MOVEDOWN);
 			break;
 		case LEFT:
-			System.out.println("LEFT");
+			this.myGame.communiquerMovement(Hero.MOVELEFT);
 			break;
 		case RIGHT: 
-			System.out.println("RIGHT");
+			this.myGame.communiquerMovement(Hero.MOVERIGHT);
 			break;
 		default :
 			System.out.println("Unknown key");
@@ -110,19 +104,22 @@ public class Controleur implements Initializable{
 						playMoves(this.myGame.turn());
 					}
 				})
-				);
+		);
+		gameLoop.getKeyFrames().add(frame);
+		gameLoop.playFromStart();
 	}
 
 	private void playMoves(Move[] moves ) {
 		for (Move move : moves) {
-			MovableView movable = this.movableList.get(move.getMovableId());
-			movable.moveTo(move.getEndCellId(), move.getImageValue(),move.getSpeed());
+				MovableView movable = this.movableList.get(move.getMovableId());
+				movable.moveTo(move.getEndCellId(), move.getImageValue(),move.getSpeed());
 		}
 	}
 	
 	private void addPlayers(NewCharacter[] newPlayers) {
 		for(NewCharacter newPlayer : newPlayers) {
-			MovableView newMovable = new MovableView(newPlayer.getCellId(),newPlayer.getImageValue());
+			MovableView newMovable = new MovableView(newPlayer.getCellId(),newPlayer.getImageValue(),this.characterAnchorPane);
+			this.characterAnchorPane.getChildren().add(newMovable);
 			this.movableList.put(newPlayer.getKey(), newMovable);
 		}
 		
@@ -141,23 +138,18 @@ public class Controleur implements Initializable{
 		for(int cellId = 0 ; cellId < this.cellsItemAndBackground.length ;cellId++) {
 			this.cellsItemAndBackground[cellId] = new StackPane();
 			StackPane current = this.cellsItemAndBackground[cellId];
-			ImageView background = new ImageView(TILESETIMAGE);
 			int backgroundId = this.myGame.getBackgroundId(cellId);
-			setViewPort(background,backgroundId);
+			Image image = TEXTURE.getImg(backgroundId);
+			ImageView background = new ImageView(image);
+			current.getChildren().add(background);
 			this.mapTilePane.getChildren().add(current);
 		}
 	}
 	
-	static void setViewPort(ImageView viewer,int imageId) {
-		int row = imageId * TILEDIMENSION / GameMap.LINELENGTH ;
-		int column = (imageId  % GameMap.LINELENGTH)*TILEDIMENSION;
-		viewer.setViewport(new Rectangle2D(row, column, 32, 32));
-	
-	}
 	
 	public static int[] convertToViewSize(int cellId) {
 		int row = (cellId / MapReader.MAPLENGTH)*TILEDIMENSION;
-		int column = (cellId*TILEDIMENSION - row);
+		int column = (cellId%MapReader.MAPLENGTH)*TILEDIMENSION;
 		int[] position = {row,column};
 		return position;
 	}
