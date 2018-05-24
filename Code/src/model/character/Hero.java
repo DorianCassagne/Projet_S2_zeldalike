@@ -7,7 +7,6 @@ import model.gameMap.move.Move;
 import model.gameMap.move.Movement;
 
 public class Hero extends GameCharacter{
-	private final static int DEFAULTSPEED = 10;
 	private final static int DEFAULTHP = 300;
 	private final static int DEFAULTDEF = 200;
 	private final static int DEFAULTCYCLE = 20;
@@ -53,6 +52,7 @@ public class Hero extends GameCharacter{
 		int reachRow = this.getRow();
 		int reachColumn = this.getColumn(); 
 		int imageIndex = TOPIMAGEINDEX;
+		boolean changedCell = true;
 		switch(this.nextMove) {
 		case MOVEUP:
 			reachRow--;
@@ -70,7 +70,11 @@ public class Hero extends GameCharacter{
 			imageIndex = RIGHTIMAGEINDEX;
 			break;
 		case ATTACK :
-			Attack attack = new AttackTest(getMyMap(), reachRow, reachColumn,Movement.values()[lastImageIndex], 1);
+			changedCell = false;
+			Movement movement = Movement.values()[lastImageIndex];
+			reachRow += movement.getVerticalIncrement();
+			reachColumn += movement.getHorizontalIncrement();
+			Attack attack = new AttackTest(getMyMap(), reachRow, reachColumn,movement, 80);
 			break;
 		default : 
 			break;
@@ -78,7 +82,7 @@ public class Hero extends GameCharacter{
 		
 		this.nextMove = STAY;
 		
-		boolean changedCell = this.getMyMap().changeCell(this,this.getRow(),this.getColumn(),reachRow,reachColumn);
+		 changedCell = changedCell && this.getMyMap().changeCell(this,this.getRow(),this.getColumn(),reachRow,reachColumn);
 		if(changedCell) {
 			this.lastImageIndex = imageIndex;
 			myMove = new Move(GameMap.convertToCellId(reachRow, reachColumn),this.getCycle()/getCoefficient(), IMAGES[imageIndex]);

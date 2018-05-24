@@ -50,8 +50,8 @@ public abstract class Movable {
 	
 	public void oneTurn() {
 		if(!this.isAlive())
-			this.getMyMap().delMovable(this, this.row, this.column);
-		if(this.tour != cycle)
+			this.removeCharacter();
+		else if(this.tour != cycle)
 			this.tour++;
 	}
 	
@@ -70,6 +70,7 @@ public abstract class Movable {
 	
 	
 	
+	protected abstract void removeCharacter();
 	public abstract boolean isAlive();
 	public abstract Move turn();
 	public abstract int getDefaultImage() ;

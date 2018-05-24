@@ -80,8 +80,7 @@ public abstract class GameCharacter extends Movable{
 		if (dmg < 0) {
 			throw new IllegalArgumentException("DMG on getDMG is < 0");
 		}
-		dmg = dmg*(100/(100+this.def));
-		System.out.println(dmg);
+		dmg = (dmg*100/(100+this.def));
 		if(dmg > this.hp) {
 			this.hp = 0;
 		}
@@ -90,11 +89,12 @@ public abstract class GameCharacter extends Movable{
 		}
 	}
 	
+	protected void removeCharacter() {
+		this.getMyMap().delCharacter(this, getRow(), getColumn());
+	}
 	
 	public boolean isAlive() {
 		return this.hp != 0;
 	}
-
-	
 
 }

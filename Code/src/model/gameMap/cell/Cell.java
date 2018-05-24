@@ -41,16 +41,24 @@ public class Cell {
 		return true;
 	}
 
+
 	public byte attack(Attack attack) {
-		byte number = 0;
+		byte number = 1;
 		if(this.gameCharacter!=null) {
 			this.gameCharacter.attaquer(attack);
 			System.out.println("The character was attacked");
-			number += 1;
+			number *= 3;
 		}
-		return number;
+		if(this.item!=null)
+			number *= 5;
+		if(!this.background.isWalkable())
+			number *= 7;
 			
+		
+
+		return number;
 	}
+		
 
 	public boolean setItem (Item item) {
 		if (this.item!=null) 

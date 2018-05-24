@@ -6,7 +6,7 @@ import model.gameMap.move.Move;
 public class Dolphin extends GameCharacter{
 	
 	private final static int DEFAULTHP = 150;
-	private final static int DEFAULTDEF = 150;
+	private final static int DEFAULTDEF = 10;
 	
 	
 	public Dolphin(GameMap map, int startRow, int startColumn) {

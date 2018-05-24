@@ -7,10 +7,12 @@ import model.gameMap.move.Move;
 import model.gameMap.move.Movement;
 
 public abstract class Attack extends Movable {
+	public final static int NOTPLAYED = 0 ;
 	
 	private Movement direction;
 	private int damage;
 	private int cellPerTurn;
+	
 	
 	public Attack(GameMap map, int cycle, int row, int column,Movement direction,int damage,int cellPerTurn) {
 		
@@ -26,8 +28,15 @@ public abstract class Attack extends Movable {
 	public final int establishMove() {
 		int row = this.getRow() + this.cellPerTurn * this.direction.getVerticalIncrement();
 		int column = this.getColumn() + this.cellPerTurn * this.direction.getHorizontalIncrement() ;
-		this.setCellId(row, column);
-		return GameMap.convertToCellId(row, column);
+		int cellId = GameMap.convertToCellId(row, column);
+		int endCellId;
+		if(this.getMyMap().playAttack(this,row,column) != NOTPLAYED) {
+			endCellId = cellId;
+			this.setCellId(row, column);
+		}else {
+			endCellId = GameMap.convertToCellId(getRow(), getColumn());
+		}
+		return endCellId;
 	}
 	
 	public  void target(GameCharacter gameCharacter) {
@@ -42,6 +51,10 @@ public abstract class Attack extends Movable {
 	public boolean isAlive() {
 		return true;
 	}
-
+	
+	@Override
+	public void removeCharacter() {
+		this.getMyMap().delAttack(this);
+	}
 	
 }
