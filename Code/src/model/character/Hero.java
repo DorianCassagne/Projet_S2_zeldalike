@@ -11,7 +11,7 @@ public class Hero extends GameCharacter{
 	private final static int DEFAULTDEF = 200;
 	private final static int DEFAULTCYCLE = 20;
 	private final static int DEFAULTCOEFFICIENT = 2;
-	
+	public final static int DEFAULTIMAGE = 8;
 	public static final char MOVEUP = 'u';
 	public static final char MOVEDOWN = 'd';
 	public static final char MOVELEFT = 'l';
@@ -21,7 +21,6 @@ public class Hero extends GameCharacter{
 	
 	private char nextMove;
 	
-	private final static int[] IMAGES = {9,11,8,10};
 	private int lastImageIndex;
 	
 	public Hero(GameMap map,int startRow,int startColumn) {
@@ -35,7 +34,7 @@ public class Hero extends GameCharacter{
 	
 	@Override
 	public int getDefaultImage() {
-		return IMAGES[Movable.DEFAULTIMAGEINDEX];
+		return DEFAULTIMAGE  ;
 	}
 	
 	private Move interpreteMove() {
@@ -74,7 +73,7 @@ public class Hero extends GameCharacter{
 		 changedCell = changedCell && this.getMyMap().changeCell(this,this.getRow(),this.getColumn(),reachRow,reachColumn);
 		if(changedCell) {
 			this.lastImageIndex = imageIndex;
-			myMove = new Move(GameMap.convertToCellId(reachRow, reachColumn),this.getMoveCycle(), IMAGES[imageIndex]);
+			myMove = new Move(GameMap.convertToCellId(reachRow, reachColumn),this.getMoveCycle(), DEFAULTIMAGE + imageIndex);
 		}
 		else
 			myMove = null;

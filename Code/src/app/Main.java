@@ -40,17 +40,15 @@ public class Main extends Application {
 
         Controleur controller = loader.getController();
         
-        Scene  scene = new Scene(root,600,400);
-
+        Scene  scene = new Scene(root,960,640);
         controller.startScene(scene);
         primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 
     public static void main(String[] args) {
         launch(args);
-        
-       
     }
 }
 

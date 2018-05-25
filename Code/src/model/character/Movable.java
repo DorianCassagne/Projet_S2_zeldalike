@@ -88,5 +88,4 @@ public abstract class Movable {
 	public abstract int getDefaultImage() ;
 	public abstract Move act();
 	
-	
 }
