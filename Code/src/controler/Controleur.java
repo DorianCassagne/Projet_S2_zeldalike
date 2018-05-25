@@ -91,7 +91,6 @@ public class Controleur implements Initializable{
 			break;
 		case A :
 			this.myGame.communiquerMovement(Hero.ATTACK);
-			System.out.println("Attacl");
 			break;
 		default :
 			System.out.println("Unknown key");
@@ -124,7 +123,7 @@ public class Controleur implements Initializable{
 
 	
 	private void removePlayers(int[] playersId) {
-	    FadeTransition ft = new FadeTransition(Duration.millis(2000));
+	    FadeTransition ft = new FadeTransition(Duration.millis(300));
 	    ft.setFromValue(1.0);
 		for(Integer playerId : playersId) {
 			MovableView current = this.movableList.get(playerId);
@@ -153,7 +152,7 @@ public class Controleur implements Initializable{
 		for(NewMovable newPlayer : newPlayers) {
 			MovableView newMovable ;
 			if(newPlayer.getKey() == Game.HEROKEY)
-				newMovable = new HeroView(newPlayer.getCellId(),newPlayer.getCellId(),this.characterAnchorPane);
+				newMovable = new HeroView(newPlayer.getCellId(),newPlayer.getImageValue(),this.characterAnchorPane);
 			else
 				newMovable = new MovableView(newPlayer.getCellId(),newPlayer.getImageValue());
 			this.characterAnchorPane.getChildren().add(newMovable);

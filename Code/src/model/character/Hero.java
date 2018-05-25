@@ -73,6 +73,7 @@ public class Hero extends GameCharacter{
 		 changedCell = changedCell && this.getMyMap().changeCell(this,this.getRow(),this.getColumn(),reachRow,reachColumn);
 		if(changedCell) {
 			this.lastImageIndex = imageIndex;
+			System.out.println(imageIndex);
 			myMove = new Move(GameMap.convertToCellId(reachRow, reachColumn),this.getMoveCycle(), DEFAULTIMAGE + imageIndex);
 		}
 		else
