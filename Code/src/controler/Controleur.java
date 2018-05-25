@@ -11,6 +11,7 @@ import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -34,7 +35,7 @@ public class Controleur implements Initializable{
 	final static TexturePack TEXTURE ;
 	public final static int FRAMEDURATION = 17;
 	
-	private final static String TILESETPATH = "src/resources/tileset/futuretileset.png";
+	private final static String TILESETPATH = "src/resources/tileset/jeudi24.png";
 	
 	@FXML
 	private AnchorPane mainAnchorPane;
@@ -105,6 +106,8 @@ public class Controleur implements Initializable{
 				(ev->{
 					if(this.myGame.end()) {
 						gameLoop.stop();
+						Alert alert = new Alert(Alert.AlertType.INFORMATION,"Vous avez perdu ! :(");
+						alert.show();
 					}
 					else {
 						addPlayers(this.myGame.getNewPlayers());
@@ -148,7 +151,11 @@ public class Controleur implements Initializable{
 	
 	private void addPlayers(NewMovable[] newPlayers) {
 		for(NewMovable newPlayer : newPlayers) {
-			MovableView newMovable = new MovableView(newPlayer.getCellId(),newPlayer.getImageValue(),this.characterAnchorPane);
+			MovableView newMovable ;
+			if(newPlayer.getKey() == Game.HEROKEY)
+				newMovable = new HeroView(newPlayer.getCellId(),newPlayer.getCellId(),this.characterAnchorPane);
+			else
+				newMovable = new MovableView(newPlayer.getCellId(),newPlayer.getImageValue());
 			this.characterAnchorPane.getChildren().add(newMovable);
 			this.movableList.put(newPlayer.getKey(), newMovable);
 		}

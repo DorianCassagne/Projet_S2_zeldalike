@@ -14,13 +14,18 @@ public abstract class Attack extends Movable {
 	private int cellPerTurn;
 	
 	
-	public Attack(GameMap map, int cycle, int row, int column,Movement direction,int damage,int cellPerTurn) {
+	public Attack(GameMap map, int cycle, int row, int column,Movement direction,int damage,int cellPerTurn,int coefficient) {
 		
-		super(map, cycle, row, column);
-		this.direction = direction;
-		this.damage = damage;
-		this.cellPerTurn = cellPerTurn;
-		this.getMyMap().addAttack(this, row, column);
+		super(map, cycle, row, column,coefficient);
+		if(direction == null || damage <= 0 && cellPerTurn <= 0) {
+			throw new IllegalArgumentException("PROBLEM IN ATTACK");
+		}
+		else {
+			this.direction = direction;
+			this.damage = damage;
+			this.cellPerTurn = cellPerTurn;
+			this.getMyMap().addAttack(this, row, column);	
+		}
 
 	}
 	
@@ -30,11 +35,15 @@ public abstract class Attack extends Movable {
 		int column = this.getColumn() + this.cellPerTurn * this.direction.getHorizontalIncrement() ;
 		int cellId = GameMap.convertToCellId(row, column);
 		int endCellId;
-		if(this.getMyMap().playAttack(this,row,column) != NOTPLAYED) {
+		byte playAttack = this.getMyMap().playAttack(this, row, column);
+		
+		if(this.getMyMap().playAttack(this,row,column) != NOTPLAYED && (playAttack % 3 == 0 || playAttack % 7 == 0) ) {
 			endCellId = cellId;
 			this.setCellId(row, column);
+			this.removeCharacter();
 		}else {
-			endCellId = GameMap.convertToCellId(getRow(), getColumn());
+			endCellId = GameMap.convertToCellId(row, column);
+			this.setCellId(row, column);
 		}
 		return endCellId;
 	}

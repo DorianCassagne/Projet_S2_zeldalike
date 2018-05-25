@@ -17,12 +17,13 @@ public abstract class Movable {
 	private GameMap map;
 	private int cycle;
 	private int tour ;
+	private int moveCoefficient;
 	
 	
-	
-	public Movable(GameMap map,int cycle, int row, int column) {
-		if(cycle < 0)
+	public Movable(GameMap map,int cycle, int row, int column,int moveCoefficient) {
+		if(cycle < 0 && moveCoefficient > 0)
 			throw new IllegalArgumentException("Speed must be greater than 0");
+		this.moveCoefficient = moveCoefficient;
 		this.cycle = cycle;
 		this.tour = 0;
 		this.row = row;
@@ -30,36 +31,34 @@ public abstract class Movable {
 		this.map = map;
 	}
 	
-	protected int getRow() {
+	protected final int getRow() {
 		return this.row;
 	}
 	
-	protected int getColumn() {
+	protected final int getColumn() {
 		return this.column;
 	}
 	
-	protected GameMap getMyMap() {
+	protected final GameMap getMyMap() {
 		return this.map;
 	}
 	
-	public void setCellId(int row,int column) {
+	public final void setCellId(int row,int column) {
 		this.row = row;
 		this.column = column;
 	}	
 	
 	
-	public void oneTurn() {
+	private void oneTurn() {
 		if(!this.isAlive())
 			this.removeCharacter();
 		else if(this.tour != cycle)
 			this.tour++;
 	}
 	
-	protected int getCycle() {
-		return this.cycle;
-	}
 	
-	protected boolean canAct() {
+	private boolean canAct() {
+		this.oneTurn();
 		boolean canAct = false;
 		if(this.tour == cycle) {
 			this.tour = 0;
@@ -69,11 +68,25 @@ public abstract class Movable {
 	}
 	
 	
+	public final Move turn() {
+		Move move = null ;
+		if(this.canAct()) {
+			move = this.act();
+		}
+		return move;
+	}
+	
+	protected  final int getMoveCycle() {
+		return this.cycle / this.moveCoefficient;
+	}
+	
 	
 	protected abstract void removeCharacter();
+	
+	
 	public abstract boolean isAlive();
-	public abstract Move turn();
 	public abstract int getDefaultImage() ;
+	public abstract Move act();
 	
 	
 }

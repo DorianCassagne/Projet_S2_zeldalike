@@ -10,6 +10,7 @@ import java.util.HashMap;
 
 import model.character.attack.Attack;
 import model.gameMap.GameMap;
+import model.gameMap.move.Movement;
 import resources.additionalClass.UsefulMethods;
 
 public abstract class GameCharacter extends Movable{
@@ -33,8 +34,8 @@ public abstract class GameCharacter extends Movable{
 	}
 	
 	
-	public GameCharacter(GameMap map, char type, int hp, int def,int startRow,int startColumn,int cycle) {
-		super(map,cycle,startRow,startColumn);
+	public GameCharacter(GameMap map, char type, int hp, int def,int startRow,int startColumn,int cycle,int coefficient) {
+		super(map,cycle,startRow,startColumn,coefficient);
 		
 		if( map == null || hp <= 0 || def < 0) {
 			throw new IllegalArgumentException("ARGUMENT INVALID on GAMECHARACTER ");
@@ -42,16 +43,17 @@ public abstract class GameCharacter extends Movable{
 		else if(!UsefulMethods.isCharInCharList(type, HEROTYPE,ENEMYTYPE))
 			throw new IllegalArgumentException("Undefined type");
 		else {
-			this.hp=hp;
-			this.def=def;
+			boolean put = this.getMyMap().addCharacter(this, startRow, startColumn);
+			if(!put)
+				throw new IllegalArgumentException("THE CHARACTER COULD NOT BE CORRECTLY PLACED");
+			this.hp = hp;
+			this.def = def;
 			CHARACTERTYPE.put(this, type);
 		}
-		this.getMyMap().addCharacter(this, startRow, startColumn);
-
 	}
 	
 	
-	public int getHp() {
+	protected final int getHp() {
 		return this.hp;
 	}
 	
@@ -59,11 +61,11 @@ public abstract class GameCharacter extends Movable{
 		getDmg(attack.getDamage());
 	}
 	
-	public int getDef() {
+	protected final int getDef() {
 		return this.def;
 	}
 
-	public void setDef(int def) {
+	protected final void setDef(int def) {
 		if(def < 0 ) {
 			throw new IllegalArgumentException("ARGUMENT 'DEF' INVALID on GAMECHARACTER ");
 		}
@@ -93,8 +95,10 @@ public abstract class GameCharacter extends Movable{
 		this.getMyMap().delCharacter(this, getRow(), getColumn());
 	}
 	
+	
 	public boolean isAlive() {
-		return this.hp != 0;
+		return this.hp > 0;
 	}
 
+	public abstract void launchAttack(Movement move);
 }

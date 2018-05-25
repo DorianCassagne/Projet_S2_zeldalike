@@ -1,6 +1,7 @@
 package model;
 
 import model.character.Dolphin;
+
 import model.character.Hero;
 import model.character.attack.Attack;
 import model.gameMap.GameMap;
@@ -9,7 +10,8 @@ import model.gameMap.move.Move;
 import model.gameMap.move.Movement;
 
 public class Game {
-	private final static String mapName = "testMap.csv";
+	public final static int HEROKEY = 0;
+	private final static String mapName = "modifiedMap.csv";
 	
 	private GameMap myMap;
 	private Hero hero;
@@ -18,8 +20,8 @@ public class Game {
 	//Initialise le jeu avec une map
 	public Game() {
 		myMap = new GameMap(mapName);
-		this.hero = new Hero(myMap, 10, 10);
-		new Dolphin(myMap,9,10);
+		this.hero = new Hero(myMap, 16, 17);
+		new Dolphin(myMap,14,15);
 
 	}
 	
@@ -40,7 +42,7 @@ public class Game {
 	
 	//renvoie vrai si le jeu est arrivé à sa fin
 	public boolean end() {
-		return false;
+		return !this.hero.isAlive();
 	}
 	
 	public void communiquerMovement(char moveChar) {

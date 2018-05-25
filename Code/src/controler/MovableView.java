@@ -1,12 +1,6 @@
 package controler;
 
-import javafx.animation.TranslateTransition;
-import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.util.Duration;
-import resources.additionalClass.UsefulMethods;
 
 public class MovableView extends ImageView{
 	
@@ -14,7 +8,7 @@ public class MovableView extends ImageView{
 	private double avancementY;
 	private int progress;
 	
-	public MovableView(int cellId,int imageId,AnchorPane characterPane) {
+	public MovableView(int cellId,int imageId) {
 		this.setImage(Controleur.TEXTURE.getImg(imageId));
 		this.setPosition(cellId);
 		this.progress = 0;

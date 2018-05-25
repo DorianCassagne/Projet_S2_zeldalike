@@ -2,11 +2,13 @@ package model.gameMap.cell;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import model.Game;
 import model.character.GameCharacter;
 import model.character.Movable;
 import model.character.attack.Attack;
 import model.character.item.Item;
 import model.gameMap.GameMap;
+import model.gameMap.move.Movement;
 
 public class Cell {
 
@@ -44,19 +46,29 @@ public class Cell {
 
 	public byte attack(Attack attack) {
 		byte number = 1;
-		if(this.gameCharacter!=null) {
+		if(this.gameCharacter != null) {
 			this.gameCharacter.attaquer(attack);
-			System.out.println("The character was attacked");
 			number *= 3;
 		}
 		if(this.item!=null)
 			number *= 5;
 		if(!this.background.isWalkable())
 			number *= 7;
-			
 		
 
 		return number;
+	}
+	
+	public void notifyEnemy(Movement movement) {
+		if(this.gameCharacter != null) {
+			if(GameCharacter.getType(gameCharacter) == GameCharacter.ENEMYTYPE) {
+				gameCharacter.launchAttack(movement);
+			}
+		}
+	}
+	
+	public void unnotifyEnemy() {
+		notifyEnemy(null);
 	}
 		
 

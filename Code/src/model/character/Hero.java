@@ -10,7 +10,7 @@ public class Hero extends GameCharacter{
 	private final static int DEFAULTHP = 300;
 	private final static int DEFAULTDEF = 200;
 	private final static int DEFAULTCYCLE = 20;
-	
+	private final static int DEFAULTCOEFFICIENT = 2;
 	
 	public static final char MOVEUP = 'u';
 	public static final char MOVEDOWN = 'd';
@@ -25,17 +25,8 @@ public class Hero extends GameCharacter{
 	private int lastImageIndex;
 	
 	public Hero(GameMap map,int startRow,int startColumn) {
-		super(map, GameCharacter.HEROTYPE, DEFAULTHP, DEFAULTDEF,startRow,startColumn,DEFAULTCYCLE);
+		super(map, GameCharacter.HEROTYPE, DEFAULTHP, DEFAULTDEF,startRow,startColumn,DEFAULTCYCLE,DEFAULTCOEFFICIENT);
 		this.nextMove = STAY;
-	}
-
-	public Move turn() {
-		this.oneTurn();
-		Move move = null;
-		if(this.nextMove != STAY && this.canAct()) {
-			move = interpreteMove();
-		}
-		return move;
 	}
 	
 	public void setNextMove(char nextMove) {
@@ -72,8 +63,6 @@ public class Hero extends GameCharacter{
 		case ATTACK :
 			changedCell = false;
 			Movement movement = Movement.values()[lastImageIndex];
-			reachRow += movement.getVerticalIncrement();
-			reachColumn += movement.getHorizontalIncrement();
 			Attack attack = new AttackTest(getMyMap(), reachRow, reachColumn,movement, 80);
 			break;
 		default : 
@@ -85,7 +74,7 @@ public class Hero extends GameCharacter{
 		 changedCell = changedCell && this.getMyMap().changeCell(this,this.getRow(),this.getColumn(),reachRow,reachColumn);
 		if(changedCell) {
 			this.lastImageIndex = imageIndex;
-			myMove = new Move(GameMap.convertToCellId(reachRow, reachColumn),this.getCycle()/getCoefficient(), IMAGES[imageIndex]);
+			myMove = new Move(GameMap.convertToCellId(reachRow, reachColumn),this.getMoveCycle(), IMAGES[imageIndex]);
 		}
 		else
 			myMove = null;
@@ -93,9 +82,16 @@ public class Hero extends GameCharacter{
 
 	}
 	
-	public int getCoefficient() {
-		return 2;
+	@Override
+	public void launchAttack(Movement move) {
+		throw new IllegalArgumentException("He throws Attack automatically");
 	}
+	
+	@Override
+	public Move act() {
+		return interpreteMove();
+	}
+
 	
 
 }

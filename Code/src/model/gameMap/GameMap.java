@@ -1,8 +1,8 @@
 package model.gameMap;
 
 import java.util.ArrayList;
+
 import java.util.HashMap;
-import java.util.Iterator;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import model.character.GameCharacter;
@@ -13,6 +13,7 @@ import model.gameMap.additional.MapReader;
 import model.gameMap.additional.NewMovable;
 import model.gameMap.cell.Cell;
 import model.gameMap.move.Move;
+import model.gameMap.move.Movement;
 
 public class GameMap {
 	public final static int LINELENGTH = 8;
@@ -33,6 +34,7 @@ public class GameMap {
 	private ArrayList<NewMovable> addedCharacter;//Caractères qui sont ajoutés récement mais pas encore récupérés
 	private ArrayList<Integer> removedMovable;//Caractère qui seront retiré au prochain tour
 	private ArrayList<PendingMovable> pendingMovable;//Caractères qui vont être ajouté au prochain tour
+	private ArrayList<Integer> triggeredCells;
 	
 	static {
 		movableId = 0;
@@ -50,6 +52,7 @@ public class GameMap {
 		this.movableList = new HashMap<Movable,Integer>();
 		this.removedMovable = new ArrayList<Integer>();
 		this.pendingMovable = new ArrayList<PendingMovable>();
+		this.triggeredCells = new ArrayList<Integer>();
 	}
 	
 	
@@ -68,6 +71,8 @@ public class GameMap {
 			if(changed ) {
 				int startCellId = convertToCellId(currentRow,currentColumn);
 				if(isInMap(currentRow,currentColumn)) {
+					if(GameCharacter.getType(character) == GameCharacter.HEROTYPE)
+						notifyCells(endCellId);
 					this.cells[startCellId].removeMovable();
 					this.cells[endCellId].addMovable(character);
 					character.setCellId(endRow, endColumn);
@@ -79,8 +84,32 @@ public class GameMap {
 		return changed;	
 	}
 	
+	/*
+	 * D'abord unnotify tous les ennemis qui était notifiés
+	 * Notifie tous les ennemis sur la case d'une portée x 
+	 * 
+	 */
+	public void notifyCells(int cellId) {
+		this.unnotify();
+		int portee = 1;
+		Movement movement;
+		int attackCellId;
+		for(int i = 0 ; i < portee ; i++) {
+			for(int j = 0 ; j < Movement.values().length ;j++) {
+				movement = Movement.values()[j]; 
+				attackCellId = cellId + movement.getHorizontalIncrement();
+				attackCellId += movement.getVerticalIncrement() * MapReader.MAPLENGTH;
+				this.cells[attackCellId].notifyEnemy(Movement.values()[(j+2)%4]);
+				this.triggeredCells.add(attackCellId);
+			}
+		}
+	}
 	
-	
+	private void unnotify() {
+		for(Integer cellId : this.triggeredCells) {
+			this.cells[cellId].unnotifyEnemy();
+		}
+	}
 	
 	//Renvoie la liste des movements effectués pendant un tour
 	synchronized public Move[] turn() {
@@ -202,6 +231,12 @@ public class GameMap {
 		this.pendingMovable.add(new PendingMovable(movable,cellId));
 	}
 	
+	
+	/*
+	 * Identifie un movableEnAttente et applique les actions suivant les conditions suivants : 
+	 * -Si Le déplaçable est déjà sur la map, on l'enlève
+	 * -Si le déplaçable n'est pas déjà dans la map, on l'ajoute
+	 */
 	private void identifieMovable(PendingMovable pending) {
 		Movable currentMovable = pending.getMovable();
 		if(this.movableList.containsKey(currentMovable)){
@@ -216,6 +251,9 @@ public class GameMap {
 	}
 
 	
+	/*
+	 * Fait jouer un tour à tous les déplaçable sur la map et renvoie la liste de leurs actions
+	 */
 	private ArrayList<Move> executeTurn() {
 		ArrayList<Move> moves = new ArrayList<Move>();
 		Move move;
@@ -261,7 +299,9 @@ public class GameMap {
 		return row * MapReader.MAPLENGTH + column;
 	}
 	
-	
+	/*
+	 * Vérifie si les paramètres en entrés désigne une case avaible sur la map
+	 */
 	public static boolean isInMap(int row,int column) {
 		return row >= 0 && row < MapReader.MAPLENGTH && column >= 0 && row < MapReader.MAPLENGTH;
 	}

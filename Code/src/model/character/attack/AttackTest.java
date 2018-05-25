@@ -9,29 +9,26 @@ public class AttackTest extends Attack{
 
 	private final static int DEFAULTCYCLE = 20;
 	private final static int DEFAULTCELLPERTURN = 1;
+	private final static int DEFAULTCOEFFICIENT = 2;
+	private final static int DEFAULTIMAGE = 1;
 	
 	public AttackTest(GameMap map,  int row, int column, Movement direction, int damage) {
-		super(map, DEFAULTCYCLE, row, column, direction, damage, DEFAULTCELLPERTURN);
+		super(map, DEFAULTCYCLE, row, column, direction, damage, DEFAULTCELLPERTURN,DEFAULTCOEFFICIENT);
 		
-	}
-
-	@Override
-	public Move turn() {
-		this.oneTurn();
-		if(this.canAct()) {
-			int endCellId = this.establishMove();
-			return new Move(endCellId, this.getCycle(), 10);
-		}
-		return null;
-	}
+	}	
 	
 	@Override
 	public int getDefaultImage() {
-		return 11;
+		return DEFAULTIMAGE;
 	}
 
 	public void attaquePersonnage(GameCharacter character) {
 		
 	}
 
+	@Override
+	public Move act() {
+		int endCellId = this.establishMove();
+		return new Move(endCellId, this.getMoveCycle(), getDefaultImage());
+	}
 }
