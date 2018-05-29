@@ -84,6 +84,7 @@ public class GameMap {
 		return changed;	
 	}
 	
+		
 	/*
 	 * D'abord unnotify tous les ennemis qui était notifiés
 	 * Notifie tous les ennemis sur la case d'une portée x 
@@ -113,6 +114,7 @@ public class GameMap {
 	
 	//Renvoie la liste des movements effectués pendant un tour
 	synchronized public Move[] turn() {
+		System.out.println("True");
 		updateMovableList();
 		ArrayList<Move> moves = executeTurn();
 		Move[] movesArray = new Move[moves.size()];

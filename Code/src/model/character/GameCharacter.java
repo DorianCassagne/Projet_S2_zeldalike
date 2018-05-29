@@ -18,6 +18,7 @@ public abstract class GameCharacter extends Movable{
 	public final static char HEROTYPE = 'H';
 	public final static char ENEMYTYPE = 'E';
 	private final static HashMap<Movable,Character> CHARACTERTYPE;
+	private static GameCharacter Hero;
 	
 	private int hp; 	
 	private int def;	// comportement de la defense avoir avec Dorian atk*def/100 ??
@@ -29,12 +30,17 @@ public abstract class GameCharacter extends Movable{
 		CHARACTERTYPE = new HashMap<Movable,Character>();
 	}
 	
+	
 	public static final char getType(Movable movable) {
 		return CHARACTERTYPE.get(movable);
 	}
 	
+	protected static final GameCharacter getGameCharacter() {
+		return Hero;
+	}
 	
-	public GameCharacter(GameMap map, char type, int hp, int def,int startRow,int startColumn,int cycle,int coefficient) {
+	
+	public GameCharacter(GameMap map, char type, int hp, int def,int startRow,int startColumn,int cycle,double coefficient) {
 		super(map,cycle,startRow,startColumn,coefficient);
 		
 		if( map == null || hp <= 0 || def < 0) {
@@ -48,6 +54,8 @@ public abstract class GameCharacter extends Movable{
 				throw new IllegalArgumentException("THE CHARACTER COULD NOT BE CORRECTLY PLACED");
 			this.hp = hp;
 			this.def = def;
+			if(type == HEROTYPE)
+				Hero = this;
 			CHARACTERTYPE.put(this, type);
 		}
 	}
@@ -57,9 +65,6 @@ public abstract class GameCharacter extends Movable{
 		return this.hp;
 	}
 	
-	public void attaquer(Attack attack) {
-		getDmg(attack.getDamage());
-	}
 	
 	protected final int getDef() {
 		return this.def;

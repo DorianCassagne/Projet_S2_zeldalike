@@ -49,7 +49,6 @@ public abstract class Attack extends Movable {
 	}
 	
 	public  void target(GameCharacter gameCharacter) {
-		gameCharacter.attaquer(this);
 	}
 	
 	public int getDamage() {

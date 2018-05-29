@@ -17,10 +17,10 @@ public abstract class Movable {
 	private GameMap map;
 	private int cycle;
 	private int tour ;
-	private int moveCoefficient;
+	private double moveCoefficient;
 	
 	
-	public Movable(GameMap map,int cycle, int row, int column,int moveCoefficient) {
+	public Movable(GameMap map,int cycle, int row, int column,double moveCoefficient) {
 		if(cycle < 0 && moveCoefficient > 0)
 			throw new IllegalArgumentException("Speed must be greater than 0");
 		this.moveCoefficient = moveCoefficient;
@@ -77,9 +77,19 @@ public abstract class Movable {
 	}
 	
 	protected  final int getMoveCycle() {
-		return this.cycle / this.moveCoefficient;
+		Double d = this.cycle / this.moveCoefficient;
+		return d.intValue();
 	}
 	
+	//Omar n'étais pas d'accord
+	public final int getX() {
+		return this.column;
+	}
+	
+	//Omar n'étais pas d'accord
+	public final int getY() {
+		return this.row;
+	}
 	
 	protected abstract void removeCharacter();
 	
