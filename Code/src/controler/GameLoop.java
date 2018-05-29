@@ -24,7 +24,6 @@ public class GameLoop {
 	public GameLoop(Game myGame,AnchorPane characterAnchorPane) {
 		this.movableList = new HashMap<Integer,MovableView>();
 		this.characterAnchorPane = characterAnchorPane;
-		System.out.println("True");
 		this.myGame = myGame;
 		this.gameLoop = new Timeline();
 		initialiseLoop();
@@ -53,7 +52,7 @@ public class GameLoop {
 	private void turn() {
 		if(this.myGame.end()) {
 			gameLoop.stop();
-			Alert alert = new Alert(Alert.AlertType.INFORMATION,"Vous avez perdu ! :(");
+			Alert alert = new Alert(Alert.AlertType.INFORMATION,"Vous avez perdu !");
 			alert.show();
 		}
 		else {

@@ -120,7 +120,6 @@ public class GameMap {
 	
 	//Renvoie la liste des movements effectués pendant un tour
 	synchronized public Move[] turn() {
-		System.out.println("True");
 		updateMovableList();
 		ArrayList<Move> moves = executeTurn();
 		Move[] movesArray = new Move[moves.size()];

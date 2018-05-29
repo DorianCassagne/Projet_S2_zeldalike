@@ -1,12 +1,9 @@
 package model.character;
 
 import model.PathFinder.BFS1;
-import model.character.attack.AttackTest;
 import model.gameMap.GameMap;
-import model.gameMap.additional.MapReader;
 import model.gameMap.move.Move;
 import model.gameMap.move.Movement;
-import resources.additionalClass.UsefulMethods;
 
 public class BadMonkey extends GameCharacter{
 	
@@ -16,7 +13,6 @@ public class BadMonkey extends GameCharacter{
 	private final static int DEFAULTIMAGE = 20;
 	private final static double DEFAULTCOEFFICIENT = 1.3;
 	
-	private Movement lastHeroPosition;
 	
 	public BadMonkey(GameMap map, int startRow, int startColumn) {
 		super(map, GameCharacter.ENEMYTYPE, DEFAULTHP, DEFAULTDEF, startRow, startColumn,DEFAULTCYCLE,DEFAULTCOEFFICIENT);
@@ -30,7 +26,6 @@ public class BadMonkey extends GameCharacter{
 				actualCell,
 				GameMap.convertToCellId(GameCharacter.getGameCharacter().getRow(),GameCharacter.getGameCharacter().getColumn()));
 		if (actualCell==nextCell) {
-			System.out.println("errroooororo");
 			return null;
 		}
 		
