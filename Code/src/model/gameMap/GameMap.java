@@ -16,6 +16,35 @@ import model.gameMap.move.Move;
 import model.gameMap.move.Movement;
 
 public class GameMap {
+	
+	public enum Map {
+		MAPDEBUT("testMap.csv",12,13),
+		MAPFORET("MapForet1.csv",12,13),
+		MAPBOSS1("smallMap.csv",12,13)
+		;
+		
+		private String path;
+		private int heroPosX;
+		private int heroPosY;
+		
+		Map(String path,int posX,int posY) {
+			this.path = path;
+			this.heroPosX=posX;
+			this.heroPosY=posY;
+		}
+		
+		public String getPath() {
+			return this.path;
+		}
+		public int getPosX() {
+			return this.heroPosX;
+		}
+		public int getPosY() {
+			return this.heroPosY;
+		}
+		
+	}
+	
 	public final static int LINELENGTH = 8;
 	public final static int CATEGORYLENGTH = 100 * LINELENGTH ;
 	public final static int STARTCHARINDEX = 0 * LINELENGTH;

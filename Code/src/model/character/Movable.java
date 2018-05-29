@@ -39,6 +39,10 @@ public abstract class Movable {
 		return this.column;
 	}
 	
+	public void setMap(GameMap map) {
+		this.map = map;
+	}
+
 	protected final GameMap getMyMap() {
 		return this.map;
 	}

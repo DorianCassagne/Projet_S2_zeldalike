@@ -47,7 +47,6 @@ public class Cell {
 	public byte attack(Attack attack) {
 		byte number = 1;
 		if(this.gameCharacter != null) {
-			this.gameCharacter.attaquer(attack);
 			number *= 3;
 		}
 		if(this.item!=null)

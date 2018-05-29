@@ -5,6 +5,7 @@ import model.character.Dolphin;
 import model.character.Hero;
 import model.character.attack.Attack;
 import model.gameMap.GameMap;
+import model.gameMap.GameMap.Map;
 import model.gameMap.additional.NewMovable;
 import model.gameMap.move.Move;
 import model.gameMap.move.Movement;
@@ -51,6 +52,14 @@ public class Game {
 	
 	public int[] getRemovedMovable() {
 		return this.myMap.getRemovedCharacter();
+	}
+	
+	
+	public void changeMap(Map newMap) {
+		GameMap map= new GameMap(newMap.getPath());
+		this.hero.setMap(map);
+		this.myMap = map;
+		this.hero.setCellId(newMap.getPosX(), newMap.getPosY());
 	}
 	
 	/*
