@@ -31,17 +31,17 @@ public class GameMap {
 	private final IntegerProperty safeChangeProperty;
 	private Cell[] cells ;
 	private HashMap<Movable,Integer> movableList;
-	private ArrayList<NewMovable> addedCharacter;//CaractÃ¨res qui sont ajoutÃ©s rÃ©cement mais pas encore rÃ©cupÃ©rÃ©s
-	private ArrayList<Integer> removedMovable;//CaractÃ¨re qui seront retirÃ© au prochain tour
-	private ArrayList<PendingMovable> pendingMovable;//CaractÃ¨res qui vont Ãªtre ajoutÃ© au prochain tour
+	private ArrayList<NewMovable> addedCharacter;//Caractères qui sont ajoutés récement mais pas encore récupérés
+	private ArrayList<Integer> removedMovable;//Caractère qui seront retiré au prochain tour
+	private ArrayList<PendingMovable> pendingMovable;//Caractères qui vont être ajouté au prochain tour
 	private ArrayList<Integer> triggeredCells;
 	
 	static {
 		movableId = 0;
 	}
 	
-	//CrÃ©e une map en se rÃ©fÃ©rant Ã  un fichier csv qui initilialise les fond des cases
-	//Dans ce cas lÃ  il n'est autorisÃ© qu'un layer, dÃ©clenche une exception si le fichier n'est pas valid
+	//Crée une map en se référant à un fichier csv qui initilialise les fond des cases
+	//Dans ce cas là il n'est autorisé qu'un layer, déclenche une exception si le fichier n'est pas valid
 	public GameMap(String mapPath) {
 		int[] values = MapReader.readAndConvertMapFile(mapPath);
 		this.changeProperty = new SimpleIntegerProperty();
@@ -58,9 +58,9 @@ public class GameMap {
 	
 	
 	/*
-	 * Change la case du personnage, la case de dÃ©part et d'arrivÃ©s doivent Ãªtre passÃ©es en paramÃ¨tre pour rÃ©duire le temps de calcul
-	 * Renvoie vrai si le changement a Ã©tÃ© bien effectuÃ©, cela veut dire que la case destination accepte le personnage en movement
-	 * Renvoie faux si la case d'arrivÃ© ou de dÃ©part n'est pas une case disponible ou incorrecte.
+	 * Change la case du personnage, la case de départ et d'arrivés doivent être passées en paramètre pour réduire le temps de calcul
+	 * Renvoie vrai si le changement a été bien effectué, cela veut dire que la case destination accepte le personnage en movement
+	 * Renvoie faux si la case d'arrivé ou de départ n'est pas une case disponible ou incorrecte.
 	*/
 	
 	public boolean changeCell(GameCharacter character,int currentRow,int currentColumn,int endRow,int endColumn) {
@@ -86,8 +86,8 @@ public class GameMap {
 	
 		
 	/*
-	 * D'abord unnotify tous les ennemis qui Ã©tait notifiÃ©s
-	 * Notifie tous les ennemis sur la case d'une portÃ©e x 
+	 * D'abord unnotify tous les ennemis qui était notifiés
+	 * Notifie tous les ennemis sur la case d'une portée x 
 	 * 
 	 */
 	public void notifyCells(int cellId) {
@@ -112,7 +112,7 @@ public class GameMap {
 		}
 	}
 	
-	//Renvoie la liste des movements effectuÃ©s pendant un tour
+	//Renvoie la liste des movements effectués pendant un tour
 	synchronized public Move[] turn() {
 		System.out.println("True");
 		updateMovableList();
@@ -122,7 +122,7 @@ public class GameMap {
 		return movesArray;
 	}
 	
-	//Renvoie la liste des nouveaux caractÃ¨res introduit dans le jeu
+	//Renvoie la liste des nouveaux caractères introduit dans le jeu
 	public NewMovable[] getNewCharList() {
 		NewMovable[] newChars = new NewMovable[this.addedCharacter.size()];
 		newChars = this.addedCharacter.toArray(newChars);
@@ -142,9 +142,9 @@ public class GameMap {
 
 	
 	/*
-	* Ajoute un caractÃ¨re Ã  la Map,le caractÃ¨re s'ajoute Ã  la map en s'ajoutant Ã  une case
-	* Les caractÃ¨res Ã  ajouter sont ajouter dans une liste qui doit Ãªtre lÃ» au moment du tour
-	* Renvoie faux si la case d'arrivÃ©e n'est pas correcte ou non disponible
+	* Ajoute un caractère à la Map,le caractère s'ajoute à la map en s'ajoutant à une case
+	* Les caractères à ajouter sont ajouter dans une liste qui doit être lû au moment du tour
+	* Renvoie faux si la case d'arrivée n'est pas correcte ou non disponible
 	*/
 	public boolean addCharacter(GameCharacter movable,int row,int column) {
 		
@@ -162,8 +162,8 @@ public class GameMap {
 	
 	
 	/*
-	 * Ajoute une attaque Ã  la map en indiquant sa case de dÃ©part
-	 * DÃ©clenche une erreur si l'attaque n'a pas pÃ» Ãªtre placÃ© sur la case, car l'identifiant de case est incorrecte
+	 * Ajoute une attaque à la map en indiquant sa case de départ
+	 * Déclenche une erreur si l'attaque n'a pas pû être placé sur la case, car l'identifiant de case est incorrecte
 	 */
 	
 	public void  addAttack(Attack attack,int row,int column) {
@@ -178,7 +178,7 @@ public class GameMap {
 	
 	
 	/*
-	 * Renvoie une valeur qui reprÃ©sente l'effet emis par l'attaque dans une case donnÃ©e
+	 * Renvoie une valeur qui représente l'effet emis par l'attaque dans une case donnée
 	 */
 	public byte playAttack(Attack attack,int row,int column) {
 		
@@ -196,7 +196,7 @@ public class GameMap {
 	}
 	
 	/*
-	 * Retire un caractÃ¨re de la liste courante dans la map
+	 * Retire un caractère de la liste courante dans la map
 	 */
 	public void delCharacter(GameCharacter character,int row,int column) {
 		if(this.deleteMovableFromList(character)) {
@@ -227,7 +227,7 @@ public class GameMap {
 
 	
 	/*
-	 * Cette mÃ©thode ajoute un dÃ©plaÃ§able Ã  la liste des dÃ©plaÃ§able en lui attribuant un identifiant unique
+	 * Cette méthode ajoute un déplaçable à la liste des déplaçable en lui attribuant un identifiant unique
 	 */
 	private void addMovable(Movable movable,int cellId) {
 		this.pendingMovable.add(new PendingMovable(movable,cellId));
@@ -236,8 +236,8 @@ public class GameMap {
 	
 	/*
 	 * Identifie un movableEnAttente et applique les actions suivant les conditions suivants : 
-	 * -Si Le dÃ©plaÃ§able est dÃ©jÃ  sur la map, on l'enlÃ¨ve
-	 * -Si le dÃ©plaÃ§able n'est pas dÃ©jÃ  dans la map, on l'ajoute
+	 * -Si Le déplaçable est déjà sur la map, on l'enlève
+	 * -Si le déplaçable n'est pas déjà dans la map, on l'ajoute
 	 */
 	private void identifieMovable(PendingMovable pending) {
 		Movable currentMovable = pending.getMovable();
@@ -254,7 +254,7 @@ public class GameMap {
 
 	
 	/*
-	 * Fait jouer un tour Ã  tous les dÃ©plaÃ§able sur la map et renvoie la liste de leurs actions
+	 * Fait jouer un tour à tous les déplaçable sur la map et renvoie la liste de leurs actions
 	 */
 	private ArrayList<Move> executeTurn() {
 		ArrayList<Move> moves = new ArrayList<Move>();
@@ -271,7 +271,7 @@ public class GameMap {
 	
 	
 	
-	//Met Ã  jour la liste des dÃ©plaÃ§able en les ajoutants Ã  la hashmap des dÃ©plaÃ§able courrants
+	//Met à jour la liste des déplaçable en les ajoutants à la hashmap des déplaçable courrants
 	private void updateMovableList() {
 		for(PendingMovable movable : this.pendingMovable) {
 			identifieMovable(movable);
@@ -297,14 +297,23 @@ public class GameMap {
 		}
 	}
 	
+	public boolean containHero(int id) {
+		return cells[id].containsHero();
+	}
+	
+	public boolean isWalkableAt(int id) {
+		return this.cells[id].isWalkable();
+	}
+	
 	public static int convertToCellId(int row,int column) {
 		return row * MapReader.MAPLENGTH + column;
 	}
 	
 	/*
-	 * VÃ©rifie si les paramÃ¨tres en entrÃ©s dÃ©signe une case avaible sur la map
+	 * Vérifie si les paramètres en entrés désigne une case avaible sur la map
 	 */
 	public static boolean isInMap(int row,int column) {
 		return row >= 0 && row < MapReader.MAPLENGTH && column >= 0 && row < MapReader.MAPLENGTH;
 	}
 }
+

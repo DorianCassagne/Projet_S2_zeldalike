@@ -27,6 +27,11 @@ public class Cell {
 
 	}
 
+	public boolean containsHero() {
+		if (this.gameCharacter == null)
+			return false;
+        return GameCharacter.getType(this.gameCharacter) == GameCharacter.HEROTYPE;
+    }
 	public Cell(int backgroundValue,Item item) {
 		this(backgroundValue);
 		this.item=item;
