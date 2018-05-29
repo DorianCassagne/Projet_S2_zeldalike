@@ -23,7 +23,7 @@ public class Game {
 		myMap = new GameMap(mapName);
 		this.hero = new Hero(myMap, 16, 17);
 		new Dolphin(myMap,14,15);
-		new BadMonkey(myMap,15,40);
+		new BadMonkey(myMap,12,40);
 
 	}
 	

@@ -9,9 +9,9 @@ public class BadMonkey extends GameCharacter{
 	
 	private final static int DEFAULTHP = 150;
 	private final static int DEFAULTDEF = 10;
-	private final static int DEFAULTCYCLE = 30;
+	private final static int DEFAULTCYCLE = 4;
 	private final static int DEFAULTIMAGE = 20;
-	private final static double DEFAULTCOEFFICIENT = 1.3;
+	private final static double DEFAULTCOEFFICIENT = 2;
 	
 	
 	public BadMonkey(GameMap map, int startRow, int startColumn) {
@@ -22,9 +22,23 @@ public class BadMonkey extends GameCharacter{
 	public Move act() {
 		//Move nextMove = null;
 		int actualCell=GameMap.convertToCellId(this.getRow(), this.getColumn());
+		
+		//exmple pour attackmove
+		int[]tab= {
+				//GameMap.convertToCellId(GameCharacter.getGameCharacter().getRow(),GameCharacter.getGameCharacter().getColumn())
+				GameMap.convertToCellId(GameCharacter.getGameCharacter().getRow()-2,GameCharacter.getGameCharacter().getColumn()),
+				GameMap.convertToCellId(GameCharacter.getGameCharacter().getRow()+2,GameCharacter.getGameCharacter().getColumn()),
+				GameMap.convertToCellId(GameCharacter.getGameCharacter().getRow(),GameCharacter.getGameCharacter().getColumn()-2),
+				GameMap.convertToCellId(GameCharacter.getGameCharacter().getRow(),GameCharacter.getGameCharacter().getColumn()+2)
+		};
 		int nextCell= BFS1.simpleMove(this.getMyMap(), 
 				actualCell,
-				GameMap.convertToCellId(GameCharacter.getGameCharacter().getRow(),GameCharacter.getGameCharacter().getColumn()));
+				tab, false);
+	
+		
+//		int nextCell= BFS1.simpleMove(this.getMyMap(), 
+//				actualCell,
+//				GameMap.convertToCellId(GameCharacter.getGameCharacter().getRow(),GameCharacter.getGameCharacter().getColumn()));
 		if (actualCell==nextCell) {
 			return null;
 		}
