@@ -77,6 +77,10 @@ public abstract class GameCharacter extends Movable{
 		this.def=def;
 	}
 	
+	public void getDmgAttacked(Attack atc) {
+		this.getDmg(atc.getDamage());
+	}
+	
 	//getters setters end
 	
 	//blesse le personnage exeption si dmg < 0.

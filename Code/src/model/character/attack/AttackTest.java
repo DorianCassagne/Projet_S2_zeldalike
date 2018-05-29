@@ -25,10 +25,21 @@ public class AttackTest extends Attack{
 	public void attaquePersonnage(GameCharacter character) {
 		
 	}
+	
+	@Override
+	public int getDamage() {
+		return 10;
+	}
 
 	@Override
 	public Move act() {
 		int endCellId = this.establishMove();
 		return new Move(endCellId, this.getMoveCycle(), getDefaultImage());
+	}
+
+	
+	public void attack(GameCharacter gameCharac) {
+		gameCharac.getDmgAttacked(this);
+		
 	}
 }

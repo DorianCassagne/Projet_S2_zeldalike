@@ -60,6 +60,8 @@ public abstract class Attack extends Movable {
 		return true;
 	}
 	
+	public abstract void attack(GameCharacter gameCharac) ;
+	
 	@Override
 	public void removeCharacter() {
 		this.getMyMap().delAttack(this);
