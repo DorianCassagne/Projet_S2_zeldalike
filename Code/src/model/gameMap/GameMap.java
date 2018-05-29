@@ -26,6 +26,7 @@ public class GameMap {
 	public final static int CHANGEPARTWITHCELLID = 9;
 	public final static int STEP = 1;
 	
+	private GameCharacter hero;
 	private static int movableId;
 	private final IntegerProperty changeProperty;
 	private final IntegerProperty safeChangeProperty;
@@ -35,7 +36,6 @@ public class GameMap {
 	private ArrayList<Integer> removedMovable;//Caractère qui seront retiré au prochain tour
 	private ArrayList<PendingMovable> pendingMovable;//Caractères qui vont être ajouté au prochain tour
 	private ArrayList<Integer> triggeredCells;
-	
 	static {
 		movableId = 0;
 	}
@@ -54,8 +54,14 @@ public class GameMap {
 		this.pendingMovable = new ArrayList<PendingMovable>();
 		this.triggeredCells = new ArrayList<Integer>();
 	}
-	
-	
+//	
+//	public void addHero(GameCharacter hero) {
+//		this.hero=hero;
+//	}
+//	
+//	public GameCharacter getHero() {
+//		return this.getHero();
+//	}
 	
 	/*
 	 * Change la case du personnage, la case de départ et d'arrivés doivent être passées en paramètre pour réduire le temps de calcul
@@ -307,6 +313,14 @@ public class GameMap {
 	
 	public static int convertToCellId(int row,int column) {
 		return row * MapReader.MAPLENGTH + column;
+	}
+	
+	public static int convertToRow(int id) {
+		return id/MapReader.MAPLENGTH;
+	}
+	
+	public static int convertToColomn(int id) {
+		return id%MapReader.MAPLENGTH;
 	}
 	
 	/*

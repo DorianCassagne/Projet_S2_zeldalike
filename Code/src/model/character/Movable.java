@@ -91,6 +91,7 @@ public abstract class Movable {
 		return this.row;
 	}
 	
+	
 	protected abstract void removeCharacter();
 	
 	
