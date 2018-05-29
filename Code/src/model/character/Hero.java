@@ -10,7 +10,7 @@ public class Hero extends GameCharacter{
 	private final static int DEFAULTHP = 300;
 	private final static int DEFAULTDEF = 200;
 	private final static int DEFAULTCYCLE = 20;
-	private final static int DEFAULTCOEFFICIENT = 2;
+	private final static double DEFAULTCOEFFICIENT = 1.2;
 	public final static int DEFAULTIMAGE = 8;
 	public static final char MOVEUP = 'u';
 	public static final char MOVEDOWN = 'd';

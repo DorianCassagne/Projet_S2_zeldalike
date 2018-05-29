@@ -11,7 +11,7 @@ public class Dolphin extends GameCharacter{
 	private final static int DEFAULTDEF = 10;
 	private final static int DEFAULTCYCLE = 30;
 	private final static int DEFAULTIMAGE = 20;
-	private final static int DEFAULTCOEFFICIENT = 2;
+	private final static double DEFAULTCOEFFICIENT = 1.3;
 	
 	private Movement lastHeroPosition;
 	

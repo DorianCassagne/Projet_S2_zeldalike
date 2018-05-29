@@ -59,6 +59,7 @@ public class Cell {
 		return number;
 	}
 	
+	
 	public void notifyEnemy(Movement movement) {
 		if(this.gameCharacter != null) {
 			if(GameCharacter.getType(gameCharacter) == GameCharacter.ENEMYTYPE) {

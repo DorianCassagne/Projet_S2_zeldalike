@@ -84,6 +84,7 @@ public class GameMap {
 		return changed;	
 	}
 	
+		
 	/*
 	 * D'abord unnotify tous les ennemis qui était notifiés
 	 * Notifie tous les ennemis sur la case d'une portée x 
