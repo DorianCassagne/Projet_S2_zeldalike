@@ -18,6 +18,7 @@ public abstract class Movable {
 	private int cycle;
 	private int tour ;
 	private double moveCoefficient;
+	private int baseCycle;
 	
 	
 	public Movable(GameMap map,int cycle, int row, int column,double moveCoefficient) {
@@ -25,10 +26,17 @@ public abstract class Movable {
 			throw new IllegalArgumentException("Speed must be greater than 0");
 		this.moveCoefficient = moveCoefficient;
 		this.cycle = cycle;
+		this.baseCycle=cycle;
 		this.tour = 0;
 		this.row = row;
 		this.column = column;
 		this.map = map;
+	}
+	
+	protected void setWait(int cycle) {
+		if(cycle < 0 && moveCoefficient > 0)
+			throw new IllegalArgumentException("Speed must be greater than 0");
+		this.cycle = cycle;
 	}
 	
 	protected final int getRow() {
@@ -62,6 +70,7 @@ public abstract class Movable {
 		boolean canAct = false;
 		if(this.tour == cycle) {
 			this.tour = 0;
+			this.cycle=this.baseCycle;
 			canAct = true;
 		}
 		return canAct;

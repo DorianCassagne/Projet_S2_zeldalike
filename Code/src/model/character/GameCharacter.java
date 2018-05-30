@@ -110,4 +110,6 @@ public abstract class GameCharacter extends Movable{
 	}
 
 	public abstract void launchAttack(Movement move);
+
+	
 }
