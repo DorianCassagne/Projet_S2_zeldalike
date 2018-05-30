@@ -8,8 +8,6 @@ public class CellBfs {
 		this.setLast(last);
 		this.setIdCell(idCell);
 	}
-	
-	
 
 	public int getIdCell() {
 		return idCell;
@@ -19,11 +17,9 @@ public class CellBfs {
 		this.idCell = idCell;
 	}
 
-
 	public CellBfs getLast() {
 		return last;
 	}
-
 
 	private void setLast(CellBfs last) {
 		this.last = last;

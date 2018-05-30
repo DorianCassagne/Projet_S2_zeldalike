@@ -18,7 +18,6 @@ public final class BFS1 {
 }
 
 
-
 	private final static CellBfs checkCase(CellBfs lastCase, GameMap map, boolean[] seenMap, int id) {
 	if (id<0 || id>=MapReader.MAPLENGTH*MapReader.MAPLENGTH )
 		return null;
@@ -31,6 +30,8 @@ public final class BFS1 {
 	}
 	return null;
 	}
+	
+	
 	private final static CellBfs getCase(CellBfs lastCase, GameMap map, boolean[] seenMap, int id) {
 		if (id<0 || id>=MapReader.MAPLENGTH*MapReader.MAPLENGTH )
 			return null;
@@ -40,6 +41,7 @@ public final class BFS1 {
 		}
 		return null;
 	}
+	
 	
 	public final static int simpleMove(GameMap map, int cellStart, int[] cellEnd, boolean joinTheCell) {
 		return simpleMove(map, cellStart, cellEnd, joinTheCell, -1);
@@ -116,7 +118,6 @@ public final class BFS1 {
 		}
 		return null;
 	}
-
 
 
 	private static CellBfs checkAroud(ArrayList<CellBfs> last, ArrayList<CellBfs> empty, boolean[] seenMap, GameMap map,int[] cellEnd, boolean joinTheCell) {
