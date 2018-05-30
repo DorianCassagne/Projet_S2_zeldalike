@@ -25,7 +25,7 @@ public class BadMonkey extends GameCharacter{
 		
 		
 		int actualCell=GameMap.convertToCellId(this.getRow(), this.getColumn());
-		//exmple pour attackmove
+		//exmple pour attackmove attention a l'ordre des cases
 		int[]tab= {
 				GameMap.convertToCellId(GameCharacter.getGameCharacter().getRow()+3,GameCharacter.getGameCharacter().getColumn()),
 				GameMap.convertToCellId(GameCharacter.getGameCharacter().getRow()-3,GameCharacter.getGameCharacter().getColumn()),
