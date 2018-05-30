@@ -9,7 +9,7 @@ public class BadMonkey extends GameCharacter{
 	
 	private final static int DEFAULTHP = 150;
 	private final static int DEFAULTDEF = 10;
-	private final static int DEFAULTCYCLE = 4;
+	private final static int DEFAULTCYCLE = 20;
 	private final static int DEFAULTIMAGE = 20;
 	private final static double DEFAULTCOEFFICIENT = 2;
 	
@@ -20,12 +20,10 @@ public class BadMonkey extends GameCharacter{
 
 	@Override
 	public Move act() {
-		//Move nextMove = null;
 		int actualCell=GameMap.convertToCellId(this.getRow(), this.getColumn());
 		
 		//exmple pour attackmove
 		int[]tab= {
-				//GameMap.convertToCellId(GameCharacter.getGameCharacter().getRow(),GameCharacter.getGameCharacter().getColumn())
 				GameMap.convertToCellId(GameCharacter.getGameCharacter().getRow()-2,GameCharacter.getGameCharacter().getColumn()),
 				GameMap.convertToCellId(GameCharacter.getGameCharacter().getRow()+2,GameCharacter.getGameCharacter().getColumn()),
 				GameMap.convertToCellId(GameCharacter.getGameCharacter().getRow(),GameCharacter.getGameCharacter().getColumn()-2),
@@ -33,12 +31,9 @@ public class BadMonkey extends GameCharacter{
 		};
 		int nextCell= BFS1.simpleMove(this.getMyMap(), 
 				actualCell,
-				tab, false);
+				tab, false, 0);
 	
 		
-//		int nextCell= BFS1.simpleMove(this.getMyMap(), 
-//				actualCell,
-//				GameMap.convertToCellId(GameCharacter.getGameCharacter().getRow(),GameCharacter.getGameCharacter().getColumn()));
 		if (actualCell==nextCell) {
 			return null;
 		}
@@ -49,13 +44,11 @@ public class BadMonkey extends GameCharacter{
 		
 		return null;
 		
-		//return nextMove;
 	}
 
 	
 	@Override
 	public void launchAttack(Movement movement) {
-		//this.lastHeroPosition = movement;
 	}
 	
 	

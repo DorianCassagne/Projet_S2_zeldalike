@@ -13,62 +13,12 @@ public final class BFS1 {
 	
 	public final static int simpleMove(GameMap map, int cellStart, int cellEnd, boolean joinTheCell) {
 		int[] tab ={cellEnd};
-		return simpleMove(map, cellStart, tab, joinTheCell);
+		return simpleMove(map, cellStart, tab, joinTheCell, -1);
 				
 }
 
 
-//	
-//	
-//	
-//	
-//	
-//	private final static CellBfs checkAroud(ArrayList<CellBfs> last,ArrayList<CellBfs> empty , boolean[] seenMap,GameMap map, int cellEnd) {
-//
-//		for (CellBfs sommet: last) {
-//			CellBfs check;
-//			for (int i = 0; i<2 ;i++) {//metre i<1 pour un deplacement bizzare mais se raprochant de la case
-//			if(random) {
-//
-//					if (sommet.getIdCell()+1==cellEnd) 
-//						return getCase(sommet, map, seenMap, sommet.getIdCell()+1);
-//					check= checkCase(sommet, map, seenMap, sommet.getIdCell()+1);
-//					if (check!=null)
-//						empty.add(check);
-//						
-//					
-//					
-//
-//					if (sommet.getIdCell()-1==cellEnd)
-//						return getCase(sommet, map, seenMap, sommet.getIdCell()-1);
-//					check= checkCase(sommet, map, seenMap, sommet.getIdCell()-1);
-//					if (check!=null)
-//						empty.add(check);
-//				}
-//					
-//				if(!random) {
-//					if (sommet.getIdCell()+MapReader.MAPLENGTH==cellEnd)
-//						return getCase(sommet, map, seenMap, sommet.getIdCell()+MapReader.MAPLENGTH);
-//					check= checkCase(sommet, map, seenMap, sommet.getIdCell()+MapReader.MAPLENGTH);
-//					if (check!=null)
-//						empty.add(check);
-//					
-//
-//					if (sommet.getIdCell()-MapReader.MAPLENGTH==cellEnd)
-//						return getCase(sommet, map, seenMap, sommet.getIdCell()-MapReader.MAPLENGTH);
-//					check= checkCase(sommet, map, seenMap, sommet.getIdCell()-MapReader.MAPLENGTH);
-//					if (check!=null)
-//						empty.add(check);
-//					
-//				}
-//				random=!random;
-//				//System.out.println("test"+random);
-//			}
-//		}
-//		
-//		return null;
-//	}
-	
+
 	private final static CellBfs checkCase(CellBfs lastCase, GameMap map, boolean[] seenMap, int id) {
 	if (id<0 || id>=MapReader.MAPLENGTH*MapReader.MAPLENGTH )
 		return null;
@@ -91,41 +41,20 @@ public final class BFS1 {
 		return null;
 	}
 	
-	
-	
-//	public final static int simpleMove(GameMap map, int cellStart, int cellEnd) {
-//	if(cellEnd==cellStart)
-//		return cellStart;
-//	boolean[] seenMap= new boolean[MapReader.MAPLENGTH*MapReader.MAPLENGTH];
-//	random=ran.nextBoolean();
-//	ArrayList<CellBfs> all=new ArrayList<CellBfs>();
-//	ArrayList<CellBfs> last=new ArrayList<CellBfs>();
-//	last.add(new CellBfs(null, cellStart));
-//	CellBfs find = null;
-//	
-//	do{
-//		ArrayList<CellBfs> empty=new ArrayList<CellBfs>();
-//		find= checkAroud(last, empty, seenMap, map, cellEnd);
-//		all.addAll(empty);
-//		last=empty;
-//		if (last.isEmpty())
-//			break;
-//	}while (find==null && !last.isEmpty());
-//	if (find==null) {
-//		System.out.println("no way to join him");
-//		return cellStart;
-//	}
-//	if (find.getLast()==null)
-//		return find.getIdCell();
-//	while(find.getLast().getLast()!=null){
-//		find=find.getLast();
-//	}
-//	return find.getIdCell();
-//				
-//}
-//
-	//beacoup de code duplique TODO:retirer duplication
 	public final static int simpleMove(GameMap map, int cellStart, int[] cellEnd, boolean joinTheCell) {
+		return simpleMove(map, cellStart, cellEnd, joinTheCell, -1);
+	}
+	
+	/**
+	 * 
+	 * @param map
+	 * @param cellStart
+	 * @param cellEnd un tableau des cellules on lon peu arriver
+	 * @param joinTheCell si vrai le personnage ne bougeras que si il peu acceder a une des cellules d'arrivé
+	 * @param nbCycle 0 si autant de mouvement que possible
+	 * @return
+	 */
+	public final static int simpleMove(GameMap map, int cellStart, int[] cellEnd, boolean joinTheCell, int nbCycle) {
 		for (int i : cellEnd) {
 			if(i==cellStart)
 				return cellStart;
@@ -143,9 +72,10 @@ public final class BFS1 {
 			find= checkAroud(last, empty, seenMap, map, cellEnd ,joinTheCell);
 			all.addAll(empty);
 			last=empty;
+			nbCycle--;
 			if (last.isEmpty())
 				break;
-		}while (find==null && !last.isEmpty());
+		}while (find==null && !last.isEmpty()&& nbCycle !=0);
 		if (find==null) {
 			System.out.println("no way to join him");
 			return cellStart;
@@ -187,13 +117,6 @@ public final class BFS1 {
 		return null;
 	}
 
-//	if (sommet.getIdCell()+MapReader.MAPLENGTH==cellEnd)
-//	return getCase(sommet, map, seenMap, sommet.getIdCell()+MapReader.MAPLENGTH);
-//check= checkCase(sommet, map, seenMap, sommet.getIdCell()+MapReader.MAPLENGTH);
-//if (check!=null)
-//	empty.add(check);
-//
-//
 
 
 	private static CellBfs checkAroud(ArrayList<CellBfs> last, ArrayList<CellBfs> empty, boolean[] seenMap, GameMap map,int[] cellEnd, boolean joinTheCell) {
@@ -206,26 +129,7 @@ public final class BFS1 {
 					if (check!=null)
 						return check;
 					check=checkSingleCell(empty, sommet, map, seenMap, cellEnd,joinTheCell, -1);
-//					check= checkCase(sommet, map, seenMap, sommet.getIdCell()+1);
-//					if (check!=null) {
-//						empty.add(check);
-//						for (int i2 : cellEnd) {
-//							if (sommet.getIdCell()+1==i2) 
-//								return check;
-//						}
-//					}
-					
-					
-	
-//					
-//					check= checkCase(sommet, map, seenMap, sommet.getIdCell()-1);
-//					if (check!=null) {
-//						empty.add(check);
-//						for (int i2 : cellEnd) {
-//							if (sommet.getIdCell()-1==i2)
-//								return check;
-//						}
-//					}
+
 				}
 						
 				if(!random) {
@@ -237,27 +141,9 @@ public final class BFS1 {
 					check=checkSingleCell(empty, sommet, map, seenMap, cellEnd,joinTheCell, -MapReader.MAPLENGTH);
 				
 					
-//					check= checkCase(sommet, map, seenMap, sommet.getIdCell()+MapReader.MAPLENGTH);
-//					if (check!=null) {
-//						empty.add(check);
-//						for (int i2 : cellEnd) {
-//							if (sommet.getIdCell()+MapReader.MAPLENGTH==i2)
-//								return check;
-//						}
-//					}
-//					
-//					
-//					check= checkCase(sommet, map, seenMap, sommet.getIdCell()-MapReader.MAPLENGTH);
-//					if (check!=null) {
-//						empty.add(check);
-//						for (int i2 : cellEnd) {
-//							if (sommet.getIdCell()-MapReader.MAPLENGTH==i2)
-//								return check;
-//						}
-//					}
+
 				}
 				random=!random;
-				//System.out.println("test"+random);
 
 				if (check!=null)
 					return check;
