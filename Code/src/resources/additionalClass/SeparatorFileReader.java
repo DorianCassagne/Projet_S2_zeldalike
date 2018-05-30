@@ -10,11 +10,16 @@ public class SeparatorFileReader {
 	
 	public static BufferedReader openTextFile(String path)  {
 		try {
+
 			File file = new File(SeparatorFileReader.class.getResource(path).toURI().toURL().getPath());
+
+			//System.out.println(file);
 			FileReader fileReader = new FileReader(file);
 			BufferedReader reader = new BufferedReader(fileReader);
+
 			return reader;
 		}catch(IOException exception) {
+
 			throw new IllegalArgumentException("Error while reading file");
 		}catch(URISyntaxException exception) {
 			throw new IllegalArgumentException("Error in file path");

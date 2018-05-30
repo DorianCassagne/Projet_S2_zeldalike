@@ -9,7 +9,7 @@ import model.gameMap.move.Movement;
 public class Hero extends GameCharacter{
 	private final static int DEFAULTHP = 300;
 	private final static int DEFAULTDEF = 200;
-	private final static int DEFAULTCYCLE = 20;
+	private final static int DEFAULTCYCLE = 10;
 	private final static double DEFAULTCOEFFICIENT = 1.2;
 	public final static int DEFAULTIMAGE = 8;
 	public static final char MOVEUP = 'u';
@@ -25,6 +25,7 @@ public class Hero extends GameCharacter{
 	
 	public Hero(GameMap map,int startRow,int startColumn) {
 		super(map, GameCharacter.HEROTYPE, DEFAULTHP, DEFAULTDEF,startRow,startColumn,DEFAULTCYCLE,DEFAULTCOEFFICIENT);
+		//map.addHero(this);
 		this.nextMove = STAY;
 	}
 	
@@ -62,7 +63,7 @@ public class Hero extends GameCharacter{
 		case ATTACK :
 			changedCell = false;
 			Movement movement = Movement.values()[lastImageIndex];
-			Attack attack = new AttackTest(getMyMap(), reachRow, reachColumn,movement, 80);
+			new AttackTest(getMyMap(), reachRow, reachColumn,movement, 80);
 			break;
 		default : 
 			break;

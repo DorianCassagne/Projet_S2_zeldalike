@@ -9,7 +9,7 @@ public class MovableView extends ImageView{
 	private int progress;
 	
 	public MovableView(int cellId,int imageId) {
-		System.out.println(imageId);
+		//System.out.println(imageId);
 		this.setImage(Controleur.TEXTURE.getImg(imageId));
 		this.setPosition(cellId);
 		this.progress = 0;

@@ -32,6 +32,7 @@ public class Main extends Application {
         loader.setLocation(url);
         AnchorPane root = new AnchorPane(); 
         try {
+
 			root=loader.load();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -43,7 +44,7 @@ public class Main extends Application {
         Scene  scene = new Scene(root,960,640);
         controller.startScene(scene);
         primaryStage.setScene(scene);
-        primaryStage.setResizable(false);
+        primaryStage.setResizable(true);
         primaryStage.show();
     }
 

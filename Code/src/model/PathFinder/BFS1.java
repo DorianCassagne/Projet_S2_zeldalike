@@ -1,151 +1,23 @@
 package model.PathFinder;
 
 import java.util.ArrayList;
-
+import java.util.Random;
 import model.PathFinder.resources.CellBfs;
 import model.gameMap.GameMap;
 import model.gameMap.additional.MapReader;
-
 public final class BFS1 {
-	public final static int simpleMove(GameMap map, int cellStart, int cellEnd) {
-		boolean[] seenMap= new boolean[MapReader.MAPLENGTH*MapReader.MAPLENGTH];
-		
-		ArrayList<CellBfs> all=new ArrayList<CellBfs>();
-		ArrayList<CellBfs> last=new ArrayList<CellBfs>();
-		last.add(new CellBfs(null, cellStart));
-		//map.isWalkableAt(cellStart);
-		CellBfs find = null;
-		
-		do{
-			ArrayList<CellBfs> empty=new ArrayList<CellBfs>();
-			find= checkAroud(last, empty, seenMap, map, cellEnd);
-			all.addAll(empty);
-			last=empty;
-			if (last.isEmpty())
-				break;
-		}while (find==null && !last.isEmpty());
-		if (last.isEmpty())
-			return cellStart;
-		if (find.getLast()==null)
-			return find.getIdCell();
-		while(find.getLast().getLast()==null){
-			find=find.getLast();
-		}
-		return find.getIdCell();
-			
-		
-		
-//		last.add(new CellBfs(null, xStart, yStart));
-//		//seenMap[xStart][yStart]=true;
-//		CaseBfs victory=null;
-//		
-//		do{
-//			ArrayList<CaseBfs> empty=new ArrayList<CaseBfs>();
-//			victory= check(last, empty, seenMap, map,maxX,maxY  );
-//			all.addAll(empty);
-//			last=empty;
-//			if (last.isEmpty())
-//				break;
-//		}while (victory==null);
-//		if(victory==null)
-//			return "x";
-//		if (victory.last!=null)
-//			while(victory.last.last!=null) {
-//				victory=victory.last;
-//			}
-//		if (victory.x == xStart) {
-//			if(victory.y<yStart) {
-//				return "O";
-//			}
-//			if(victory.y>yStart) {
-//				return "E";
-//			}
-//		}
-//		else {
-//			if(victory.x<xStart) {
-//				return "N";
-//			}
-//			if(victory.x>xStart) {
-//				return "S";
-//			}
-//		}
-//		System.out.println("erreur bfs");
-//		return "x";
-//		
-//		
-//	}
-//	
-//	private final static CaseBfs check(ArrayList<CaseBfs> last,ArrayList<CaseBfs> empty , boolean[][] seenMap,Map map,int maxX,int maxY) {
-//
-//		CaseBfs victory=null;
-//		for (CaseBfs sommet: last) {
-//			empty.add(checkCase(sommet, sommet.x-1, sommet.y, map, seenMap, maxX, maxY));
-//			if (map.getCase(sommet.x-1, sommet.y).haveFruit()) {
-//				victory=new CaseBfs(sommet,sommet.x-1, sommet.y);
-//			}
-//			empty.add(checkCase(sommet, sommet.x+1, sommet.y, map, seenMap, maxX, maxY));
-//			if (map.getCase(sommet.x-1, sommet.y).haveFruit()) {
-//				victory=new CaseBfs(sommet,sommet.x-1, sommet.y);
-//			}
-//			empty.add(checkCase(sommet, sommet.x, sommet.y-1, map, seenMap, maxX, maxY));
-//			if (map.getCase(sommet.x, sommet.y-1).haveFruit()) {
-//				victory=new CaseBfs(sommet,sommet.x, sommet.y-1);
-//			}
-//			empty.add(checkCase(sommet, sommet.x, sommet.y+1, map, seenMap, maxX, maxY));
-//			if (map.getCase(sommet.x, sommet.y+1).haveFruit()) {
-//				victory=new CaseBfs(sommet, sommet.x, sommet.y+1);
-//			}
-//		}
-//		
-//		return victory;
-//	}
-//	private final static CaseBfs checkCase(CaseBfs lastCase,int x, int y, Map map, boolean[][] seenMap,int maxX,int maxY) {
-//		if (x<0 || y<0||x>=maxX || y>=maxY)
-//			return null;
-//		if(!seenMap[x][y]) {
-//			seenMap[x][y]=true;
-//			if (map.getCase(maxX, maxY).isWalkable()){
-//				return new CaseBfs(lastCase, x, y);
-//			}
-//				
-//		}
-//		return null;
-//	}
-//	
-		
-	}
+	
+	private static boolean random;
+	private final static Random ran=  new Random();
 	
 	
-	
-	private final static CellBfs checkAroud(ArrayList<CellBfs> last,ArrayList<CellBfs> empty , boolean[] seenMap,GameMap map, int cellEnd) {
+	public final static int simpleMove(GameMap map, int cellStart, int cellEnd, boolean joinTheCell) {
+		int[] tab ={cellEnd};
+		return simpleMove(map, cellStart, tab, joinTheCell, -1);
+				
+}
 
-		for (CellBfs sommet: last) {
-			CellBfs check;
-			if (sommet.getIdCell()+1==cellEnd)
-				return sommet;
-			check= checkCase(sommet, map, seenMap, sommet.getIdCell()+1);
-			if (check!=null)
-				empty.add(check);
-			if (sommet.getIdCell()-1==cellEnd)
-				return sommet;
-			check= checkCase(sommet, map, seenMap, sommet.getIdCell()-1);
-			if (check!=null)
-				empty.add(check);
-			if (sommet.getIdCell()+MapReader.MAPLENGTH==cellEnd)
-				return sommet;
-			check= checkCase(sommet, map, seenMap, sommet.getIdCell()+MapReader.MAPLENGTH);
-			if (check!=null)
-				empty.add(check);
-			if (sommet.getIdCell()-MapReader.MAPLENGTH==cellEnd)
-				return sommet;
-			check= checkCase(sommet, map, seenMap, sommet.getIdCell()-MapReader.MAPLENGTH);
-			if (check!=null)
-				empty.add(check);
-		}
-		
-		return null;
-	}
-	
+
 	private final static CellBfs checkCase(CellBfs lastCase, GameMap map, boolean[] seenMap, int id) {
 	if (id<0 || id>=MapReader.MAPLENGTH*MapReader.MAPLENGTH )
 		return null;
@@ -157,7 +29,131 @@ public final class BFS1 {
 			
 	}
 	return null;
-}
+	}
+	
+	
+	private final static CellBfs getCase(CellBfs lastCase, GameMap map, boolean[] seenMap, int id) {
+		if (id<0 || id>=MapReader.MAPLENGTH*MapReader.MAPLENGTH )
+			return null;
+		if(!seenMap[id]) {
+			seenMap[id]=true;
+				return new CellBfs(lastCase, id);	
+		}
+		return null;
+	}
+	
+	
+	public final static int simpleMove(GameMap map, int cellStart, int[] cellEnd, boolean joinTheCell) {
+		return simpleMove(map, cellStart, cellEnd, joinTheCell, -1);
+	}
+	
+	/**
+	 * 
+	 * @param map
+	 * @param cellStart
+	 * @param cellEnd un tableau des cellules on lon peu arriver
+	 * @param joinTheCell si vrai le personnage ne bougeras que si il peu acceder a une des cellules d'arrivé
+	 * @param nbCycle 0 si autant de mouvement que possible
+	 * @return
+	 */
+	public final static int simpleMove(GameMap map, int cellStart, int[] cellEnd, boolean joinTheCell, int nbCycle) {
+		for (int i : cellEnd) {
+			if(i==cellStart)
+				return cellStart;
+		}
+		
+		boolean[] seenMap= new boolean[MapReader.MAPLENGTH*MapReader.MAPLENGTH];
+		random=ran.nextBoolean();
+		ArrayList<CellBfs> all=new ArrayList<CellBfs>();
+		ArrayList<CellBfs> last=new ArrayList<CellBfs>();
+		last.add(new CellBfs(null, cellStart));
+		CellBfs find = null;
+		
+		do{
+			ArrayList<CellBfs> empty=new ArrayList<CellBfs>();
+			find= checkAroud(last, empty, seenMap, map, cellEnd ,joinTheCell);
+			all.addAll(empty);
+			last=empty;
+			nbCycle--;
+			if (last.isEmpty())
+				break;
+		}while (find==null && !last.isEmpty()&& nbCycle !=0);
+		if (find==null) {
+			System.out.println("no way to join him");
+			return cellStart;
+		}
+		if (find.getLast()==null)
+			return find.getIdCell();
+		while(find.getLast().getLast()!=null){
+			find=find.getLast();
+		}
+		return find.getIdCell();
+					
+	}
 
+
+	private static CellBfs checkSingleCell( ArrayList<CellBfs> empty,CellBfs sommet, GameMap map, boolean[] seenMap, int[] cellEnd,boolean joinTheCell, int increment) {
+		if(!joinTheCell) {
+			for (int i2 : cellEnd) {
+				if (sommet.getIdCell()+increment==i2) {
+					CellBfs check= checkCase(sommet, map, seenMap, sommet.getIdCell()+ increment);
+					if (check!=null) {
+						return check;
+					}
+					//return getCase(sommet, map, seenMap,sommet.getIdCell()+increment);
+					return sommet;
+				}
+			}
+		}
+		
+		CellBfs check= checkCase(sommet, map, seenMap, sommet.getIdCell()+ increment);
+		if (check!=null) {
+			empty.add(check);
+			if (joinTheCell) {
+				for (int i2 : cellEnd) {
+					if (sommet.getIdCell()+increment==i2) 
+						return check;
+				}
+			}
+		}
+		return null;
+	}
+
+
+	private static CellBfs checkAroud(ArrayList<CellBfs> last, ArrayList<CellBfs> empty, boolean[] seenMap, GameMap map,int[] cellEnd, boolean joinTheCell) {
+		for (CellBfs sommet: last) {
+			CellBfs check=null;
+			for (int i = 0; i<2 ;i++) {//metre i<1 pour un deplacement bizzare mais se raprochant de la case
+				if(random) {
+	
+					check=checkSingleCell(empty, sommet, map, seenMap, cellEnd,joinTheCell, +1);
+					if (check!=null)
+						return check;
+					check=checkSingleCell(empty, sommet, map, seenMap, cellEnd,joinTheCell, -1);
+
+				}
+						
+				if(!random) {
+					
+
+					check=checkSingleCell(empty, sommet, map, seenMap, cellEnd,joinTheCell, +MapReader.MAPLENGTH);
+					if (check!=null)
+						return check;
+					check=checkSingleCell(empty, sommet, map, seenMap, cellEnd,joinTheCell, -MapReader.MAPLENGTH);
+				
+					
+
+				}
+				random=!random;
+
+				if (check!=null)
+					return check;
+			}
+		
+		}
+		
+		return null;
+
+	}
 }
 

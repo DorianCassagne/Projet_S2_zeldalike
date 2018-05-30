@@ -22,7 +22,6 @@ public class Controleur implements Initializable{
 	
 	final static int TILEDIMENSION = 32;
 	final static int ROWINDEX = 0;
-	
 	final static int COLUMNINDEX = 1 ;
 	final static TexturePack TEXTURE ;
 	private final static String TILESETPATH = "src/resources/tileset/jeudi24.png";
@@ -37,10 +36,11 @@ public class Controleur implements Initializable{
 	
 	static {
 		TEXTURE = new TexturePack(TILESETPATH,GameMap.LINELENGTH, TILEDIMENSION);
+
 	}
 	
 	public Controleur() {
-		
+
 		myGame = new Game();
 		this.cellsItemAndBackground = new StackPane[MapReader.MAPLENGTH * MapReader.MAPLENGTH];
 		this.interpreter = new CommandInterpreter(myGame,gameLoop);
@@ -49,6 +49,7 @@ public class Controleur implements Initializable{
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+
 		this.gameLoop = new GameLoop(myGame,this.characterAnchorPane);
 		fixePaneDimension(MapReader.MAPLENGTH * TILEDIMENSION);
 		initialiseCells();
