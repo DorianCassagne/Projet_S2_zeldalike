@@ -11,7 +11,7 @@ public class BadMonkey extends GameCharacter{
 	
 	private final static int DEFAULTHP = 150;
 	private final static int DEFAULTDEF = 10;
-	private final static int DEFAULTCYCLE = 40;
+	private final static int DEFAULTCYCLE = 20;
 	private final static int DEFAULTIMAGE = 20;
 	private final static double DEFAULTCOEFFICIENT = 2;
 	
@@ -27,14 +27,14 @@ public class BadMonkey extends GameCharacter{
 		int actualCell=GameMap.convertToCellId(this.getRow(), this.getColumn());
 		//exmple pour attackmove attention a l'ordre des cases
 		int[]tab= {
-				GameMap.convertToCellId(GameCharacter.getGameCharacter().getRow()+3,GameCharacter.getGameCharacter().getColumn()),
-				GameMap.convertToCellId(GameCharacter.getGameCharacter().getRow()-3,GameCharacter.getGameCharacter().getColumn()),
-				GameMap.convertToCellId(GameCharacter.getGameCharacter().getRow(),GameCharacter.getGameCharacter().getColumn()+3),
-				GameMap.convertToCellId(GameCharacter.getGameCharacter().getRow(),GameCharacter.getGameCharacter().getColumn()-3),
-				GameMap.convertToCellId(GameCharacter.getGameCharacter().getRow()+4,GameCharacter.getGameCharacter().getColumn()),
-				GameMap.convertToCellId(GameCharacter.getGameCharacter().getRow()-4,GameCharacter.getGameCharacter().getColumn()),
-				GameMap.convertToCellId(GameCharacter.getGameCharacter().getRow(),GameCharacter.getGameCharacter().getColumn()+4),
-				GameMap.convertToCellId(GameCharacter.getGameCharacter().getRow(),GameCharacter.getGameCharacter().getColumn()-4)
+				GameMap.convertToCellId(GameCharacter.getGameCharacter().getRow()+1,GameCharacter.getGameCharacter().getColumn()),
+				GameMap.convertToCellId(GameCharacter.getGameCharacter().getRow()-1,GameCharacter.getGameCharacter().getColumn()),
+				GameMap.convertToCellId(GameCharacter.getGameCharacter().getRow(),GameCharacter.getGameCharacter().getColumn()+1),
+				GameMap.convertToCellId(GameCharacter.getGameCharacter().getRow(),GameCharacter.getGameCharacter().getColumn()-1),
+				GameMap.convertToCellId(GameCharacter.getGameCharacter().getRow()+2,GameCharacter.getGameCharacter().getColumn()),
+				GameMap.convertToCellId(GameCharacter.getGameCharacter().getRow()-2,GameCharacter.getGameCharacter().getColumn()),
+				GameMap.convertToCellId(GameCharacter.getGameCharacter().getRow(),GameCharacter.getGameCharacter().getColumn()+2),
+				GameMap.convertToCellId(GameCharacter.getGameCharacter().getRow(),GameCharacter.getGameCharacter().getColumn()-2)
 		};
 		
 		int inPlace= inPlace(tab, actualCell);

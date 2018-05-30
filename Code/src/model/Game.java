@@ -12,7 +12,7 @@ import model.gameMap.move.Movement;
 
 public class Game {
 	public final static int HEROKEY = 0;
-	private final static String mapName = "mapForet1.csv";
+	private final static String mapName = "MapForet1.csv";
 	
 	private GameMap myMap;
 	private Hero hero;
@@ -23,8 +23,11 @@ public class Game {
 		myMap = new GameMap(mapName);
 		this.hero = new Hero(myMap, 16, 17);
 		new Dolphin(myMap,14,15);
-		new BadMonkey(myMap,30,12);
-
+		new BadMonkey(myMap,12,21);
+		new BadMonkey(myMap,16,20);
+		new BadMonkey(myMap,12,20);
+		new BadMonkey(myMap,13,20);
+		new BadMonkey(myMap,13,19);
 	}
 	
 	//renvoie l'identifiant du fond pour une cellude donnée.

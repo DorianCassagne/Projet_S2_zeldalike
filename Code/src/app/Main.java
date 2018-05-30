@@ -32,6 +32,7 @@ public class Main extends Application {
         loader.setLocation(url);
         AnchorPane root = new AnchorPane(); 
         try {
+
 			root=loader.load();
 		} catch (IOException e) {
 			e.printStackTrace();

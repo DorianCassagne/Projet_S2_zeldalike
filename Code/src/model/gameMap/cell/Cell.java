@@ -77,6 +77,10 @@ public class Cell {
 		notifyEnemy(null);
 	}
 		
+	public void setBackground(int backValue) {
+		this.background=new Background(backValue);
+		this.changeProperty.set(backValue);
+	}
 
 	public boolean setItem (Item item) {
 		if (this.item!=null) 

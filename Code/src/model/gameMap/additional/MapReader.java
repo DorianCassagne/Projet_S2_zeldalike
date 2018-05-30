@@ -14,8 +14,10 @@ public class MapReader {
 	
 	//lit un fichier csv et le convertit en tableau d'entier
 	public static int[]  readAndConvertMapFile(String path) {
+
 		BufferedReader reader = SeparatorFileReader.openTextFile(MAPFILEPATH + path);
 		int[] result = SeparatorFileReader.readAllIntLines(reader, SEPARATOR, MAPLENGTH);
+
 		return result;
 	}
 	

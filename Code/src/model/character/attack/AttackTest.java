@@ -7,7 +7,7 @@ import model.gameMap.move.Movement;
 
 public class AttackTest extends Attack{
 
-	private final static int DEFAULTCYCLE = 20;
+	private final static int DEFAULTCYCLE = 2;
 	private final static int DEFAULTCELLPERTURN = 1;
 	private final static int DEFAULTCOEFFICIENT = 2;
 	private final static int DEFAULTIMAGE = 1613;

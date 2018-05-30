@@ -17,7 +17,8 @@ public class Background {
 		else
 			throw new IllegalArgumentException("UNKNOWN BACKGROUND ID" + value);
 		this.image = value;
-	}	
+	}
+	
 	
 	public int getImage() {
 		return image;
