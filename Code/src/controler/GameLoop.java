@@ -24,7 +24,6 @@ public class GameLoop {
 	public GameLoop(Game myGame,AnchorPane characterAnchorPane) {
 		this.movableList = new HashMap<Integer,MovableView>();
 		this.characterAnchorPane = characterAnchorPane;
-		System.out.println("True");
 		this.myGame = myGame;
 		this.gameLoop = new Timeline();
 		initialiseLoop();

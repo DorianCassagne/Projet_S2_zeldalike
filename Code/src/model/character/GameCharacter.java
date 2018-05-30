@@ -96,7 +96,7 @@ public abstract class GameCharacter extends Movable{
 		}
 	}
 	
-	protected void removeCharacter() {
+	public void removeCharacter() {
 		this.getMyMap().delCharacter(this, getRow(), getColumn());
 	}
 	

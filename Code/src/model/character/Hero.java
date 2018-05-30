@@ -18,6 +18,8 @@ public class Hero extends GameCharacter{
 	public static final char MOVERIGHT = 'r';
 	public static final char STAY = ' ';
 	public static final char ATTACK = 'a';
+	private int lvl;
+	private boolean mapmap;
 	
 	private char nextMove;
 	
@@ -26,6 +28,8 @@ public class Hero extends GameCharacter{
 	public Hero(GameMap map,int startRow,int startColumn) {
 		super(map, GameCharacter.HEROTYPE, DEFAULTHP, DEFAULTDEF,startRow,startColumn,DEFAULTCYCLE,DEFAULTCOEFFICIENT);
 		this.nextMove = STAY;
+		this.lvl=1;
+		mapmap=false;
 	}
 	
 	public void setNextMove(char nextMove) {
@@ -60,9 +64,18 @@ public class Hero extends GameCharacter{
 			imageIndex = RIGHTIMAGEINDEX;
 			break;
 		case ATTACK :
-			changedCell = false;
-			Movement movement = Movement.values()[lastImageIndex];
-			Attack attack = new AttackTest(getMyMap(), reachRow, reachColumn,movement, 80);
+			
+			if(!mapmap ) {
+				this.getMyMap().resetMap("MapForet", this);	
+				mapmap=!mapmap;
+			}
+			else {
+				this.getMyMap().resetMap("modifiedMap", this);	
+				mapmap=!mapmap;
+			}
+//			changedCell = false;
+//			Movement movement = Movement.values()[lastImageIndex];
+//			Attack attack = new AttackTest(getMyMap(), reachRow, reachColumn,movement, 80);
 			break;
 		default : 
 			break;

@@ -5,6 +5,9 @@ import java.net.URL;
 
 import java.util.ResourceBundle;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
@@ -22,11 +25,9 @@ public class Controleur implements Initializable{
 	
 	final static int TILEDIMENSION = 32;
 	final static int ROWINDEX = 0;
-	
 	final static int COLUMNINDEX = 1 ;
 	final static TexturePack TEXTURE ;
 	private final static String TILESETPATH = "src/resources/tileset/jeudi24.png";
-	
 	@FXML private AnchorPane mainAnchorPane;
 	@FXML private AnchorPane characterAnchorPane;
 	@FXML private TilePane mapTilePane;
@@ -34,13 +35,13 @@ public class Controleur implements Initializable{
 	private Game myGame;
 	private CommandInterpreter interpreter;
 	private GameLoop gameLoop;
+	private IntegerProperty changeProperty;
 	
 	static {
 		TEXTURE = new TexturePack(TILESETPATH,GameMap.LINELENGTH, TILEDIMENSION);
 	}
 	
 	public Controleur() {
-		
 		myGame = new Game();
 		this.cellsItemAndBackground = new StackPane[MapReader.MAPLENGTH * MapReader.MAPLENGTH];
 		this.interpreter = new CommandInterpreter(myGame,gameLoop);
@@ -52,11 +53,24 @@ public class Controleur implements Initializable{
 		this.gameLoop = new GameLoop(myGame,this.characterAnchorPane);
 		fixePaneDimension(MapReader.MAPLENGTH * TILEDIMENSION);
 		initialiseCells();
+		changeProperty = myGame.getChangeProperty();
 		gameLoop.start();
+		changeProperty.addListener(new ChangeListener<Number>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+				System.out.println(newValue.intValue());
+				cellsItemAndBackground[newValue.intValue()].getChildren().clear();
+				int backgroundId = myGame.getBackgroundId(newValue.intValue());
+				Image image = TEXTURE.getImg(backgroundId);
+				ImageView background = new ImageView(image);
+				cellsItemAndBackground[newValue.intValue()].getChildren().add(background);
+			}
+			
+		});
 	
 	}
 	
-
 	public void startScene(Scene scene) {
 	
 		scene.setOnKeyPressed(e->interpreter.handleKey(e));

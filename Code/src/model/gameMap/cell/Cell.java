@@ -12,28 +12,36 @@ import model.gameMap.move.Movement;
 
 public class Cell {
 
-	
+	private int cellId;
 	private Background background;
 	private Item item;
 	private GameCharacter gameCharacter;
 	private IntegerProperty changeProperty;
-	private IntegerProperty safeProperty;
 	
-	public Cell(int backgroundValue){
+	public Cell(int backgroundValue, int cellId){
 		this.background = new Background(backgroundValue);
 		this.changeProperty = new SimpleIntegerProperty();
-		this.safeProperty = new SimpleIntegerProperty();
-		this.safeProperty.bind(changeProperty);
+		this.cellId=cellId;
 
 	}
+	
+	public void setChangeProperty(IntegerProperty prop) {
+		this.changeProperty=prop;
+	}
 
-	public Cell(int backgroundValue,Item item) {
-		this(backgroundValue);
+	public Cell(int backgroundValue,Item item, int cellId) {
+		this(backgroundValue, cellId);
 		this.item=item;
 	}
 
 	public void removeMovable() {
 		this.gameCharacter=null;
+	}
+	
+	public void setBooth(int back, Item item) {
+		this.item=item;
+		this.background= new Background(back);
+		this.changeProperty.set(cellId);
 	}
 
 	public boolean addMovable(GameCharacter movable) {
@@ -42,6 +50,11 @@ public class Cell {
 		this.gameCharacter = movable;
 		return true;
 	}
+	public void setBackground(int backValue) {
+        this.background=new Background(backValue);
+        this.changeProperty.set(cellId);
+    }
+
 
 
 	public byte attack(Attack attack) {
@@ -88,8 +101,6 @@ public class Cell {
 		return this.background.getImage();
 	}
 	
-	public final IntegerProperty changeProperty() {
-		return this.safeProperty;
-	}
+	
 	
 }

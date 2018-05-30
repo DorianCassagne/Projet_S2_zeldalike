@@ -3,12 +3,20 @@ package model.gameMap;
 import java.util.ArrayList;
 
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
+import javafx.beans.InvalidationListener;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import model.character.GameCharacter;
 import model.character.Movable;
 import model.character.PendingMovable;
 import model.character.attack.Attack;
+import model.character.item.Item;
+import model.character.item.ItemGenerator;
 import model.gameMap.additional.MapReader;
 import model.gameMap.additional.NewMovable;
 import model.gameMap.cell.Cell;
@@ -17,7 +25,7 @@ import model.gameMap.move.Movement;
 
 public class GameMap {
 	
-	public enum Map {
+	public enum MapEnum {
 		MAPDEBUT("testMap.csv",12,13),
 		MAPFORET("MapForet1.csv",12,13),
 		MAPBOSS1("smallMap.csv",12,13)
@@ -27,7 +35,7 @@ public class GameMap {
 		private int heroPosX;
 		private int heroPosY;
 		
-		Map(String path,int posX,int posY) {
+		MapEnum(String path,int posX,int posY) {
 			this.path = path;
 			this.heroPosX=posX;
 			this.heroPosY=posY;
@@ -56,8 +64,7 @@ public class GameMap {
 	public final static int STEP = 1;
 	
 	private static int movableId;
-	private final IntegerProperty changeProperty;
-	private final IntegerProperty safeChangeProperty;
+	private final IntegerProperty changeProperty=new SimpleIntegerProperty();
 	private Cell[] cells ;
 	private HashMap<Movable,Integer> movableList;
 	private ArrayList<NewMovable> addedCharacter;//Caractères qui sont ajoutés récement mais pas encore récupérés
@@ -73,9 +80,6 @@ public class GameMap {
 	//Dans ce cas là il n'est autorisé qu'un layer, déclenche une exception si le fichier n'est pas valid
 	public GameMap(String mapPath) {
 		int[] values = MapReader.readAndConvertMapFile(mapPath);
-		this.changeProperty = new SimpleIntegerProperty();
-		this.safeChangeProperty = new SimpleIntegerProperty();
-		this.safeChangeProperty.bind(this.changeProperty);
 		initialiseCells(values);
 		this.addedCharacter = new ArrayList<NewMovable>();
 		this.movableList = new HashMap<Movable,Integer>();
@@ -143,7 +147,6 @@ public class GameMap {
 	
 	//Renvoie la liste des movements effectués pendant un tour
 	synchronized public Move[] turn() {
-		System.out.println("True");
 		updateMovableList();
 		ArrayList<Move> moves = executeTurn();
 		Move[] movesArray = new Move[moves.size()];
@@ -205,6 +208,29 @@ public class GameMap {
 		}
 	}
 	
+	
+	public void resetMap(String str, GameCharacter hero) {//TODO:
+		 Iterator iterator = movableList.entrySet().iterator();
+		 iterator.hasNext();
+         Map.Entry mapentry = (Map.Entry) iterator.next();
+        while (iterator.hasNext()) {
+          mapentry = (Map.Entry) iterator.next();
+          Movable mov=((Movable)mapentry.getKey());
+          mov.removeCharacter();
+        }
+        //Item[] items = ItemGenerator.gen(MapReader.readAndConvertMapFile(str+"2.csv"));
+        int[] tab = MapReader.readAndConvertMapFile(str+"1.csv");
+        Item[] items= new Item[tab.length];
+        for(int i = 0 ; i < tab.length ; i++) {
+        	cells[i].setBooth(tab[i], items[i]);
+        }
+        
+//       for (Cell cell : this.cells) {
+//    	   System.out.println(cell);
+//    	   	cell.removeItem();
+//			cell.setBoth(2000, 100);
+//		}
+	}
 	
 	/*
 	 * Renvoie une valeur qui représente l'effet emis par l'attaque dans une case donnée
@@ -316,12 +342,8 @@ public class GameMap {
 
 		for(int i = 0 ; i < values.length ;i++) {
 			final int cellId = i;
-			cells[cellId] = new Cell(values[cellId]);
-			cells[cellId].changeProperty().addListener(
-					(obs,oldValue,newValue)->{
-						this.changeProperty.set(newValue.intValue()<< CHANGEPARTWITHCELLID + cellId);
-					}
-			);
+			cells[cellId] = new Cell(values[cellId], cellId);
+			cells[cellId].setChangeProperty(changeProperty);
 
 		}
 	}
@@ -336,4 +358,23 @@ public class GameMap {
 	public static boolean isInMap(int row,int column) {
 		return row >= 0 && row < MapReader.MAPLENGTH && column >= 0 && row < MapReader.MAPLENGTH;
 	}
+
+
+
+	public HashMap<Movable, Integer> getMovableList() {
+		return movableList;
+	}
+	
+	public IntegerProperty getChangeProperty() {
+		return changeProperty;
+	}
+	
+//	public void delMovablefromGameMap() {
+//		this.movableList
+//		for(Movable mov : ) {
+//			
+//		}
+//	}
+	
+	
 }
