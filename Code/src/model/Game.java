@@ -20,19 +20,16 @@ public class Game {
 	
 	//Initialise le jeu avec une map
 	public Game() {
-		myMap = new GameMap(mapName);
+		myMap = new GameMap(mapName,mapName);
 		this.hero = new Hero(myMap, 16, 17);
 		new Dolphin(myMap,14,15);
 		new BadMonkey(myMap,12,21);
-		new BadMonkey(myMap,16,20);
-		new BadMonkey(myMap,12,20);
 		new BadMonkey(myMap,13,20);
-		new BadMonkey(myMap,13,19);
 	}
 	
 	//renvoie l'identifiant du fond pour une cellude donnée.
-	public int getBackgroundId(int cellId) {
-		return this.myMap.getBackgroundImage(cellId);
+	public Integer[] getLayerForCell(int cellId) {
+		return this.myMap.getLayerForCell(cellId);
 	}
 	
 	//renvoie la liste des caractères crées pendant un tour 

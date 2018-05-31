@@ -25,6 +25,7 @@ public class GameMap {
 	public final static int STARTNONWALKABLEINDEX = 400 * LINELENGTH;
 	public final static int CHANGEPARTWITHCELLID = 9;
 	public final static int STEP = 1;
+	private final static int ITEMVALUEINDEX = 1;
 	
 	private GameCharacter hero;
 	private static int movableId;
@@ -42,15 +43,11 @@ public class GameMap {
 	
 	//Cr�e une map en se r�f�rant � un fichier csv qui initilialise les fond des cases
 	//Dans ce cas l� il n'est autoris� qu'un layer, d�clenche une exception si le fichier n'est pas valid
-	public GameMap(String mapPath) {
-
-		int[] values = MapReader.readAndConvertMapFile(mapPath);
-
+	public GameMap(String ... mapPath) {
+		int[][] values = MapReader.readAndConvertMapFile(mapPath);
 		this.changeProperty = new SimpleIntegerProperty();
-
 		this.safeChangeProperty = new SimpleIntegerProperty();
 		this.safeChangeProperty.bind(this.changeProperty);
-
 		initialiseCells(values);
 		this.addedCharacter = new ArrayList<NewMovable>();
 		this.movableList = new HashMap<Movable,Integer>();
@@ -59,19 +56,12 @@ public class GameMap {
 		this.triggeredCells = new ArrayList<Integer>();
 
 	}
-//	
-//	public void addHero(GameCharacter hero) {
-//		this.hero=hero;
-//	}
-//	
-//	public GameCharacter getHero() {
-//		return this.getHero();
-//	}
+	
 	
 	/*
 	 * Change la case du personnage, la case de d�part et d'arriv�s doivent �tre pass�es en param�tre pour r�duire le temps de calcul
-	 * Renvoie vrai si le changement a �t� bien effectu�, cela veut dire que la case destination accepte le personnage en movement
-	 * Renvoie faux si la case d'arriv� ou de d�part n'est pas une case disponible ou incorrecte.
+	 * Renvoie vrai si le changement a été bien effectu�, cela veut dire que la case destination accepte le personnage en movement
+	 * Renvoie faux si la case d'arrivée ou de départ n'est pas une case disponible ou incorrecte.
 	*/
 	
 	public boolean changeCell(GameCharacter character,int currentRow,int currentColumn,int endRow,int endColumn) {
@@ -231,13 +221,14 @@ public class GameMap {
 	/*
 	 * Renvoie l'indice du fond
 	 */
-	public int getBackgroundImage(int cellId) {
-		return this.cells[cellId].getBackgroundRepresentation();
+	public Integer[] getLayerForCell(int cellId) {
+		return this.cells[cellId].getCellBackgroundLayer();
+	
 	}
 
 	
 	/*
-	 * Cette m�thode ajoute un d�pla�able � la liste des d�pla�able en lui attribuant un identifiant unique
+	 * Cette m�thode ajoute un déplaçable � la liste des d�pla�able en lui attribuant un identifiant unique
 	 */
 	private void addMovable(Movable movable,int cellId) {
 		this.pendingMovable.add(new PendingMovable(movable,cellId));
@@ -291,13 +282,38 @@ public class GameMap {
 
 	
 	
+	private int[] getItemValue(int[][] values) {
+		
+		return values[ITEMVALUEINDEX - 1];
+		
+	}
+	
+	private int[][] getBackgroundValues(int[][] values) {
+		int length = MapReader.MAPLENGTH * MapReader.MAPLENGTH;
+		int[][] backValues = new int[length][values.length - 1];
+		
+		for(int j = 0 ; j < length ; j++) {
+			for(int i = ITEMVALUEINDEX ; i < values.length ;i++) {
+				backValues[j][i - ITEMVALUEINDEX] = values[i][j];
+			}
+		}
+		
+		return backValues;
+	}
+	
 	//Initialise l'ensemble des celluls de la map
-	private void initialiseCells(int[] values) {
-		this.cells = new Cell[MapReader.MAPLENGTH*MapReader.MAPLENGTH];
+	
+	private void initialiseCells(int[][] values) {
 
-		for(int i = 0 ; i < values.length ;i++) {
+		int length = MapReader.MAPLENGTH*MapReader.MAPLENGTH;
+		this.cells = new Cell[length];
+		int[][] backValues = this.getBackgroundValues(values);
+		int[] itemValue = this.getItemValue(values);
+		
+		for(int i = 0 ; i < length ;i++) {
 			final int cellId = i;
-			cells[cellId] = new Cell(values[cellId]);
+			System.out.println(cellId);
+			cells[cellId] = new Cell(backValues[i],itemValue[i]);			
 			cells[cellId].changeProperty().addListener(
 					(obs,oldValue,newValue)->{
 						this.changeProperty.set(newValue.intValue()<< CHANGEPARTWITHCELLID + cellId);
@@ -305,10 +321,6 @@ public class GameMap {
 			);
 
 		}
-	}
-	
-	public boolean containHero(int id) {
-		return cells[id].containsHero();
 	}
 	
 	public boolean isWalkableAt(int id) {

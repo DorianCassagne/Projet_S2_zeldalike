@@ -1,14 +1,13 @@
 package model.gameMap.cell;
 
 import javafx.beans.property.IntegerProperty;
+
 import javafx.beans.property.SimpleIntegerProperty;
-import model.Game;
 import model.character.GameCharacter;
-import model.character.Movable;
 import model.character.attack.Attack;
 import model.character.item.Item;
-import model.gameMap.GameMap;
 import model.gameMap.move.Movement;
+import resources.additionalClass.Fusion;
 
 public class Cell {
 
@@ -19,22 +18,13 @@ public class Cell {
 	private IntegerProperty changeProperty;
 	private IntegerProperty safeProperty;
 	
-	public Cell(int backgroundValue){
+	public Cell(int[] backgroundValue,int itemValue){
+		
 		this.background = new Background(backgroundValue);
 		this.changeProperty = new SimpleIntegerProperty();
 		this.safeProperty = new SimpleIntegerProperty();
 		this.safeProperty.bind(changeProperty);
 
-	}
-
-	public boolean containsHero() {
-		if (this.gameCharacter == null)
-			return false;
-        return GameCharacter.getType(this.gameCharacter) == GameCharacter.HEROTYPE;
-    }
-	public Cell(int backgroundValue,Item item) {
-		this(backgroundValue);
-		this.item=item;
 	}
 
 	public void removeMovable() {
@@ -59,8 +49,6 @@ public class Cell {
 			number *= 5;
 		if(!this.background.isWalkable())
 			number *= 7;
-		
-
 		return number;
 	}
 	
@@ -76,11 +64,6 @@ public class Cell {
 	public void unnotifyEnemy() {
 		notifyEnemy(null);
 	}
-		
-	public void setBackground(int backValue) {
-		this.background=new Background(backValue);
-		this.changeProperty.set(backValue);
-	}
 
 	public boolean setItem (Item item) {
 		if (this.item!=null) 
@@ -94,8 +77,8 @@ public class Cell {
 		return (this.background.isWalkable() && this.gameCharacter==null);
 	}
 
-	public int getBackgroundRepresentation() {
-		return this.background.getImage();
+	public Integer[] getCellBackgroundLayer() {
+		return Fusion.fuseIntegerWithArray(this.background.getBackgroundList(),200);
 	}
 	
 	public final IntegerProperty changeProperty() {

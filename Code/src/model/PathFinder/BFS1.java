@@ -5,17 +5,19 @@ import java.util.Random;
 import model.PathFinder.resources.CellBfs;
 import model.gameMap.GameMap;
 import model.gameMap.additional.MapReader;
+
 public final class BFS1 {
 	
 	private static boolean random;
-	private final static Random ran=  new Random();
+	private final static Random ran = new Random();
+	
+
 	
 	
 	public final static int simpleMove(GameMap map, int cellStart, int cellEnd, boolean joinTheCell) {
 		int[] tab ={cellEnd};
 		return simpleMove(map, cellStart, tab, joinTheCell, -1);
-				
-}
+	}
 
 
 	private final static CellBfs checkCase(CellBfs lastCase, GameMap map, boolean[] seenMap, int id) {
@@ -52,11 +54,13 @@ public final class BFS1 {
 	 * @param map
 	 * @param cellStart
 	 * @param cellEnd un tableau des cellules on lon peu arriver
-	 * @param joinTheCell si vrai le personnage ne bougeras que si il peu acceder a une des cellules d'arrivé
+	 * @param joinTheCell si vrai le personnage ne bougeras que si il peu acceder a une des cellules d'arrivÃ©
 	 * @param nbCycle 0 si autant de mouvement que possible
 	 * @return
 	 */
+	
 	public final static int simpleMove(GameMap map, int cellStart, int[] cellEnd, boolean joinTheCell, int nbCycle) {
+		
 		for (int i : cellEnd) {
 			if(i==cellStart)
 				return cellStart;

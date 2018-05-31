@@ -10,15 +10,15 @@ import javafx.scene.layout.TilePane;
 import model.gameMap.additional.MapReader;
 
 public class MapView {
-	private StackPane[] cellsItemAndBackground;
-	private Function<Integer,Integer> backgroundSource;
+	private CellView[] cellsItemAndBackground;
+	private Function<Integer,Integer[]> backgroundSource;
 	private TilePane mapContainer;
 	
-	public MapView(Function<Integer,Integer> backSource,TilePane mapContainer) {
+	public MapView(Function<Integer,Integer[]> backSource,TilePane mapContainer) {
 		if(backSource != null && mapContainer != null ) {
 			this.mapContainer = mapContainer;
 			this.backgroundSource = backSource;
-			this.cellsItemAndBackground = new StackPane[MapReader.MAPLENGTH * MapReader.MAPLENGTH];
+			this.cellsItemAndBackground = new CellView[MapReader.MAPLENGTH * MapReader.MAPLENGTH];
 		}
 		else {
 			throw new IllegalArgumentException("BACKGROUNDSOURCE OR MAPCONTAINER IS NOT DEFINED");
@@ -27,17 +27,18 @@ public class MapView {
 	
 	public void initialise() {			
 		for(int cellId = 0 ; cellId < this.cellsItemAndBackground.length ;cellId++) {
-			
-			this.cellsItemAndBackground[cellId] = new StackPane();
-			StackPane current = this.cellsItemAndBackground[cellId];
-			int backgroundId = this.backgroundSource.apply(cellId);
-			Image image = Controleur.TEXTURE.getImg(backgroundId);
-			ImageView background = new ImageView(image);
-			current.getChildren().add(background);
+			Integer[] layers = this.backgroundSource.apply(cellId);
+			CellView current = new CellView(layers);
+			this.cellsItemAndBackground[cellId] = current;
 			this.mapContainer.getChildren().add(current);
 		
 		}
 		
+	}
+	
+	
+	public void updateCell(int cellId,Integer[] newBackground) {
+		this.cellsItemAndBackground[cellId].updateCell(newBackground);
 	}
 
 }

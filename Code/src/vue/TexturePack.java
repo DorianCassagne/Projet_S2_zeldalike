@@ -31,6 +31,5 @@ public class TexturePack {
 		if (val ==-1)
 			return getImg(1606);
 		return SwingFXUtils.toFXImage(titleImg.getSubimage(val%titlePaneWidth*titlePx, (int)val/titlePaneWidth*titlePx, titlePx, titlePx), null);
-
 	}
 }

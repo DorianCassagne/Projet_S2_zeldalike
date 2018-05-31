@@ -56,7 +56,7 @@ public class Controleur implements Initializable{
 	}
 	
 	private void createMap() {
-		Function< Integer,Integer> backgroundSource = element->this.myGame.getBackgroundId(element);
+		Function< Integer,Integer[]> backgroundSource = element->this.myGame.getLayerForCell(element);
 		this.myMapView = new MapView(backgroundSource,this.mapTilePane);
 		this.myMapView.initialise();
 	}

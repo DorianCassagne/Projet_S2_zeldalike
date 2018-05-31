@@ -10,7 +10,7 @@ public class SeparatorFileReader {
 	
 	public static BufferedReader openTextFile(String path)  {
 		try {
-
+			System.out.println(path);
 			File file = new File(SeparatorFileReader.class.getResource(path).toURI().toURL().getPath());
 
 			//System.out.println(file);
