@@ -4,6 +4,7 @@ import java.net.URL;
 
 
 import java.util.ResourceBundle;
+import java.util.function.Function;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,88 +17,57 @@ import javafx.scene.layout.TilePane;
 import model.Game;
 import model.gameMap.GameMap;
 import model.gameMap.additional.MapReader;
+import vue.MapView;
 import vue.TexturePack;
 
 public class Controleur implements Initializable{
 	
-	final static int TILEDIMENSION = 32;
-	final static int ROWINDEX = 0;
-	final static int COLUMNINDEX = 1 ;
-	final static TexturePack TEXTURE ;
+	public final static TexturePack TEXTURE ;
+
 	private final static String TILESETPATH = "src/resources/tileset/jeudi24.png";
 	
 	@FXML private AnchorPane mainAnchorPane;
 	@FXML private AnchorPane characterAnchorPane;
 	@FXML private TilePane mapTilePane;
-	private StackPane[] cellsItemAndBackground;
+
 	private Game myGame;
 	private CommandInterpreter interpreter;
 	private GameLoop gameLoop;
+	private MapView myMapView;
 	
 	static {
-		TEXTURE = new TexturePack(TILESETPATH,GameMap.LINELENGTH, TILEDIMENSION);
-
+		TEXTURE = new TexturePack(TILESETPATH,GameMap.LINELENGTH, ConvertionAndStatics.TILEDIMENSION);
 	}
 	
 	public Controleur() {
 
 		myGame = new Game();
-		this.cellsItemAndBackground = new StackPane[MapReader.MAPLENGTH * MapReader.MAPLENGTH];
 		this.interpreter = new CommandInterpreter(myGame,gameLoop);
 	
 	}
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-
 		this.gameLoop = new GameLoop(myGame,this.characterAnchorPane);
-		fixePaneDimension(MapReader.MAPLENGTH * TILEDIMENSION);
-		initialiseCells();
+		ConvertionAndStatics.fixPaneDimension(MapReader.MAPLENGTH * ConvertionAndStatics.TILEDIMENSION,this.mapTilePane,this.characterAnchorPane);
+		this.createMap();
 		gameLoop.start();
-	
+		
 	}
 	
+	private void createMap() {
+		Function< Integer,Integer> backgroundSource = element->this.myGame.getBackgroundId(element);
+		this.myMapView = new MapView(backgroundSource,this.mapTilePane);
+		this.myMapView.initialise();
+	}
 
 	public void startScene(Scene scene) {
-	
 		scene.setOnKeyPressed(e->interpreter.handleKey(e));
-	
 	}
 	
 
 	
-	private void fixePaneDimension(int dimension) {
-		
-		this.characterAnchorPane.setMinHeight(dimension);
-		this.characterAnchorPane.setMaxHeight(dimension);
-		this.characterAnchorPane.setMinWidth(dimension);
-		this.characterAnchorPane.setMaxWidth(dimension);
-		this.mapTilePane.setPrefColumns(MapReader.MAPLENGTH);
-		this.mapTilePane.setPrefRows(MapReader.MAPLENGTH);
-	
-	}
-	
-	private void initialiseCells() {
-		
-		for(int cellId = 0 ; cellId < this.cellsItemAndBackground.length ;cellId++) {
-			this.cellsItemAndBackground[cellId] = new StackPane();
-			StackPane current = this.cellsItemAndBackground[cellId];
-			int backgroundId = this.myGame.getBackgroundId(cellId);
-			Image image = TEXTURE.getImg(backgroundId);
-			ImageView background = new ImageView(image);
-			current.getChildren().add(background);
-			this.mapTilePane.getChildren().add(current);
-		}
-		
-	}
 	
 	
 	
-	
-	public static int[] convertToViewSize(int cellId) {
-		int row = (cellId / MapReader.MAPLENGTH)*TILEDIMENSION;
-		int column = (cellId%MapReader.MAPLENGTH)*TILEDIMENSION;
-		int[] position = {row,column};
-		return position;
-	}
 }

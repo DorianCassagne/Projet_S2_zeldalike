@@ -1,5 +1,7 @@
-package controler;
+package vue;
 
+import controler.Controleur;
+import controler.ConvertionAndStatics;
 import javafx.scene.image.ImageView;
 
 public class MovableView extends ImageView{
@@ -9,7 +11,6 @@ public class MovableView extends ImageView{
 	private int progress;
 	
 	public MovableView(int cellId,int imageId) {
-		//System.out.println(imageId);
 		this.setImage(Controleur.TEXTURE.getImg(imageId));
 		this.setPosition(cellId);
 		this.progress = 0;
@@ -17,13 +18,15 @@ public class MovableView extends ImageView{
 	
 	
 	public void moveTo(int cellId,int imageId,int speed) {
-		int[] position = Controleur.convertToViewSize(cellId);
-		double row = position[Controleur.ROWINDEX] - this.getLayoutY();
-		double column = position[Controleur.COLUMNINDEX] - this.getLayoutX();
+		
+		int[] position = ConvertionAndStatics.convertToViewSize(cellId);
+		double row = position[ConvertionAndStatics.ROWINDEX] - this.getLayoutY();
+		double column = position[ConvertionAndStatics.COLUMNINDEX] - this.getLayoutX();
 		this.setImage(Controleur.TEXTURE.getImg(imageId));
 		this.avancementX = column/speed;
 		this.avancementY = row/speed;
 		this.progress = speed;
+	
 	}
 	
 	
@@ -37,8 +40,8 @@ public class MovableView extends ImageView{
 	
 		
 	private void setPosition(int cellId) {
-		int[] position = Controleur.convertToViewSize(cellId);
-		this.setLayoutX(position[Controleur.COLUMNINDEX]);
-		this.setLayoutY(position[Controleur.ROWINDEX]);
+		int[] position = ConvertionAndStatics.convertToViewSize(cellId);
+		this.setLayoutX(position[ConvertionAndStatics.COLUMNINDEX]);
+		this.setLayoutY(position[ConvertionAndStatics.ROWINDEX]);
 	}
 }

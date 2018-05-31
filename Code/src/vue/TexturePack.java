@@ -27,8 +27,6 @@ public class TexturePack {
 		this.titlePx = titlePx;
 	}
 	
-	
-	
 	public WritableImage getImg(int val) {
 		if (val ==-1)
 			return getImg(1606);

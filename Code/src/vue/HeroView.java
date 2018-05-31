@@ -1,5 +1,7 @@
-package controler;
+package vue;
 
+import controler.Controleur;
+import controler.ConvertionAndStatics;
 import javafx.scene.layout.AnchorPane;
 import model.gameMap.additional.MapReader;
 
@@ -22,7 +24,7 @@ public class HeroView extends MovableView{
 	
 	private void scrollX(double newValue) {
 		double diff = newValue- this.shownColumn/2;
-		boolean isNotAtLimit = (newValue - (Controleur.TILEDIMENSION * MapReader.MAPLENGTH) < -this.shownColumn/2);
+		boolean isNotAtLimit = (newValue - (ConvertionAndStatics.TILEDIMENSION * MapReader.MAPLENGTH) < -this.shownColumn/2);
 		if(diff > 0 && isNotAtLimit) {
 			this.myAnchorPane.setTranslateX(-diff);
 		}
@@ -31,7 +33,7 @@ public class HeroView extends MovableView{
 	
 	private void scrollY(double newValue) {
 		double diff = newValue - this.shownRow/2;
-		boolean isNotAtLimit = (newValue - (Controleur.TILEDIMENSION * MapReader.MAPLENGTH) < -this.shownRow/2);
+		boolean isNotAtLimit = (newValue - (ConvertionAndStatics.TILEDIMENSION * MapReader.MAPLENGTH) < -this.shownRow/2);
 		if(diff > 0 && isNotAtLimit) {
 			this.myAnchorPane.setTranslateY(-diff);
 		}

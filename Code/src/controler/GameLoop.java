@@ -11,6 +11,8 @@ import javafx.util.Duration;
 import model.Game;
 import model.gameMap.additional.NewMovable;
 import model.gameMap.move.Move;
+import vue.HeroView;
+import vue.MovableView;
 
 public class GameLoop {
 	
