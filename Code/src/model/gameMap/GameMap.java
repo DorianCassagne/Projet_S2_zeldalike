@@ -218,6 +218,7 @@ public class GameMap {
           Movable mov=((Movable)mapentry.getKey());
           mov.removeCharacter();
         }
+
         //Item[] items = ItemGenerator.gen(MapReader.readAndConvertMapFile(str+"2.csv"));
         int[] tab = MapReader.readAndConvertMapFile(str+"1.csv");
         Item[] items= new Item[tab.length];

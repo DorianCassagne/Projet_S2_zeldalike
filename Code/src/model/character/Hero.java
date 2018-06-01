@@ -64,12 +64,17 @@ public class Hero extends GameCharacter{
 			imageIndex = RIGHTIMAGEINDEX;
 			break;
 		case ATTACK :
-			
+
+	        System.out.println("testetetet1111");
 			if(!mapmap ) {
+
+		        System.out.println("testetetet");
 				this.getMyMap().resetMap("MapForet", this);	
 				mapmap=!mapmap;
 			}
 			else {
+
+		        System.out.println("testetetet");
 				this.getMyMap().resetMap("modifiedMap", this);	
 				mapmap=!mapmap;
 			}

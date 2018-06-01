@@ -1,4 +1,8 @@
 package controler;
+/**
+ * Classe COmmandInterpreter, qui recoit la Game et la gameLoop 
+ * permet de gerer les touches recus en entrée
+ */
 
 
 import javafx.scene.input.KeyEvent;

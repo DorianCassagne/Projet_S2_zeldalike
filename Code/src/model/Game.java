@@ -26,7 +26,7 @@ public class Game {
 	//Initialise le jeu avec une map
 	public Game() {
 		myMap = new GameMap(mapName);
-		this.hero = new Hero(myMap, 16, 17);
+		this.hero = new Hero(myMap, 20, 27);
 		new Dolphin(myMap,14,15);
 
 	}
