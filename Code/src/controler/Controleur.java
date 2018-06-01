@@ -3,20 +3,19 @@ package controler;
 import java.net.URL;
 
 
+
+
 import java.util.ResourceBundle;
 import java.util.function.Function;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
 import model.Game;
-import model.gameMap.GameMap;
 import model.gameMap.additional.MapReader;
+import model.gameMap.additional.Statics;
 import vue.MapView;
 import vue.TexturePack;
 
@@ -36,13 +35,12 @@ public class Controleur implements Initializable{
 	private MapView myMapView;
 	
 	static {
-		TEXTURE = new TexturePack(TILESETPATH,GameMap.LINELENGTH, ConvertionAndStatics.TILEDIMENSION);
+		TEXTURE = new TexturePack(TILESETPATH,Statics.LINELENGTH, ConvertionAndStatics.TILEDIMENSION);
 	}
 	
 	public Controleur() {
 
 		myGame = new Game();
-		this.interpreter = new CommandInterpreter(myGame,gameLoop);
 	
 	}
 	
@@ -52,6 +50,7 @@ public class Controleur implements Initializable{
 		ConvertionAndStatics.fixPaneDimension(MapReader.MAPLENGTH * ConvertionAndStatics.TILEDIMENSION,this.mapTilePane,this.characterAnchorPane);
 		this.createMap();
 		gameLoop.start();
+		this.interpreter = new CommandInterpreter(myGame,gameLoop);
 		
 	}
 	

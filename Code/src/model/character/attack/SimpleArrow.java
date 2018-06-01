@@ -9,15 +9,12 @@ import model.gameMap.move.Movement;
 public class SimpleArrow extends Attack {
  
 
-	private final static int IMG = 8;
 	private final static int DEFAULTCYCLE = 9;
 	private final static int DEFAULTCELLPERTURN = 1;
-	
-	private boolean disappear;
+	private final static int DEFAULTIMAGE = 8;
 	
 	public SimpleArrow(GameMap map, int row, int column, Movement direction, int damage, int cellPerTurn) {
-		super(map, DEFAULTCYCLE, row, column, direction, damage, DEFAULTCELLPERTURN, 2);
-		disappear=false;
+		super(map, DEFAULTCYCLE, row, column, direction, damage, DEFAULTCELLPERTURN, 2,DEFAULTIMAGE);
 	}
 
 	@Override
@@ -27,15 +24,15 @@ public class SimpleArrow extends Attack {
 	}
 
 	@Override
-	public int getDefaultImage() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
 	public Move act() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public boolean handlePlay(byte attackResult) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 //	@Override

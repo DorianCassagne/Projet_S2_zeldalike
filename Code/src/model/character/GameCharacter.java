@@ -8,6 +8,8 @@
 package model.character;
 import java.util.HashMap;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import model.character.attack.Attack;
 import model.gameMap.GameMap;
 import model.gameMap.move.Movement;
@@ -19,9 +21,10 @@ public abstract class GameCharacter extends Movable{
 	public final static char ENEMYTYPE = 'E';
 	private final static HashMap<Movable,Character> CHARACTERTYPE;
 	private static GameCharacter Hero;
-	
-	private int hp; 	
-	private int def;	// comportement de la defense avoir avec Dorian atk*def/100 ??
+	private IntegerProperty hp; 	
+	private IntegerProperty def;	// comportement de la defense avoir avec Dorian atk*def/100 ??
+	private IntegerProperty safeHP;
+	private IntegerProperty safeDEF;
 
 	//Crée un deplaçable ayant les propriétées voulue. Déclenche une erreur si l'une des propriétés est invalid (négatif ou null)
 	
@@ -40,9 +43,8 @@ public abstract class GameCharacter extends Movable{
 	}
 	
 	
-	public GameCharacter(GameMap map, char type, int hp, int def,int startRow,int startColumn,int cycle,double coefficient) {
-		super(map,cycle,startRow,startColumn,coefficient);
-		
+	public GameCharacter(GameMap map, char type, int hp, int def,int startRow,int startColumn,int cycle,double coefficient,int defaultImage) {
+		super(map,cycle,startRow,startColumn,coefficient,defaultImage);
 		if( map == null || hp <= 0 || def < 0) {
 			throw new IllegalArgumentException("ARGUMENT INVALID on GAMECHARACTER ");
 		}
@@ -52,64 +54,57 @@ public abstract class GameCharacter extends Movable{
 			boolean put = this.getMyMap().addCharacter(this, startRow, startColumn);
 			if(!put)
 				throw new IllegalArgumentException("THE CHARACTER COULD NOT BE CORRECTLY PLACED");
-			this.hp = hp;
-			this.def = def;
+			initialiseProperties(hp,def);
 			if(type == HEROTYPE)
 				Hero = this;
 			CHARACTERTYPE.put(this, type);
 		}
 	}
 	
+	private  void initialiseProperties(int hp,int def) {
+		this.hp = new SimpleIntegerProperty(hp);
+		this.def = new SimpleIntegerProperty(def);
+		this.safeHP = UsefulMethods.copyIntegerProperty(this.hp);
+		this.safeDEF = UsefulMethods.copyIntegerProperty(this.def);
+	}
 	
-	protected final int getHp() {
-		return this.hp;
+	public final IntegerProperty getHp() {
+		return this.safeHP;
 	}
 	
 	
-	protected final int getDef() {
-		return this.def;
+	public final IntegerProperty getDef() {
+		return this.safeDEF;
 	}
 
-	protected final void setDef(int def) {
-		if(def < 0 ) {
-			throw new IllegalArgumentException("ARGUMENT 'DEF' INVALID on GAMECHARACTER ");
-		}
-		this.def=def;
-	}
-	
 	public void getDmgAttacked(Attack atc) {
 		this.getDmg(atc.getDamage());
 	}
 	
-	//getters setters end
-	
-	//blesse le personnage exeption si dmg < 0.
-	//j'aime pas beaucoup le nom de la methode "getDmg" 
-	//fait penser a un getter alors que ce n'est pas un attribut
-	
-	private void getDmg(int dmg) {
-		if (dmg < 0) {
-			throw new IllegalArgumentException("DMG on getDMG is < 0");
-		}
-		dmg = (dmg*100/(100+this.def));
-		if(dmg > this.hp) {
-			this.hp = 0;
-		}
-		else {
-			this.hp -= dmg;
-		}
+	public boolean isAlive() {
+		return this.hp.get() > 0;
 	}
 	
 	protected void removeCharacter() {
 		this.getMyMap().delCharacter(this, getRow(), getColumn());
 	}
-	
-	
-	public boolean isAlive() {
-		return this.hp > 0;
-	}
 
 	public abstract void launchAttack(Movement move);
+
+	private void getDmg(int dmg) {
+		if (dmg < 0) {
+			throw new IllegalArgumentException("DMG on getDMG is < 0");
+		}
+		dmg = (dmg*100/(100+this.def.get()));
+		System.out.println("I got dmg equal to " + dmg);
+
+		if(dmg > this.hp.get()) {
+			this.hp.set(0);
+		}
+		else {
+			this.hp.set(this.hp.get() - dmg);;
+		}
+	}
 
 	
 }

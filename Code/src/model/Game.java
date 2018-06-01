@@ -1,8 +1,6 @@
 package model;
 
 import model.character.BadMonkey;
-import model.character.Dolphin;
-
 import model.character.Hero;
 import model.character.attack.Attack;
 import model.gameMap.GameMap;
@@ -22,7 +20,6 @@ public class Game {
 	public Game() {
 		myMap = new GameMap(mapName,mapName);
 		this.hero = new Hero(myMap, 16, 17);
-		new Dolphin(myMap,14,15);
 		new BadMonkey(myMap,12,21);
 		new BadMonkey(myMap,13,20);
 	}

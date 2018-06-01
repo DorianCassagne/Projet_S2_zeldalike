@@ -58,17 +58,17 @@ public class GameLoop {
 			alert.show();
 		}
 		else {
+			
 			addPlayers(this.myGame.getNewPlayers());
 			removePlayers(this.myGame.getRemovedMovable());
-			playMoves(this.myGame.turn());
-			
+			playMoves(this.myGame.turn());			
 			allTick();
 		}
 
 	}
 	
 	private void removePlayers(int[] playersId) {
-	    FadeTransition ft = new FadeTransition(Duration.millis(300));
+	    FadeTransition ft = new FadeTransition(Duration.millis(200));
 	    ft.setFromValue(1.0);
 		for(Integer playerId : playersId) {
 			MovableView current = this.movableList.get(playerId);
@@ -89,7 +89,7 @@ public class GameLoop {
 	private void playMoves(Move[] moves ) {
 		for (Move move : moves) {
 				MovableView movable = this.movableList.get(move.getMovableId());
-				movable.moveTo(move.getEndCellId(), move.getImageValue(),move.getSpeed());
+				movable.moveTo(move.getEndCellId(),move.getSpeed());
 		}
 	}
 	
@@ -100,6 +100,7 @@ public class GameLoop {
 				newMovable = new HeroView(newPlayer.getCellId(),newPlayer.getImageValue(),this.characterAnchorPane);
 			else
 				newMovable = new MovableView(newPlayer.getCellId(),newPlayer.getImageValue());
+			
 			this.characterAnchorPane.getChildren().add(newMovable);
 			this.movableList.put(newPlayer.getKey(), newMovable);
 		}

@@ -2,11 +2,11 @@ package model.gameMap.cell;
 
 import javafx.beans.property.IntegerProperty;
 
+
 import javafx.beans.property.SimpleIntegerProperty;
 import model.character.GameCharacter;
 import model.character.attack.Attack;
 import model.character.item.Item;
-import model.gameMap.move.Movement;
 import resources.additionalClass.Fusion;
 
 public class Cell {
@@ -53,17 +53,6 @@ public class Cell {
 	}
 	
 	
-	public void notifyEnemy(Movement movement) {
-		if(this.gameCharacter != null) {
-			if(GameCharacter.getType(gameCharacter) == GameCharacter.ENEMYTYPE) {
-				gameCharacter.launchAttack(movement);
-			}
-		}
-	}
-	
-	public void unnotifyEnemy() {
-		notifyEnemy(null);
-	}
 
 	public boolean setItem (Item item) {
 		if (this.item!=null) 

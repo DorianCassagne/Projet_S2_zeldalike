@@ -1,8 +1,13 @@
 package model.character;
 
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import model.gameMap.GameMap;
+import model.gameMap.additional.Statics;
 import model.gameMap.move.Move;
+import model.gameMap.move.Movement;
+import resources.additionalClass.UsefulMethods;
 
 public abstract class Movable {
 
@@ -18,25 +23,42 @@ public abstract class Movable {
 	private int cycle;
 	private int tour ;
 	private double moveCoefficient;
+	private IntegerProperty safeImageValueProperty;
 	private int baseCycle;
+	private IntegerProperty imageValueProperty;
+	private int defaultImage;
 	
-	
-	public Movable(GameMap map,int cycle, int row, int column,double moveCoefficient) {
-		if(cycle < 0 && moveCoefficient > 0)
-			throw new IllegalArgumentException("Speed must be greater than 0");
+	public Movable(GameMap map,int cycle, int row, int column,double moveCoefficient,int defaultImage) {
+		if(cycle < 0 || moveCoefficient < 0 )
+			throw new IllegalArgumentException("Invalid Parameter");
+		setCellId(row, column);
+		this.map = map;
 		this.moveCoefficient = moveCoefficient;
 		this.cycle = cycle;
 		this.baseCycle=cycle;
-		this.tour = 0;
-		this.row = row;
-		this.column = column;
-		this.map = map;
+		this.tour = 0;	
+		this.defaultImage = defaultImage;
+		initialiseImageProperty();
+	}
+	
+	private void initialiseImageProperty() {
+		this.imageValueProperty = new SimpleIntegerProperty(this.defaultImage);
+		this.safeImageValueProperty = UsefulMethods.copyIntegerProperty(imageValueProperty );
+	}
+	
+	protected void setImage(Movement movement) {
+		this.imageValueProperty.set(this.defaultImage + movement.getIndex());
+	}
+			
+	public final IntegerProperty getImageValueProperty() {
+		return this.safeImageValueProperty;
 	}
 	
 	protected void setWait(int cycle) {
-		if(cycle < 0 && moveCoefficient > 0)
-			throw new IllegalArgumentException("Speed must be greater than 0");
+		if(cycle < 0)
+			throw new IllegalArgumentException("CYCLE MUST BE GREATER THAN 0");
 		this.cycle = cycle;
+	
 	}
 	
 	protected final int getRow() {
@@ -52,8 +74,13 @@ public abstract class Movable {
 	}
 	
 	public final void setCellId(int row,int column) {
-		this.row = row;
-		this.column = column;
+		
+		if(Statics.isInMap(row, column)) {
+			this.row = row;
+			this.column = column;
+		}
+		else
+			throw new IllegalArgumentException ("THE POSITION OF THE CHARACTER IS WRONG");	
 	}	
 	
 	
@@ -68,11 +95,12 @@ public abstract class Movable {
 	private boolean canAct() {
 		this.oneTurn();
 		boolean canAct = false;
+		
 		if(this.tour == cycle) {
 			this.tour = 0;
-			this.cycle=this.baseCycle;
 			canAct = true;
 		}
+		
 		return canAct;
 	}
 	
@@ -101,11 +129,8 @@ public abstract class Movable {
 	}
 	
 	
-	protected abstract void removeCharacter();
-	
-	
+	protected abstract void removeCharacter();	
 	public abstract boolean isAlive();
-	public abstract int getDefaultImage() ;
 	public abstract Move act();
 	
 }

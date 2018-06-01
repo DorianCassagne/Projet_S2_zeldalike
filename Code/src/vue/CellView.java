@@ -8,7 +8,7 @@ import javafx.scene.layout.StackPane;
 public class CellView extends StackPane{
 	
 	public CellView(Integer[] layers) {
-		updateCell(layers);
+		this.updateCell(layers);
 	}
 	
 	public void updateCell(Integer[] layers) {
@@ -24,5 +24,7 @@ public class CellView extends StackPane{
 			
 		}
 	}
+	
+	
 	
 }

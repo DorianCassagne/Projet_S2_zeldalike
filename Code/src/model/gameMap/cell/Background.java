@@ -1,6 +1,7 @@
 package model.gameMap.cell;
 
 import model.gameMap.GameMap;
+import model.gameMap.additional.Statics;
 
 public class Background {
 
@@ -18,9 +19,9 @@ public class Background {
 	private void setWalkable(int[] backValues) {
 		this.isWalkable = true;
 		for(int value : backValues) {
-			if(value >= GameMap.STARTNONWALKABLEINDEX && value < GameMap.STARTNONWALKABLEINDEX + GameMap.CATEGORYLENGTH ) 
+			if(value >= Statics.STARTNONWALKABLEINDEX && value < Statics.STARTNONWALKABLEINDEX + Statics.CATEGORYLENGTH ) 
 				this.isWalkable = this.isWalkable && false ;
-			else if(value >= GameMap.STARTWALKABLEINDEX && value < GameMap.STARTWALKABLEINDEX + GameMap.CATEGORYLENGTH)
+			else if(value >= Statics.STARTWALKABLEINDEX && value < Statics.STARTWALKABLEINDEX + Statics.CATEGORYLENGTH)
 				this.isWalkable = this.isWalkable && true ;
 			else {
 				throw new IllegalArgumentException("INVALID BACKGROUND");
