@@ -53,7 +53,7 @@ public class Controleur implements Initializable{
 		this.interpreter = new CommandInterpreter(myGame,gameLoop);
 		
 	}
-	
+	 
 	private void createMap() {
 		Function< Integer,Integer[]> backgroundSource = element->this.myGame.getLayerForCell(element);
 		this.myMapView = new MapView(backgroundSource,this.mapTilePane);

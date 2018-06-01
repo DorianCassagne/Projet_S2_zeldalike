@@ -1,6 +1,7 @@
 package model;
 
 import model.character.BadMonkey;
+
 import model.character.Hero;
 import model.character.attack.Attack;
 import model.gameMap.GameMap;
@@ -21,13 +22,20 @@ public class Game {
 		myMap = new GameMap(mapName,mapName);
 		this.hero = new Hero(myMap, 16, 17);
 		new BadMonkey(myMap,12,21);
+		new BadMonkey(myMap,16,20);
+		new BadMonkey(myMap,12,20);
 		new BadMonkey(myMap,13,20);
+		new BadMonkey(myMap,13,19);
 	}
 	
 	//renvoie l'identifiant du fond pour une cellude donnée.
-	public Integer[] getLayerForCell(int cellId) {
-		return this.myMap.getLayerForCell(cellId);
-	}
+//	public int getBackgroundId(int cellId) {
+//		return this.myMap.getBackgroundImage(cellId);
+//	}
+	public Integer[] getLayerForCell(int cellId) { 
+		return this.myMap.getLayerForCell(cellId); 
+}
+	
 	
 	//renvoie la liste des caractères crées pendant un tour 
 	public NewMovable[] getNewPlayers() {

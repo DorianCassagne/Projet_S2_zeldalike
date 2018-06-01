@@ -17,6 +17,7 @@ public class CellView extends StackPane{
 			this.getChildren().clear();
 			
 			for(int layer : layers) {
+				System.out.println("Layer : "+ layer);
 				Image layerImage = Controleur.TEXTURE.getImg(layer);
 				ImageView viewLayer = new ImageView(layerImage);
 				this.getChildren().add(viewLayer);
