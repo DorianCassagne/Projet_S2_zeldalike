@@ -1,11 +1,13 @@
 package model.gameMap.additional;
 
+import javafx.beans.property.IntegerProperty;
+
 public class NewMovable {
 	private int cellId;
 	private int key;
-	private int imageValue;
+	private IntegerProperty imageValue;
 	
-	public NewMovable(int key,int cellId,int imageValue) {
+	public NewMovable(int key,int cellId,IntegerProperty imageValue) {
 		this.key = key;
 		this.cellId = cellId;
 		this.imageValue = imageValue;
@@ -19,7 +21,7 @@ public class NewMovable {
 		return this.key;
 	}
 	
-	public int getImageValue() {
+	public IntegerProperty getImageValue() {
 		return this.imageValue;
 	}
 }

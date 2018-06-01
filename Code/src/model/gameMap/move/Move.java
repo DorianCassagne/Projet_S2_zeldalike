@@ -4,7 +4,6 @@ public class Move {
 	private int movableId;
 	private int endCellId;
 	private int speed;
-	private int imageValue;
 	
 	/*
 	 * permet d'indiquer un mouvement de movable
@@ -16,9 +15,8 @@ public class Move {
 	 */
 	
 	
-	public Move(int endCellId,int speed,int imageValue) {
+	public Move(int endCellId,int speed) {
 		this.endCellId = endCellId;
-		this.imageValue=imageValue;
 		this.speed=speed;
 	}
 	
@@ -41,9 +39,4 @@ public class Move {
 		return this.speed;
 	}
 	
-	public int getImageValue() {
-		return this.imageValue;
-	}
-
-
 }

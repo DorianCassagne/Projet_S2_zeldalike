@@ -13,7 +13,6 @@ public class SeparatorFileReader {
 			System.out.println(path);
 			File file = new File(SeparatorFileReader.class.getResource(path).toURI().toURL().getPath());
 
-			//System.out.println(file);
 			FileReader fileReader = new FileReader(file);
 			BufferedReader reader = new BufferedReader(fileReader);
 

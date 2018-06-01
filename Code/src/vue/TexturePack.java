@@ -20,7 +20,6 @@ public class TexturePack {
 		try {
 			titleImg= ImageIO.read(new File(imagePath).toURI().toURL());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		this.titlePaneWidth = titlePaneWith;

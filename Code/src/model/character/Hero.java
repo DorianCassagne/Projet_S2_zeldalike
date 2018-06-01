@@ -1,16 +1,18 @@
 package model.character;
 
-import model.character.attack.Attack;
+
 import model.character.attack.AttackTest;
 import model.gameMap.GameMap;
+import model.gameMap.additional.Statics;
 import model.gameMap.move.Move;
 import model.gameMap.move.Movement;
 
 public class Hero extends GameCharacter{
+	
 	private final static int DEFAULTHP = 300;
 	private final static int DEFAULTDEF = 200;
-	private final static int DEFAULTCYCLE = 10;
-	private final static double DEFAULTCOEFFICIENT = 1.2;
+	private final static int DEFAULTCYCLE = 40;
+	private final static double DEFAULTCOEFFICIENT = 2;
 	public final static int DEFAULTIMAGE = 8;
 	public static final char MOVEUP = 'u';
 	public static final char MOVEDOWN = 'd';
@@ -20,61 +22,57 @@ public class Hero extends GameCharacter{
 	public static final char ATTACK = 'a';
 	
 	private char nextMove;
-	
-	private int lastImageIndex;
+	private Movement direction;
 	
 	public Hero(GameMap map,int startRow,int startColumn) {
-		super(map, GameCharacter.HEROTYPE, DEFAULTHP, DEFAULTDEF,startRow,startColumn,DEFAULTCYCLE,DEFAULTCOEFFICIENT);
-		//map.addHero(this);
+		super(map, GameCharacter.HEROTYPE, DEFAULTHP, DEFAULTDEF,startRow,startColumn,DEFAULTCYCLE,DEFAULTCOEFFICIENT,DEFAULTIMAGE);
 		this.nextMove = STAY;
+		this.direction = Movement.TOP;
 	}
 	
 	public void setNextMove(char nextMove) {
 		 this.nextMove = nextMove;
 	}
 	
-	@Override
-	public int getDefaultImage() {
-		return DEFAULTIMAGE  ;
-	}
+	/*
+	 * Movements
+	 */
 	
 	private Move interpreteMove() {
 		Move myMove;
+		
 		int reachRow = this.getRow();
 		int reachColumn = this.getColumn(); 
-		int imageIndex = TOPIMAGEINDEX;
 		boolean changedCell = true;
 		switch(this.nextMove) {
 		case MOVEUP:
 			reachRow--;
+			this.direction = Movement.TOP;
 			break;
 		case MOVEDOWN:
 			reachRow++;
-			imageIndex = BOTTOMIMAGEINDEX;
+			this.direction = Movement.BOTTOM;
 			break;
 		case MOVELEFT:
 			reachColumn--;
-			imageIndex = LEFTIMAGEINDEX;
+			this.direction = Movement.LEFT;
 			break;
 		case MOVERIGHT:
 			reachColumn++;
-			imageIndex = RIGHTIMAGEINDEX;
+			this.direction = Movement.RIGHT;			
 			break;
 		case ATTACK :
-			changedCell = false;
-			Movement movement = Movement.values()[lastImageIndex];
-			new AttackTest(getMyMap(), reachRow, reachColumn,movement, 80);
+			new AttackTest(getMyMap(), reachRow, reachColumn,this.direction, 80);
 			break;
 		default : 
 			break;
 		}
 		
 		this.nextMove = STAY;
-		
+		this.setImage(this.direction);
 		 changedCell = changedCell && this.getMyMap().changeCell(this,this.getRow(),this.getColumn(),reachRow,reachColumn);
 		if(changedCell) {
-			this.lastImageIndex = imageIndex;
-			myMove = new Move(GameMap.convertToCellId(reachRow, reachColumn),this.getMoveCycle(), DEFAULTIMAGE + imageIndex);
+			myMove = new Move(Statics.convertToCellId(reachRow, reachColumn),this.getMoveCycle());
 		}
 		else
 			myMove = null;

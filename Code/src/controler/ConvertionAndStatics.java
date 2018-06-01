@@ -17,16 +17,18 @@ public class ConvertionAndStatics {
 	public static int[] convertToViewSize(int cellId) {
 		int row = (cellId / MapReader.MAPLENGTH)*TILEDIMENSION;
 		int column = (cellId%MapReader.MAPLENGTH)*TILEDIMENSION;
+		
 		int[] position = {row,column};
 		return position;
 	}
 
 	public static void  fixPaneDimension(int dimension,TilePane tile,Pane container) {
-		
 		container.setMinHeight(dimension);
 		container.setMaxHeight(dimension);
+		
 		container.setMinWidth(dimension);
 		container.setMaxWidth(dimension);
+		
 		tile.setPrefColumns(MapReader.MAPLENGTH);
 		tile.setPrefRows(MapReader.MAPLENGTH);
 	
