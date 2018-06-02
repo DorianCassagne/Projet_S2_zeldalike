@@ -17,7 +17,7 @@ public class BadMonkey extends GameCharacter{
 	
 	
 	public BadMonkey(GameMap map, int startRow, int startColumn) {
-		super(map, GameCharacter.ENEMYTYPE, DEFAULTHP, DEFAULTDEF, startRow, startColumn,DEFAULTCYCLE,DEFAULTCOEFFICIENT,DEFAULTIMAGE);
+		super(map, DEFAULTHP, DEFAULTDEF, startRow, startColumn,DEFAULTCYCLE,DEFAULTCOEFFICIENT,DEFAULTIMAGE);
 	}
 
 	@Override

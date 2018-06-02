@@ -15,27 +15,39 @@ public class CommandInterpreter {
 	}
 	
 	void handleKey(KeyEvent event) {
+		char nextMove = Hero.STAY;
 		switch(event.getCode()) {
 		case UP : 
-			this.myGame.communiquerMovement(Hero.MOVEUP);
+			nextMove = Hero.MOVEUP;
 			break;
 		case DOWN:
-			this.myGame.communiquerMovement(Hero.MOVEDOWN);
+			nextMove = Hero.MOVEDOWN;
 			break;
 		case LEFT:
-			this.myGame.communiquerMovement(Hero.MOVELEFT);
+			nextMove = Hero.MOVELEFT;
 			break;
 		case RIGHT: 
-			this.myGame.communiquerMovement(Hero.MOVERIGHT);
+			nextMove = Hero.MOVERIGHT;
 			break;
-		case A :
-			this.myGame.communiquerMovement(Hero.ATTACK);
+		case Z :
+			nextMove = Hero.ATTACKUP;
+			break;
+		case S :
+			nextMove = Hero.ATTACKDOWN ;
+			break;
+		case D :
+			nextMove = Hero.ATTACKRIGHT;
+			break;
+		case Q : 
+			nextMove = Hero.ATTACKLEFT;
 			break;
 		case B :
 			this.gameLoop.stop();
 		default :
 			System.out.println("Unknown key");
 		}
+		this.myGame.communiquerMovement(nextMove);
+
 
 	}
 }

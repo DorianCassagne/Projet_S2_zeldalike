@@ -1,5 +1,7 @@
 package model.gameMap.additional;
 
+import model.gameMap.MapEnum;
+
 public class Statics {
 	private final static int ITEMVALUEINDEX = 1;
 	public final static int LINELENGTH = 8;
@@ -14,15 +16,27 @@ public class Statics {
 	public final static int MAPFULLSIZE = MapReader.MAPLENGTH * MapReader.MAPLENGTH;
 
 	
-	public static int convertToCellId(int row,int column) {
+	public final static int convertFromRelativeMapIndex(int newMapIndex) {
+		return newMapIndex - Integer.MIN_VALUE;
+	}
+	
+	public final static int convertToRelativeMapIndex(int mapIndex) {
+		return Integer.MIN_VALUE + mapIndex;
+	}
+	
+	public final static boolean isAMapChange(int checkedValue) {
+		return Math.abs(convertFromRelativeMapIndex(checkedValue)) < MapEnum.values().length ;
+	}
+	
+	public final static int convertToCellId(int row,int column) {
 		return row * MapReader.MAPLENGTH + column;
 	}
 	
-	public static int convertToRow(int id) {
+	public final static int convertToRow(int id) {
 		return id/MapReader.MAPLENGTH;
 	}
 	
-	public static int convertToColomn(int id) {
+	public final static int convertToColomn(int id) {
 		return id%MapReader.MAPLENGTH;
 	}
 	

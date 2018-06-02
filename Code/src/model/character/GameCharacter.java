@@ -6,7 +6,6 @@
 
 
 package model.character;
-import java.util.HashMap;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -17,10 +16,7 @@ import resources.additionalClass.UsefulMethods;
 
 public abstract class GameCharacter extends Movable{
 
-	public final static char HEROTYPE = 'H';
-	public final static char ENEMYTYPE = 'E';
-	private final static HashMap<Movable,Character> CHARACTERTYPE;
-	private static GameCharacter Hero;
+	private static Hero Hero;
 	private IntegerProperty hp; 	
 	private IntegerProperty def;	// comportement de la defense avoir avec Dorian atk*def/100 ??
 	private IntegerProperty safeHP;
@@ -29,37 +25,35 @@ public abstract class GameCharacter extends Movable{
 	//Crée un deplaçable ayant les propriétées voulue. Déclenche une erreur si l'une des propriétés est invalid (négatif ou null)
 	
 	
-	static {
-		CHARACTERTYPE = new HashMap<Movable,Character>();
+	
+	public final static Hero getHero() {
+		return Hero;
 	}
 	
-	
-	public static final char getType(Movable movable) {
-		return CHARACTERTYPE.get(movable);
+	public final static void setHero(Hero hero) {
+		if(hero != null) {
+			Hero = hero;
+		}
 	}
+	
 	
 	protected static final GameCharacter getGameCharacter() {
 		return Hero;
 	}
 	
 	
-	public GameCharacter(GameMap map, char type, int hp, int def,int startRow,int startColumn,int cycle,double coefficient,int defaultImage) {
+	public GameCharacter(GameMap map, int hp, int def,int startRow,int startColumn,int cycle,double coefficient,int defaultImage) {
 		super(map,cycle,startRow,startColumn,coefficient,defaultImage);
 		if( map == null || hp <= 0 || def < 0) {
 			throw new IllegalArgumentException("ARGUMENT INVALID on GAMECHARACTER ");
 		}
-		else if(!UsefulMethods.isCharInCharList(type, HEROTYPE,ENEMYTYPE))
-			throw new IllegalArgumentException("Undefined type");
 		else {
-			boolean put = this.getMyMap().addCharacter(this, startRow, startColumn);
-			if(!put)
-				throw new IllegalArgumentException("THE CHARACTER COULD NOT BE CORRECTLY PLACED");
+			this.setMap(map,startRow,startColumn);
+
 			initialiseProperties(hp,def);
-			if(type == HEROTYPE)
-				Hero = this;
-			CHARACTERTYPE.put(this, type);
 		}
 	}
+	
 	
 	private  void initialiseProperties(int hp,int def) {
 		this.hp = new SimpleIntegerProperty(hp);
@@ -85,6 +79,18 @@ public abstract class GameCharacter extends Movable{
 		return this.hp.get() > 0;
 	}
 	
+	protected void setMap(GameMap newMap,int row,int column) {
+
+		boolean put = newMap.addCharacter(this, row, column);
+
+		if(!put) {
+			throw new IllegalArgumentException("MAP UNDEFINED");
+		}
+		else
+			this.setMap(newMap);
+		
+	}
+
 	protected void removeCharacter() {
 		this.getMyMap().delCharacter(this, getRow(), getColumn());
 	}
@@ -92,11 +98,11 @@ public abstract class GameCharacter extends Movable{
 	public abstract void launchAttack(Movement move);
 
 	private void getDmg(int dmg) {
+		
 		if (dmg < 0) {
 			throw new IllegalArgumentException("DMG on getDMG is < 0");
 		}
 		dmg = (dmg*100/(100+this.def.get()));
-		System.out.println("I got dmg equal to " + dmg);
 
 		if(dmg > this.hp.get()) {
 			this.hp.set(0);
@@ -105,6 +111,7 @@ public abstract class GameCharacter extends Movable{
 			this.hp.set(this.hp.get() - dmg);;
 		}
 	}
+	
 
 	
 }

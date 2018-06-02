@@ -17,7 +17,7 @@ public class HeroView extends MovableView{
 		this.shownRow = characterAnchorPane.getScene().getHeight() ;
 		this.shownColumn = characterAnchorPane.getScene().getWidth() ;
 		this.myAnchorPane = characterAnchorPane;
-		
+
 		this.scrollX(this.getLayoutX());
 		this.scrollY(this.getLayoutY());
 

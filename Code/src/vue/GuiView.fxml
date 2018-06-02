@@ -1,13 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="mainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controler.Controleur">
    <children>
       <AnchorPane fx:id="characterAnchorPane" prefHeight="400.0" prefWidth="600.0">
          <children>
             <TilePane fx:id="mapTilePane" layoutX="20.0" layoutY="73.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <HBox opacity="0.7" prefHeight="66.0" prefWidth="572.0" spacing="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="10.0">
+               <children>
+                  <ImageView fx:id="avatarImage" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <VBox alignment="CENTER" fillWidth="false" maxHeight="59.0" minHeight="50.0" prefHeight="59.0" prefWidth="146.0">
+                     <children>
+                        <Canvas fx:id="heartCanvas" height="30.0" width="115.0" />
+                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                           <children>
+                              <Label fx:id="MPLabel" text="200" textFill="#470ad7">
+                                 <font>
+                                    <Font name="KacstOne Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <ProgressBar fx:id="MPProgressBar" prefHeight="20.0" prefWidth="94.0" progress="0.0" style="-fx-background-radius: 0;" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <HBox alignment="CENTER_RIGHT" maxHeight="60.0" prefHeight="60.0" prefWidth="383.0" spacing="20.0">
+                     <children>
+                        <ImageView fx:id="itemImage" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="attackImage" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                     <padding>
+                        <Insets right="20.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </HBox>
          </children>
       </AnchorPane>
    </children>

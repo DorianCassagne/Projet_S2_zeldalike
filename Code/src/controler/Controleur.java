@@ -1,5 +1,7 @@
 package controler;
 
+import java.awt.Canvas;
+import java.awt.Label;
 import java.net.URL;
 
 
@@ -11,6 +13,8 @@ import java.util.function.Function;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.TilePane;
 import model.Game;
@@ -28,6 +32,12 @@ public class Controleur implements Initializable{
 	@FXML private AnchorPane mainAnchorPane;
 	@FXML private AnchorPane characterAnchorPane;
 	@FXML private TilePane mapTilePane;
+	@FXML private ImageView avatarImage;
+    @FXML private Canvas heartCanvas;
+    @FXML private Label MPLabel;
+    @FXML private ProgressBar MPProgressBar;
+    @FXML private ImageView itemImage;
+    @FXML private ImageView attackImage;
 
 	private Game myGame;
 	private CommandInterpreter interpreter;
@@ -39,9 +49,7 @@ public class Controleur implements Initializable{
 	}
 	
 	public Controleur() {
-
 		myGame = new Game();
-	
 	}
 	
 	@Override
@@ -51,13 +59,17 @@ public class Controleur implements Initializable{
 		this.createMap();
 		gameLoop.start();
 		this.interpreter = new CommandInterpreter(myGame,gameLoop);
-		
+		this.myGame.changeMapProperty().addListener(
+				(obs,oldValue,newValue)->this.createMap()
+		);
 	}
 	
 	private void createMap() {
+		
 		Function< Integer,Integer[]> backgroundSource = element->this.myGame.getLayerForCell(element);
-		this.myMapView = new MapView(backgroundSource,this.mapTilePane);
+		this.myMapView = new MapView(backgroundSource,this.mapTilePane,this.myGame.getMapChangeProperty());
 		this.myMapView.initialise();
+	
 	}
 
 	public void startScene(Scene scene) {

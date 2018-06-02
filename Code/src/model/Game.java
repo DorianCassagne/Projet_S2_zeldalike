@@ -1,28 +1,58 @@
 package model;
 
-import model.character.BadMonkey;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import model.character.Hero;
-import model.character.attack.Attack;
 import model.gameMap.GameMap;
+import model.gameMap.MapEnum;
 import model.gameMap.additional.NewMovable;
 import model.gameMap.move.Move;
-import model.gameMap.move.Movement;
 
 public class Game {
 	public final static int HEROKEY = 0;
-	private final static String mapName = "MapForet1.csv";
 	
+	private BooleanProperty mapChangeProperty;
 	private GameMap myMap;
 	private Hero hero;
 	
-	
 	//Initialise le jeu avec une map
+	
 	public Game() {
-		myMap = new GameMap(mapName,mapName);
-		this.hero = new Hero(myMap, 16, 17);
-		new BadMonkey(myMap,12,21);
-		new BadMonkey(myMap,13,20);
+		this(0);
 	}
+	
+	public Game(int mapIndex) {
+		this.mapChangeProperty = new SimpleBooleanProperty(true);
+		this.changeMap(mapIndex);
+	}
+
+	
+	private void changeMap(int mapIndex) {
+		if(mapIndex >= 0 && mapIndex < MapEnum.values().length) {
+			MapEnum mapHash = MapEnum.values()[mapIndex];
+			this.myMap = new GameMap(mapHash.getLayers());
+			createHero(mapHash.getPosY(),mapHash.getPosX());
+			this.mapChangeProperty.set(!this.mapChangeProperty.get());
+		}
+	}
+	
+	private void createHero(int startRow,int startColumn) {
+		if(this.hero == null) {
+			this.hero = new Hero(this.myMap,startRow,startColumn);
+			this.hero.mapChangerProperty().addListener(
+					(obs,oldValue,newValue)->changeMap(newValue.intValue())
+			);
+		}
+		else {
+			this.hero.changeMap(this.myMap,startRow, startColumn);
+		}
+	}
+	
+	public final BooleanProperty changeMapProperty() {
+		return this.mapChangeProperty;
+	}
+		
 	
 	//renvoie l'identifiant du fond pour une cellude donnée.
 	public Integer[] getLayerForCell(int cellId) {
@@ -52,10 +82,11 @@ public class Game {
 		return this.myMap.getRemovedCharacter();
 	}
 	
-	/*
-	public int getCharCell(Integer charKey) {
-		return this.myMap.getCharacterPosition(charKey);
+	
+	public IntegerProperty getMapChangeProperty() {
+		return this.myMap.changeProperty();
 	}
-	*/
+	
+	
 	
 }

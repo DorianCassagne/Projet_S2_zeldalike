@@ -1,5 +1,6 @@
 package model.character.item;
 
+import model.character.GameCharacter;
 import model.character.Hero;
 
 /*
@@ -14,27 +15,26 @@ import model.character.Hero;
 
 public abstract class Item {
 	
-	private int imgVal;
-	private int hp;
-	private int mp;
-	private int atk;
+	private int imageValue;
 		
 	//crée un objet de type Item. Renvoie une erreure si l'une des valeurs est négatives
-	public Item(int hp, int mp, int atk) throws IllegalArgumentException{ 
-		if(hp < 0 || mp < 0 || atk < 0) {
-			throw new IllegalArgumentException("FALSE ARGUMENT ON ITEM");
-		}
-		else {
-			this.hp = hp;
-			this.mp = mp;
-			this.atk = atk;
-		}
+	public Item(int imageValue) throws IllegalArgumentException{
+		this.imageValue = imageValue;
 	}
 
 	//public abstract int getImageName(): retourne le nom de l�imag
-	public abstract int getImageName() ;
+	public int getImageValue() {
+		return this.imageValue;
+	}
+	
+	public boolean effectOn(GameCharacter c) {
+		boolean isConsumed = c == GameCharacter.getHero();
+		if(isConsumed) {
+			this.applyTo(GameCharacter.getHero());
+		}
+		return isConsumed;
+	}
 	
 	//modifie les caract�ristique du personnage � partir des propri�t�s de l�item,
-	public abstract void applyTo(Hero hero); 
-	
+	protected abstract void applyTo(Hero hero); 
 }

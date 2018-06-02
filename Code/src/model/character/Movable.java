@@ -24,7 +24,6 @@ public abstract class Movable {
 	private int tour ;
 	private double moveCoefficient;
 	private IntegerProperty safeImageValueProperty;
-	private int baseCycle;
 	private IntegerProperty imageValueProperty;
 	private int defaultImage;
 	
@@ -35,7 +34,6 @@ public abstract class Movable {
 		this.map = map;
 		this.moveCoefficient = moveCoefficient;
 		this.cycle = cycle;
-		this.baseCycle=cycle;
 		this.tour = 0;	
 		this.defaultImage = defaultImage;
 		initialiseImageProperty();
@@ -118,14 +116,18 @@ public abstract class Movable {
 		return d.intValue();
 	}
 	
-	//Omar n'étais pas d'accord
 	public final int getX() {
 		return this.column;
 	}
 	
-	//Omar n'étais pas d'accord
 	public final int getY() {
 		return this.row;
+	}
+	
+	protected final void setMap(GameMap newMap) {
+		if(this == GameCharacter.getHero()) {
+			this.map = newMap;
+		}
 	}
 	
 	

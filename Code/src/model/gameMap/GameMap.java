@@ -9,6 +9,7 @@ import model.gameMap.additional.Statics;
 import model.gameMap.cell.Cell;
 import model.gameMap.move.Action;
 import model.gameMap.move.Move;
+import resources.additionalClass.UsefulMethods;
 
 public class GameMap {	
 	
@@ -24,12 +25,17 @@ public class GameMap {
 		int[][] values = MapReader.readAndConvertMapFile(mapPath);
 		this.action = new Action();
 		this.changeProperty = new SimpleIntegerProperty();
-		this.safeChangeProperty = new SimpleIntegerProperty();
-		this.safeChangeProperty.bind(this.changeProperty);
+		this.safeChangeProperty = UsefulMethods.copyIntegerProperty(this.changeProperty);
 		initialiseCells(values);
 	
 	}
 	
+
+	public IntegerProperty changeProperty() {
+		return this.safeChangeProperty;
+	}
+	
+
 	
 	/*
 	 * Change la case du personnage, la case de d�part et d'arriv�s doivent �tre pass�es en param�tre pour r�duire le temps de calcul
@@ -65,15 +71,11 @@ public class GameMap {
 		for(int i = 0 ; i < Statics.MAPFULLSIZE ;i++) {
 			createCell(i,backValues[i],itemValue[i]);
 		}
+		
 	}
 	
 	private void createCell(int cellId,int[] backValue,int itemValue) {
-		cells[cellId] = new Cell(backValue,itemValue);			
-		cells[cellId].changeProperty().addListener(
-				(obs,oldValue,newValue)->{
-					//TODO DORIAN
-				}
-		);
+		cells[cellId] = new Cell(backValue,itemValue,this.changeProperty,cellId);			
 	}
 
 	
@@ -82,12 +84,15 @@ public class GameMap {
 	* Les caract�res � ajouter sont ajouter dans une liste qui doit �tre l� au moment du tour
 	* Renvoie faux si la case d'arriv�e n'est pas correcte ou non disponible
 	*/
+	
 	public boolean addCharacter(GameCharacter movable,int row,int column) {	
 		boolean correctlyPlaced = false;
 		
 		if(Statics.isInMap(row,column)) {
 			int cellId = Statics.convertToCellId(row, column);
 			correctlyPlaced = this.cells[cellId].addMovable(movable);
+			System.out.println(correctlyPlaced);
+
 			if(correctlyPlaced) {
 				this.action.addMovable(movable,cellId);
 			}
@@ -98,8 +103,8 @@ public class GameMap {
 	
 	
 	/*
-	 * Ajoute une attaque � la map en indiquant sa case de d�part
-	 * D�clenche une erreur si l'attaque n'a pas p� �tre plac� sur la case, car l'identifiant de case est incorrecte
+	 * Ajoute une attaque � la map en indiquant sa case de départ
+	 * D�clenche une erreur si l'attaque n'a pas p� autre place sur la case, car l'identifiant de case est incorrecte
 	 */
 	
 	public void  addAttack(Attack attack,int row,int column) {
@@ -125,7 +130,7 @@ public class GameMap {
 	}
 	
 	/*
-	 * Renvoie une valeur qui représente l'effet emis par l'attaque dans une case donn�e
+	 * Renvoie une valeur qui représente l'effet emis par l'attaque dans une case donnée
 	 */
 	public byte playAttack(Attack attack,int row,int column) {
 		
@@ -140,7 +145,7 @@ public class GameMap {
 	}
 
 	/*
-	 * Retire un caract�re de la liste courante dans la map
+	 * Retire un caractère de la liste courante dans la map
 	 */
 	public void delCharacter(GameCharacter character,int row,int column) {
 		if(this.action.deleteMovableFromList(character)) {

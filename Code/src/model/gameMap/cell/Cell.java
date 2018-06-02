@@ -2,11 +2,10 @@ package model.gameMap.cell;
 
 import javafx.beans.property.IntegerProperty;
 
-
-import javafx.beans.property.SimpleIntegerProperty;
 import model.character.GameCharacter;
 import model.character.attack.Attack;
 import model.character.item.Item;
+import model.gameMap.additional.Statics;
 import resources.additionalClass.Fusion;
 
 public class Cell {
@@ -15,16 +14,15 @@ public class Cell {
 	private Background background;
 	private Item item;
 	private GameCharacter gameCharacter;
-	private IntegerProperty changeProperty;
-	private IntegerProperty safeProperty;
+	private IntegerProperty mapProperty;
+	private int cellId;
 	
-	public Cell(int[] backgroundValue,int itemValue){
+	
+	public Cell(int[] backgroundValue,int itemValue,IntegerProperty mapProperty,int cellId){
 		
 		this.background = new Background(backgroundValue);
-		this.changeProperty = new SimpleIntegerProperty();
-		this.safeProperty = new SimpleIntegerProperty();
-		this.safeProperty.bind(changeProperty);
-
+		this.mapProperty = mapProperty;
+	
 	}
 
 	public void removeMovable() {
@@ -32,33 +30,46 @@ public class Cell {
 	}
 
 	public boolean addMovable(GameCharacter movable) {
-		if (this.gameCharacter != null)
-			return false;
-		this.gameCharacter = movable;
-		return true;
+		boolean isSet = this.gameCharacter == null && this.isWalkable();
+	
+		if (isSet) {
+			this.gameCharacter = movable;
+			if(item!=null && this.item.effectOn(movable)) {
+				this.delItem();
+			}
+		}
+		
+		return isSet;
 	}
 
 
 	public byte attack(Attack attack) {
 		byte number = 1;
+		
 		if(this.gameCharacter != null) {
 			attack.attack(this.gameCharacter);
 			number *= 3;
 		}
+		
 		if(this.item!=null)
 			number *= 5;
+		
 		if(!this.background.isWalkable())
 			number *= 7;
+		
 		return number;
 	}
 	
-	
+	public void delItem () {
+		this.item = null;
+		this.mapProperty.set(cellId);
+	}
 
 	public boolean setItem (Item item) {
 		if (this.item!=null) 
 			return false;
 		this.item=item;
-		this.changeProperty.set(item.getImageName());
+		this.mapProperty.set(cellId);
 		return true;
 	}
 
@@ -70,8 +81,21 @@ public class Cell {
 		return Fusion.fuseIntegerWithArray(this.background.getBackgroundList(),200);
 	}
 	
-	public final IntegerProperty changeProperty() {
-		return this.safeProperty;
+	
+	public void setBackground(int[] backValue) {
+        this.background = new Background(backValue);
+        this.triggerChange();
 	}
+	
+	private void triggerChange() {
+		if(mapProperty.get()==this.cellId)
+			this.mapProperty.set(-1);
+		else
+			this.mapProperty.set(this.cellId);
+	}
+	
+	
+	
+	
 	
 }
