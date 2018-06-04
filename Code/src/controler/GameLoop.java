@@ -6,6 +6,8 @@ import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 import model.Game;
@@ -22,12 +24,16 @@ public class GameLoop {
 	private Game myGame;
 	private HashMap<Integer,MovableView> movableList;
 	private AnchorPane characterAnchorPane;
+	private Label HPLabel ;
+	private ProgressBar HPProgressBar;
 	
-	public GameLoop(Game myGame,AnchorPane characterAnchorPane) {
+	public GameLoop(Game myGame,AnchorPane characterAnchorPane,Label HPLabel,ProgressBar HPProgress) {
 		this.movableList = new HashMap<Integer,MovableView>();
 		this.characterAnchorPane = characterAnchorPane;
 		this.myGame = myGame;
 		this.gameLoop = new Timeline();
+		this.HPLabel = HPLabel;
+		this.HPProgressBar = HPProgress;
 		initialiseLoop();
 
 	}
@@ -52,13 +58,13 @@ public class GameLoop {
 	}
 	
 	private void turn() {
+		
 		if(this.myGame.end()) {
 			gameLoop.stop();
 			Alert alert = new Alert(Alert.AlertType.INFORMATION,"Vous avez perdu !");
 			alert.show();
 		}
 		else {
-			
 			addPlayers(this.myGame.getNewPlayers());
 			removePlayers(this.myGame.getRemovedMovable());
 			playMoves(this.myGame.turn());			
@@ -68,13 +74,14 @@ public class GameLoop {
 	}
 	
 	private void removePlayers(int[] playersId) {
-	    FadeTransition ft = new FadeTransition(Duration.millis(200));
-	    ft.setFromValue(1.0);
+		FadeTransition ft;
 		for(Integer playerId : playersId) {
+		    ft = new FadeTransition(Duration.millis(200));
+		    ft.setFromValue(1.0);
 			MovableView current = this.movableList.get(playerId);
 			ft.setToValue(0);
 			ft.setNode(current);
-			ft.play();
+			ft.playFromStart();
 			this.movableList.remove(playerId);
 			ft.setOnFinished(e->this.characterAnchorPane.getChildren().remove(current));
 		}
@@ -91,13 +98,15 @@ public class GameLoop {
 				MovableView movable = this.movableList.get(move.getMovableId());
 				movable.moveTo(move.getEndCellId(),move.getSpeed());
 		}
+		
+		
 	}
 	
 	private void addPlayers(NewMovable[] newPlayers) {
 		for(NewMovable newPlayer : newPlayers) {
 			MovableView newMovable ;
 			if(newPlayer.getKey() == Game.HEROKEY)
-				newMovable = new HeroView(newPlayer.getCellId(),newPlayer.getImageValue(),this.characterAnchorPane);
+				newMovable = new HeroView(newPlayer.getCellId(),newPlayer.getImageValue(),this.myGame,this.characterAnchorPane,HPLabel,HPProgressBar);
 			else
 				newMovable = new MovableView(newPlayer.getCellId(),newPlayer.getImageValue());
 			

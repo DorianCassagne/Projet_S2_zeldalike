@@ -1,30 +1,31 @@
-package model.character;
+package model.character.enemy;
 
 import model.PathFinder.BFS1;
-import model.character.attack.AttackTest;
+
+import model.character.GameCharacter;
+import model.character.attack.statics.AttackTest;
 import model.gameMap.GameMap;
 import model.gameMap.additional.Statics;
 import model.gameMap.move.Move;
 import model.gameMap.move.Movement;
 
-public class BadMonkey extends GameCharacter{
+public class BadMonkey extends Enemy{
 	
 	private final static int DEFAULTHP = 150;
 	private final static int DEFAULTDEF = 10;
 	private final static int DEFAULTCYCLE = 40;
 	private final static int DEFAULTIMAGE = 16;
-	private final static double DEFAULTCOEFFICIENT = 2;
 	
 	
 	public BadMonkey(GameMap map, int startRow, int startColumn) {
-		super(map, DEFAULTHP, DEFAULTDEF, startRow, startColumn,DEFAULTCYCLE,DEFAULTCOEFFICIENT,DEFAULTIMAGE);
+		super(map, startRow, startColumn,DEFAULTCYCLE,DEFAULTIMAGE,DEFAULTHP, DEFAULTDEF,90);
 	}
 
 	@Override
 	public Move act() {
 		
-		int row = GameCharacter.getGameCharacter().getRow() ;
-		int column = GameCharacter.getGameCharacter().getColumn();
+		int row = GameCharacter.getHero().getRow() ;
+		int column = GameCharacter.getHero().getColumn();
 		int actualCell= Statics.convertToCellId(this.getRow(), this.getColumn());
 		//exmple pour attackmove attention a l'ordre des cases
 		int[]tab= {
@@ -72,6 +73,7 @@ public class BadMonkey extends GameCharacter{
 
 		return ret;
 	}
+
 	
 	
 

@@ -1,7 +1,5 @@
 package controler;
 
-import java.awt.Canvas;
-import java.awt.Label;
 import java.net.URL;
 
 
@@ -13,6 +11,7 @@ import java.util.function.Function;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -27,18 +26,19 @@ public class Controleur implements Initializable{
 	
 	public final static TexturePack TEXTURE ;
 
-	private final static String TILESETPATH = "src/resources/tileset/jeudi24.png";
+	private final static String TILESETPATH = "src/resources/tileset/Image/LastTileset.png";
 	
 	@FXML private AnchorPane mainAnchorPane;
 	@FXML private AnchorPane characterAnchorPane;
 	@FXML private TilePane mapTilePane;
 	@FXML private ImageView avatarImage;
-    @FXML private Canvas heartCanvas;
     @FXML private Label MPLabel;
     @FXML private ProgressBar MPProgressBar;
     @FXML private ImageView itemImage;
     @FXML private ImageView attackImage;
-
+    @FXML private Label HPLabel;
+    @FXML private ProgressBar HPProgressBar;
+    
 	private Game myGame;
 	private CommandInterpreter interpreter;
 	private GameLoop gameLoop;
@@ -54,14 +54,18 @@ public class Controleur implements Initializable{
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		this.gameLoop = new GameLoop(myGame,this.characterAnchorPane);
+		
+		this.gameLoop = new GameLoop(myGame,this.characterAnchorPane,this.HPLabel,this.HPProgressBar);
+
 		ConvertionAndStatics.fixPaneDimension(MapReader.MAPLENGTH * ConvertionAndStatics.TILEDIMENSION,this.mapTilePane,this.characterAnchorPane);
 		this.createMap();
 		gameLoop.start();
 		this.interpreter = new CommandInterpreter(myGame,gameLoop);
+		
 		this.myGame.changeMapProperty().addListener(
 				(obs,oldValue,newValue)->this.createMap()
 		);
+		
 	}
 	
 	private void createMap() {

@@ -7,16 +7,11 @@ import model.gameMap.GameMap;
 import model.gameMap.additional.Statics;
 import model.gameMap.move.Move;
 import model.gameMap.move.Movement;
+import model.scenario.action.Action;
 import resources.additionalClass.UsefulMethods;
 
 public abstract class Movable {
 
-	public final static int DEFAULTIMAGEINDEX = 0;
-	public final static int TOPIMAGEINDEX = 0;
-	public final static int LEFTIMAGEINDEX = 3;
-	public final static int RIGHTIMAGEINDEX = 1;
-	public final static int BOTTOMIMAGEINDEX = 2;	
-	
 	private int row;
 	private int column;
 	private GameMap map;
@@ -52,18 +47,12 @@ public abstract class Movable {
 		return this.safeImageValueProperty;
 	}
 	
-	protected void setWait(int cycle) {
-		if(cycle < 0)
-			throw new IllegalArgumentException("CYCLE MUST BE GREATER THAN 0");
-		this.cycle = cycle;
 	
-	}
-	
-	protected final int getRow() {
+	public final int getRow() {
 		return this.row;
 	}
 	
-	protected final int getColumn() {
+	public final int getColumn() {
 		return this.column;
 	}
 	
@@ -73,12 +62,14 @@ public abstract class Movable {
 	
 	public final void setCellId(int row,int column) {
 		
+
 		if(Statics.isInMap(row, column)) {
 			this.row = row;
 			this.column = column;
 		}
 		else
 			throw new IllegalArgumentException ("THE POSITION OF THE CHARACTER IS WRONG");	
+	
 	}	
 	
 	
@@ -115,24 +106,22 @@ public abstract class Movable {
 		Double d = this.cycle / this.moveCoefficient;
 		return d.intValue();
 	}
-	
-	public final int getX() {
-		return this.column;
-	}
-	
-	public final int getY() {
-		return this.row;
-	}
-	
+		
 	protected final void setMap(GameMap newMap) {
 		if(this == GameCharacter.getHero()) {
 			this.map = newMap;
 		}
 	}
 	
+	public void removeCharacter(Action action) {
+		if(action != null && action.isActive()) {
+			this.removeCharacter();
+		}
+	}
+
 	
 	protected abstract void removeCharacter();	
 	public abstract boolean isAlive();
-	public abstract Move act();
+	protected abstract Move act();
 	
 }

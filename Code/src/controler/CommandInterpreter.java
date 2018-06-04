@@ -3,7 +3,7 @@ package controler;
 
 import javafx.scene.input.KeyEvent;
 import model.Game;
-import model.character.Hero;
+import model.character.hero.Hero;
 
 public class CommandInterpreter {
 	private Game myGame;
@@ -21,12 +21,15 @@ public class CommandInterpreter {
 			nextMove = Hero.MOVEUP;
 			break;
 		case DOWN:
+
 			nextMove = Hero.MOVEDOWN;
 			break;
 		case LEFT:
+
 			nextMove = Hero.MOVELEFT;
 			break;
 		case RIGHT: 
+
 			nextMove = Hero.MOVERIGHT;
 			break;
 		case Z :
@@ -43,6 +46,7 @@ public class CommandInterpreter {
 			break;
 		case B :
 			this.gameLoop.stop();
+			break;
 		default :
 			System.out.println("Unknown key");
 		}

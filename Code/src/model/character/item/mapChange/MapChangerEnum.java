@@ -1,6 +1,6 @@
 package model.character.item.mapChange;
 
-import model.character.Hero;
+import model.character.hero.Hero;
 
 public enum MapChangerEnum  {
 	MAP1(0),

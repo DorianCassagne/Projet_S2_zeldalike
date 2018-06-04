@@ -1,6 +1,6 @@
 package model.character.item.mapChange;
 
-import model.character.Hero;
+import model.character.hero.Hero;
 import model.character.item.Item;
 
 public class MapChanger extends Item{
@@ -20,7 +20,6 @@ public class MapChanger extends Item{
 	@Override
 	protected void applyTo(Hero hero) {
 		this.changer.applyTo(hero);
-		
 	}
 	
 	

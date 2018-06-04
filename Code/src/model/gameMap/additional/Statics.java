@@ -47,12 +47,12 @@ public class Statics {
 		return row >= 0 && row < MapReader.MAPLENGTH && column >= 0 && row < MapReader.MAPLENGTH;
 	}
 	
-	public static int[] getItemValue(int[][] values) {
+	public static Integer[] getItemValue(Integer[][] values) {
 		return values[ITEMVALUEINDEX - 1];
 	}
 	
-	public static int[][] getBackgroundValues(int[][] values) {
-		int[][] backValues = new int[Statics.MAPFULLSIZE][values.length - 1];
+	public static Integer[][] getBackgroundValues(Integer[][] values) {
+		Integer[][] backValues = new Integer[Statics.MAPFULLSIZE][values.length - 1];
 		
 		for(int j = 0 ; j < Statics.MAPFULLSIZE ; j++) {
 			for(int i = ITEMVALUEINDEX ; i < values.length ;i++) {

@@ -1,7 +1,7 @@
 package model.character.item;
 
 import model.character.GameCharacter;
-import model.character.Hero;
+import model.character.hero.Hero;
 
 /*
  * Item : abstract
@@ -14,11 +14,20 @@ import model.character.Hero;
  */
 
 public abstract class Item {
+	public static final int	ATTACKITEMSTARTINDEX = 808;
+	public final static int DEFENSEINTEMSTARTINDEX = 824;
+	public final static int SPEEDITEMSTARTINDEX = 840;
+	public final static int MPITEMSTARTINDEX = 856;
+	public final static int BOXITEMSTARTINDEX = 872 ;
+	public final static int HPPOTIONSTARTINDEX = 888;
+	public final static int MPPOTIONSTARTINDEX = 892;
 	
+
+
 	private int imageValue;
-		
+	
 	//crée un objet de type Item. Renvoie une erreure si l'une des valeurs est négatives
-	public Item(int imageValue) throws IllegalArgumentException{
+	public Item(int imageValue) {
 		this.imageValue = imageValue;
 	}
 
@@ -34,6 +43,7 @@ public abstract class Item {
 		}
 		return isConsumed;
 	}
+	
 	
 	//modifie les caract�ristique du personnage � partir des propri�t�s de l�item,
 	protected abstract void applyTo(Hero hero); 

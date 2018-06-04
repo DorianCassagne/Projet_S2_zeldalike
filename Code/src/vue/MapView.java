@@ -35,7 +35,7 @@ public class MapView {
 		Integer[] changeCell = this.backgroundSource.apply(cellId);
 		this.cellsItemAndBackground[cellId].updateCell(changeCell);
 	}
-	
+		
 	public void initialise() {		
 		this.mapContainer.getChildren().clear();
 		for(int cellId = 0 ; cellId < this.cellsItemAndBackground.length ;cellId++) {

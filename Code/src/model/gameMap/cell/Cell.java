@@ -2,13 +2,19 @@ package model.gameMap.cell;
 
 import javafx.beans.property.IntegerProperty;
 
+
 import model.character.GameCharacter;
 import model.character.attack.Attack;
 import model.character.item.Item;
-import model.gameMap.additional.Statics;
+import model.character.item.factory.ItemFactory;
 import resources.additionalClass.Fusion;
 
 public class Cell {
+
+	public final static byte NOEFFECT = 1;
+	public final static byte CHARACTERISPRESENT = 3;
+	public final static byte ITEMISPRESENT = 5;
+	public final static byte NOTWALKABLE = 7 ;
 
 	
 	private Background background;
@@ -18,20 +24,28 @@ public class Cell {
 	private int cellId;
 	
 	
-	public Cell(int[] backgroundValue,int itemValue,IntegerProperty mapProperty,int cellId){
-		
+	public Cell(Integer[] backgroundValue,int itemValue,IntegerProperty mapProperty,int cellId){
 		this.background = new Background(backgroundValue);
 		this.mapProperty = mapProperty;
-	
+		this.item = ItemFactory.getItem(itemValue);
+		this.cellId = cellId;
 	}
 
+	public boolean containsItem() {
+		return this.item == null;
+	}
+	
 	public void removeMovable() {
 		this.gameCharacter=null;
+	}
+	
+	public void setToWalkable() {
+		this.background.setToWalkable();
+		this.triggerChange();
 	}
 
 	public boolean addMovable(GameCharacter movable) {
 		boolean isSet = this.gameCharacter == null && this.isWalkable();
-	
 		if (isSet) {
 			this.gameCharacter = movable;
 			if(item!=null && this.item.effectOn(movable)) {
@@ -44,33 +58,34 @@ public class Cell {
 
 
 	public byte attack(Attack attack) {
-		byte number = 1;
+		byte number = NOEFFECT;
 		
 		if(this.gameCharacter != null) {
 			attack.attack(this.gameCharacter);
-			number *= 3;
+			number *= CHARACTERISPRESENT;
 		}
 		
 		if(this.item!=null)
-			number *= 5;
+			number *= ITEMISPRESENT;
 		
 		if(!this.background.isWalkable())
-			number *= 7;
+			number *= NOTWALKABLE;
 		
 		return number;
 	}
 	
-	public void delItem () {
+	private void delItem () {
 		this.item = null;
-		this.mapProperty.set(cellId);
+		triggerChange();
 	}
 
 	public boolean setItem (Item item) {
-		if (this.item!=null) 
-			return false;
-		this.item=item;
-		this.mapProperty.set(cellId);
-		return true;
+		boolean isSet = this.item == null;
+		if(isSet) {
+			this.item=item;
+			this.triggerChange();
+		}
+		return isSet;
 	}
 
 	public boolean isWalkable() {
@@ -78,11 +93,14 @@ public class Cell {
 	}
 
 	public Integer[] getCellBackgroundLayer() {
-		return Fusion.fuseIntegerWithArray(this.background.getBackgroundList(),200);
+		if(item != null)
+			return Fusion.fuseIntegerWithArray(this.background.getBackgroundList(),this.item.getImageValue());
+		else
+			return this.background.getBackgroundList();
 	}
 	
 	
-	public void setBackground(int[] backValue) {
+	public void setBackground(Integer[] backValue) {
         this.background = new Background(backValue);
         this.triggerChange();
 	}

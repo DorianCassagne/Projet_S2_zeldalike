@@ -1,8 +1,11 @@
 package model.gameMap;
 import javafx.beans.property.IntegerProperty;
+
+
 import javafx.beans.property.SimpleIntegerProperty;
 import model.character.GameCharacter;
 import model.character.attack.Attack;
+import model.character.item.Item;
 import model.gameMap.additional.MapReader;
 import model.gameMap.additional.NewMovable;
 import model.gameMap.additional.Statics;
@@ -22,10 +25,11 @@ public class GameMap {
 	//Dans ce cas l� il n'est autoris� qu'un layer, d�clenche une exception si le fichier n'est pas valid
 	public GameMap(String ... mapPath) {
 		
-		int[][] values = MapReader.readAndConvertMapFile(mapPath);
+		Integer[][] values = MapReader.readAndConvertMapFile(mapPath);
 		this.action = new Action();
 		this.changeProperty = new SimpleIntegerProperty();
 		this.safeChangeProperty = UsefulMethods.copyIntegerProperty(this.changeProperty);
+		this.safeChangeProperty.addListener((obs,oldV,newV)->System.out.println("The new Value = "+newV));
 		initialiseCells(values);
 	
 	}
@@ -62,11 +66,25 @@ public class GameMap {
 		return changed;	
 	}
 	
+	public boolean addItem(Item item,int cellId ) {
+		boolean added = this.cells[cellId].setItem(item);
+		return added;
+	}
+	
+	public void clearBackgroundConstraint(int cellId,model.scenario.action.Action action) {
+		if(action != null && action.isActive())
+			this.cells[cellId].setToWalkable();
+	}
+	
+	public boolean containsItemAt(int cellId) {
+		return this.cells[cellId].containsItem();
+	}
+	
 	//Initialise l'ensemble des celluls de la map
-	private void initialiseCells(int[][] values) {
+	private void initialiseCells(Integer[][] values) {
 		this.cells = new Cell[Statics.MAPFULLSIZE];
-		int[][] backValues = Statics.getBackgroundValues(values);
-		int[] itemValue = Statics.getItemValue(values);
+		Integer[][] backValues = Statics.getBackgroundValues(values);
+		Integer[] itemValue = Statics.getItemValue(values);
 		
 		for(int i = 0 ; i < Statics.MAPFULLSIZE ;i++) {
 			createCell(i,backValues[i],itemValue[i]);
@@ -74,7 +92,7 @@ public class GameMap {
 		
 	}
 	
-	private void createCell(int cellId,int[] backValue,int itemValue) {
+	private void createCell(Integer cellId,Integer[] backValue,int itemValue) {
 		cells[cellId] = new Cell(backValue,itemValue,this.changeProperty,cellId);			
 	}
 

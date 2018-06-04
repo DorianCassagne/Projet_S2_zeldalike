@@ -20,19 +20,19 @@ public class Main extends Application {
 
         FXMLLoader loader = new FXMLLoader();
         URL url=null;
+        AnchorPane root = null; 
+        
 		try {
 			url = Main.class.getResource("/vue/GuiView.fxml").toURI().toURL();
 		} catch (MalformedURLException e) {
-			e.printStackTrace();
 			throw new Error("Error path to fxml file");
 		}catch (URISyntaxException e) {
-			e.printStackTrace();
+			throw new Error("Error path to fxml file");
 		}
 
         loader.setLocation(url);
-        AnchorPane root = new AnchorPane(); 
+        
         try {
-
 			root=loader.load();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -40,11 +40,10 @@ public class Main extends Application {
 		} 
 
         Controleur controller = loader.getController();
-        
         Scene  scene = new Scene(root,960,640);
+        
         controller.startScene(scene);
         primaryStage.setScene(scene);
-        primaryStage.setResizable(true);
         primaryStage.show();
     }
 

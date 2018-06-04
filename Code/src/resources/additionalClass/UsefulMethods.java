@@ -14,10 +14,14 @@ public class UsefulMethods {
 		return false;
 	}
 	
-	
 	public static boolean compareDouble(double firstOne,double secondOne) {
 		return (Math.abs(firstOne - secondOne) > 0.001);
 	}
+	
+	public static boolean isBetween(double value,double firstParam,double secondParam) {
+		return value >= firstParam && value < secondParam;
+	}
+	
 	
 	public static IntegerProperty copyIntegerProperty(IntegerProperty source) {
 		IntegerProperty copy = new SimpleIntegerProperty();

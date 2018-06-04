@@ -2,7 +2,7 @@ package resources.additionalClass;
 
 public class Fusion {
 
-	public static Integer[] fuseIntegerWithArray(int[] values,int ... lastValues) {
+	public static Integer[] fuseIntegerWithArray(Integer[] values,Integer ... lastValues) {
 		Integer[] newArray = new Integer[values.length + lastValues.length];
 		
 		fuseIntegerArray(newArray,values,0);
@@ -12,7 +12,7 @@ public class Fusion {
 	}
 	
 	
-	public static void fuseIntegerArray(Integer[] destArray,int[] sourceArray,int startIndex) {
+	public static void fuseIntegerArray(Integer[] destArray,Integer[] sourceArray,int startIndex) {
 		for(int i = 0 ; i < sourceArray.length;i++) {
 			destArray[i+startIndex] = sourceArray[i];
 		}
