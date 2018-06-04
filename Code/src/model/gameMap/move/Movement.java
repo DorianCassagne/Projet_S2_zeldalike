@@ -8,8 +8,9 @@ public enum Movement {
 	TOP(-Statics.STEP,0),
 	RIGHT(0,Statics.STEP),
 	BOTTOM(Statics.STEP,0),
-	LEFT(0,-Statics.STEP);
+	LEFT(0,-Statics.STEP),
 	
+	STAY(0,0);
 	private int verticaly;
 	private int horizontaly;
 	

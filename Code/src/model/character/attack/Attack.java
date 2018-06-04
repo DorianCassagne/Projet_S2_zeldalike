@@ -81,6 +81,9 @@ public abstract class Attack extends Movable {
 	public Movement getDirection() {
 		return this.direction;
 	}
+	protected void setDirection(Movement dir) {
+		this.direction=dir;
+	}
 	
 	public abstract boolean handlePlay(byte attackResult);
 	public abstract void attack(GameCharacter gameCharacter) ;
