@@ -47,6 +47,9 @@ public class CommandInterpreter {
 		case B :
 			this.gameLoop.stop();
 			break;
+		case E : 
+			nextMove = Hero.CHANGEATTACK;
+			break;
 		default :
 			System.out.println("Unknown key");
 		}

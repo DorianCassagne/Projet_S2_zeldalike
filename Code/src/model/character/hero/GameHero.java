@@ -34,6 +34,7 @@ public abstract class GameHero extends GameCharacter {
 	public static final char ATTACKRIGHT = '6' ;
 	public static final char ATTACKDOWN = '2' ;
 	public static final char ATTACKLEFT = '4' ;
+	public static final char CHANGEATTACK = 'c';
 	private final static AttackItem DEFAULTATKITEM = new AttackItem(809);
 	
 	private IntegerProperty hp;
@@ -49,6 +50,23 @@ public abstract class GameHero extends GameCharacter {
 		this.attackList = new ArrayList<Launcher>();
 		this.attackList.add(new DefaultAttackLauncher(DEFAULTATKITEM));
 		this.attackType = new SimpleIntegerProperty(0);
+	}
+	
+	protected void setNextAttack(int index) {
+		if(index >= 0 && index < this.attackList.size())
+			this.attackType.set(index);
+	}
+	
+	protected int getIndexAttack() {
+		return this.attackType.get();
+	}
+		
+	public void addLauncher(Launcher launcher) {
+		this.attackList.add(launcher);
+	}
+	
+	protected int getAttackQuantity() {
+		return this.attackList.size();
 	}
 	
 	public GameHero(GameMap map, int startRow, int startColumn) {

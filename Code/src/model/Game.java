@@ -38,15 +38,10 @@ public class Game {
 			this.myMap = new GameMap(mapHash.getLayers());
 			this.scenario = new Scenario(mapHash.getScenario(),new SimpleStringProperty(),this.myMap);
 			createHero(mapHash.getPosY(),mapHash.getPosX());
-			createEnemy();
 			this.mapChangeProperty.set(!this.mapChangeProperty.get());
 		}
 	}
-	
-	private void createEnemy(){
-		new BadMonkey(myMap, 18, 18);
-	}
-	
+		
 	private void createHero(int startRow,int startColumn) {
 		if(this.hero == null) {
 			this.hero = new Hero(this.myMap,startRow,startColumn);

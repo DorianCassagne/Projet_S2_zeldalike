@@ -10,6 +10,7 @@ import java.util.function.Function;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -70,10 +71,21 @@ public class Controleur implements Initializable{
 	
 	private void createMap() {
 		
+		clearCharacterPane();
 		Function< Integer,Integer[]> backgroundSource = element->this.myGame.getLayerForCell(element);
 		this.myMapView = new MapView(backgroundSource,this.mapTilePane,this.myGame.getMapChangeProperty());
 		this.myMapView.initialise();
 	
+	}
+	
+	private void clearCharacterPane() {
+		int i = 0;
+		while(i < this.characterAnchorPane.getChildren().size()){
+			if(this.characterAnchorPane.getChildren().get(i) != this.mapTilePane)
+				this.characterAnchorPane.getChildren().remove(this.characterAnchorPane.getChildren().get(i));
+			else
+				i++;
+		}
 	}
 
 	public void startScene(Scene scene) {

@@ -75,7 +75,12 @@ public class Condition {
 	
 	private Supplier<Boolean> handleMonster(){
 		Supplier<Boolean> supplier = ()->{
-			boolean isGreater = actionData.getElementsList().get(this.id).getHp() <= this.lifePoint;
+			boolean isGreater = false;
+			try {
+				isGreater = actionData.getElementsList().get(this.id).getHp() <= this.lifePoint;
+			}catch(NullPointerException e) {
+				
+			}
 			return isGreater ^ this.conditionValue;
 		};
 		return supplier;

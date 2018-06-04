@@ -21,6 +21,7 @@ public abstract class Movable {
 	private IntegerProperty safeImageValueProperty;
 	private IntegerProperty imageValueProperty;
 	private int defaultImage;
+	private int baseCycle;
 	
 	public Movable(GameMap map,int cycle, int row, int column,double moveCoefficient,int defaultImage) {
 		if(cycle < 0 || moveCoefficient < 0 )
@@ -30,8 +31,15 @@ public abstract class Movable {
 		this.moveCoefficient = moveCoefficient;
 		this.cycle = cycle;
 		this.tour = 0;	
+		this.baseCycle=cycle;
 		this.defaultImage = defaultImage;
 		initialiseImageProperty();
+	}
+	
+	protected void setWait(int cycle) {
+		if(cycle < 0 && moveCoefficient > 0)
+			throw new IllegalArgumentException("Speed must be greater than 0");
+		this.cycle = cycle;
 	}
 	
 	private void initialiseImageProperty() {
@@ -87,6 +95,7 @@ public abstract class Movable {
 		
 		if(this.tour == cycle) {
 			this.tour = 0;
+			this.cycle=this.baseCycle;
 			canAct = true;
 		}
 		

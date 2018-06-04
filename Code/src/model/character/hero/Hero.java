@@ -2,7 +2,6 @@ package model.character.hero;
 
 
 import javafx.beans.property.IntegerProperty;
-
 import javafx.beans.property.SimpleIntegerProperty;
 import model.character.GameCharacter;
 import model.character.item.mapChange.MapChangerEnum;
@@ -73,7 +72,14 @@ public class Hero extends GameHero{
 			attackLaunch = true;
 			this.direction = Movement.RIGHT;
 			break;
-			
+		case CHANGEATTACK : 
+			this.setWait(1);
+			int i = this.getIndexAttack()+1;
+			if (i==this.getAttackQuantity())
+				this.setNextAttack(0);
+			this.setNextAttack(i);
+			System.out.println("This attack is " + i);
+			break;
 			
 		default : 
 			break;

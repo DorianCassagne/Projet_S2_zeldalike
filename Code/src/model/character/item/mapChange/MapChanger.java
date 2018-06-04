@@ -5,7 +5,7 @@ import model.character.item.Item;
 
 public class MapChanger extends Item{
 
-	private static final int STARTMAPCHANGEINDEX = 204;
+	private static final int STARTMAPCHANGEINDEX = 10;
 	
 	private MapChangerEnum changer;
 	

@@ -3,8 +3,7 @@ package model.gameMap;
 public enum MapEnum {
 	
 	MAPDEBUT(14,13,"scenario1.txt","BelleMap_ItemLayer.csv","BelleMap_Background.csv","BelleMap_Foreground.csv"),
-	MAPFORET(12,13,"testMap.csv"),
-	MAPBOSS1(12,13,"testMap.csv");
+	MAPFORET(12,13,"scenario1.txt","BelleMap_ItemLayer.csv","BelleMap_Background.csv");	
 	
 	private String[] layers;
 	private int heroPosX;
