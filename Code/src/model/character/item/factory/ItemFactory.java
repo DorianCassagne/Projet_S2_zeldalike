@@ -37,7 +37,7 @@ public class ItemFactory {
 				try{
 					item = new Healer(name);
 				}catch(IllegalArgumentException e3) {
-					item = new MapChanger(1);
+					item = new SpecialAttackItem();
 				}
 			}
 		}
