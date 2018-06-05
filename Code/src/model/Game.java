@@ -5,6 +5,7 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import model.character.enemy.BadMonkey;
+import model.character.enemy.boss.NyaNyaNay;
 import model.character.hero.Hero;
 import model.gameMap.GameMap;
 import model.gameMap.MapEnum;
@@ -29,6 +30,7 @@ public class Game {
 	public Game(int mapIndex) {
 		this.mapChangeProperty = new SimpleBooleanProperty(true);
 		this.changeMap(mapIndex);
+		new NyaNyaNay(myMap, 20, 20);
 	}
 
 	

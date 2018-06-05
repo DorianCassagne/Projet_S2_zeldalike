@@ -7,7 +7,7 @@ import model.gameMap.GameMap;
 import model.gameMap.move.Move;
 import model.gameMap.move.Movement;
 
-public class Enemy extends GameCharacter{
+public abstract class Enemy extends GameCharacter{
 	
 	private final static double DEFAULTCOEFFICIENT = 2;
 
@@ -50,10 +50,6 @@ public class Enemy extends GameCharacter{
 		new AttackTest(getMyMap(), getRow(), getColumn(), direction, damage);
 	}
 
-	@Override
-	protected Move act() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 }
