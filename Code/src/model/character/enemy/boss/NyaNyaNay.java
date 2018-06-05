@@ -21,7 +21,7 @@ public class NyaNyaNay  extends NyaSlave {
  
 	private final static double COEF=2.0;
 	private final static int DEFALTIMG=40;
-	private final static int DEFAULTCYCLE=5;
+	private final static int DEFAULTCYCLE=4;
 	//private final static int COEF=2.0;
 	private static BooleanProperty dead=new SimpleBooleanProperty(false);
 	private static IntegerProperty def =new SimpleIntegerProperty(10);
@@ -47,7 +47,8 @@ public class NyaNyaNay  extends NyaSlave {
 	}
 	@Override
 	protected Move act() {
-		if (attCoté) {
+		if (attCoté&&super.getMov()==Movement.STAY) {
+			
 			new NyanAttHori(this.getMyMap(), this.getRow(), this.getColumn());
 			attCoté=false;
 		}
@@ -83,7 +84,7 @@ public class NyaNyaNay  extends NyaSlave {
 				if (randomInt == this.getColumn()) {
 					setWait(30);
 					//randomInt=2;
-					randomInt= ran.nextInt(5);//nb dattaque max
+					randomInt= ran.nextInt(5)+1;//nb dattaque max
 					att=true;
 				}
 				if (randomInt<this.getColumn()) {
