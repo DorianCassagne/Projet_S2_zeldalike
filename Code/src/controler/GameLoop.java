@@ -18,7 +18,7 @@ import vue.MovableView;
 
 public class GameLoop {
 	
-	public final static int FRAMEDURATION = 17;
+	public final static int FRAMEDURATION = 90;
 	
 	private Timeline gameLoop ;
 	private Game myGame;

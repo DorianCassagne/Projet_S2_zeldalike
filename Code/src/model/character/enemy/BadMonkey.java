@@ -29,10 +29,10 @@ public class BadMonkey extends Enemy{
 		int actualCell= Statics.convertToCellId(this.getRow(), this.getColumn());
 		//exmple pour attackmove attention a l'ordre des cases
 		int[]tab= {
-				Statics.convertToCellId(row+1,column),
-				Statics.convertToCellId(row,column-1),
-				Statics.convertToCellId(row-1,column),
-				Statics.convertToCellId(row,column+1),
+				Statics.convertToCellId(row+2,column),
+				Statics.convertToCellId(row,column-2),
+				Statics.convertToCellId(row-2,column),
+				Statics.convertToCellId(row,column+2),
 		};
 		
 		int inPlace= inPlace(tab, actualCell);

@@ -27,18 +27,18 @@ public class EnemyMove extends Attack implements ExternalMover{
 	
 
 	@Override
-	public void attack(GameCharacter gameCharacter) {
+	public int getSpeed() {
+		return 20;
+	}
+
+	@Override
+	protected void establishAttack(GameCharacter gameCharacter) {
 		
 		Movement direction = this.getDirection();
 		int newRow = gameCharacter.getRow() + direction.getVerticalIncrement() ;
 		int newColumn = gameCharacter.getColumn() + direction.getHorizontalIncrement();
-		System.out.println(gameCharacter.getRow() + " -> "+newRow + " ; "+gameCharacter.getColumn() + "->"+newColumn);
 		this.getMyMap().changeCell(gameCharacter, gameCharacter.getRow(), gameCharacter.getColumn(), newRow, newColumn,this);
-	}
-
-	@Override
-	public int getSpeed() {
-		return 20;
+		
 	}
 
 }

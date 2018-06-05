@@ -1,10 +1,7 @@
 package model.gameMap;
-import java.util.ArrayList;
 
 
 import javafx.beans.property.IntegerProperty;
-
-
 import javafx.beans.property.SimpleIntegerProperty;
 import model.character.GameCharacter;
 import model.character.attack.Attack;
@@ -120,7 +117,6 @@ public class GameMap {
 		if(Statics.isInMap(row,column)) {
 			int cellId = Statics.convertToCellId(row, column);
 			correctlyPlaced = this.cells[cellId].addMovable(movable);
-			System.out.println(correctlyPlaced);
 
 			if(correctlyPlaced) {
 				this.action.addMovable(movable,cellId);
@@ -138,13 +134,10 @@ public class GameMap {
 	
 	public void  addAttack(Attack attack,int row,int column) {
 		if(Statics.isInMap(row,column)) {
-		
 			int cellId = Statics.convertToCellId(row,column);
 			this.action.addMovable(attack,cellId);
-		
 		}
 		else {
-			
 			throw new IllegalArgumentException("ENDCELL NOT FOUND");
 		
 		}
@@ -164,9 +157,9 @@ public class GameMap {
 	public byte playAttack(Attack attack,int row,int column) {
 		
 		byte value = Attack.NOTPLAYED;
-		if(Statics.isInMap(row,column)) {
+		if(Statics.isInMap(row,column) && attack != null) {
 			int endCellId = Statics.convertToCellId(row, column);
-			value = this.cells[endCellId].attack(attack);
+			value = this.cells[endCellId].addAttack(attack);
 		}else {
 			this.action.delAttack(attack);
 		}

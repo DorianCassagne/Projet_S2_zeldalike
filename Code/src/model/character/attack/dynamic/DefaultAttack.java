@@ -1,10 +1,10 @@
 package model.character.attack.dynamic;
 
 import model.character.GameCharacter;
+
 import model.character.attack.Attack;
 import model.character.item.attack.AttackItem;
 import model.gameMap.GameMap;
-import model.gameMap.cell.Cell;
 import model.gameMap.move.Movement;
 
 public class DefaultAttack extends Attack{
@@ -18,15 +18,9 @@ public class DefaultAttack extends Attack{
 	}
 
 	@Override
-	public boolean handlePlay(byte attackResult) {
-		return attackResult == Cell.NOEFFECT || attackResult == Cell.ITEMISPRESENT;
-	}
-
-	@Override
-	public void attack(GameCharacter gameCharacter) {
+	protected void establishAttack(GameCharacter gameCharacter) {
 		gameCharacter.getDmg(this);
 	}
-	
 	
 	
 
