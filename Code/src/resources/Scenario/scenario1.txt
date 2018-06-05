@@ -1,0 +1,3 @@
+H:845: :C-OR-H:500: :C->C-I-AXE- -848->C-M-BADMONKEY-15-860
+M:15: :0->C-M-BADMONKEY-dorian2-861
+M:dorian2: :0->C-I-AXE- -847
