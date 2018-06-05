@@ -42,7 +42,7 @@ public class NyaSlave extends GameCharacter{
 			this.kill();
 	}
 	
-	public void setMov(Movement mov) {
+	protected void setMov(Movement mov) {
 		if (mov==null)
 			this.mov=Movement.STAY;
 		else
