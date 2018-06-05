@@ -14,41 +14,6 @@ public final class BFS1 {
 
 	
 	
-	public final static int simpleMove(GameMap map, int cellStart, int cellEnd, boolean joinTheCell) {
-		int[] tab ={cellEnd};
-		return simpleMove(map, cellStart, tab, joinTheCell, -1);
-	}
-
-
-	private final static CellBfs checkCase(CellBfs lastCase, GameMap map, boolean[] seenMap, int id) {
-	if (id<0 || id>=MapReader.MAPLENGTH*MapReader.MAPLENGTH )
-		return null;
-	if(!seenMap[id]) {
-		seenMap[id]=true;
-		if (map.isWalkableAt(id)){
-			return new CellBfs(lastCase, id);
-		}
-			
-	}
-	return null;
-	}
-	
-	
-	private final static CellBfs getCase(CellBfs lastCase, GameMap map, boolean[] seenMap, int id) {
-		if (id<0 || id>=MapReader.MAPLENGTH*MapReader.MAPLENGTH )
-			return null;
-		if(!seenMap[id]) {
-			seenMap[id]=true;
-				return new CellBfs(lastCase, id);	
-		}
-		return null;
-	}
-	
-	
-	public final static int simpleMove(GameMap map, int cellStart, int[] cellEnd, boolean joinTheCell) {
-		return simpleMove(map, cellStart, cellEnd, joinTheCell, -1);
-	}
-	
 	/**
 	 * 
 	 * @param map
@@ -57,8 +22,7 @@ public final class BFS1 {
 	 * @param joinTheCell si vrai le personnage ne bougeras que si il peu acceder a une des cellules d'arrivé
 	 * @param nbCycle 0 si autant de mouvement que possible
 	 * @return
-	 */
-	
+	 */	
 	public final static int simpleMove(GameMap map, int cellStart, int[] cellEnd, boolean joinTheCell, int nbCycle) {
 		
 		for (int i : cellEnd) {
@@ -83,7 +47,7 @@ public final class BFS1 {
 				break;
 		}while (find==null && !last.isEmpty()&& nbCycle !=0);
 		if (find==null) {
-			System.out.println("no way to join him");
+			//System.out.println("no way to join him");
 			return cellStart;
 		}
 		if (find.getLast()==null)
@@ -95,34 +59,14 @@ public final class BFS1 {
 					
 	}
 
-
-	private static CellBfs checkSingleCell( ArrayList<CellBfs> empty,CellBfs sommet, GameMap map, boolean[] seenMap, int[] cellEnd,boolean joinTheCell, int increment) {
-		if(!joinTheCell) {
-			for (int i2 : cellEnd) {
-				if (sommet.getIdCell()+increment==i2) {
-					CellBfs check= checkCase(sommet, map, seenMap, sommet.getIdCell()+ increment);
-					if (check!=null) {
-						return check;
-					}
-					//return getCase(sommet, map, seenMap,sommet.getIdCell()+increment);
-					return sommet;
-				}
-			}
-		}
-		
-		CellBfs check= checkCase(sommet, map, seenMap, sommet.getIdCell()+ increment);
-		if (check!=null) {
-			empty.add(check);
-			if (joinTheCell) {
-				for (int i2 : cellEnd) {
-					if (sommet.getIdCell()+increment==i2) 
-						return check;
-				}
-			}
-		}
-		return null;
+	public final static int simpleMove(GameMap map, int cellStart, int[] cellEnd, boolean joinTheCell) {
+		return simpleMove(map, cellStart, cellEnd, joinTheCell, -1);
 	}
-
+	
+	public final static int simpleMove(GameMap map, int cellStart, int cellEnd, boolean joinTheCell) {
+		int[] tab ={cellEnd};
+		return simpleMove(map, cellStart, tab, joinTheCell, -1);
+	}
 
 	private static CellBfs checkAroud(ArrayList<CellBfs> last, ArrayList<CellBfs> empty, boolean[] seenMap, GameMap map,int[] cellEnd, boolean joinTheCell) {
 		for (CellBfs sommet: last) {
@@ -159,5 +103,55 @@ public final class BFS1 {
 		return null;
 
 	}
+	
+	private static CellBfs checkSingleCell( ArrayList<CellBfs> empty,CellBfs sommet, GameMap map, boolean[] seenMap, int[] cellEnd,boolean joinTheCell, int increment) {
+		if(!joinTheCell) {
+			for (int i2 : cellEnd) {
+				if (sommet.getIdCell()+increment==i2) {
+					CellBfs check= checkCase(sommet, map, seenMap, sommet.getIdCell()+ increment);
+					if (check!=null) {
+						return check;
+					}
+					//return getCase(sommet, map, seenMap,sommet.getIdCell()+increment);
+					return sommet;
+				}
+			}
+		}
+		
+		CellBfs check= checkCase(sommet, map, seenMap, sommet.getIdCell()+ increment);
+		if (check!=null) {
+			empty.add(check);
+			if (joinTheCell) {
+				for (int i2 : cellEnd) {
+					if (sommet.getIdCell()+increment==i2) 
+						return check;
+				}
+			}
+		}
+		return null;
+	}
+	
+	private final static CellBfs checkCase(CellBfs lastCase, GameMap map, boolean[] seenMap, int id) {
+	if (id<0 || id>=MapReader.MAPLENGTH*MapReader.MAPLENGTH )
+		return null;
+	if(!seenMap[id]) {
+		seenMap[id]=true;
+		if (map.isWalkableAt(id)){
+			return new CellBfs(lastCase, id);
+		}
+			
+	}
+	return null;
+	}
+	
+//	private final static CellBfs getCase(CellBfs lastCase, GameMap map, boolean[] seenMap, int id) {
+//		if (id<0 || id>=MapReader.MAPLENGTH*MapReader.MAPLENGTH )
+//			return null;
+//		if(!seenMap[id]) {
+//			seenMap[id]=true;
+//				return new CellBfs(lastCase, id);	
+//		}
+//		return null;
+//	}
 }
 
