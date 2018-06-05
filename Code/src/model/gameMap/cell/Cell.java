@@ -56,7 +56,10 @@ public class Cell {
 		return isSet;
 	}
 
-
+	public boolean backWalkable() {
+		return this.background.isWalkable();
+	}
+	
 	public byte attack(Attack attack) {
 		byte number = NOEFFECT;
 		

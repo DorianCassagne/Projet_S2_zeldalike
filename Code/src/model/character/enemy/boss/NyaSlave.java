@@ -16,7 +16,7 @@ public class NyaSlave extends GameCharacter{
 	private IntegerProperty hp;
 	private IntegerProperty def;
 	private int realcycle;
-	public NyaSlave(GameMap map, int startRow, int startColumn, int cycle, double coefficient, int defaultImage, IntegerProperty hp, IntegerProperty def, BooleanProperty dead, int realCycle) {
+	protected NyaSlave(GameMap map, int startRow, int startColumn, int cycle, double coefficient, int defaultImage, IntegerProperty hp, IntegerProperty def, BooleanProperty dead, int realCycle) {
 		super(map, startRow, startColumn, cycle, coefficient, defaultImage);
 		this.dead=dead;		
 		this.hp=hp;

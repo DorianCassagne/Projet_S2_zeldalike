@@ -124,6 +124,9 @@ public class GameMap {
 	 * Ajoute une attaque � la map en indiquant sa case de départ
 	 * D�clenche une erreur si l'attaque n'a pas p� autre place sur la case, car l'identifiant de case est incorrecte
 	 */
+	public boolean backWalkableAt(int id) {
+			return cells[id].backWalkable();
+		}
 	
 	public void  addAttack(Attack attack,int row,int column) {
 		if(Statics.isInMap(row,column)) {

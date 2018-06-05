@@ -9,7 +9,7 @@ import model.gameMap.move.Movement;
 public class Bomrang extends Attack {
 
 	public Bomrang(GameMap map, int row, int column, Movement direction) {
-		super(map, 100, row, column, direction,100, 1, 2, 9, 10);
+		super(map, 100, row+direction.getVerticalIncrement(), column+direction.getHorizontalIncrement(), direction, 100, 1, 2, 9, 10);
 		this.setWait(30);
 	}
 
