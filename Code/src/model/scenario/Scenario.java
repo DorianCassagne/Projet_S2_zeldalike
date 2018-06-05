@@ -26,10 +26,12 @@ public class Scenario {
 	private ArrayList<Evenement> events ;
 	private HashMap<String,Enemy> elementsList;
 	private ActionData data;
+	private ArrayList<Integer> finishedEvents;
 	
 	public Scenario(String filename,StringProperty textMessages,GameMap map) {
 		this.elementsList = new HashMap<String,Enemy>();
-		this.data = new ActionData(map,textMessages,elementsList); 
+		this.finishedEvents = new ArrayList<Integer>();
+		this.data = new ActionData(map,textMessages,elementsList,finishedEvents); 
 		this.events = new ArrayList<Evenement>();
 		BufferedReader reader = SeparatorFileReader.openTextFile(SCENARIOPATH + filename);
 		ArrayList<ArrayList<String[]>> scenario = SeparatorFileReader.readFileWithTwoSeparator(reader, EXTERNALSEPARATOR, INTERNALSEPARTOR);
@@ -42,7 +44,7 @@ public class Scenario {
 			try{
 				Supplier<Boolean> condition = getCondition(scenario.get(i));
 				Supplier<Boolean>[] actions = this.getActions(scenario.get(i));
-				this.events.add(new Evenement(condition,actions));
+				this.events.add(new Evenement(i,condition,actions));
 			}catch(Exception e) {
 				e.printStackTrace();
 				throw new IllegalArgumentException("ERROR FOUND AT LINE "+ (i+1) + " \nMessage : " + e.getMessage());
@@ -92,11 +94,15 @@ public class Scenario {
 	}
 	
 	public void run() {
+		Evenement currentEvent;
 		if(this.canRun()) {
 			int i = 0;
 			while(i < events.size()) {
-				if(events.get(i).evaluate())
-					events.remove(i);
+				currentEvent = events.get(i);  
+				if(currentEvent.evaluate()) {
+					this.events.remove(i);
+					this.finishedEvents.add(currentEvent.getId());
+				}
 				i++;
 			}
 

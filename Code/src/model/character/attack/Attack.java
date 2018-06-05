@@ -19,7 +19,7 @@ public abstract class Attack extends Movable {
 	public Attack(GameMap map, int cycle, int row, int column,Movement direction,int damage,int cellPerTurn,double coefficient,int defaultImage,int maxDistance) {
 		
 		super(map,cycle, row, column,coefficient,defaultImage);
-		if(direction == null || damage <= 0 || cellPerTurn <= 0 || maxDistance < 0) {
+		if(direction == null || damage < 0 || cellPerTurn <= 0 || maxDistance < 0) {
 			throw new IllegalArgumentException("PROBLEM IN ATTACK");
 		}
 		else {

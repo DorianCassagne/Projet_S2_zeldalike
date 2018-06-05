@@ -1,4 +1,7 @@
 package model.gameMap;
+import java.util.ArrayList;
+
+
 import javafx.beans.property.IntegerProperty;
 
 
@@ -11,6 +14,7 @@ import model.gameMap.additional.NewMovable;
 import model.gameMap.additional.Statics;
 import model.gameMap.cell.Cell;
 import model.gameMap.move.Action;
+import model.gameMap.move.ExternalMover;
 import model.gameMap.move.Move;
 import resources.additionalClass.UsefulMethods;
 
@@ -29,7 +33,6 @@ public class GameMap {
 		this.action = new Action();
 		this.changeProperty = new SimpleIntegerProperty();
 		this.safeChangeProperty = UsefulMethods.copyIntegerProperty(this.changeProperty);
-		this.safeChangeProperty.addListener((obs,oldV,newV)->System.out.println("The new Value = "+newV));
 		initialiseCells(values);
 	
 	}
@@ -46,6 +49,14 @@ public class GameMap {
 	 * Renvoie vrai si le changement a été bien effectu�, cela veut dire que la case destination accepte le personnage en movement
 	 * Renvoie faux si la case d'arrivée ou de départ n'est pas une case disponible ou incorrecte.
 	*/
+	
+	public boolean changeCell(GameCharacter character,int currentRow,int currentColumn,int endRow,int endColumn,ExternalMover mover) {
+		boolean moved = mover != null && this.changeCell(character, currentRow, currentColumn, endRow, endColumn);
+		if(moved) {
+			this.action.addMove(endRow,endColumn,mover.getSpeed(),character);
+		}
+		return moved;
+	}
 	
 	public boolean changeCell(GameCharacter character,int currentRow,int currentColumn,int endRow,int endColumn) {
 		int endCellId = Statics.convertToCellId(endRow,endColumn);

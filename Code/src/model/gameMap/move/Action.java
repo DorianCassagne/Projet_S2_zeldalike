@@ -6,6 +6,7 @@ import model.character.Movable;
 import model.character.PendingMovable;
 import model.character.attack.Attack;
 import model.gameMap.additional.NewMovable;
+import model.gameMap.additional.Statics;
 
 public class Action {
 	private static int movableId;
@@ -13,7 +14,8 @@ public class Action {
 	private ArrayList<NewMovable> addedCharacter;//Caract�res qui sont ajout�s r�cement mais pas encore r�cup�r�s
 	private ArrayList<Integer> removedMovable;//Caract�re qui seront retir� au prochain tour
 	private ArrayList<PendingMovable> pendingMovable;//Caract�res qui vont �tre ajout� au prochain tour
-
+	private ArrayList<Move> pendingMoves;
+	
 	static {
 		movableId = 0;
 	}
@@ -23,12 +25,24 @@ public class Action {
 		this.addedCharacter = new ArrayList<NewMovable>();
 		this.removedMovable = new ArrayList<Integer>();
 		this.pendingMovable = new ArrayList<PendingMovable>();
+		this.pendingMoves = new ArrayList<Move>();
+	}
+	
+	
+	public void addMove(int endRow,int endColumn,int speed,Movable character) {
+		if(this.movableList.containsKey(character)) {
+			character.setCellId(endRow, endColumn);
+			Move newMove = new Move(Statics.convertToCellId(endRow, endColumn),speed);
+			newMove.setMovableId(this.movableList.get(character));
+		}
 	}
 		
 	//Renvoie la liste des movements effectu�s pendant un tour
 	synchronized public Move[] turn() {
 		updateMovableList();
 		ArrayList<Move> moves = executeTurn();
+		moves.addAll(this.pendingMoves);
+		this.pendingMoves.clear();
 		Move[] movesArray = new Move[moves.size()];
 		movesArray = moves.toArray(movesArray);
 		return movesArray;

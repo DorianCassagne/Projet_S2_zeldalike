@@ -1,4 +1,7 @@
-H:845: :C-OR-H:500: :C->C-I-AXE- -848->C-M-BADMONKEY-15-860
+H:845: :C-OR-H:500: :C->C-I-AXE- -848->C-M-BADMONKEY-15-860->C-I-EnemyMover- -849
 H:845: :C-OR-H:300: :C->C-M-BADMONKEY-dorian-861
-M:15: :0->C-M-BADMONKEY-dorian2-861
-M:dorian2: :0->C-I-AXE- -847
+//Enigme
+H:845: :C-AND-M:dorian5: :200->C-I-AXE-853
+H:850: :C-AND-O:A: :5->C-I-AXE-860
+H:860: :C-AND-O:A: :6->C-I-AXE-870
+H:870: :C-AND-O:A: :7->C-I-BADMONKEY-dorian8-845
