@@ -20,9 +20,6 @@ public class ItemFactory {
 		else if(id == 864){
 			item = new MapChanger(1);
 		}
-		else if(id == -1) {
-			item = null;
-		}
 		else {
 			try {
 			item = new SpecialAttackItem(id);
@@ -46,7 +43,11 @@ public class ItemFactory {
 				try{
 					item = new Healer(name);
 				}catch(IllegalArgumentException e3) {
-					item = new SpecialAttackItem(name);
+					try {
+						item = new SpecialAttackItem(name);
+					}catch(IllegalArgumentException e4) {
+						item = new MapChanger(name);
+					}
 				}
 			}
 		}

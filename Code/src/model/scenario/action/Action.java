@@ -89,7 +89,6 @@ public class Action {
 	
 	private boolean createItem() {
 		Item item = ItemFactory.getItem(this.specificType.toUpperCase());
-
 		boolean created = actionData.getMap().addItem(item,this.cellId);
 		return created;
 	}

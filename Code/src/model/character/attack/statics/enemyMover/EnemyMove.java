@@ -22,7 +22,7 @@ public class EnemyMove extends Attack implements ExternalMover{
 	}
 
 	public boolean handlePlay(byte attackResult) {
-		return attackResult % Cell.NOEFFECT == 0;
+		return attackResult % Cell.NOEFFECT != 0;
 	}
 	
 

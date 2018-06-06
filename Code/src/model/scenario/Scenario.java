@@ -19,7 +19,7 @@ public class Scenario {
 	private final static String EXTERNALSEPARATOR = "->";
 	private final static String INTERNALSEPARTOR = "-";
 	private final static int CONDITIONINDEX = 0;
-	private final static int CYCLE = 20;
+	private final static int CYCLE = 10;
 	private final static String CONDITIONINTERNALSEPARATOR = ":";
 	
 	private int counter;
@@ -39,6 +39,7 @@ public class Scenario {
 		readScenario(scenario);
 	}
 	
+	
 	private void readScenario(ArrayList<ArrayList<String[]>> scenario) {
 		for(int i = 0; i < scenario.size();i++) {
 			try{
@@ -46,7 +47,6 @@ public class Scenario {
 				Supplier<Boolean>[] actions = this.getActions(scenario.get(i));
 				this.events.add(new Evenement(i,condition,actions));
 			}catch(Exception e) {
-				e.printStackTrace();
 				throw new IllegalArgumentException("ERROR FOUND AT LINE "+ (i+1) + " \nMessage : " + e.getMessage());
 			}
 		}
@@ -100,6 +100,7 @@ public class Scenario {
 			while(i < events.size()) {
 				currentEvent = events.get(i);  
 				if(currentEvent.evaluate()) {
+					System.out.println("The current event id is : "+i);
 					this.events.remove(i);
 					this.finishedEvents.add(currentEvent.getId());
 				}
