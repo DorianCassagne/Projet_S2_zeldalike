@@ -58,9 +58,9 @@ public abstract class Attack extends Movable {
 		while(index < this.cellPerTurn && this.isAlive()) {
 			row +=  this.direction.getVerticalIncrement();
 			column +=  this.direction.getHorizontalIncrement() ;
-			this.maxDistance--;
 			byte playAttack = this.getMyMap().playAttack(this, row, column);
-			
+			this.maxDistance--;
+
 			if(!handleMove(playAttack)) {
 				row = this.getRow();
 				column = this.getColumn();
@@ -113,6 +113,7 @@ public abstract class Attack extends Movable {
 	}
 	
 	protected boolean handlePlay(GameCharacter gameCharacter) {
+		System.out.println("Ask to establishAttack");
 		this.establishAttack(gameCharacter);
 		return true;
 	}

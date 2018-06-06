@@ -29,7 +29,8 @@ public class Bomrang extends Attack {
 			new DoomAttack(this.getMyMap(),this.getRow(),this.getColumn(),Movement.RIGHT,2,2, true);
 			this.removeCharacter();
 		}
-		return attackResult % Cell.CHARACTERISPRESENT != 0 && attackResult % Cell.NOTWALKABLE != 0;
+		System.out.println();
+		return super.handleMove(attackResult);
 	}
 	
 	public void establishAttack(GameCharacter gameCharacter) {
@@ -38,7 +39,6 @@ public class Bomrang extends Attack {
 		Movement direction2 = Movement.values()[(this.getDirection().getIndex() + 3)%4];
 		new AttackTest(this.getMyMap(),this.getRow(),this.getColumn(),direction1,80);
 		new AttackTest(this.getMyMap(),this.getRow(),this.getColumn(),direction2,80);
-
 	}
 	
 	

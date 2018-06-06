@@ -36,8 +36,8 @@ public class NyaSlave extends GameCharacter{
 
 	@Override
 	public void getDmg(Attack attack) {
-		System.out.println(hp.get());
-		System.out.println(attack.getDamage());
+		//System.out.println(hp.get());
+		//System.out.println(attack.getDamage());
 		this.hp.set(this.hp.get() - GameCharacter.calculateDamage(attack.getDamage(), def.get()));
 		if (hp.get()<=0)
 			this.kill();

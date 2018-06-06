@@ -12,15 +12,15 @@ public class DoomAttack extends Attack {
 	private int lifeTime;
 	public boolean entire=false;
 	public DoomAttack(GameMap map, int row, int column, Movement direction, int dmg) {
-		this(map, row, column, direction, 3,dmg , true, -1, false);
+		this(map, row, column, direction, 3,dmg , true, 0, false);
 
 	}
 	public DoomAttack(GameMap map, int row, int column, Movement direction, int dmg, int size) {
-		this(map, row, column, direction,size,dmg , true, -1, false);
+		this(map, row, column, direction,size,dmg , true, 0, false);
 
 	}
 	public DoomAttack(GameMap map, int row, int column, Movement direction, int dmg, int size, boolean entire) {
-		this(map, row, column, direction,size,dmg , true, -1, entire);
+		this(map, row, column, direction,size,dmg , true, 0, entire);
 		
 
 	}
@@ -32,6 +32,18 @@ public class DoomAttack extends Attack {
 		lifeTime=maxdistance;
 		this.entire=entire;
 		this.duplicate();
+		//TODO: if reproduce
+//		if (entire&&lifeTime>0&&this.reproduce) {
+//			System.out.println("entireeee");
+//
+//			int x = this.getDirection().getHorizontalIncrement();
+//			if (x==0)
+//				x=1;
+//			int y = this.getDirection().getVerticalIncrement();
+//			if (y==0)
+//				y=-1;
+//			new DoomAttack(this.getMyMap(),this.getRow()+x*(inc+2),this.getColumn()-y*(inc+2),this.getDirection(),0,this.getDamage(), false, 0, false);
+//		}
 	}
 
 	
@@ -39,21 +51,25 @@ public class DoomAttack extends Attack {
 
 		lifeTime--;
 		inc++;
-		System.out.println(inc);
 		if (lifeTime>=0) {
 			int x = this.getDirection().getHorizontalIncrement();
 			int y = this.getDirection().getVerticalIncrement();
-			if(lifeTime>0)
-				new DoomAttack(this.getMyMap(),this.getRow()+y,this.getColumn()+x,this.getDirection(),lifeTime,this.getDamage(), this.reproduce, inc, this.entire);
-		
+			//if(lifeTime>0)
+				new DoomAttack(this.getMyMap(),this.getRow(),this.getColumn(),this.getDirection(),lifeTime,this.getDamage(), this.reproduce, inc, this.entire);
+//				if (entire&&lifeTime>=0) {
+//					System.out.println("entireeee");
+//					new DoomAttack(this.getMyMap(),this.getRow()+x*(inc+2),this.getColumn()-y*(inc+2),this.getDirection(),0,this.getDamage(), false, 0, false);
+//				}
 
 			if(this.reproduce) {
 				for( int i =1; i<=inc; i++) {
 					new DoomAttack(this.getMyMap(),this.getRow()+x*i,this.getColumn()+y*i,this.getDirection(),0,this.getDamage(), false, 0, false);
 					new DoomAttack(this.getMyMap(),this.getRow()-x*i,this.getColumn()-y*i,this.getDirection(),0,this.getDamage(), false, 0, false);
 				}
-				if (entire&&lifeTime>0)
-					new DoomAttack(this.getMyMap(),this.getRow()+x*(inc+1),this.getColumn()-y*(inc+1),this.getDirection(),0,this.getDamage(), false, 0, false);
+//				if (entire&&lifeTime>0) {
+//					System.out.println("entireeee");
+//					new DoomAttack(this.getMyMap(),this.getRow()+x*(inc+1),this.getColumn()-y*(inc+1),this.getDirection(),0,this.getDamage(), false, 0, false);
+//				}
 			}
 		}
 	
@@ -62,6 +78,7 @@ public class DoomAttack extends Attack {
 
 	@Override
 	protected void establishAttack(GameCharacter gameCharacter) {
+		//System.out.println("Damage is " + this.getDamage());
 		gameCharacter.getDmg(this);
 		
 	}

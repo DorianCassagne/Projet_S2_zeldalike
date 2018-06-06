@@ -1,12 +1,9 @@
-<<<<<<< HEAD
 H:845: :C-OR-H:500: :C->C-I-AXE- -848->C-M-BADMONKEY-15-860
 M:15: :0->C-M-BADMONKEY-dorian2-861
 M:dorian2: :0->C-I-AXE- -847
-=======
 N->C-M-BADMONKEY-dorian -847
 H:850: :C->S-m- -Omar est beacoup fort 
 H:851: :C->D-W- - -842->D-W- - -841->D-W- - -840->D-W- - -839->D-W- - -838->D-W- - -837->D-W- - -836
 H:836: :C->S-m- -Vas y sur la case 850
 H:850: :C-AND-O:A: :4->C-M-BADMONKEY-william-851
 M:william: :0->S-m- -William est mort
->>>>>>> Omar

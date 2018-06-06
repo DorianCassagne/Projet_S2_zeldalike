@@ -80,7 +80,7 @@ public class NyaNyaNay  extends NyaSlave {
 					randomInt--;
 			}
 			else {
-				System.out.println("mv"+randomInt+"  "+this.getColumn());
+				//System.out.println("mv"+randomInt+"  "+this.getColumn());
 				if (randomInt == this.getColumn()) {
 					setWait(30);
 					//randomInt=2;
