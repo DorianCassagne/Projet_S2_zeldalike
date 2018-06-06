@@ -10,19 +10,20 @@ import model.gameMap.move.Move;
 import model.gameMap.move.Movement;
 
 public class NyaSlave extends GameCharacter{
-
+	private static boolean done;
 	private Movement mov;
 	private BooleanProperty dead;
 	private IntegerProperty hp;
 	private IntegerProperty def;
 	private int realcycle;
-	public NyaSlave(GameMap map, int startRow, int startColumn, int cycle, double coefficient, int defaultImage, IntegerProperty hp, IntegerProperty def, BooleanProperty dead, int realCycle) {
+	protected NyaSlave(GameMap map, int startRow, int startColumn, int cycle, double coefficient, int defaultImage, IntegerProperty hp, IntegerProperty def, BooleanProperty dead, int realCycle) {
 		super(map, startRow, startColumn, cycle, coefficient, defaultImage);
 		this.dead=dead;		
 		this.hp=hp;
 		this.def=def;
 		this.realcycle=realCycle;
 		mov= Movement.STAY;
+		done = true;
 	}//
 
 	
@@ -42,11 +43,13 @@ public class NyaSlave extends GameCharacter{
 			this.kill();
 	}
 	
-	public void setMov(Movement mov) {
+	protected void setMov(Movement mov) {
 		if (mov==null)
 			this.mov=Movement.STAY;
-		else
-			this.mov=mov;
+		else 
+			if(done)
+				this.mov=mov;
+				
 		
 	}
 	
@@ -60,11 +63,13 @@ public class NyaSlave extends GameCharacter{
 	protected Move act() {
 		if(mov==Movement.STAY)
 			return null;
+		
 		int r = this.getRow() + mov.getVerticalIncrement();
 		int c= this.getColumn() + mov.getHorizontalIncrement();
 		if(this.getMyMap().changeCell(this, this.getRow(), this.getColumn(), r, c)) {
 			mov=Movement.STAY;
 			setWait(realcycle);
+			done=!done;
 			return new Move(Statics.convertToCellId(r, c), realcycle);
 		}
 		this.setWait(1);
@@ -75,6 +80,9 @@ public class NyaSlave extends GameCharacter{
 		 
 	}
 
+	protected Movement getMov(){
+		return this.mov;
+	}
 	private void kill() {
 		dead.set(true);
 	}

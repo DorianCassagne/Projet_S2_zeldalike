@@ -30,7 +30,7 @@ public class Game {
 	public Game(int mapIndex) {
 		this.mapChangeProperty = new SimpleBooleanProperty(true);
 		this.changeMap(mapIndex);
-		new NyaNyaNay(myMap, 20, 20);
+		new NyaNyaNay(myMap, 18, 20, 5);
 	}
 
 	
