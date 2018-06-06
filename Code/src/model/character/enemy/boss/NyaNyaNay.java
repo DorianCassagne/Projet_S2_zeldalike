@@ -28,7 +28,7 @@ public class NyaNyaNay  extends NyaSlave {
 	private static IntegerProperty hp=new SimpleIntegerProperty(200);
 	
 	
-	boolean attCoté;
+	boolean attCote;
 	private int randomInt;
 	private Random ran;
 	private NyaSlave slave1;
@@ -47,14 +47,14 @@ public class NyaNyaNay  extends NyaSlave {
 	}
 	@Override
 	protected Move act() {
-		if (attCoté&&super.getMov()==Movement.STAY) {
+		if (attCote&&super.getMov()==Movement.STAY) {
 			
 			new NyanAttHori(this.getMyMap(), this.getRow(), this.getColumn());
-			attCoté=false;
+			attCote=false;
 		}
 			
 		else {
-			attCoté=true;
+			attCote=true;
 			if (att) {
 				switch (ran.nextInt(3)) {
 				case 0:

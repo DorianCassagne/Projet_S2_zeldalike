@@ -19,17 +19,18 @@ public class NyanHorRainbow extends Attack{
 		//super(map, DEFAULTCYCLE, row, column, Movement.RIGHT, DEFAULDAMAGE, 1, DEFAULTCOEF, 1624, 0);
 	}
 	@Override
-	public boolean handlePlay(byte attackResult) {
+	protected boolean handleMove(byte attackResult) {
 		return false;
 	}
-	@Override
-	public void attack(GameCharacter gameCharacter) {
-		gameCharacter.getDmg(this);
-		
-	}
+	
 	@Override
 	protected void setImage(Movement mov) {
 		return ;
+	}
+	
+	@Override
+	protected void establishAttack(GameCharacter gameCharacter) {
+		gameCharacter.getDmg(this);
 	}
 
 }

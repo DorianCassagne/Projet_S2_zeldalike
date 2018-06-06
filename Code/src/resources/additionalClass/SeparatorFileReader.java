@@ -8,9 +8,12 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 public class SeparatorFileReader {
+
+	public final static String TOIGNORE = "//";
 	
 	public static BufferedReader openTextFile(String path)  {
 		try {
+			System.out.println(path);
 			File file = new File(SeparatorFileReader.class.getResource(path).toURI().toURL().getPath());
 
 			FileReader fileReader = new FileReader(file);
@@ -59,7 +62,8 @@ public class SeparatorFileReader {
 			String line = reader.readLine();
 			
 			while(line != null) {
-				firstList.add(line.split(separator1));
+				if(!line.startsWith(TOIGNORE) && line.length() != 0)
+					firstList.add(line.split(separator1));
 				line = reader.readLine();
 			}
 			

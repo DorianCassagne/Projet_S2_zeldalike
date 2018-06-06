@@ -78,7 +78,6 @@ public class Hero extends GameHero{
 			if (i==this.getAttackQuantity())
 				this.setNextAttack(0);
 			this.setNextAttack(i);
-			System.out.println("This attack is " + i);
 			break;
 			
 		default : 
@@ -136,6 +135,7 @@ public class Hero extends GameHero{
 		if(mapChanger == null)
 			throw new IllegalArgumentException("MAPCHANGER MUST NOT BE NULL");
 		this.mapProperty.set(mapChanger.getMapIndex());
+		System.out.println("Changed" + this.mapProperty.get());
 	}
 
 	

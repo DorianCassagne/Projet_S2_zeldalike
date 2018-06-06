@@ -39,10 +39,9 @@ public abstract class GameCharacter extends Movable{
 		}
 		else {
 			this.setMap(map,startRow,startColumn);
-
 		}
 	}
-		
+	
 	protected void setMap(GameMap newMap,int row,int column) {
 
 		boolean put = newMap.addCharacter(this, row, column);

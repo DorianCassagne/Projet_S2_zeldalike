@@ -5,6 +5,7 @@ import java.util.HashMap;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.property.StringProperty;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -27,7 +28,7 @@ public class GameLoop {
 	private Label HPLabel ;
 	private ProgressBar HPProgressBar;
 	
-	public GameLoop(Game myGame,AnchorPane characterAnchorPane,Label HPLabel,ProgressBar HPProgress) {
+	public GameLoop(Game myGame,AnchorPane characterAnchorPane,Label HPLabel,ProgressBar HPProgress,StringProperty messageZone) {
 		this.movableList = new HashMap<Integer,MovableView>();
 		this.characterAnchorPane = characterAnchorPane;
 		this.myGame = myGame;
@@ -44,6 +45,7 @@ public class GameLoop {
 	
 	
 	public void stop() {
+		System.out.println("Stop the gameloop");
 		this.gameLoop.stop();
 	}
 	

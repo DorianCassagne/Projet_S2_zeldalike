@@ -5,7 +5,7 @@ import model.character.item.Item;
 
 public class MapChanger extends Item{
 
-	private static final int STARTMAPCHANGEINDEX = 10;
+	private static final int STARTMAPCHANGEINDEX = 9 ;
 	
 	private MapChangerEnum changer;
 	
@@ -17,6 +17,10 @@ public class MapChanger extends Item{
 			throw new IllegalArgumentException("MAPINDEX IS NOT AVAILABLE");
 	}
 
+	public MapChanger(String mapName) throws IllegalArgumentException {
+		this(MapChangerEnum.valueOf(mapName).getMapIndex());
+	}
+	
 	@Override
 	protected void applyTo(Hero hero) {
 		this.changer.applyTo(hero);

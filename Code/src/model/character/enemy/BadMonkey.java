@@ -52,7 +52,7 @@ public class BadMonkey extends Enemy{
 	
 			int nextCell= BFS1.simpleMove(this.getMyMap(), 
 					actualCell,
-					tab, false, 0);
+					tab, true, 0);
 			
 			if (actualCell==nextCell) {
 				return null;

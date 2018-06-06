@@ -25,7 +25,8 @@ public class Action {
 	private final static char SHOW = 'S';
 	private final static char ADD = 'A';
 	private final static char ATTACK = 'A';
-
+	public final static char NOTHING = 'N';
+	
 	private static ActionData actionData;
 	private char generalType;
 	private String specificType;
@@ -88,7 +89,6 @@ public class Action {
 	
 	private boolean createItem() {
 		Item item = ItemFactory.getItem(this.specificType.toUpperCase());
-
 		boolean created = actionData.getMap().addItem(item,this.cellId);
 		return created;
 	}
@@ -158,6 +158,9 @@ public class Action {
 			break;
 		case ADD :
 			supplier = actionParams.establishAdd();
+			break;
+		case NOTHING:
+			supplier = ()->(true);
 			break;
 		default :
 			throw new IllegalArgumentException("UNKNOWN ACTION NAME : " + encode.getAction());

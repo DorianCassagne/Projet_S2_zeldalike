@@ -20,6 +20,13 @@ public class ItemFactory {
 		else if(id == 864){
 			item = new MapChanger(1);
 		}
+		else {
+			try {
+			item = new SpecialAttackItem(id);
+			}catch(IllegalArgumentException e) {
+				System.err.println(e.getMessage());
+			}
+		}
 					
 		return item;
 	}
@@ -27,7 +34,6 @@ public class ItemFactory {
 	public static Item getItem(String name) {
 		Item item = null;
 		
-		System.out.println(name);
 		try {
 			item = new AttackItem(name);
 		}catch(IllegalArgumentException e1) {
@@ -37,7 +43,11 @@ public class ItemFactory {
 				try{
 					item = new Healer(name);
 				}catch(IllegalArgumentException e3) {
-					item = new SpecialAttackItem();
+					try {
+						item = new SpecialAttackItem(name);
+					}catch(IllegalArgumentException e4) {
+						item = new MapChanger(name);
+					}
 				}
 			}
 		}

@@ -6,12 +6,14 @@ import java.util.function.Supplier;
 public class Evenement {
 	private Supplier<Boolean> condition;
 	private Supplier<Boolean>[] actions;
+	private int id;
 	
-	public Evenement(Supplier<Boolean> condition,Supplier<Boolean> ... action) {
-		if(action == null || condition == null)
+	public Evenement(int id,Supplier<Boolean> condition,Supplier<Boolean>[] action) {
+		if(action == null || condition == null || id < 0)
 			throw new IllegalArgumentException("ERROR ON EVENEMENT");
 		this.actions = action;
 		this.condition = condition;
+		this.id = id + 1;
 	}
 	
 	public boolean evaluate() {
@@ -25,10 +27,15 @@ public class Evenement {
 					done = false;
 				}
 				counter++;
-			}
+			}			
 
 		}
 		return done;
 	}
+	
+	public int getId() {
+		return this.id;
+	}
+	
 	
 }
