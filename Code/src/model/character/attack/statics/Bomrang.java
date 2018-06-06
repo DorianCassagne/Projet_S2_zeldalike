@@ -16,7 +16,7 @@ public class Bomrang extends Attack {
 	}
 
 	@Override
-	public boolean handlePlay(byte attackResult) {
+	public boolean handleMove(byte attackResult) {
 		if(count!=0||!start) {
 			count--;
 			start=true;
@@ -31,10 +31,14 @@ public class Bomrang extends Attack {
 		}
 		return attackResult % Cell.CHARACTERISPRESENT != 0 && attackResult % Cell.NOTWALKABLE != 0;
 	}
+	
+	public void establishAttack(GameCharacter gameCharacter) {
+		
+		Movement direction1 = Movement.values()[(this.getDirection().getIndex() + 1)%4 ];
+		Movement direction2 = Movement.values()[(this.getDirection().getIndex() + 3)%4];
+		new AttackTest(this.getMyMap(),this.getRow(),this.getColumn(),direction1,80);
+		new AttackTest(this.getMyMap(),this.getRow(),this.getColumn(),direction2,80);
 
-	@Override
-	public void attack(GameCharacter gameCharacter) {
-		gameCharacter.getDmg(this);
 	}
 	
 	

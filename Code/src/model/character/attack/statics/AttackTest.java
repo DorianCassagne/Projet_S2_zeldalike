@@ -1,9 +1,9 @@
 package model.character.attack.statics;
 
 import model.character.GameCharacter;
+
 import model.character.attack.Attack;
 import model.gameMap.GameMap;
-import model.gameMap.cell.Cell;
 import model.gameMap.move.Movement;
 
 public class AttackTest extends Attack{
@@ -18,13 +18,8 @@ public class AttackTest extends Attack{
 		super(map, DEFAULTCYCLE, row, column, direction, damage, DEFAULTCELLPERTURN,DEFAULTCOEFFICIENT,DEFAULTIMAGE,MAXDISTANCE);
 	}	
 	
-	public void attack(GameCharacter gameCharac) {
-		gameCharac.getDmg(this);
-	}
-
 	@Override
-	public boolean handlePlay(byte attackResult) {
-		boolean ended = attackResult == Cell.NOEFFECT;
-		return ended;
+	protected void establishAttack(GameCharacter gameCharacter) {
+		gameCharacter.getDmg(this);	
 	}
 }

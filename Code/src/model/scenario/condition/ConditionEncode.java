@@ -1,7 +1,7 @@
 package model.scenario.condition;
 
 import resources.additionalClass.Conversion;
-import resources.additionalClass.UsefulMethods;
+
 
 public class ConditionEncode {
 
@@ -14,15 +14,18 @@ public class ConditionEncode {
 	private int lifePoint;
 	
 	public ConditionEncode(String[] params) {
-		if(params != null && params.length == PARAMLENGTH) {
+		try {
 			this.category = Conversion.toChar(params[0]);
-			this.id = params[1];
-			this.conditionValue = Conversion.toChar(params[2]);
-			try {
-				this.lifePoint = Integer.parseInt(params[3]);
-			}catch(NumberFormatException e) {
-				this.detail = Conversion.toChar(params[3]);
+			if(this.category != Condition.NOTHING) {
+				this.id = params[1];
+				this.conditionValue = Conversion.toChar(params[2]);
+				try {
+					this.lifePoint = Integer.parseInt(params[3]);
+				}catch(NumberFormatException e) {
+					this.detail = Conversion.toChar(params[3]);
+				}
 			}
+		}catch(Exception e) {
 			
 		}
 	}

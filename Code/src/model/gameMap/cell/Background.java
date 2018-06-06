@@ -25,7 +25,7 @@ public class Background {
 				this.isWalkable = this.isWalkable && true ;
 			else {
 				if(value != -1 )
-					throw new IllegalArgumentException("INVALID BACKGROUND");
+					throw new IllegalArgumentException("INVALID BACKGROUND "+ value);
 			}
 		}
 		

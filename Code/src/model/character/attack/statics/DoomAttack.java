@@ -61,14 +61,9 @@ public class DoomAttack extends Attack {
 	}
 
 	@Override
-	public void attack(GameCharacter gameCharacter) {
+	protected void establishAttack(GameCharacter gameCharacter) {
 		gameCharacter.getDmg(this);
-
-	}
-	@Override
-	public boolean handlePlay(byte attackResult) {
-		// TODO Auto-generated method stub
-		return false;
+		
 	}
 
 }

@@ -1,11 +1,13 @@
 package model;
 
 import javafx.beans.property.BooleanProperty;
+
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import model.character.enemy.BadMonkey;
 import model.character.enemy.boss.NyaNyaNay;
+import javafx.beans.property.StringProperty;
 import model.character.hero.Hero;
 import model.gameMap.GameMap;
 import model.gameMap.MapEnum;
@@ -20,15 +22,17 @@ public class Game {
 	private GameMap myMap;
 	private Hero hero;
 	private Scenario scenario;
+	private StringProperty messageProperty;
 	
 	//Initialise le jeu avec une map
 	
-	public Game() {
-		this(0);
+	public Game(StringProperty messageProperty) {
+		this(1,messageProperty);
 	}
 	
-	public Game(int mapIndex) {
+	public Game(int mapIndex,StringProperty messageText ) {
 		this.mapChangeProperty = new SimpleBooleanProperty(true);
+		this.messageProperty = messageText;
 		this.changeMap(mapIndex);
 		new NyaNyaNay(myMap, 18, 20, 5);
 	}
@@ -38,7 +42,7 @@ public class Game {
 		if(mapIndex >= 0 && mapIndex < MapEnum.values().length) {
 			MapEnum mapHash = MapEnum.values()[mapIndex];
 			this.myMap = new GameMap(mapHash.getLayers());
-			this.scenario = new Scenario(mapHash.getScenario(),new SimpleStringProperty(),this.myMap);
+			this.scenario = new Scenario(mapHash.getScenario(),this.messageProperty,this.myMap);
 			createHero(mapHash.getPosY(),mapHash.getPosX());
 			this.mapChangeProperty.set(!this.mapChangeProperty.get());
 		}

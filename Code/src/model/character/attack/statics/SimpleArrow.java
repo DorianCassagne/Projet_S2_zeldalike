@@ -19,13 +19,9 @@ public class SimpleArrow extends Attack {
 		super(map, DEFAULTCYCLE, row, column, direction, damage, DEFAULTCELLPERTURN, DEFAULTCOEFFICIENT,DEFAULTIMAGE,MAXDISTANCE);
 	}
 
-	public void attack(GameCharacter gameCharac) {
+	public void establishAttack(GameCharacter gameCharac) {
 		gameCharac.getDmg(this);
 
 	}
 
-	@Override
-	public boolean handlePlay(byte attackResult) {
-		return true;
-	}
 }
