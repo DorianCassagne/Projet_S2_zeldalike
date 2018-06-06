@@ -113,7 +113,6 @@ public abstract class Attack extends Movable {
 	}
 	
 	protected boolean handlePlay(GameCharacter gameCharacter) {
-		System.out.println("Ask to establishAttack");
 		this.establishAttack(gameCharacter);
 		return true;
 	}
