@@ -5,18 +5,24 @@ import java.util.Random;
 
 import model.character.GameCharacter;
 import model.character.attack.Attack;
+import model.character.attack.statics.boss.NyanAttHori;
 import model.gameMap.GameMap;
 import model.gameMap.move.Move;
 import model.gameMap.move.Movement;
 
 public class NyaBlock  extends GameCharacter{
+	private final static int DEFAULTCYCLE = 3;
+	private final static double DEFAULTCOEF = 1;
+	private final static int DEFAULTIMG = 8;
 	private boolean att;
 	private int img;
 	private Random ran = new Random();
-	public NyaBlock(GameMap map, int startRow, int startColumn, int cycle, double coefficient, int defaultImage,Movement mov) {
-		super(map, startRow, startColumn, cycle, coefficient, defaultImage+mov.getIndex());
+	private boolean mov;
+	public NyaBlock(GameMap map, int startRow, int startColumn,Movement mov) {
+		super(map, startRow, startColumn, DEFAULTCYCLE, DEFAULTCOEF, DEFAULTIMG+mov.getIndex());
 		img=mov.getIndex();
 		att=false;
+		this.mov=mov==Movement.LEFT;
 		// TODO Auto-generated constructor stub
 	}
 //
@@ -58,12 +64,12 @@ public class NyaBlock  extends GameCharacter{
 	@Override
 	protected Move act() {
 		if (att) {
-
 			setImage(img);
+			new NyanAttHori(getMyMap(), getRow(), getColumn(), mov);
 			att = false;
 		}
 		
-		else if (ran.nextInt(100)==2) {
+		else if (ran.nextInt(10)==0) {
 			setWait(100);
 			setImage(img-1);
 			att=true;

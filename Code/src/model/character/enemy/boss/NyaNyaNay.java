@@ -76,7 +76,7 @@ public class NyaNyaNay  extends NyaSlave {
 					randomInt += positionLeft;
 					setWait(50);//wait apres suite dattaque
 				}
-				else
+				else 
 					randomInt--;
 			}
 			else {
