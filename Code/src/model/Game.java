@@ -6,6 +6,7 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import model.character.enemy.BadMonkey;
+import model.character.enemy.boss.NyaBlock;
 import model.character.enemy.boss.NyaNyaNay;
 import javafx.beans.property.StringProperty;
 import model.character.hero.Hero;
@@ -13,6 +14,7 @@ import model.gameMap.GameMap;
 import model.gameMap.MapEnum;
 import model.gameMap.additional.NewMovable;
 import model.gameMap.move.Move;
+import model.gameMap.move.Movement;
 import model.scenario.Scenario;
 
 public class Game {
@@ -34,7 +36,8 @@ public class Game {
 		this.mapChangeProperty = new SimpleBooleanProperty(true);
 		this.messageProperty = messageText;
 		this.changeMap(mapIndex);
-		new NyaNyaNay(myMap, 18, 20, 5);
+		new NyaNyaNay(myMap, 14, 15, 5);
+		new NyaBlock(myMap, 12 ,13, Movement.RIGHT);
 	}
 
 	
