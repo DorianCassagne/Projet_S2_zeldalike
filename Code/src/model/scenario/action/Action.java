@@ -143,7 +143,6 @@ public class Action {
 	public static Supplier<Boolean> TakeAction(String[] action,ActionData data) {
 		ActionEncode encode = new ActionEncode(action);
 		Action actionParams = new Action(encode.getGeneralType(),encode.getSpecificType(),encode.getInfo(),encode.idCase());
-		System.out.println("We received " +data);
 		actionData = data;
 		Supplier<Boolean> supplier;
 		switch(encode.getAction()) {

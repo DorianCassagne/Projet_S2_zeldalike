@@ -49,6 +49,8 @@ public class Condition {
 		case WALKABLE:
 			this.checkForWalkable();
 			break;
+		default :
+			throw new IllegalArgumentException("HANDLECELL ERROR, THE CONDITION REQUESTED ON CELL IS NOT FOUND " + " " + this.detail );
 		}
 		return supplier;
 	}

@@ -37,10 +37,14 @@ public abstract class GameHero extends GameCharacter {
 	public static final char CHANGEATTACK = 'c';
 	private final static AttackItem DEFAULTATKITEM = new AttackItem(809);
 	
-	private IntegerProperty hp;
+	private IntegerProperty defenseImage;
 	private IntegerProperty def;
+	private IntegerProperty hp;
+	private IntegerProperty atk;
 	private IntegerProperty safeHP;
 	private IntegerProperty safeDef;
+	private IntegerProperty safeAtk;
+	
 	private ArrayList<Launcher> attackList;
 	private IntegerProperty attackType;
 	

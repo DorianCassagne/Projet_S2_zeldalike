@@ -36,4 +36,5 @@ public class ActionData {
 	public ArrayList<Integer> getFinishedvents(){
 		return this.finishedEvents;
 	}
+	
 }

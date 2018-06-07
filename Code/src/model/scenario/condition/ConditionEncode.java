@@ -49,4 +49,5 @@ public class ConditionEncode {
 	public int getLifePoint() {
 		return this.lifePoint;
 	}
+	
 }

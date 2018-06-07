@@ -36,8 +36,6 @@ public class Game {
 		this.mapChangeProperty = new SimpleBooleanProperty(true);
 		this.messageProperty = messageText;
 		this.changeMap(mapIndex);
-		new NyaNyaNay(myMap, 14, 15, 5);
-		new NyaBlock(myMap, 12 ,13, Movement.RIGHT);
 	}
 
 	

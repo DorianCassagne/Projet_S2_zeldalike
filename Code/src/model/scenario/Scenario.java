@@ -66,7 +66,7 @@ public class Scenario {
 				throw new IllegalArgumentException("YOU MUST PROVIDE AT LEAST ONE CONDITION ");
 		}
 		else
-			throw new IllegalArgumentException("Not Sufficient Elements FOR CONDITION ");
+			throw new IllegalArgumentException("Not Sufficient Elements FOR CONDITION " + scenarioPart.size());
 		return supplier;
 	}
 	

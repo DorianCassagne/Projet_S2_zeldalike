@@ -1,9 +1,6 @@
-H:845: :C-OR-H:500: :C->C-I-AXE- -848->C-M-BADMONKEY-15-860
-M:15: :0->C-M-BADMONKEY-dorian2-861
-M:dorian2: :0->C-I-AXE- -847
-N->C-M-BADMONKEY-dorian -847
-H:850: :C->S-m- -Omar est beacoup fort 
-H:851: :C->D-W- - -842->D-W- - -841->D-W- - -840->D-W- - -839->D-W- - -838->D-W- - -837->D-W- - -836
-H:836: :C->S-m- -Vas y sur la case 850
-H:850: :C-AND-O:A: :4->C-M-BADMONKEY-william-851
-M:william: :0->S-m- -William est mort
+H:771: :C->S-m- -L'ENIGME COMMENCE, PENDANT CE TEMPS VOUS N'AUREZ PLUS D'ARMURE->C-M-BADMONKEY-monster1-855
+O:A: :1->S-m- -VOUS DEVEZ ME RAMENEZ 5 AVOCATS ICI POUR RÉCUPÉRER UNE ATTAQUE
+O:A: :2-AND-C:410:!:I-AND-C:922:!:I->S-m- -BRAVO VOUS AVEZ REUSSI A AVOIR UN AVOCAT, vous reste à trouver un autre->D-M- -monster1
+O:A: :4-AND-H:771: :C->A-I-AXE->S-m- -TESTEZ VOTRE ATTAQUE SUR LE MONSTRE A COTÉ
+O:A: :5->C-M-BADMONKEY-monster2-772->S-m- -APPUYEZ SUR LA TOUCHE Z,Q,S,D POUR ATTAQUER
+O:A: :5-AND-M:monster2: :99->S-m- -Tutorial fini
