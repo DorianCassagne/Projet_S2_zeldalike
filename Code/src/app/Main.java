@@ -11,6 +11,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -20,10 +21,10 @@ public class Main extends Application {
 
         FXMLLoader loader = new FXMLLoader();
         URL url=null;
-        AnchorPane root = null; 
+        StackPane root = null; 
         
 		try {
-			url = Main.class.getResource("/vue/GuiView.fxml").toURI().toURL();
+			url = Main.class.getResource("/vue/Ground.fxml").toURI().toURL();
 		} catch (MalformedURLException e) {
 			throw new Error("Error path to fxml file");
 		}catch (URISyntaxException e) {
@@ -39,10 +40,8 @@ public class Main extends Application {
 			throw new Error("Error loading javaFX");
 		} 
 
-        Controleur controller = loader.getController();
         Scene  scene = new Scene(root,960,640);
         
-        controller.startScene(scene);
         primaryStage.setScene(scene);
         primaryStage.show();
     }

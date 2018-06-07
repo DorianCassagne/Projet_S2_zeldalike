@@ -1,5 +1,6 @@
 package controler;
 
+import java.io.IOException;
 import java.net.URL;
 
 
@@ -8,7 +9,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.function.Function;
 
+import app.Main;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -57,7 +60,16 @@ public class Controleur implements Initializable{
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
 		this.gameLoop = new GameLoop(myGame,this.characterAnchorPane,this.HPLabel,this.HPProgressBar);
-
+		FXMLLoader loader = new FXMLLoader();
+		try {
+			loader.setLocation(Main.class.getResource("/vue/menu/MenuAccueil.fxml"));
+			AnchorPane root = loader.load();
+			this.mainAnchorPane.getChildren().clear();
+			this.mainAnchorPane.getChildren().add(root);
+		} catch (IOException e) {
+			
+		}
+		
 		ConvertionAndStatics.fixPaneDimension(MapReader.MAPLENGTH * ConvertionAndStatics.TILEDIMENSION,this.mapTilePane,this.characterAnchorPane);
 		this.createMap();
 		gameLoop.start();
