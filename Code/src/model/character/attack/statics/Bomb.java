@@ -6,11 +6,11 @@ import model.gameMap.GameMap;
 import model.gameMap.cell.Cell;
 import model.gameMap.move.Movement;
 
-public class Bomrang extends Attack {
+public class Bomb extends Attack {
 
 	private int count;
 	private boolean start;
-	public Bomrang(GameMap map, int row, int column, Movement direction) {
+	public Bomb(GameMap map, int row, int column, Movement direction) {
 		super(map, 40, row/*+direction.getVerticalIncrement()*/, column/*+direction.getHorizontalIncrement()*/, direction, 100, 1, 2, 1620, 7);
 		count = 6;
 	}

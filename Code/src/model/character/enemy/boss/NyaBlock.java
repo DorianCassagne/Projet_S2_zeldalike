@@ -1,10 +1,11 @@
 package model.character.enemy.boss;
 
-import java.awt.Image;
+
 import java.util.Random;
 
 import model.character.GameCharacter;
 import model.character.attack.Attack;
+import model.character.attack.statics.Missile;
 import model.character.attack.statics.boss.NyanAttHori;
 import model.gameMap.GameMap;
 import model.gameMap.move.Move;
@@ -13,17 +14,16 @@ import model.gameMap.move.Movement;
 public class NyaBlock  extends GameCharacter{
 	private final static int DEFAULTCYCLE = 3;
 	private final static double DEFAULTCOEF = 1;
-	private final static int DEFAULTIMG = 8;
+	private final static int DEFAULTIMG = 48;
 	private boolean att;
 	private int img;
 	private Random ran = new Random();
 	private boolean mov;
 	public NyaBlock(GameMap map, int startRow, int startColumn,Movement mov) {
 		super(map, startRow, startColumn, DEFAULTCYCLE, DEFAULTCOEF, DEFAULTIMG+mov.getIndex());
-		img=mov.getIndex();
+		img=mov.getIndex()+1;
 		att=false;
 		this.mov=mov==Movement.LEFT;
-		// TODO Auto-generated constructor stub
 	}
 //
 //	public NyaBlock(GameMap map, int cycle, int row, int column, int damage, int cellPerTurn,
@@ -66,10 +66,11 @@ public class NyaBlock  extends GameCharacter{
 		if (att) {
 			setImage(img);
 			new NyanAttHori(getMyMap(), getRow(), getColumn(), mov);
+			new Missile(getMyMap(), getRow(), getColumn(), Movement.RIGHT);
 			att = false;
 		}
 		
-		else if (ran.nextInt(10)==0) {
+		else if (ran.nextInt(50)==0) {
 			setWait(100);
 			setImage(img-1);
 			att=true;

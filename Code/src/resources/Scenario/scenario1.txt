@@ -7,3 +7,6 @@ H:851: :C->D-W- - -842->D-W- - -841->D-W- - -840->D-W- - -839->D-W- - -838->D-W-
 H:836: :C->S-m- -Vas y sur la case 850
 H:850: :C-AND-O:A: :4->C-M-BADMONKEY-william-851
 M:william: :0->S-m- -William est mort
+N->S-m- -Mon message
+O:A: :10->C-M-BADMONKEY-will-820->S-m- -Tuez cet ennemi
+M:will: :50->S-m- -Tu es presque mort
