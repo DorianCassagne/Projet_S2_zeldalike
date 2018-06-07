@@ -24,9 +24,9 @@ import view.TexturePack;
 public class MapLoader implements Initializable{
 	
 	public  static TexturePack TEXTURE ;
-	public final static double DEFAULTIMAGESCALE = 1/2.95;
-	public final static int MAPLENGTH = 700;
+	public final static int MAPLENGTH = 768;
 	public final static double TILEPREFDIMENSION = MAPLENGTH/MapReader.MAPLENGTH;
+	public final static double TILESCALE = TILEPREFDIMENSION/FileUploader.TILEDIMENSION;
 	
 	@FXML private TilePane newMap;
     

@@ -17,8 +17,8 @@ public class CellView extends StackPane{
 			for(int layer : layers) {
 				Image layerImage = MapLoader.TEXTURE.getImg(layer);
 				ImageView viewLayer = new ImageView(layerImage);
-				viewLayer.setScaleX(0.15);
-				viewLayer.setScaleY(0.15);
+				viewLayer.setScaleX(MapLoader.TILESCALE);
+				viewLayer.setScaleY(MapLoader.TILESCALE);
 				this.getChildren().add(viewLayer);
 				
 			}
