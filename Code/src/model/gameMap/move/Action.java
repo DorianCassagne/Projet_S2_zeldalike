@@ -86,6 +86,8 @@ public class Action {
 		return deleted;
 	}
 	
+	
+	
 	/*
 	 * Identifie un movableEnAttente et applique les actions suivant les conditions suivants : 
 	 * -Si Le déplaçable est d�j� sur la map, on l'enl�ve

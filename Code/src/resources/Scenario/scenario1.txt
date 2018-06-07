@@ -1,7 +1,6 @@
-H:845: :C-OR-H:500: :C->C-I-AXE- -848->C-M-BADMONKEY-15-860->C-I-EnemyMover- -849
-H:845: :C-OR-H:300: :C->C-M-BADMONKEY-dorian-861
-//Enigme
-H:845: :C-AND-M:dorian5: :200->C-I-AXE-853
-H:850: :C-AND-O:A: :5->C-I-AXE-860
-H:860: :C-AND-O:A: :6->C-I-AXE-870
-H:870: :C-AND-O:A: :7->C-I-BADMONKEY-dorian8-845
+N->C-M-BADMONKEY-dorian -847
+H:850: :C->S-m- -Omar est beacoup fort 
+H:851: :C->D-W- - -842->D-W- - -841->D-W- - -840->D-W- - -839->D-W- - -838->D-W- - -837->D-W- - -836
+H:836: :C->S-m- -Vas y sur la case 850
+H:850: :C-AND-O:A: :4->C-M-BADMONKEY-william-851
+M:william: :0->S-m- -William est mort

@@ -9,13 +9,14 @@ import model.gameMap.move.Movement;
 
 public abstract class Attack extends Movable {
 	public final static int NOTPLAYED = 0 ;
+	private final static int DYINGTURNAFTERREALDEATH = 22; 
 	
 	private Movement direction;
 	private int damage;
 	private int cellPerTurn;
 	private int maxDistance;
 	private boolean isAlive;
-	private boolean lastTurn;
+	private int lastTurn;
 	
 	
 	public Attack(GameMap map, int cycle, int row, int column,Movement direction,int damage,int cellPerTurn,double coefficient,int defaultImage,int maxDistance) {
@@ -25,7 +26,7 @@ public abstract class Attack extends Movable {
 			throw new IllegalArgumentException("PROBLEM IN ATTACK");
 		}
 		else {
-			this.lastTurn = false;
+			this.lastTurn = 0;
 			this.direction = direction;
 			this.setImage(direction);
 			this.damage = damage;
@@ -49,24 +50,20 @@ public abstract class Attack extends Movable {
 
 	
 	
-	private final int establishMove() {
+	private int establishMove() {
 		int row = this.getRow();
 		int column = this.getColumn();
 		int index = 0;
+
 		while(index < this.cellPerTurn && this.isAlive()) {
-			
 			row +=  this.direction.getVerticalIncrement();
 			column +=  this.direction.getHorizontalIncrement() ;
-			byte playAttack = this.getMyMap().playAttack(this, row, column);
 			this.maxDistance--;
+			byte playAttack = this.getMyMap().playAttack(this, row, column);
 			
 			if(!handleMove(playAttack)) {
 				row = this.getRow();
 				column = this.getColumn();
-				this.isAlive = false;
-			}
-			else if(this.lastTurn) {
-				this.lastTurn = false;
 				this.isAlive = false;
 			}
 			this.setCellId(row, column);
@@ -84,15 +81,16 @@ public abstract class Attack extends Movable {
 
 	@Override
 	public boolean isAlive() {
-		System.out.println("The last turn or alive is : " + ((this.isAlive && maxDistance >= 0) || this.lastTurn));
-		return (this.isAlive && maxDistance >= 0) || this.lastTurn;
+		return maxDistance >= 0 && this.isAlive ;
 	}
 	
 	@Override
 	protected void removeCharacter() {
-		this.getMyMap().delAttack(this);
-		this.isAlive = false;
-		this.lastTurn = false;
+		
+		if(this.lastTurn > DYINGTURNAFTERREALDEATH)
+			this.getMyMap().delAttack(this);
+		else
+			this.lastTurn++;
 	}
 
 	public Movement getDirection() {
@@ -105,7 +103,9 @@ public abstract class Attack extends Movable {
 	
 	public final void attack(GameCharacter gameCharacter) {
 		if(gameCharacter != null && this.isAlive()) {
-			this.lastTurn = this.handlePlay(gameCharacter);
+			if(this.handlePlay(gameCharacter)){
+				this.isAlive = false;
+			}
 		}
 	}
 	

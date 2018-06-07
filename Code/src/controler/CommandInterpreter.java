@@ -1,6 +1,7 @@
 package controler;
 
 
+import javafx.beans.property.BooleanProperty;
 import javafx.scene.input.KeyEvent;
 import model.Game;
 import model.character.hero.Hero;
@@ -8,10 +9,20 @@ import model.character.hero.Hero;
 public class CommandInterpreter {
 	private Game myGame;
 	private GameLoop gameLoop;
+	private BooleanProperty messagingProperty;
 	
-	public CommandInterpreter(Game game,GameLoop gameLoop)  {
+	public CommandInterpreter(Game game,GameLoop gameLoop,BooleanProperty waitingForAnswer)  {
 		this.myGame = game;
 		this.gameLoop = gameLoop;
+		this.messagingProperty = waitingForAnswer;
+		this.messagingProperty.addListener((obs,oldValue,newValue)->{
+			if(newValue) {
+				gameLoop.stop();
+			}
+			else
+				this.gameLoop.start();
+		});
+		
 	}
 	
 	void handleKey(KeyEvent event) {
@@ -49,6 +60,9 @@ public class CommandInterpreter {
 			break;
 		case E : 
 			nextMove = Hero.CHANGEATTACK;
+			break;
+		case T : 
+			this.messagingProperty.set(false);
 			break;
 		default :
 			System.out.println("Unknown key");

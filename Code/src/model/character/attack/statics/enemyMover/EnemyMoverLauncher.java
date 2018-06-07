@@ -9,9 +9,7 @@ public class EnemyMoverLauncher implements Launcher{
 
 	@Override
 	public void launch(GameMap map, Movement direction, int row, int column) {
-		for(int i = 0; i < 4;i++) {
-			new EnemyMove(map, row, column, Movement.values()[i]);
-		}
+			new EnemyMove(map, row, column,direction);
 	}
 
 }
