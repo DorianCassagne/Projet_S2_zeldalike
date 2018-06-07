@@ -53,6 +53,7 @@ public abstract class GameCharacter extends Movable{
 			this.setMap(newMap);
 		
 	}
+	
 
 	protected void removeCharacter() {
 		this.getMyMap().delCharacter(this, getRow(), getColumn());

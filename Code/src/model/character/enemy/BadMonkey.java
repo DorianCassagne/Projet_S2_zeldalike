@@ -3,7 +3,9 @@ package model.character.enemy;
 import model.PathFinder.BFS1;
 
 import model.character.GameCharacter;
-import model.character.attack.statics.AttackTest;
+import model.character.attack.statics.Bomrang;
+import model.character.attack.statics.DoomAttack;
+import model.character.attack.statics.boss.NyanAttHori;
 import model.gameMap.GameMap;
 import model.gameMap.additional.Statics;
 import model.gameMap.move.Move;
@@ -29,17 +31,24 @@ public class BadMonkey extends Enemy{
 		int actualCell= Statics.convertToCellId(this.getRow(), this.getColumn());
 		//exmple pour attackmove attention a l'ordre des cases
 		int[]tab= {
-				Statics.convertToCellId(row+1,column),
-				Statics.convertToCellId(row,column-1),
-				Statics.convertToCellId(row-1,column),
-				Statics.convertToCellId(row,column+1),
+				Statics.convertToCellId(row+5,column),
+				Statics.convertToCellId(row,column-5),
+				Statics.convertToCellId(row-5,column),
+				Statics.convertToCellId(row,column+5),
+//				Statics.convertToCellId(row+2,column),
+//				Statics.convertToCellId(row,column-2),
+//				Statics.convertToCellId(row-2,column),
+//				Statics.convertToCellId(row,column+2),
 		};
 		
 		int inPlace= inPlace(tab, actualCell);
 		if (inPlace != -1) {
 			Movement currentMovement = Movement.values()[inPlace];
 			this.setImage(currentMovement);
-			new AttackTest(getMyMap(),this.getRow(),this.getColumn(),currentMovement,10);
+			//new DoomAttack(getMyMap(),this.getRow(),this.getColumn(),currentMovement, 10);
+			new Bomrang(getMyMap(),this.getRow(),this.getColumn(),currentMovement);
+			//new NyanAttHori(getMyMap(), this.getRow(), this.getColumn());
+			setWait(200);
 			return null;
 		}
 		else {
@@ -71,7 +80,7 @@ public class BadMonkey extends Enemy{
 				ret=i;
 		}
 
-		return ret;
+		return ret%4;
 	}
 
 	

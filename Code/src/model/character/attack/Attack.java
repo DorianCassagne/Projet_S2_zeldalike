@@ -58,9 +58,9 @@ public abstract class Attack extends Movable {
 		while(index < this.cellPerTurn && this.isAlive()) {
 			row +=  this.direction.getVerticalIncrement();
 			column +=  this.direction.getHorizontalIncrement() ;
-			this.maxDistance--;
 			byte playAttack = this.getMyMap().playAttack(this, row, column);
-			
+			this.maxDistance--;
+
 			if(!handleMove(playAttack)) {
 				row = this.getRow();
 				column = this.getColumn();
@@ -95,6 +95,9 @@ public abstract class Attack extends Movable {
 
 	public Movement getDirection() {
 		return this.direction;
+	}
+	protected void setDirection(Movement dir) {
+		this.direction=dir;
 	}
 	
 	protected boolean handleMove(byte attackResult) {

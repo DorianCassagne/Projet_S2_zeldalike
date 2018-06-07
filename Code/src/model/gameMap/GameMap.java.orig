@@ -1,7 +1,7 @@
 package model.gameMap;
-
-
 import javafx.beans.property.IntegerProperty;
+
+
 import javafx.beans.property.SimpleIntegerProperty;
 import model.character.GameCharacter;
 import model.character.attack.Attack;
@@ -11,7 +11,6 @@ import model.gameMap.additional.NewMovable;
 import model.gameMap.additional.Statics;
 import model.gameMap.cell.Cell;
 import model.gameMap.move.Action;
-import model.gameMap.move.ExternalMover;
 import model.gameMap.move.Move;
 import resources.additionalClass.UsefulMethods;
 
@@ -30,6 +29,7 @@ public class GameMap {
 		this.action = new Action();
 		this.changeProperty = new SimpleIntegerProperty();
 		this.safeChangeProperty = UsefulMethods.copyIntegerProperty(this.changeProperty);
+		this.safeChangeProperty.addListener((obs,oldV,newV)->System.out.println("The new Value = "+newV));
 		initialiseCells(values);
 	
 	}
@@ -46,14 +46,6 @@ public class GameMap {
 	 * Renvoie vrai si le changement a été bien effectu�, cela veut dire que la case destination accepte le personnage en movement
 	 * Renvoie faux si la case d'arrivée ou de départ n'est pas une case disponible ou incorrecte.
 	*/
-	
-	public boolean changeCell(GameCharacter character,int currentRow,int currentColumn,int endRow,int endColumn,ExternalMover mover) {
-		boolean moved = mover != null && this.changeCell(character, currentRow, currentColumn, endRow, endColumn);
-		if(moved) {
-			this.action.addMove(endRow,endColumn,mover.getSpeed(),character);
-		}
-		return moved;
-	}
 	
 	public boolean changeCell(GameCharacter character,int currentRow,int currentColumn,int endRow,int endColumn) {
 		int endCellId = Statics.convertToCellId(endRow,endColumn);
@@ -117,6 +109,7 @@ public class GameMap {
 		if(Statics.isInMap(row,column)) {
 			int cellId = Statics.convertToCellId(row, column);
 			correctlyPlaced = this.cells[cellId].addMovable(movable);
+			System.out.println(correctlyPlaced);
 
 			if(correctlyPlaced) {
 				this.action.addMovable(movable,cellId);
@@ -137,10 +130,13 @@ public class GameMap {
 	
 	public void  addAttack(Attack attack,int row,int column) {
 		if(Statics.isInMap(row,column)) {
+		
 			int cellId = Statics.convertToCellId(row,column);
 			this.action.addMovable(attack,cellId);
+		
 		}
 		else {
+			
 			throw new IllegalArgumentException("ENDCELL NOT FOUND");
 		
 		}
@@ -160,9 +156,9 @@ public class GameMap {
 	public byte playAttack(Attack attack,int row,int column) {
 		
 		byte value = Attack.NOTPLAYED;
-		if(Statics.isInMap(row,column) && attack != null) {
+		if(Statics.isInMap(row,column)) {
 			int endCellId = Statics.convertToCellId(row, column);
-			value = this.cells[endCellId].addAttack(attack);
+			value = this.cells[endCellId].attack(attack);
 		}else {
 			this.action.delAttack(attack);
 		}
