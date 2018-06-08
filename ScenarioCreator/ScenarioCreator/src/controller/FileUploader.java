@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.File;
+
 import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,7 +9,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.stage.FileChooser;
 import model.gameMap.GameMap;
-import model.gameMap.additional.MapReader;
 import view.TexturePack;
 
 public class FileUploader {

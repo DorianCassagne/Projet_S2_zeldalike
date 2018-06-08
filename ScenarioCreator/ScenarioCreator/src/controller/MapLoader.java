@@ -15,7 +15,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.TilePane;
+import javafx.stage.Stage;
+import model.gameMap.Conversion;
 import model.gameMap.GameMap;
 import model.gameMap.additional.MapReader;
 import view.MapView;
@@ -24,6 +27,7 @@ import view.TexturePack;
 public class MapLoader implements Initializable{
 	
 	public  static TexturePack TEXTURE ;
+	public static final String PATHFXML = "/view/Map.fxml";
 	public final static int MAPLENGTH = 768;
 	public final static double TILEPREFDIMENSION = MAPLENGTH/MapReader.MAPLENGTH;
 	public final static double TILESCALE = TILEPREFDIMENSION/FileUploader.TILEDIMENSION;
@@ -32,28 +36,31 @@ public class MapLoader implements Initializable{
     
 	private MapView myMapView;
 	private GameMap map;
-	private IntegerProperty changeProperty;
 	private Scene scene;
+	private Stage stage;
+	private int cellId;
 	
 	public void setTexturePack(TexturePack texture) {
 		TEXTURE = texture;
-		
 	}
 	
-	public MapLoader() {
-		this.changeProperty = new SimpleIntegerProperty();
+	
+	public void setStage(Stage stage) {
+		if(this.stage == null)
+			this.stage = stage;
+		else
+			throw new IllegalArgumentException("This can only have one Stage");
 	}
 	
 	public void setMap(GameMap map ) {
-		this.map = map;
+		if(this.map == null)
+			this.map = map;
+		else
+			throw new IllegalArgumentException("This map must be assigned Once");
 	}
-	
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		initTile();
-	}
-	
+		
 	public void launch() {
+
 		this.createMap();
 	}
 	
@@ -67,22 +74,36 @@ public class MapLoader implements Initializable{
 	}
 	
 	private void createMap() {
-
 		Function< Integer,Integer[]> backgroundSource = element->this.map.getLayerForCell(element);
 		this.myMapView = new MapView(backgroundSource,this.newMap);
 		this.myMapView.initialise();
 	}
-	
-	public final  IntegerProperty changeProperty() {
-		return this.changeProperty;
-	}
-	
+		
 	public void startScene(Scene scene) {
 		this.scene = scene;
+		this.scene.setOnMouseClicked(e->setCurrentCell(e));
+
+	}
+		
+	
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		initTile();
+
 	}
 	
-
+	public int getCurrentCell() {
+		this.stage.showAndWait();
+		return this.cellId;
+	}
 	
+	private void setCurrentCell(MouseEvent event) {
+		Double row = event.getX() / MapLoader.TILEPREFDIMENSION;
+		Double column = event.getY() / MapLoader.TILEPREFDIMENSION;
+		this.cellId = Conversion.convertToCellId(row.intValue(), column.intValue());
+		this.stage.close();
+	}
+
 	
 	
 	

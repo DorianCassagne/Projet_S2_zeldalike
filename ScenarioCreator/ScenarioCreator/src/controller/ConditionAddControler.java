@@ -9,6 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -21,6 +22,8 @@ public class ConditionAddControler implements Initializable{
     @FXML
     private ChoiceBox<Type> conditionType;
 
+    @FXML
+    private ChoiceBox<LogicalLink> logicalLink;
     @FXML
     private ChoiceBox<ConditionValidity> conditionValue;
 
@@ -84,13 +87,18 @@ public class ConditionAddControler implements Initializable{
     private ObservableList<Type> conditionTypeItems;
     private ObservableList<ConditionValue> conditionValueItems;
     private ObservableList<ConditionValidity> conditionValidityItems;
+    private ObservableList<LogicalLink> logicalLinkItems;
     private ObservableList<TypeAction> actionTypeItems;
     private ObservableList<TypeAction> actionGeneralTypeItems;
     private ObservableList<TypeAction> actionSpecificTypeItems;
-    
+    private MapLoader mapLoader;
     
     public ConditionAddControler() {
     	this.initAllValues();
+    }
+    
+    public void setMapLoader(MapLoader mapLoader) {
+    	this.mapLoader = mapLoader;
     }
     
     private void initAllValues() {
@@ -101,10 +109,11 @@ public class ConditionAddControler implements Initializable{
 		this.actionTypeItems = FXCollections.observableArrayList();
 		this.actionGeneralTypeItems = FXCollections.observableArrayList();
 		this.actionSpecificTypeItems = FXCollections.observableArrayList();
+		this.logicalLinkItems = FXCollections.observableArrayList();
     }
     
     private void setConditionTypeItems() {
-		this.conditionTypeItems.setAll(Type.values());
+		this.conditionTypeItems.addAll(Type.values());
 		this.conditionType.setItems(this.conditionTypeItems);
     }
     
@@ -114,14 +123,23 @@ public class ConditionAddControler implements Initializable{
     }
 
     private void setConditionValidityItems() {
-		this.conditionValidityItems.setAll(ConditionValidity.values());
+		this.conditionValidityItems.addAll(ConditionValidity.values());
 		this.conditionValue.setItems(this.conditionValidityItems);
     }
 
+    private void setLogicalLinkItems() {
+    	this.logicalLinkItems.addAll(LogicalLink.values());
+    	this.logicalLink.setItems(this.logicalLinkItems);
+    }
     
     @FXML
     void addCondition(ActionEvent event) {
 
+    }
+    
+    @FXML
+    void chooseOnMap(ActionEvent event) {
+    	System.out.println(this.mapLoader.getCurrentCell());
     }
 
 
@@ -131,7 +149,7 @@ public class ConditionAddControler implements Initializable{
 		this.setConditionTypeItems();
 		this.setConditionValidityItems();
 		this.setConditionValueItems();
-
+		this.setLogicalLinkItems();
 	}
 
 }
