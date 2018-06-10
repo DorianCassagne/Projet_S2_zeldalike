@@ -1,6 +1,7 @@
-package model.event.condition;
+package model.event.condition.elements;
 
-import model.event.ElementNames;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 public enum ConditionValue implements ElementNames {
 
@@ -9,10 +10,13 @@ public enum ConditionValue implements ElementNames {
 	
 	private String nom;
 	private String representation;
-	
+	private StringProperty representationProperty;
+
 	ConditionValue(String nom,String representation){
 		this.nom = nom;
 		this.representation = representation;
+		this.representationProperty = new SimpleStringProperty(nom);
+
 	}
 	
 	
@@ -25,4 +29,9 @@ public enum ConditionValue implements ElementNames {
 	public String getValue() {
 		return this.representation;
 	}
+	
+	public StringProperty representationProperty() {
+		return this.representationProperty;
+	}
+
 }

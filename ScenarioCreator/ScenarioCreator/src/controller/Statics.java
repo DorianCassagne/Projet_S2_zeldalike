@@ -41,10 +41,9 @@ public class Statics {
         Stage s = new Stage();
         loader.setLocation(Main.class.getResource("/view/SceneCreation.fxml"));
         Parent p = loader.load();
-        Scene scene = new Scene(p,1100,MapLoader.MAPLENGTH);
+        Scene scene = new Scene(p,1100,700);
         ConditionAddControler controller = loader.getController();
         controller.setMapLoader(mapLoader);
-        s.setResizable(false);
         s.setScene(scene);
         s.show();
         

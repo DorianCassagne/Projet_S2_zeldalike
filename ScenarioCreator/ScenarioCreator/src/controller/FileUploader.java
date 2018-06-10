@@ -75,6 +75,7 @@ public class FileUploader {
     			GameMap map = new GameMap(this.mapPath.toArray(list));
     			TexturePack texture = new TexturePack(this.tilesetPath,8,TILEDIMENSION);    	        
     			Statics.newMap(map,texture,null);
+    			this.tilesetName.getScene().getWindow().hide();
     		}catch(Exception e) {
     			e.printStackTrace();
     			Alert alert = new Alert(Alert.AlertType.ERROR,"VERIFIEZ BIEN VOS FICHIERS");
