@@ -7,7 +7,8 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import model.character.attack.statics.Bomrang;
+import model.character.GameCharacter;
+import model.character.attack.statics.Bomb;
 import model.character.attack.statics.DoomAttack;
 import model.character.attack.statics.SimpleArrow;
 import model.character.attack.statics.boss.NyanAttHori;
@@ -20,7 +21,7 @@ public class NyaNyaNay  extends NyaSlave {
 
  
 	private final static double COEF=2.0;
-	private final static int DEFALTIMG=40;
+	private final static int DEFALTIMG=64;
 	private final static int DEFAULTCYCLE=4;
 	//private final static int COEF=2.0;
 	private static BooleanProperty dead=new SimpleBooleanProperty(false);
@@ -47,7 +48,7 @@ public class NyaNyaNay  extends NyaSlave {
 	}
 	@Override
 	protected Move act() {
-		if (attCote&&super.getMov()==Movement.STAY) {
+		if (attCote&&super.getMov()==Movement.STAY|| GameCharacter.getHero().getRow()==this.getRow()) {
 			
 			new NyanAttHori(this.getMyMap(), this.getRow(), this.getColumn());
 			attCote=false;
@@ -62,7 +63,7 @@ public class NyaNyaNay  extends NyaSlave {
 					setWait(20);
 					break;
 				case 1:
-					new Bomrang(getMyMap(), this.getRow(), this.getColumn()+1, Movement.BOTTOM);
+					new Bomb(getMyMap(), this.getRow(), this.getColumn()+1, Movement.BOTTOM);
 					setWait(50);
 					break;
 				case 2:

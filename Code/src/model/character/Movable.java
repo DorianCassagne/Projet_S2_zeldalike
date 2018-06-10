@@ -68,6 +68,10 @@ public abstract class Movable {
 		return this.column;
 	}
 	
+	public final int getCellId() {
+		return Statics.convertToCellId(this.getRow(), this.getColumn());
+	}
+	
 	protected final GameMap getMyMap() {
 		return this.map;
 	}

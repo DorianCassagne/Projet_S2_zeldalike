@@ -45,7 +45,6 @@ public class GameLoop {
 	
 	
 	public void stop() {
-		System.out.println("Stop the gameloop");
 		this.gameLoop.stop();
 	}
 	

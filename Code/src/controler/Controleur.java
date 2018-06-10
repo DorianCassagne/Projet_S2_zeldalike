@@ -31,7 +31,7 @@ public class Controleur implements Initializable{
 	
 	public final static TexturePack TEXTURE ;
 
-	private final static String TILESETPATH = "src/resources/tileset/Image/mardi5.png";
+	private final static String TILESETPATH = "src/resources/tileset/Image/lastTileset.png";
 	
 	@FXML private TextArea messageText;
 	@FXML private AnchorPane mainAnchorPane;

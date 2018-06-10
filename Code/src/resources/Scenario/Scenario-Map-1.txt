@@ -1,0 +1,8 @@
+//Tutoriel
+N:0: :->S-m--Utilisez les flèches pour le mouvement du personnage-
+//TutoMovement
+H:774: :->S-m--Mouvement effectuer !-
+//Tuto collecteItem
+O:1: :->S-m--Marcher sur l'item pour le ramasser-->C-I-AXE--1158
+//TutorielITem
+C:1158:!:I-AND-O:3:!:-AND-O:3:!:->S-m--Maintenant que vous avez collecter l'item vous pouvez attaquer-1158->C-M-NOTYETIMPLEMENTED-Maintenant que vous avez collecter l'item vous pouvez attaquer-1160

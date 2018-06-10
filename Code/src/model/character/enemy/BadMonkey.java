@@ -3,7 +3,7 @@ package model.character.enemy;
 import model.PathFinder.BFS1;
 
 import model.character.GameCharacter;
-import model.character.attack.statics.Bomrang;
+import model.character.attack.statics.Bomb;
 import model.character.attack.statics.DoomAttack;
 import model.character.attack.statics.boss.NyanAttHori;
 import model.gameMap.GameMap;
@@ -46,7 +46,7 @@ public class BadMonkey extends Enemy{
 			Movement currentMovement = Movement.values()[inPlace];
 			this.setImage(currentMovement);
 			//new DoomAttack(getMyMap(),this.getRow(),this.getColumn(),currentMovement, 10);
-			new Bomrang(getMyMap(),this.getRow(),this.getColumn(),currentMovement);
+			new Bomb(getMyMap(),this.getRow(),this.getColumn(),currentMovement);
 			//new NyanAttHori(getMyMap(), this.getRow(), this.getColumn());
 			setWait(200);
 			return null;
