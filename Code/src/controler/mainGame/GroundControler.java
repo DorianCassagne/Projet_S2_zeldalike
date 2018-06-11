@@ -1,10 +1,11 @@
 package controler.mainGame;
 
 import java.io.IOException;
+
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import app.Main;
+import controler.menu.Accueil1Controler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -20,20 +21,25 @@ import javafx.scene.layout.StackPane;
  */
 
 public class GroundControler implements Initializable {
+	
+	
 	/*
 	 * Variables statiques : 
 	 * VIEWPATH : le chemin vers tous les fichiers du package de la vue.
 	 * FXMLPATH : le chemin vers le fichier dont GroundControler est un controleur.
 	 */
 	
+	public final static int ERRORSTATE = 1;
 	private static final String VIEWPATH = "/vue/"; 
 	public final static String FXMLPATH = "/vue/template/Ground.fxml";
+	public final static int DEFAULTWIDTH = 960;
+	public final static int DEFAULTHEIGHT = 640;
 	
 	//Le stackPane qui contiendra l'ensemble des éléments ajouté à la fenêtre.
-	@FXML private StackPane mainAnchorPane; 
+	@FXML private StackPane mainStackPane; 
 	
 	public void changeView(String ... viewNames){
-		this.mainAnchorPane.getChildren().clear();
+		this.mainStackPane.getChildren().clear();
 		for(String viewName : viewNames) {
 			this.addElements(viewName);
 		}
@@ -44,7 +50,11 @@ public class GroundControler implements Initializable {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(Main.class.getResource(VIEWPATH + viewName));
 			AnchorPane newView = loader.load();
-			this.mainAnchorPane.getChildren().add(0,newView);
+			newView.setPrefHeight(DEFAULTHEIGHT);
+			newView.setPrefWidth(DEFAULTWIDTH);
+			SceneLoader sceneLoader = loader.getController();
+			sceneLoader.loadScene(this);
+			this.mainStackPane.getChildren().add(0,newView);
 		} catch (IOException e) {
 			
 		}
@@ -53,8 +63,7 @@ public class GroundControler implements Initializable {
 	
 	
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		System.out.println("");
-		this.changeView("menu/MenuAccueil.fxml");
+		this.changeView(Accueil1Controler.FXMLPATH);
 	}
 	
 	

@@ -40,7 +40,6 @@ public abstract class GameHero extends GameCharacter {
 		super(map, startRow, startColumn, DEFAULTCYCLE, DEFAULTCOEFFICIENT, defaultImage);
 		initialiseProperties(startDef);
 		initAttack();
-		
 	}
 				
 	public GameHero(GameMap map, int startRow, int startColumn) {

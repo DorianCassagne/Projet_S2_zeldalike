@@ -1,18 +1,18 @@
 package controler;
 
-import java.io.IOException;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.function.Function;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import app.Main;
 import controler.conversion.ConversionAndStatics;
 import controler.gameLoop.ControlerEncoder;
 import controler.gameLoop.GameLoop;
+import controler.mainGame.GroundControler;
+import controler.mainGame.SceneLoader;
 import controler.withGame.CommandInterpreter;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -28,7 +28,7 @@ import vue.gameClass.MapView;
 import vue.gameClass.MessageView;
 import vue.other.TexturePack;
 
-public class Controleur implements Initializable{
+public class Controleur implements Initializable,SceneLoader{
 	
 	public final static TexturePack TEXTURE ;
 	public final static String FXMLPATH = "template/GuiView.fxml";
@@ -53,6 +53,7 @@ public class Controleur implements Initializable{
 	private MapView myMapView;
 	private StringProperty messageZone;
 	private ControlerEncoder controllerData;
+	private GroundControler sceneChanger;
 	
 	static {
 		TEXTURE = new TexturePack(TILESETPATH,Statics.LINELENGTH, ConversionAndStatics.TILEDIMENSION);
@@ -132,6 +133,11 @@ public class Controleur implements Initializable{
 			else
 				i++;
 		}
+	}
+
+	@Override
+	public void loadScene(GroundControler groundControler) {
+		this.sceneChanger = groundControler;
 	}
 
 	

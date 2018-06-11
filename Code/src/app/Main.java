@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
-
 import controler.Controleur;
 import controler.mainGame.GroundControler;
 import javafx.application.Application;
@@ -17,16 +16,17 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-	//private final static String STARTVIEW = GroundControler.FXMLPATH;
-	private final static String STARTVIEW = "/vue/" + Controleur.FXMLPATH;
+	private final static String STARTVIEW = GroundControler.FXMLPATH;
+	//private final static String STARTVIEW = "/vue/" + Controleur.FXMLPATH;
 	
     @Override
     public void start(Stage primaryStage) {
 
         FXMLLoader loader = new FXMLLoader();
         URL url = null;
-        AnchorPane root = null; 
-		try {
+        StackPane root = null; 
+		
+        try {
 			url = Main.class.getResource(STARTVIEW).toURI().toURL();
 	        loader.setLocation(url);
 		} catch (MalformedURLException e) {
@@ -41,10 +41,8 @@ public class Main extends Application {
 			e.printStackTrace();
 			throw new Error("ERROR LOADING JAVAFX");
 		} 
-        Scene  scene = new Scene(root,960,640);
-        Controleur controller = loader.getController();
-        controller.startScene(scene);
-
+        
+        Scene  scene = new Scene(root,GroundControler.DEFAULTWIDTH,GroundControler.DEFAULTHEIGHT);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
