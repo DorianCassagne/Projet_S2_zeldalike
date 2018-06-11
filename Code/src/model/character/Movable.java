@@ -50,6 +50,10 @@ public abstract class Movable {
 	protected void setImage(Movement movement) {
 		this.imageValueProperty.set(this.defaultImage + movement.getIndex());
 	}
+	
+	protected void setImage(int i) {
+		this.imageValueProperty.set(this.defaultImage +i);
+	}
 			
 	public final IntegerProperty getImageValueProperty() {
 		return this.safeImageValueProperty;
@@ -62,6 +66,10 @@ public abstract class Movable {
 	
 	public final int getColumn() {
 		return this.column;
+	}
+	
+	public final int getCellId() {
+		return Statics.convertToCellId(this.getRow(), this.getColumn());
 	}
 	
 	protected final GameMap getMyMap() {

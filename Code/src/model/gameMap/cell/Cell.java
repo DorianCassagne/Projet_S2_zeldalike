@@ -1,5 +1,7 @@
 package model.gameMap.cell;
 
+import java.util.ArrayList;
+
 import javafx.beans.property.IntegerProperty;
 
 
@@ -17,6 +19,7 @@ public class Cell {
 	public final static byte NOTWALKABLE = 7 ;
 
 	
+	private ArrayList<Attack> attackList;
 	private Background background;
 	private Item item;
 	private GameCharacter gameCharacter;
@@ -29,6 +32,7 @@ public class Cell {
 		this.mapProperty = mapProperty;
 		this.item = ItemFactory.getItem(itemValue);
 		this.cellId = cellId;
+		this.attackList = new ArrayList<Attack>();
 	}
 
 	public boolean containsItem() {
@@ -46,8 +50,9 @@ public class Cell {
 
 	public boolean addMovable(GameCharacter movable) {
 		boolean isSet = this.gameCharacter == null && this.isWalkable();
-		if (isSet) {
+		if (isSet && movable != null) {
 			this.gameCharacter = movable;
+			this.launchAttacks();
 			if(item!=null && this.item.effectOn(movable)) {
 				this.delItem();
 			}
@@ -56,23 +61,41 @@ public class Cell {
 		return isSet;
 	}
 
+	public boolean backWalkable() {
+		return this.background.isWalkable();
+	}
+	
 
-	public byte attack(Attack attack) {
+	public byte addAttack(Attack attack) {
 		byte number = NOEFFECT;
-		
-		if(this.gameCharacter != null) {
-			attack.attack(this.gameCharacter);
-			number *= CHARACTERISPRESENT;
-		}
-		
+				
 		if(this.item!=null)
 			number *= ITEMISPRESENT;
-		
 		if(!this.background.isWalkable())
 			number *= NOTWALKABLE;
 		
+		this.attackList.add(attack);
+		this.launchAttacks();
+		
 		return number;
 	}
+	
+	private void launchAttacks() {
+		int index = 0;
+		while(!this.attackList.isEmpty()) {
+			this.attack(this.attackList.get(index));
+		}
+	}
+	
+	private void attack(Attack attack) {
+		attack.attack(this.gameCharacter);
+		this.attackList.remove(attack);
+	}
+	
+	public void turn() {
+		this.attackList.clear();
+	}
+	
 	
 	private void delItem () {
 		this.item = null;
@@ -111,8 +134,6 @@ public class Cell {
 		else
 			this.mapProperty.set(this.cellId);
 	}
-	
-	
 	
 	
 	

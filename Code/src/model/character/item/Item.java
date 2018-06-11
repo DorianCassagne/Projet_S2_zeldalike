@@ -18,10 +18,10 @@ public abstract class Item {
 	public final static int DEFENSEINTEMSTARTINDEX = 824;
 	public final static int SPEEDITEMSTARTINDEX = 840;
 	public final static int MPITEMSTARTINDEX = 856;
+	public final static int HPITEMSTARTINDEX = 864;
 	public final static int BOXITEMSTARTINDEX = 872 ;
 	public final static int HPPOTIONSTARTINDEX = 888;
 	public final static int MPPOTIONSTARTINDEX = 892;
-	
 
 
 	private int imageValue;

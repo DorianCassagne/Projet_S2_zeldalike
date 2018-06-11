@@ -4,12 +4,15 @@ import java.util.function.Supplier;
 import model.character.GameCharacter;
 import model.gameMap.additional.Statics;
 import model.scenario.action.ActionData;
+import resources.additionalClass.Conversion;
 
 public class Condition {
 	/* 
 	 *Syntaxe de la case : C-IdCase-' '/!-I/W;
 	 *Syntaxe pour Enemy : M-IdMonster-' '/!-NBLIFE
 	 *Syntaxe pour Hero : H-IdCase/{R/L/U/D}-' '/!-C
+	 *Syntaxe pour ancien condition : O-A-' '/!-N
+	 (N : Numéro de ligne, A : absolute)
 	 */
 
 	
@@ -19,19 +22,22 @@ public class Condition {
 	private final static char NEGATION = '!';
 	private final static char CONTAINSITEM = 'I';
 	private final static char WALKABLE = 'W';
-
+	private final static char OLDCONDITION = 'O';
+	private final static char ABSOLUTE = 'A';
+	public final static char NOTHING = 'N';
+	
 	private static ActionData actionData;
 
 	private String id;
 	private boolean conditionValue;
-	private int lifePoint;
+	private Integer numberValue;
 	private char detail;
 	
-	private Condition(String id,char conditionValue,int lifePoint,char detail) {
+	private Condition(String id,char conditionValue,Integer lifePoint,char detail) {
 		this.id = id;
 		this.conditionValue = conditionValue == NEGATION;
-		this.detail =detail;
-		this.lifePoint = lifePoint;
+		this.detail = detail;
+		this.numberValue = lifePoint;
 	}
 	
 	private Supplier<Boolean> handleCell(){
@@ -43,6 +49,8 @@ public class Condition {
 		case WALKABLE:
 			this.checkForWalkable();
 			break;
+		default :
+			throw new IllegalArgumentException("HANDLECELL ERROR, THE CONDITION REQUESTED ON CELL IS NOT FOUND " + " " + this.detail );
 		}
 		return supplier;
 	}
@@ -77,7 +85,7 @@ public class Condition {
 		Supplier<Boolean> supplier = ()->{
 			boolean isGreater = false;
 			try {
-				isGreater = actionData.getElementsList().get(this.id).getHp() <= this.lifePoint;
+				isGreater = actionData.getElementsList().get(this.id).getHp() <= this.numberValue;
 			}catch(NullPointerException e) {
 				
 			}
@@ -101,6 +109,22 @@ public class Condition {
 		return supplier;
 	}
 	
+	private Supplier<Boolean> handleOldCondtion() {
+		Supplier<Boolean> supplier = null;
+		switch(Conversion.toChar(this.id)) {
+		case ABSOLUTE :
+			supplier = ()->calculateFromAbsolute();
+			break;
+		default : 
+			throw new IllegalArgumentException("UNKNOWN CONDITION SYNTAX " + this.id);
+		}
+		return supplier;
+	}
+	
+	
+	private boolean calculateFromAbsolute(){
+		return actionData.getFinishedvents().contains(this.numberValue) ^ this.conditionValue;
+	}
 	
 	
 	public final static Supplier<Boolean> createCondition(String[] conditionString,ActionData data){		
@@ -108,7 +132,6 @@ public class Condition {
 		Condition condition = new Condition(encoder.getId(),encoder.getConditionValue(),encoder.getLifePoint(),encoder.getDetail());
 		actionData = data;
 		Supplier<Boolean> supplier;
-		System.out.println("The length of Condition is "+conditionString.length);
 		switch(encoder.getCategory()) {
 		case CELL :
 			supplier = condition.handleCell();
@@ -118,6 +141,12 @@ public class Condition {
 			break;
 		case HERO:
 			supplier = condition.handleHero();
+			break;
+		case OLDCONDITION:
+			supplier = condition.handleOldCondtion();
+			break;
+		case NOTHING :
+			supplier = ()->(true);
 			break;
 		default:
 			throw new IllegalArgumentException("ERROR WHILE CREATING CONDITION BECAUSE OF " + encoder.getCategory());
@@ -129,7 +158,6 @@ public class Condition {
 	public final static Supplier<Boolean> createCondition(String[] conditionString,String previousConditionEffect,Supplier<Boolean> lastCondition,ActionData data){		
 		Supplier<Boolean> s;
 		Supplier<Boolean> thisCondition = createCondition(conditionString,data);
-		System.out.println("The previous effect is : " + previousConditionEffect);
 		if(previousConditionEffect.equalsIgnoreCase("OR")) {
 			s = ()->{
 				return lastCondition.get() || thisCondition.get();

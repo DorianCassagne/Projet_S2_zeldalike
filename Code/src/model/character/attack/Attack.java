@@ -3,26 +3,30 @@ import model.character.GameCharacter;
 import model.character.Movable;
 import model.gameMap.GameMap;
 import model.gameMap.additional.Statics;
+import model.gameMap.cell.Cell;
 import model.gameMap.move.Move;
 import model.gameMap.move.Movement;
 
 public abstract class Attack extends Movable {
 	public final static int NOTPLAYED = 0 ;
+	private final static int DYINGTURNAFTERREALDEATH = 22; 
 	
 	private Movement direction;
 	private int damage;
 	private int cellPerTurn;
 	private int maxDistance;
 	private boolean isAlive;
+	private int lastTurn;
 	
 	
 	public Attack(GameMap map, int cycle, int row, int column,Movement direction,int damage,int cellPerTurn,double coefficient,int defaultImage,int maxDistance) {
 		
 		super(map,cycle, row, column,coefficient,defaultImage);
-		if(direction == null || damage <= 0 || cellPerTurn <= 0 || maxDistance < 0) {
+		if(direction == null || damage < 0 || cellPerTurn <= 0 || maxDistance < 0) {
 			throw new IllegalArgumentException("PROBLEM IN ATTACK");
 		}
 		else {
+			this.lastTurn = 0;
 			this.direction = direction;
 			this.setImage(direction);
 			this.damage = damage;
@@ -39,26 +43,33 @@ public abstract class Attack extends Movable {
 
 	
 	@Override
-	public final Move act() {
+	public Move act() {
 		int endCellId = this.establishMove();
 		return new Move(endCellId, this.getMoveCycle());
 	}
 
 	
 	
-	private final int establishMove() {
-		
-		int row = this.getRow() + this.cellPerTurn * this.direction.getVerticalIncrement();
-		int column = this.getColumn() + this.cellPerTurn * this.direction.getHorizontalIncrement() ;
-		byte playAttack = this.getMyMap().playAttack(this, row, column);
-		this.maxDistance--;
-		if(!handlePlay(playAttack)) {
-			row = this.getRow();
-			column = this.getColumn();
-			this.isAlive = false;
+	private int establishMove() {
+		int row = this.getRow();
+		int column = this.getColumn();
+		int index = 0;
+
+		while(index < this.cellPerTurn && this.isAlive()) {
+			row +=  this.direction.getVerticalIncrement();
+			column +=  this.direction.getHorizontalIncrement() ;
+			byte playAttack = this.getMyMap().playAttack(this, row, column);
+			this.maxDistance--;
+
+			if(!handleMove(playAttack)) {
+				row = this.getRow();
+				column = this.getColumn();
+				this.isAlive = false;
+			}
+			this.setCellId(row, column);
+			index++;
 		}
 		
-		this.setCellId(row, column);
 		return Statics.convertToCellId(row, column);
 
 	}
@@ -70,23 +81,44 @@ public abstract class Attack extends Movable {
 
 	@Override
 	public boolean isAlive() {
-		return this.isAlive && maxDistance >= 0;
+		return maxDistance >= 0 && this.isAlive ;
 	}
 	
 	@Override
 	protected void removeCharacter() {
-		this.getMyMap().delAttack(this);
+		
+		if(this.lastTurn > DYINGTURNAFTERREALDEATH)
+			this.getMyMap().delAttack(this);
+		else
+			this.lastTurn++;
 	}
 
 	public Movement getDirection() {
 		return this.direction;
 	}
-	protected void setDirection(Movement dir) {
-		this.direction=dir;
+//	protected void setDirection(Movement dir) {
+//		this.direction = dir;
+//	}
+	
+	protected boolean handleMove(byte attackResult) {
+		return attackResult % Cell.NOTWALKABLE != 0;
 	}
 	
-	public abstract boolean handlePlay(byte attackResult);
-	public abstract void attack(GameCharacter gameCharacter) ;
+	public final void attack(GameCharacter gameCharacter) {
+		if(gameCharacter != null && this.isAlive()) {
+			if(this.handlePlay(gameCharacter)){
+				this.isAlive = false;
+			}
+		}
+	}
+	
+	protected boolean handlePlay(GameCharacter gameCharacter) {
+		this.establishAttack(gameCharacter);
+		return true;
+	}
+	
+	
+	protected abstract void establishAttack(GameCharacter gameCharacter);
 	
 	
 }

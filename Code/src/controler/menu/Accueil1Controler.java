@@ -1,59 +1,41 @@
-/*package controler.menu;
+package controler.menu;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
-import app.Main;
-import controler.GameLoop;
-import javafx.event.ActionEvent;
+import controler.Controleur;
+import controler.mainGame.GroundControler;
+import controler.mainGame.SceneLoader;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.layout.AnchorPane;
 
-public class Accueil1Controler implements Initializable {
+
+public class Accueil1Controler implements SceneLoader{
+
 	
-		
+	public final static String FXMLPATH = "menu/MenuAccueil.fxml";
+	
+	private GroundControler ground;
+	
     @FXML
-    private Button NewGameButton;
-    @FXML
-    private Button LoadButton;
-    @FXML
-    private Button LeaveButton;
-    
-    public Accueil1Controler () {
-    	
+    private void newGame() {
+    	if(ground != null)
+    		ground.changeView(Controleur.FXMLPATH);
+    	else
+    		System.exit(1);
+    		
     }
     
     @FXML
-    void createNewGame(ActionEvent event) {
-    	
+    private void exit() {
+    	System.exit(1);
     }
-
-    @FXML
-    void leave(ActionEvent event) {
-    	System.exit(0);
-    }
-
-    @FXML
-    void loadGame(ActionEvent event) {
-		FXMLLoader loader = new FXMLLoader();
-		try {
-			loader.setLocation(Main.class.getResource("/vue/menu/MenuChargerMap.fxml"));
-			AnchorPane root = loader.load();
-			this.mainAnchorPane.getChildren().clear();
-			this.mainAnchorPane.getChildren().add(root);
-		} catch (IOException e) {
-			
-		}
-    }
-
     
-    @Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-    	
+    @FXML
+    private void loadGame() {
+    	//TODO
     }
+
+	@Override
+	public void loadScene(GroundControler controller) {
+		this.ground = controller;
+	}
+    
+
 }
-*/

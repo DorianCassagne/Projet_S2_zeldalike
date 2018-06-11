@@ -1,24 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controler.Controleur">
+
+<AnchorPane xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controler.menu.Accueil1Controler">
    <children>
-      <VBox alignment="CENTER" layoutX="-1.0" prefHeight="400.0" prefWidth="600.0">
+      <VBox alignment="CENTER" prefHeight="640.0" prefWidth="960.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ImageView fitHeight="150.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true" />
-            <VBox alignment="TOP_CENTER" spacing="30.0">
+            <VBox alignment="CENTER" spacing="30.0">
                <children>
-                  <Button fx:id="NewGameButton" mnemonicParsing="false" onAction="#createNewGame" prefHeight="30.0" prefWidth="200.0" text="Nouvelle Partie">
+                  <Button mnemonicParsing="false" onAction="#newGame" prefHeight="30.0" prefWidth="200.0" text="Nouvelle Partie">
                      <VBox.margin>
                         <Insets top="20.0" />
-                     </VBox.margin></Button>
-                  <Button fx:id="LoadMenuButton" mnemonicParsing="false" onAction="#loadGame" prefHeight="30.0" prefWidth="200.0" text="Charger une partie" />
-                  <Button fx:id="LeaveButton" mnemonicParsing="false" onAction="#leave" prefHeight="30.0" prefWidth="200.0" text="Quitter" />
+                     </VBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#loadGame" prefHeight="30.0" prefWidth="200.0" text="Charger une partie" />
+                  <Button mnemonicParsing="false" onAction="#exit" prefHeight="30.0" prefWidth="200.0" text="Quitter" />
                </children>
             </VBox>
          </children>

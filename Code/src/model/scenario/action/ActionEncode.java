@@ -13,15 +13,17 @@ public class ActionEncode {
 	private int idCase;
 	
 	public ActionEncode(String[] params) {
-		if(params.length == NBPARAMS) {
+		try {
 			this.action = Conversion.toChar(params[0]);
-			this.generalType = Conversion.toChar(params[1]);
-			this.specificType = params[2];
-			this.info = params[3];
-			this.idCase = Conversion.toInt(params[4]);
+			if(action != Action.NOTHING) {
+				this.generalType = Conversion.toChar(params[1]);
+				this.specificType = params[2];
+				this.info = params[3];
+				this.idCase = Conversion.toInt(params[4]);
+			}		
+		}catch(Exception e) {
+			
 		}
-		else
-			throw new IllegalArgumentException();
 	}
 	
 	public char getAction() {
