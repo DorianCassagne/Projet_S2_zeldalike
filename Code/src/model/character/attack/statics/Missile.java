@@ -32,16 +32,8 @@ public class Missile extends Attack{
 	}
 	
 	@Override
-	public Move act() {
-		if ( count == 0 ) {
-			new Missile(getMyMap(), this.getRow(), this.getColumn(), this.getDirection(), false);
-			return null;
-		}
-		int nextCell =BFS1.simpleMove(getMyMap(), this.getCellId(),GameCharacter.getHero().getCellId(), false);
-		count--;
-		System.out.println("miss"+ count);
-		return new Move(nextCell,this.getMoveCycle());
-		
+	public boolean handleMove(byte i) {
+	//	int nextCell = BFS1.simpleMove(getMyMap(), this.cel, cellEnd, joinTheCell)
+		return true;
 	}
-
 }

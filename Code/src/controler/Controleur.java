@@ -138,6 +138,7 @@ public class Controleur implements Initializable,SceneLoader{
 	@Override
 	public void loadScene(GroundControler groundControler) {
 		this.sceneChanger = groundControler;
+		this.sceneChanger.getScene().setOnKeyPressed(e->interpreter.handleKey(e));
 	}
 
 	
