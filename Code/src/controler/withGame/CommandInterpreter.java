@@ -1,7 +1,9 @@
 package controler.withGame;
 
 
+import controler.Controleur;
 import controler.gameLoop.GameLoop;
+import controler.mainGame.GroundControler;
 import javafx.beans.property.BooleanProperty;
 import javafx.scene.input.KeyEvent;
 import model.Game;
@@ -32,7 +34,7 @@ public class CommandInterpreter {
 
 	}
 	
-	public void handleKey(KeyEvent event) {
+	public void handleKey(KeyEvent event,GroundControler ground) {
 		char nextMove = Hero.STAY;
 		switch(event.getCode()) {
 		case UP : 
@@ -59,8 +61,13 @@ public class CommandInterpreter {
 		case Q : 
 			nextMove = Hero.ATTACKLEFT;
 			break;
-		case B :
-			this.gameLoop.stop();
+		case ESCAPE :
+			if(this.gameLoop.getIsStopped()) {
+				this.gameLoop.start();
+			}
+			else {
+				this.gameLoop.stop();
+			}
 			break;
 		case E : 
 			nextMove = Hero.CHANGEATTACK;

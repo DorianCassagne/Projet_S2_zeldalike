@@ -25,11 +25,13 @@ public class GameLoop {
 	private Timeline gameLoop ;
 	private HashMap<Integer,MovableView> movableList;
 	private ControlerEncoder workingData;
+	private boolean isStopped;
 	
 	public GameLoop(StringProperty messageZone,ControlerEncoder data) {
 		this.movableList = new HashMap<Integer,MovableView>();
 		this.gameLoop = new Timeline();
 		this.workingData = data;
+		this.isStopped=false;
 		initialiseLoop();
 
 	}
@@ -37,11 +39,17 @@ public class GameLoop {
 	/*Public Methods*/
 	public void start() {
 		this.gameLoop.play();
+		this.isStopped=false;
 	}
 	
 	
+	public boolean getIsStopped() {
+		return isStopped;
+	}
+
 	public void stop() {
 		this.gameLoop.stop();
+		this.isStopped=true;
 	}
 	
 	

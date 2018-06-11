@@ -31,7 +31,11 @@ import vue.other.TexturePack;
 public class Controleur implements Initializable,SceneLoader{
 	
 	public final static TexturePack TEXTURE ;
-	public final static String FXMLPATH = "template/GuiView.fxml";
+	public final static String FXMLGAMEPATH = "template/GuiView.fxml";
+	public final static String FXMLMAINMENUPATH = "menu/MenuAccueil.fxml";
+	public final static String FXMLMAINMENU2PATH = "menu/MenuAccueil2.fxml";
+	public final static String FXMLLOADMENUPATH = "menu/MenuChargerMap.fxml";
+	public final static String FXMLPAUSEPATH = "menu/MenuDePause.fxml";
 	private final static String TILESETPATH = "src/resources/tileset/Image/jeudi7.png";
 	
 	@FXML    private AnchorPane mainAnchorPane;
@@ -80,8 +84,10 @@ public class Controleur implements Initializable,SceneLoader{
 	 * Public methods
 	 */
 
-	public void startScene(Scene scene) {
-		scene.setOnKeyPressed(e->interpreter.handleKey(e));
+	@Override
+	public void loadScene(GroundControler groundControler) {
+		this.sceneChanger = groundControler;
+		this.sceneChanger.getScene().setOnKeyPressed(e->interpreter.handleKey(e,groundControler));
 	}
 	
 
@@ -135,12 +141,7 @@ public class Controleur implements Initializable,SceneLoader{
 		}
 	}
 
-	@Override
-	public void loadScene(GroundControler groundControler) {
-		this.sceneChanger = groundControler;
-		this.sceneChanger.getScene().setOnKeyPressed(e->interpreter.handleKey(e));
-	}
-
+	
 	
 	
 	

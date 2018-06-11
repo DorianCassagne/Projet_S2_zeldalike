@@ -19,7 +19,7 @@
                         <Insets top="20.0" />
                      </VBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#loadGame" prefHeight="30.0" prefWidth="200.0" text="Charger une partie" />
+                  <Button mnemonicParsing="false" onAction="#loadMenuGame" prefHeight="30.0" prefWidth="200.0" text="Charger une partie" />
                   <Button mnemonicParsing="false" onAction="#exit" prefHeight="30.0" prefWidth="200.0" text="Quitter" />
                </children>
             </VBox>

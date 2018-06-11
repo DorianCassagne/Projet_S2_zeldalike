@@ -463,6 +463,7 @@ public class ConditionAddControler implements Initializable{
 			alert.setResizable(true);
 			alert.setContentText("FILE SAVED AT : "+path);
 		}catch(IllegalArgumentException e) {
+			e.printStackTrace();
 			alert.setContentText(e.getMessage());
 		}
 		alert.showAndWait();

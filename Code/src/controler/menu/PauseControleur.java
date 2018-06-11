@@ -6,40 +6,41 @@ import controler.mainGame.SceneLoader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
-public class Accueil2Controler implements SceneLoader{
+public class PauseControleur implements SceneLoader{
 
 
-	
 	private GroundControler ground;
-	
-    @FXML
-    private void newGame(ActionEvent event) {
-    	if(ground != null)
-    		ground.changeView(Controleur.FXMLGAMEPATH,this);
-    	else
-    		System.exit(1);
-    		
-    }
-    
-    @FXML
-    private void exit(ActionEvent event) {
-    	System.exit(1);
-    }
-    
-    @FXML
-    private void loadMenuGame(ActionEvent event) {
-    	if(ground != null) {
+
+
+	@FXML
+	void exit(ActionEvent event) {
+		System.exit(1);
+	}
+
+	@FXML
+	void loadMenuGame(ActionEvent event) {
+		if(ground != null) {
     		ground.changeView(Controleur.FXMLLOADMENUPATH,this);
     	}
     	else
     		System.exit(1);
-    }
+	}
+
+	@FXML
+	void resumeGame(ActionEvent event) {
+		this.ground.remove(this);
+	}
+
+	@FXML
+	void saveGame(ActionEvent event) {
+		
+	}
 
 	@Override
 	public void loadScene(GroundControler controller) {
 		this.ground = controller;
+
 	}
-	
-	
+
 
 }

@@ -3,12 +3,15 @@ package controler.mainGame;
 import java.io.IOException;
 
 import java.net.URL;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 import app.Main;
+import controler.Controleur;
 import controler.menu.Accueil1Controler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
@@ -35,21 +38,41 @@ public class GroundControler implements Initializable {
 	public final static String FXMLPATH = "/vue/template/Ground.fxml";
 	public final static int DEFAULTWIDTH = 960;
 	public final static int DEFAULTHEIGHT = 640;
-	
 	//Le stackPane qui contiendra l'ensemble des éléments ajouté à la fenêtre.
+	
 	@FXML private StackPane mainStackPane; 
 	
+	private HashMap<SceneLoader,Node> child;
+	private HashMap<SceneLoader,Node> parent;
 	private Scene scene;
 	
-	public void changeView(String ... viewNames){
-		this.mainStackPane.getChildren().clear();
-		for(String viewName : viewNames) {
-			this.addElements(viewName);
-		}
+	public GroundControler() {
+		this.child = new HashMap<SceneLoader,Node>();
+		this.parent = new HashMap<SceneLoader,Node>();
 	}
 	
-	private void addElements(String viewName) {
+	
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		this.changeView(Controleur.FXMLMAINMENUPATH,null);
+	}
+
+	
+	public void changeView(String  viewName,SceneLoader changer ){
+		this.mainStackPane.getChildren().clear();
+		addElements(viewName, changer);
+	}
+	
+	public void addElements(String viewName,SceneLoader changer) {
+		int lastIndex = this.mainStackPane.getChildren().size() - 1;
+		Node parent = null;
+		if(lastIndex > - 1)
+			parent = this.mainStackPane.getChildren().get(lastIndex);
+		this.addElement(viewName, changer,parent);
+	}
+	
+	private void addElement(String viewName,SceneLoader parent,Node parentSource) {
 		try {
+			
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(Main.class.getResource(VIEWPATH + viewName));
 			AnchorPane newView = loader.load();
@@ -57,11 +80,23 @@ public class GroundControler implements Initializable {
 			newView.setPrefWidth(DEFAULTWIDTH);
 			SceneLoader sceneLoader = loader.getController();
 			sceneLoader.loadScene(this);
-			this.mainStackPane.getChildren().add(0,newView);
-		} catch (IOException e) {
+			this.mainStackPane.getChildren().add(newView);
 			
+			this.parent.put(sceneLoader,parentSource);
+			this.child.put(parent,newView);
+			
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 
+	}
+	
+	public void delElements(int nbView) {
+		this.mainStackPane.getChildren().remove(nbView);
+	}
+	
+	public void remove(SceneLoader loader) {
+		
 	}
 	
 	
@@ -76,9 +111,36 @@ public class GroundControler implements Initializable {
 		return this.scene;
 	}
 	
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		this.changeView(Accueil1Controler.FXMLPATH);
+
+	
+	
+	private void replaceTo(Node newAnchor) {
+		if(newAnchor != null) {
+			this.mainStackPane.getChildren().clear();
+			this.mainStackPane.getChildren().add(newAnchor);
+
+		}
+
 	}
+	
+	public void loadParent(SceneLoader loader) {
+		Node parent = null;
+		if(loader != null)
+			parent = this.parent.get(loader);
+	
+		this.replaceTo(parent);
+	}
+	
+	public void loadChild(SceneLoader loader) {
+		Node children = null;
+		if(loader != null) 
+			children = this.child.get(loader);
+		this.replaceTo(children);
+		
+	}
+
+	
+	
 	
 	
 	
