@@ -12,13 +12,13 @@ public class SimpleArrowLauncher implements Launcher {
 	@Override
 	public void launch(GameMap map, Movement direction, int row, int column) {
 		if(this.lastAttack == null || this.lastAttack.isAlive()) {
-			this.lastAttack = new SimpleArrow(map, row, column, direction, level);
+			this.lastAttack = new SimpleArrow(map, row, column, direction, 1);
 		}
 	}
 
 	@Override
 	public int getImage() {
-
+		return lastAttack.getImageValueProperty().get();
 	}
 
 	

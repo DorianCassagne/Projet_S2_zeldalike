@@ -57,7 +57,7 @@ public class NyaNyaNay  extends NyaSlave {
 			if (att) {
 				switch (ran.nextInt(3)) {
 				case 0:
-					new SimpleArrow(getMyMap(), this.getRow(), this.getColumn(),Movement.BOTTOM, 20, 1 );
+					new SimpleArrow(getMyMap(), this.getRow(), this.getColumn(),Movement.BOTTOM, 1);
 					setWait(20);
 					break;
 				case 1:
