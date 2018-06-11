@@ -1,17 +1,15 @@
 package model.character.enemy.boss;
 
 import java.util.Random;
-
-
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import model.character.GameCharacter;
-import model.character.attack.statics.Bomb;
-import model.character.attack.statics.DoomAttack;
-import model.character.attack.statics.SimpleArrow;
 import model.character.attack.statics.boss.NyanAttHori;
+import model.character.attack.statics.hero.arrow.SimpleArrow;
+import model.character.attack.statics.hero.bomb.Bomb;
+import model.character.attack.statics.hero.doomAttack.DoomAttack;
 import model.gameMap.GameMap;
 import model.gameMap.move.Move;
 import model.gameMap.move.Movement;

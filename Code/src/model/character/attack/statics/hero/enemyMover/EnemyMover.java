@@ -1,4 +1,4 @@
-package model.character.attack.statics.enemyMover;
+package model.character.attack.statics.hero.enemyMover;
 
 import model.character.GameCharacter;
 import model.character.attack.Attack;

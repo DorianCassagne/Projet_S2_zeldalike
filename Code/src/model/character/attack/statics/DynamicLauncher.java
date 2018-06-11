@@ -1,7 +1,7 @@
 package model.character.attack.statics;
 
 import model.character.attack.dynamic.Launcher;
-import model.character.attack.statics.enemyMover.EnemyMoverLauncher;
+import model.character.attack.statics.hero.enemyMover.EnemyMoverLauncher;
 import model.gameMap.GameMap;
 import model.gameMap.move.Movement;
 

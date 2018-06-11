@@ -1,7 +1,8 @@
-package model.character.attack.statics;
+package model.character.attack.statics.hero.bomb;
 
 import model.character.GameCharacter;
 import model.character.attack.Attack;
+import model.character.attack.statics.hero.doomAttack.DoomAttack;
 import model.gameMap.GameMap;
 import model.gameMap.move.Movement;
 

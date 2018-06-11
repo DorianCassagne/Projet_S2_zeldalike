@@ -1,10 +1,10 @@
-package model.character.attack.statics;
+package model.character.attack.statics.hero.bomb;
 
 import model.character.attack.dynamic.Launcher;
 import model.gameMap.GameMap;
 import model.gameMap.move.Movement;
 
-public class BoomerangLauncher implements Launcher{
+public class BombLauncher implements Launcher{
 
 	
 	@Override

@@ -5,7 +5,7 @@ import java.util.Random;
 
 import model.character.GameCharacter;
 import model.character.attack.Attack;
-import model.character.attack.statics.Missile;
+import model.character.attack.statics.boss.Missile;
 import model.character.attack.statics.boss.NyanAttHori;
 import model.gameMap.GameMap;
 import model.gameMap.move.Move;

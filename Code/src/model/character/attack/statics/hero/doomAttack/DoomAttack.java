@@ -1,4 +1,4 @@
-package model.character.attack.statics;
+package model.character.attack.statics.hero.doomAttack;
 
 import model.character.GameCharacter;
 import model.character.attack.Attack;

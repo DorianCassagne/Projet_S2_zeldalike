@@ -1,4 +1,4 @@
-package model.character.attack.statics;
+package model.character.attack.statics.boss;
 
 import model.PathFinder.BFS1;
 import model.character.GameCharacter;

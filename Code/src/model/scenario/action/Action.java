@@ -4,7 +4,7 @@ package model.scenario.action;
 import java.util.function.Supplier;
 
 import model.character.GameCharacter;
-import model.character.enemy.Enemy;
+import model.character.enemy.BlueFairy;
 import model.character.enemy.EnemyFactory;
 import model.character.item.Item;
 import model.character.item.factory.ItemFactory;
@@ -77,7 +77,7 @@ public class Action {
 		boolean added = true;
 		
 		try {	
-			Enemy enemy = EnemyFactory.MonsterFactory(this.specificType, actionData.getMap(), Statics.convertToRow(this.cellId),Statics.convertToColomn(this.cellId));
+			BlueFairy enemy = EnemyFactory.MonsterFactory(this.specificType, actionData.getMap(), Statics.convertToRow(this.cellId),Statics.convertToColomn(this.cellId));
 			actionData.getElementsList().put(this.info,enemy);
 		}catch(Exception e) {
 			added = false;

@@ -1,10 +1,10 @@
 package model.character.enemy.boss;
 
-import model.character.enemy.Enemy;
+import model.character.enemy.BlueFairy;
 import model.gameMap.GameMap;
 import model.gameMap.move.Move;
 
-public class Fairy extends Enemy {
+public class Fairy extends BlueFairy {
 	private final static int CYCLE=30;
 	private final static int IMG=32;
 	private final static int DEF=30;

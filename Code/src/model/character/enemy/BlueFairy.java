@@ -1,28 +1,29 @@
 package model.character.enemy;
 
+import model.PathFinder.BFS1;
 import model.character.GameCharacter;
 import model.character.attack.Attack;
-import model.character.attack.statics.AttackTest;
+import model.character.attack.dynamic.DefaultAttack;
+import model.character.item.attack.AttackItem;
 import model.gameMap.GameMap;
 import model.gameMap.move.Move;
 import model.gameMap.move.Movement;
 
-public abstract class Enemy extends GameCharacter{
+public class BlueFairy extends GameCharacter{
 	
 	private final static double DEFAULTCOEFFICIENT = 2;
-
+	private final static int ATTACKITEMINDEX = 810;
+	
 	
 	private int def;
 	private int hp; 
-	private int damage;
 	
-	public Enemy(GameMap map, int startRow, int startColumn, int cycle, int defaultImage,int HP,int def,int damage) {
+	public BlueFairy(GameMap map, int startRow, int startColumn, int cycle, int defaultImage,int HP,int def,int damage) {
 		super(map, startRow, startColumn, cycle, DEFAULTCOEFFICIENT, defaultImage);
 		if(HP <= 0 || def < 0 || damage <= 0 )
 			throw new IllegalArgumentException("SOMETHING WENT WRONG IN ENEMY");
 		this.hp = HP;
 		this.def = def;
-		this.damage = damage;
 	}
 
 	@Override
@@ -47,7 +48,14 @@ public abstract class Enemy extends GameCharacter{
 
 	@Override
 	public void launchAttack(Movement direction) {
-		new AttackTest(getMyMap(), getRow(), getColumn(), direction, damage);
+		int cellId = BFS1.simpleMove(getMyMap(), this.getCellId(), GameCharacter.getHero().getCellId(),true);
+		Movement nextDirection = Movement.getDirectionInto(this.getCellId(), cellId);
+		new DefaultAttack(this.getMyMap(), this.getRow(), this.getColumn(),	nextDirection,new AttackItem(ATTACKITEMINDEX));
+	}
+
+	@Override
+	protected Move act() {
+		return null;                                               
 	}
 
 

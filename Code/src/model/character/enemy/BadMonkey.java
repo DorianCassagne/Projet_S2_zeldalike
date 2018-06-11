@@ -1,17 +1,14 @@
 package model.character.enemy;
 
 import model.PathFinder.BFS1;
-
 import model.character.GameCharacter;
-import model.character.attack.statics.Bomb;
-import model.character.attack.statics.DoomAttack;
-import model.character.attack.statics.boss.NyanAttHori;
+import model.character.attack.statics.hero.bomb.Bomb;
 import model.gameMap.GameMap;
 import model.gameMap.additional.Statics;
 import model.gameMap.move.Move;
 import model.gameMap.move.Movement;
 
-public class BadMonkey extends Enemy{
+public class BadMonkey extends BlueFairy{
 	
 	private final static int DEFAULTHP = 150;
 	private final static int DEFAULTDEF = 10;
@@ -31,10 +28,10 @@ public class BadMonkey extends Enemy{
 		int actualCell= Statics.convertToCellId(this.getRow(), this.getColumn());
 		//exmple pour attackmove attention a l'ordre des cases
 		int[]tab= {
-				Statics.convertToCellId(row+5,column),
-				Statics.convertToCellId(row,column-5),
-				Statics.convertToCellId(row-5,column),
-				Statics.convertToCellId(row,column+5),
+				Statics.convertToCellId(row+1,column),
+				Statics.convertToCellId(row,column-1),
+				Statics.convertToCellId(row-1,column),
+				Statics.convertToCellId(row,column+1),
 //				Statics.convertToCellId(row+2,column),
 //				Statics.convertToCellId(row,column-2),
 //				Statics.convertToCellId(row-2,column),
@@ -71,6 +68,7 @@ public class BadMonkey extends Enemy{
 	
 	@Override
 	public void launchAttack(Movement movement) {
+		
 	}
 	
 	private int inPlace(int[] tab, int actualCell) {
