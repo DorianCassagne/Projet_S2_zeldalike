@@ -1,4 +1,4 @@
-package controler;
+package controler.gameLoop;
 
 import java.util.HashMap;
 
@@ -14,31 +14,27 @@ import javafx.util.Duration;
 import model.Game;
 import model.gameMap.additional.NewMovable;
 import model.gameMap.move.Move;
-import vue.HeroView;
-import vue.MovableView;
+import vue.gameClass.HeroView;
+import vue.gameClass.MovableView;
 
 public class GameLoop {
 	
 	public final static int FRAMEDURATION = 17;
+	public final static int FADEDURATION = 200;
 	
 	private Timeline gameLoop ;
-	private Game myGame;
 	private HashMap<Integer,MovableView> movableList;
-	private AnchorPane characterAnchorPane;
-	private Label HPLabel ;
-	private ProgressBar HPProgressBar;
+	private ControlerEncoder workingData;
 	
-	public GameLoop(Game myGame,AnchorPane characterAnchorPane,Label HPLabel,ProgressBar HPProgress,StringProperty messageZone) {
+	public GameLoop(StringProperty messageZone,ControlerEncoder data) {
 		this.movableList = new HashMap<Integer,MovableView>();
-		this.characterAnchorPane = characterAnchorPane;
-		this.myGame = myGame;
 		this.gameLoop = new Timeline();
-		this.HPLabel = HPLabel;
-		this.HPProgressBar = HPProgress;
+		this.workingData = data;
 		initialiseLoop();
 
 	}
 	
+	/*Public Methods*/
 	public void start() {
 		this.gameLoop.play();
 	}
@@ -49,42 +45,42 @@ public class GameLoop {
 	}
 	
 	
+	/*
+	 * Private Methods
+	 */
 	private void initialiseLoop() {
-		gameLoop.setCycleCount(Timeline.INDEFINITE);
+		this.gameLoop.setCycleCount(Timeline.INDEFINITE);
 		KeyFrame frame = new KeyFrame(
 				Duration.millis(FRAMEDURATION),
 				(ev->turn())
 		);
-		gameLoop.getKeyFrames().add(frame);
+		this.gameLoop.getKeyFrames().add(frame);
 	}
 	
 	private void turn() {
 		
-		if(this.myGame.end()) {
+		if(this.workingData.getMyGame().end()) {
 			gameLoop.stop();
-			Alert alert = new Alert(Alert.AlertType.INFORMATION,"Vous avez perdu !");
-			alert.show();
 		}
 		else {
-			addPlayers(this.myGame.getNewPlayers());
-			removePlayers(this.myGame.getRemovedMovable());
-			playMoves(this.myGame.turn());			
+			addPlayers(this.workingData.getMyGame().getNewPlayers());
+			removePlayers(this.workingData.getMyGame().getRemovedMovable());
+			playMoves(this.workingData.getMyGame().turn());			
 			allTick();
 		}
-
 	}
 	
 	private void removePlayers(int[] playersId) {
 		FadeTransition ft;
 		for(Integer playerId : playersId) {
-		    ft = new FadeTransition(Duration.millis(200));
+		    ft = new FadeTransition(Duration.millis(FADEDURATION));
 		    ft.setFromValue(1.0);
 			MovableView current = this.movableList.get(playerId);
 			ft.setToValue(0);
 			ft.setNode(current);
 			ft.playFromStart();
 			this.movableList.remove(playerId);
-			ft.setOnFinished(e->this.characterAnchorPane.getChildren().remove(current));
+			ft.setOnFinished(e->this.workingData.getCharacterAnchorPane().getChildren().remove(current));
 		}
 	}
 	
@@ -105,16 +101,25 @@ public class GameLoop {
 	
 	private void addPlayers(NewMovable[] newPlayers) {
 		for(NewMovable newPlayer : newPlayers) {
-			MovableView newMovable ;
-			if(newPlayer.getKey() == Game.HEROKEY)
-				newMovable = new HeroView(newPlayer.getCellId(),newPlayer.getImageValue(),this.myGame,this.characterAnchorPane,HPLabel,HPProgressBar);
-			else
-				newMovable = new MovableView(newPlayer.getCellId(),newPlayer.getImageValue());
-			
-			this.characterAnchorPane.getChildren().add(newMovable);
-			this.movableList.put(newPlayer.getKey(), newMovable);
+			addMovable(newPlayer);
 		}
-		
 	}
+	
+	private void addMovable(NewMovable newCharacter) {
+		MovableView newMovable ;
+		if(newCharacter != null) {
+			if(newCharacter.getKey() == Game.HEROKEY)
+				newMovable = new HeroView(newCharacter.getCellId(),newCharacter.getImageValue(),this.workingData);
+			else
+				newMovable = new MovableView(newCharacter.getCellId(),newCharacter.getImageValue());
+			this.addToMovableList(newMovable,newCharacter.getKey());
+		}
+	}
+	
+	private void addToMovableList(MovableView movable,Integer movableId) {
+		this.workingData.getCharacterAnchorPane().getChildren().add(movable);
+		this.movableList.put(movableId, movable);
+	}
+
 	
 }

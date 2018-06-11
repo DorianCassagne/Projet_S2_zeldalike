@@ -1,4 +1,4 @@
-package vue;
+package vue.gameClass;
 
 import java.util.function.Function;
 
@@ -14,7 +14,7 @@ public class MapView {
 	
 	public MapView(Function<Integer,Integer[]> backSource,TilePane mapContainer,IntegerProperty changeCell) {
 		if(backSource != null && mapContainer != null ) {
-			
+	
 			this.mapContainer = mapContainer;
 			this.backgroundSource = backSource;
 			this.cellsItemAndBackground = new CellView[MapReader.MAPLENGTH * MapReader.MAPLENGTH];
@@ -30,8 +30,8 @@ public class MapView {
 	
 	
 	private void changeCell(int cellId,int oldValue) {
-		if (cellId==-1)
-			cellId=oldValue;
+		if (cellId == -1)
+			cellId = oldValue;
 		Integer[] changeCell = this.backgroundSource.apply(cellId);
 		this.cellsItemAndBackground[cellId].updateCell(changeCell);
 	}
@@ -45,7 +45,6 @@ public class MapView {
 			this.mapContainer.getChildren().add(current);
 		
 		}
-		
 	}
 	
 	

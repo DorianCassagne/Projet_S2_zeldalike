@@ -1,4 +1,4 @@
-package vue;
+package vue.other;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -22,17 +22,17 @@ public class TexturePack {
 		try {
 			titleImg= ImageIO.read(new File(imagePath).toURI().toURL());
 		} catch (IOException e) {
-			e.printStackTrace();
+			throw new Error("ERROR WHILE READING IMAGE");
 		}
 		this.titlePaneWidth = titlePaneWith;
 		this.titlePx = titlePx;
-		memo =  new HashMap<Integer, WritableImage>();
+		this.memo =  new HashMap<Integer, WritableImage>();
 	}
 	
 	public WritableImage getImg(int val) {
 		if (val ==-1)
 			val=1606;
-		if (memo.get(val)==null) {
+		if (memo.get(val) == null) {
 			memo.put(val, SwingFXUtils.toFXImage(titleImg.getSubimage(val%titlePaneWidth*titlePx, val/titlePaneWidth*titlePx, titlePx, titlePx), null));
 		}
 		return memo.get(val);

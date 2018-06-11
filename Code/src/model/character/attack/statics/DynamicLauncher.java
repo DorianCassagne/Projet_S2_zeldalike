@@ -15,13 +15,16 @@ public class DynamicLauncher implements Launcher {
 		
 		switch(attackId) {
 			case ENEMYMOVER :
-				this.launcher = new EnemyMoverLauncher();
-				
+				this.launcher = new EnemyMoverLauncher();		
 		}
 		
 	}
 	@Override
 	public void launch(GameMap map, Movement direction, int row, int column) {
 		this.launcher.launch(map, direction, row, column);
+	}
+	@Override
+	public int getImage() {
+		return this.launcher.getImage();
 	}
 }

@@ -16,6 +16,18 @@ public class Hero extends GameHero{
 	private Movement direction;
 	private IntegerProperty mapProperty;
 	
+	public static final char MOVEUP = 'u';
+	public static final char MOVEDOWN = 'd';
+	public static final char MOVELEFT = 'l';
+	public static final char MOVERIGHT = 'r';
+	public static final char STAY = ' ';
+	public static final char ATTACKUP = '8';
+	public static final char ATTACKRIGHT = '6' ;
+	public static final char ATTACKDOWN = '2' ;
+	public static final char ATTACKLEFT = '4' ;
+	public static final char CHANGEATTACK = 'c';
+
+	
 	public Hero(GameMap map,int startRow,int startColumn) {
 		super(map,startRow,startColumn);
 		GameCharacter.setHero(this);
@@ -74,10 +86,7 @@ public class Hero extends GameHero{
 			break;
 		case CHANGEATTACK : 
 			this.setWait(1);
-			int i = this.getIndexAttack()+1;
-			if (i==this.getAttackQuantity())
-				this.setNextAttack(0);
-			this.setNextAttack(i);
+			this.changeAttack();
 			break;
 			
 		default : 

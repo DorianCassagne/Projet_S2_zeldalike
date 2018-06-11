@@ -24,7 +24,6 @@ public class ItemFactory {
 			try {
 			item = new SpecialAttackItem(id);
 			}catch(IllegalArgumentException e) {
-				System.err.println(e.getMessage());
 			}
 		}
 					

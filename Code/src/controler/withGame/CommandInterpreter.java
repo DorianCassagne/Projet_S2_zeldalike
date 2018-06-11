@@ -1,6 +1,7 @@
-package controler;
+package controler.withGame;
 
 
+import controler.gameLoop.GameLoop;
 import javafx.beans.property.BooleanProperty;
 import javafx.scene.input.KeyEvent;
 import model.Game;
@@ -14,7 +15,13 @@ public class CommandInterpreter {
 	public CommandInterpreter(Game game,GameLoop gameLoop,BooleanProperty waitingForAnswer)  {
 		this.myGame = game;
 		this.gameLoop = gameLoop;
-		this.messagingProperty = waitingForAnswer;
+		this.initMessageProperty(waitingForAnswer);
+		
+	}
+	
+	private void initMessageProperty(BooleanProperty waitingForMessage) {
+		
+		this.messagingProperty = waitingForMessage;
 		this.messagingProperty.addListener((obs,oldValue,newValue)->{
 			if(newValue) {
 				gameLoop.stop();
@@ -22,25 +29,22 @@ public class CommandInterpreter {
 			else
 				this.gameLoop.start();
 		});
-		
+
 	}
 	
-	void handleKey(KeyEvent event) {
+	public void handleKey(KeyEvent event) {
 		char nextMove = Hero.STAY;
 		switch(event.getCode()) {
 		case UP : 
 			nextMove = Hero.MOVEUP;
 			break;
 		case DOWN:
-
 			nextMove = Hero.MOVEDOWN;
 			break;
 		case LEFT:
-
 			nextMove = Hero.MOVELEFT;
 			break;
 		case RIGHT: 
-
 			nextMove = Hero.MOVERIGHT;
 			break;
 		case Z :

@@ -1,4 +1,4 @@
-package vue;
+package vue.gameClass;
 
 import controler.Controleur;
 import javafx.scene.image.Image;
@@ -18,8 +18,7 @@ public class CellView extends StackPane{
 				ImageView viewLayer = new ImageView(layerImage);
 				this.getChildren().add(viewLayer);
 			}
-		}
-		
+		}		
 
 	}
 	

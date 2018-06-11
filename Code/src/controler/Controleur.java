@@ -1,17 +1,18 @@
 package controler;
 
+import java.io.IOException;
 import java.net.URL;
-
-
-
-
-
 import java.util.ResourceBundle;
 import java.util.function.Function;
-
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import app.Main;
+import controler.conversion.ConversionAndStatics;
+import controler.gameLoop.ControlerEncoder;
+import controler.gameLoop.GameLoop;
+import controler.withGame.CommandInterpreter;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -23,75 +24,104 @@ import javafx.scene.layout.TilePane;
 import model.Game;
 import model.gameMap.additional.MapReader;
 import model.gameMap.additional.Statics;
-import vue.MapView;
-import vue.MessageView;
-import vue.TexturePack;
+import vue.gameClass.MapView;
+import vue.gameClass.MessageView;
+import vue.other.TexturePack;
 
 public class Controleur implements Initializable{
 	
 	public final static TexturePack TEXTURE ;
-
-	private final static String TILESETPATH = "src/resources/tileset/Image/lastTileset.png";
+	public final static String FXMLPATH = "template/GuiView.fxml";
+	private final static String TILESETPATH = "src/resources/tileset/Image/jeudi7.png";
 	
-	@FXML private TextArea messageText;
-	@FXML private AnchorPane mainAnchorPane;
-	@FXML private AnchorPane characterAnchorPane;
-	@FXML private TilePane mapTilePane;
-	@FXML private ImageView avatarImage;
-    @FXML private Label MPLabel;
-    @FXML private ProgressBar MPProgressBar;
-    @FXML private ImageView itemImage;
-    @FXML private ImageView attackImage;
-    @FXML private Label HPLabel;
-    @FXML private ProgressBar HPProgressBar;
+	@FXML    private AnchorPane mainAnchorPane;
+    @FXML    private AnchorPane characterAnchorPane;
+    @FXML    private TilePane mapTilePane;
+    @FXML    private ImageView avatarImage;
+    @FXML    private Label HPLabel;
+    @FXML    private ProgressBar HPProgressBar;
+    @FXML    private Label MPLabel;
+    @FXML    private ProgressBar MPProgressBar;
+    @FXML    private ImageView itemImageView;
+    @FXML    private ImageView attackImageView;
+    @FXML    private ImageView defImageView;
+    @FXML 	 private TextArea messageText;
     
 	private Game myGame;
 	private CommandInterpreter interpreter;
 	private GameLoop gameLoop;
 	private MapView myMapView;
 	private StringProperty messageZone;
+	private ControlerEncoder controllerData;
 	
 	static {
-		TEXTURE = new TexturePack(TILESETPATH,Statics.LINELENGTH, ConvertionAndStatics.TILEDIMENSION);
+		TEXTURE = new TexturePack(TILESETPATH,Statics.LINELENGTH, ConversionAndStatics.TILEDIMENSION);
 	}
+	
+	/*
+	 * Initializer
+	 */
 	
 	public Controleur() {
 		this.messageZone = new SimpleStringProperty();
-		this.myGame = new Game(messageZone);
+		this.initGame();
 	}
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
-		
-		initMap();
-		initGameInterpreter();
-		this.gameLoop.start();
+		this.initMap();
+		this.initControllerData();
+		this.initGameInterpreterAndLoop();	
+	}
+	
+	
+	/*
+	 * Public methods
+	 */
+
+	public void startScene(Scene scene) {
+		scene.setOnKeyPressed(e->interpreter.handleKey(e));
+	}
+	
+
+	/*
+	 * Private methods
+	 */
+	
+	//Initialiser
+	private void initGame() {
+		this.myGame = new Game(this.messageZone);
 		this.myGame.changeMapProperty().addListener(
 				(obs,oldValue,newValue)->this.createMap()
 		);
-		
 	}
 	
-	private void initGameInterpreter() {
+	private void initControllerData() {
+		this.controllerData = new ControlerEncoder(this.characterAnchorPane, this.HPLabel, this.HPProgressBar,this.MPLabel,this.MPProgressBar,this.defImageView,this.attackImageView,this.myGame);
+	}
+
+	private void initGameInterpreterAndLoop() {
 		MessageView message = new MessageView(this.messageText, this.messageZone);
-		this.gameLoop = new GameLoop(myGame,this.characterAnchorPane,this.HPLabel,this.HPProgressBar,this.messageZone);
-		this.interpreter = new CommandInterpreter(myGame,gameLoop,message.waitingProperty());
+		this.gameLoop = new GameLoop(this.messageZone,this.controllerData);
+		System.out.println(this.controllerData);
+		this.interpreter = new CommandInterpreter(this.myGame,this.gameLoop,message.waitingProperty());
+		this.gameLoop.start();
 	}
 	
 	private void initMap() {
-		ConvertionAndStatics.fixPaneDimension(MapReader.MAPLENGTH * ConvertionAndStatics.TILEDIMENSION,this.mapTilePane,this.characterAnchorPane);
+		ConversionAndStatics.fixPaneDimension(MapReader.MAPLENGTH * ConversionAndStatics.TILEDIMENSION,this.mapTilePane,this.characterAnchorPane);
 		this.createMap();
-
 	}
 	
-	private void createMap() {
-		
+	/*
+	 * MapChange Handler
+	 */
+	 
+	private void createMap() {	
 		clearCharacterPane();
 		Function< Integer,Integer[]> backgroundSource = element->this.myGame.getLayerForCell(element);
 		this.myMapView = new MapView(backgroundSource,this.mapTilePane,this.myGame.getMapChangeProperty());
 		this.myMapView.initialise();
-	
 	}
 	
 	private void clearCharacterPane() {
@@ -104,13 +134,9 @@ public class Controleur implements Initializable{
 		}
 	}
 
-	public void startScene(Scene scene) {
-		scene.setOnKeyPressed(e->interpreter.handleKey(e));
-	}
-	
-
 	
 	
 	
 	
 }
+ 

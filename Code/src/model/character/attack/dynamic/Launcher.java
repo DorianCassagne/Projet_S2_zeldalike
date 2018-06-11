@@ -5,4 +5,5 @@ import model.gameMap.move.Movement;
 
 public interface Launcher {
 	public void launch(GameMap map,Movement direction,int row,int column);
+	public int getImage();
 }

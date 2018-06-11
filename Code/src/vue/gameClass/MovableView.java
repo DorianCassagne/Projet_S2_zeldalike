@@ -1,8 +1,7 @@
-package vue;
+package vue.gameClass;
 
 import controler.Controleur;
-
-import controler.ConvertionAndStatics;
+import controler.conversion.ConversionAndStatics;
 import javafx.beans.property.IntegerProperty;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -27,13 +26,12 @@ public class MovableView extends ImageView{
 	}
 	
 	public void moveTo(int cellId,int speed) {
-		int[] position = ConvertionAndStatics.convertToViewSize(cellId);
-		double row = position[ConvertionAndStatics.ROWINDEX] - this.getLayoutY();
-		double column = position[ConvertionAndStatics.COLUMNINDEX] - this.getLayoutX();
+		int[] position = ConversionAndStatics.convertToViewSize(cellId);
+		double row = position[ConversionAndStatics.ROWINDEX] - this.getLayoutY();
+		double column = position[ConversionAndStatics.COLUMNINDEX] - this.getLayoutX();
 		this.avancementX = column/speed;
 		this.avancementY = row/speed;
 		this.progress = speed;
-	
 	}
 	
 	
@@ -50,9 +48,9 @@ public class MovableView extends ImageView{
 		
 	private void setPosition(int cellId) {
 		
-		int[] position = ConvertionAndStatics.convertToViewSize(cellId);
-		this.setLayoutX(position[ConvertionAndStatics.COLUMNINDEX]);
-		this.setLayoutY(position[ConvertionAndStatics.ROWINDEX]);
+		int[] position = ConversionAndStatics.convertToViewSize(cellId);
+		this.setLayoutX(position[ConversionAndStatics.COLUMNINDEX]);
+		this.setLayoutY(position[ConversionAndStatics.ROWINDEX]);
 	
 	}
 }

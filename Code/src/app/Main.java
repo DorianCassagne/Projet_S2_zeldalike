@@ -7,42 +7,44 @@ import java.net.URISyntaxException;
 import java.net.URL;
 
 import controler.Controleur;
+import controler.mainGame.GroundControler;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
 
+	//private final static String STARTVIEW = GroundControler.FXMLPATH;
+	private final static String STARTVIEW = "/vue/" + Controleur.FXMLPATH;
+	
     @Override
     public void start(Stage primaryStage) {
 
         FXMLLoader loader = new FXMLLoader();
-        URL url=null;
+        URL url = null;
         AnchorPane root = null; 
-        
 		try {
-			url = Main.class.getResource("/vue/GuiView.fxml").toURI().toURL();
+			url = Main.class.getResource(STARTVIEW).toURI().toURL();
+	        loader.setLocation(url);
 		} catch (MalformedURLException e) {
-			throw new Error("Error path to fxml file");
+			throw new Error("ERROR WHILE READING FXML FILE");
 		}catch (URISyntaxException e) {
-			throw new Error("Error path to fxml file");
+			throw new Error("FXML FILE IS IN BAD STATE");
 		}
 
-        loader.setLocation(url);
-        
         try {
-			root=loader.load();
+			root = loader.load();
 		} catch (IOException e) {
 			e.printStackTrace();
-			throw new Error("Error loading javaFX");
+			throw new Error("ERROR LOADING JAVAFX");
 		} 
-
-        Controleur controller = loader.getController();
         Scene  scene = new Scene(root,960,640);
-        
+        Controleur controller = loader.getController();
         controller.startScene(scene);
+
         primaryStage.setScene(scene);
         primaryStage.show();
     }

@@ -3,7 +3,6 @@ package model.character.item.pvItem;
 import model.character.hero.Hero;
 import model.character.item.Item;
 import model.character.item.def.DefenseItemEnum;
-import model.character.item.hp.HealEnum;
 
 public class HealthItem extends Item{
 	
@@ -25,7 +24,7 @@ public class HealthItem extends Item{
 
 	@Override
 	protected void applyTo(Hero hero) {
-		hero.setMaxHP(this.healthItem);
+		hero.setMaxHp(this.healthItem);
 	}
 	
 	public static int isInRange(int imageValue) {
