@@ -9,6 +9,7 @@ import controler.menu.Accueil1Controler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 
@@ -38,6 +39,8 @@ public class GroundControler implements Initializable {
 	//Le stackPane qui contiendra l'ensemble des éléments ajouté à la fenêtre.
 	@FXML private StackPane mainStackPane; 
 	
+	private Scene scene;
+	
 	public void changeView(String ... viewNames){
 		this.mainStackPane.getChildren().clear();
 		for(String viewName : viewNames) {
@@ -61,6 +64,17 @@ public class GroundControler implements Initializable {
 
 	}
 	
+	
+	public void setScene(Scene scene) {
+		if(scene != null)
+			this.scene = scene;
+		else
+			throw new IllegalArgumentException("ERROR IN GROUND ");
+	}
+	
+	public Scene getScene() {
+		return this.scene;
+	}
 	
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		this.changeView(Accueil1Controler.FXMLPATH);
