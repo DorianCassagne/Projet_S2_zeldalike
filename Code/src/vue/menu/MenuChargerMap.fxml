@@ -7,7 +7,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: 690f0f;" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controler.menu.ChargerMapControler">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: 690f0f;" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controler.Controleur">
    <children>
       <VBox alignment="CENTER">
          <children>
@@ -29,21 +29,21 @@
                         <Insets />
                      </HBox.margin>
                      <children>
-                        <TableView prefHeight="237.0" prefWidth="476.0">
+                        <TableView fx:id="ScenarioTable" prefHeight="237.0" prefWidth="476.0">
                           <columns>
-                            <TableColumn prefWidth="450.0" text="Nom de partie" />
+                            <TableColumn fx:id="colGame" prefWidth="450.0" text="Nom de partie" />
                           </columns>
                         </TableView>
                      </children>
                   </VBox>
                   <VBox alignment="TOP_RIGHT" prefHeight="237.0" prefWidth="164.0" spacing="20.0">
                      <children>
-                        <Button fx:id="LoadButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Charger">
+                        <Button fx:id="LoadGameButton" mnemonicParsing="false" onAction="#loadGame" prefHeight="30.0" prefWidth="100.0" text="Charger">
                            <VBox.margin>
                               <Insets top="30.0" />
                            </VBox.margin>
                         </Button>
-                        <Button fx:id="DelButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Supprimer" />
+                        <Button fx:id="DelGameButton" mnemonicParsing="false" onAction="#delGame" prefHeight="30.0" prefWidth="100.0" text="Supprimer" />
                      </children>
                      <HBox.margin>
                         <Insets />
@@ -54,7 +54,7 @@
                   </VBox>
                </children>
             </HBox>
-            <Button fx:id="PreviousButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" text="Retour en arrière">
+            <Button fx:id="PreviousButton" mnemonicParsing="false" onAction="#previousMenu" prefHeight="30.0" prefWidth="200.0" text="Retour en arrière">
                <VBox.margin>
                   <Insets top="20.0" />
                </VBox.margin>

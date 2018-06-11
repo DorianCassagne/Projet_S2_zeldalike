@@ -4,7 +4,7 @@ import model.PathFinder.BFS1;
 
 import model.character.GameCharacter;
 import model.character.attack.statics.AttackTest;
-import model.character.attack.statics.DoomAttack;
+//import model.character.attack.statics.DoomAttack;
 import model.gameMap.GameMap;
 import model.gameMap.additional.Statics;
 import model.gameMap.move.Move;
@@ -44,7 +44,7 @@ public class BadMonkey extends Enemy{
 		if (inPlace != -1) {
 			Movement currentMovement = Movement.values()[inPlace];
 			this.setImage(currentMovement);
-			new DoomAttack(getMyMap(),this.getRow(),this.getColumn(),currentMovement, 10);
+			//new DoomAttack(getMyMap(),this.getRow(),this.getColumn(),currentMovement, 10);
 			setWait(200);
 			return null;
 		}

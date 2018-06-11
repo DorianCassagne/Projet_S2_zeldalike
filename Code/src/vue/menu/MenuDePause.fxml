@@ -8,11 +8,11 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" >
    <children>
       <VBox alignment="CENTER" layoutX="151.0" layoutY="76.0" opacity="0.73" prefHeight="248.0" prefWidth="299.0" spacing="20.0">
          <children>
-            <Button fx:id="ContinueButton2" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" text="Continuer la partie">
+            <Button fx:id="ResumeButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" text="Continuer la partie">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
@@ -22,8 +22,8 @@
                   <Insets />
                </VBox.margin>
             </Button>
-            <Button fx:id="LoadButton3" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" text="Charger une partie" />
-            <Button fx:id="LeaveButton3" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" text="Quitter" />
+            <Button fx:id="LoadMenuButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" text="Charger une partie" />
+            <Button fx:id="LeaveButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" text="Quitter" />
          </children>
       </VBox>
    </children>

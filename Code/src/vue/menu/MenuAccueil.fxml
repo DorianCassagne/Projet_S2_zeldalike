@@ -6,19 +6,19 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controler.menu.Accueil1Controler">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controler.Controleur">
    <children>
       <VBox alignment="CENTER" layoutX="-1.0" prefHeight="400.0" prefWidth="600.0">
          <children>
             <ImageView fitHeight="150.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true" />
             <VBox alignment="TOP_CENTER" spacing="30.0">
                <children>
-                  <Button fx:id="NewGameButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" text="Nouvelle Partie">
+                  <Button fx:id="NewGameButton" mnemonicParsing="false" onAction="#createNewGame" prefHeight="30.0" prefWidth="200.0" text="Nouvelle Partie">
                      <VBox.margin>
                         <Insets top="20.0" />
                      </VBox.margin></Button>
-                  <Button fx:id="LoadButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" text="Charger une partie" />
-                  <Button fx:id="LeaveButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" text="Quitter" />
+                  <Button fx:id="LoadMenuButton" mnemonicParsing="false" onAction="#loadGame" prefHeight="30.0" prefWidth="200.0" text="Charger une partie" />
+                  <Button fx:id="LeaveButton" mnemonicParsing="false" onAction="#leave" prefHeight="30.0" prefWidth="200.0" text="Quitter" />
                </children>
             </VBox>
          </children>
