@@ -2,6 +2,7 @@ package vue.gameClass;
 
 
 import controler.conversion.ConversionAndStatics;
+
 import controler.gameLoop.ControlerEncoder;
 import javafx.beans.binding.IntegerBinding;
 import javafx.beans.property.IntegerProperty;
@@ -9,23 +10,20 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
-import model.Game;
 import model.character.hero.CopyOfHeroStats;
 import model.gameMap.additional.MapReader;
 
 public class HeroView extends MovableView{
 	public final static int ATTACKINDEX = 0;
-	public final static int ITEMINDEX = 1;
-	public final static int DEFENSEINDEX = 2;
+	public final static int DEFENSEINDEX = 1;
 	
 	
 	
 	private double shownRow;
 	private double shownColumn;
 	private AnchorPane myAnchorPane;
-	private int maxHP;
-	private int maxMP;
-	private Tooltip tooltip;
+	private Tooltip attackTooltip;
+	private Tooltip defenseTooltip;
 	
 	public HeroView(int cellId,IntegerProperty imageValue,ControlerEncoder data) {
 		super(cellId,imageValue);
@@ -34,7 +32,9 @@ public class HeroView extends MovableView{
 		this.scrollX(this.getLayoutX());
 		this.scrollY(this.getLayoutY());
 		
-		this.tooltip = new Tooltip();
+		this.attackTooltip = new Tooltip();
+		this.defenseTooltip = new Tooltip();
+		
 		relateEveryThing(data);
 		
 	}
@@ -54,24 +54,24 @@ public class HeroView extends MovableView{
 		
 		CopyOfHeroStats heroStats = encoder.getMyGame().getHeroStats();
 		
-		this.linkHP(heroStats.getHPBinding(),encoder.getHPLabel(),encoder.getHPProgressBar());
-		this.linkMP(heroStats.getMPBinding(),encoder.getMPLabel(),encoder.getMPProgressBar());
+		this.linkHP(heroStats.getHPBinding(),heroStats.getMaxHP(),encoder.getHPLabel(),encoder.getHPProgressBar());
+		this.linkMP(heroStats.getMPBinding(),heroStats.getMaxMP(),encoder.getMPLabel(),encoder.getMPProgressBar());
 		
 		
-		ViewUsefulMethods.linkImage(heroStats.getAtkBinding(),heroStats.getAtkImageBinding(),encoder.getImageViewAt(ATTACKINDEX),encoder.getButtonAt(ATTACKINDEX),"Points d'attaque : ",this.tooltip);
-		//ViewUsefulMethods.linkImage(heroStats.getDefBinding(), encoder.getDefImageView());
+		ViewUsefulMethods.linkImage(heroStats.getAtkBinding(),heroStats.getAtkImageBinding(),encoder.getImageViewAt(ATTACKINDEX),encoder.getButtonAt(ATTACKINDEX),"Points d'attaque : ",this.attackTooltip);
+		ViewUsefulMethods.linkImage(heroStats.getDefBinding(),heroStats.getAtkBinding(),encoder.getImageViewAt(DEFENSEINDEX),encoder.getButtonAt(DEFENSEINDEX),"Points de défense : ",this.defenseTooltip);
 	
 	}
 		
 		
-	private void linkHP(IntegerBinding HPproperty,Label HPlabel,ProgressBar HPprogress) {
-		this.maxHP = HPproperty.get();
-		ViewUsefulMethods.linkPropertyToLabelAndProgress(HPproperty,HPlabel,HPprogress);
+	private void linkHP(IntegerBinding HPproperty,IntegerBinding maxHP ,Label HPlabel,ProgressBar HPprogress) {
+		ViewUsefulMethods.linkPropertyToLabelAndProgress(HPproperty,maxHP,HPlabel,HPprogress);
+		
 	}
 	
-	private void linkMP(IntegerBinding MPProperty,Label MPLabel,ProgressBar MPProgress) {
-		this.maxMP = MPProperty.get();
-		ViewUsefulMethods.linkPropertyToLabelAndProgress(MPProperty,MPLabel,MPProgress);
+	private void linkMP(IntegerBinding MPProperty,IntegerBinding maxMP,Label MPLabel,ProgressBar MPProgress) {
+		ViewUsefulMethods.linkPropertyToLabelAndProgress(MPProperty,maxMP,MPLabel,MPProgress);
+		
 	}
 	
 	

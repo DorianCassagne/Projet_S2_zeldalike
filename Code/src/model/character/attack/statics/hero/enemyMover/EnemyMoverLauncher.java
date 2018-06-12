@@ -5,11 +5,12 @@ import model.gameMap.GameMap;
 import model.gameMap.move.Movement;
 
 public class EnemyMoverLauncher implements Launcher{
-	
+	private final static int MPCONSUME = 50;
 
 	@Override
-	public void launch(GameMap map, Movement direction, int row, int column,int attackPT) {
+	public int launch(GameMap map, Movement direction, int row, int column,int attackPT) {
 			new EnemyMover(map, row, column,direction);
+			return MPCONSUME;
 	}
 
 	@Override

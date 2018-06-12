@@ -17,23 +17,25 @@ import model.character.item.pvItem.HealthEnum;
 
 public class HeroStats {
 	private IntegerProperty def;
+	private IntegerProperty defImage;
 	private IntegerProperty hp;
 	private IntegerProperty mp;
-	private CopyOfHeroStats safeStats;
 	private IntegerProperty attackItemImage;
 	private IntegerProperty attackValue;
-	private ArrayList<Launcher> attackList;
+	private IntegerProperty maxHP;
+	private IntegerProperty maxMP;
 	
+	private CopyOfHeroStats safeStats;
+	private ArrayList<Launcher> attackList;
 	private int attackType;
-	private int maxHP;
-	private int maxMP;
+
 
 	
 	public HeroStats() {
 
 		this.initialiseProperties();
 		this.initAttack();
-
+		this.safeStats = new CopyOfHeroStats(this.hp,this.def,this.defImage,this.attackItemImage,this.attackValue,this.mp,this.maxHP,this.maxMP);
 	}
 
 	
@@ -50,9 +52,10 @@ public class HeroStats {
 		this.attackItemImage = new SimpleIntegerProperty(0);
 		this.mp = new SimpleIntegerProperty(GameHero.DEFAULTMP);
 		this.attackValue = new SimpleIntegerProperty(GameHero.DEFAULTATK);
-		this.safeStats = new CopyOfHeroStats(this.hp,this.def,this.attackItemImage,this.attackValue,this.mp);
-		this.maxHP = GameHero.DEFAULTHP;
-		this.maxMP = GameHero.DEFAULTMP;
+		this.maxHP = new SimpleIntegerProperty(GameHero.DEFAULTHP);
+		this.maxMP = new SimpleIntegerProperty(GameHero.DEFAULTMP);
+		this.defImage = new SimpleIntegerProperty(0);
+		
 	}
 
 	
@@ -69,8 +72,7 @@ public class HeroStats {
 	
 	public void setMaxHp(HealthEnum healthItem) {
 		if(healthItem != null) {
-			this.maxHP = GameHero.DEFAULTHP + healthItem.getMoreHp();
-			this.setHP(this.hp.get());
+			this.maxHP.set(GameHero.DEFAULTHP + healthItem.getMoreHp());
 		}
 	}
 	
@@ -96,8 +98,7 @@ public class HeroStats {
 	
 	public void increaseMP(MPItemEnum MPItem ) {
 		if(MPItem != null) {
-			this.maxMP = GameHero.DEFAULTMP + MPItem.getAdditionalMP();
-			this.setMP(this.mp.get());
+			this.maxMP.set(GameHero.DEFAULTMP + MPItem.getAdditionalMP());
 		}
 	}
 	
@@ -136,13 +137,15 @@ public class HeroStats {
 	}
 
 	private void setHP(int newHP) {
-		correctlySetProperty(this.hp,newHP,this.maxHP);
+		correctlySetProperty(this.hp,newHP,this.maxHP.get());
 	}
 	
 	private boolean setMP(int newMP) {
-		correctlySetProperty(this.mp, newMP, this.maxMP);
+		correctlySetProperty(this.mp, newMP, this.maxMP.get());
 		return newMP >= 0;
 	}
+	
+	
 	
 	
 	
@@ -157,7 +160,7 @@ public class HeroStats {
 
 	public Launcher getCurrentAttack() {
 		Launcher currentAttack = null;
-		if(this.attackType > 0) {
+		if(this.attackType >= 0) {
 			currentAttack = this.attackList.get(this.attackType);
 		}
 		return currentAttack;

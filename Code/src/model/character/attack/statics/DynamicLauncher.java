@@ -20,8 +20,8 @@ public class DynamicLauncher implements Launcher {
 		
 	}
 	@Override
-	public void launch(GameMap map, Movement direction, int row, int column,int attackPT) {
-		this.launcher.launch(map, direction, row, column,attackPT);
+	public int launch(GameMap map, Movement direction, int row, int column,int attackPT) {
+		return this.launcher.launch(map, direction, row, column,attackPT);
 	}
 	@Override
 	public int getImage() {

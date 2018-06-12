@@ -6,14 +6,18 @@ import model.gameMap.move.Movement;
 
 public class SimpleArrowLauncher implements Launcher {
 
+	private final static int MANACONSUME = 10;
 	private SimpleArrow lastAttack;
 	
 	
 	@Override
-	public void launch(GameMap map, Movement direction, int row, int column,int atkPT) {
+	public int launch(GameMap map, Movement direction, int row, int column,int atkPT) {
+		int manaPts = 0;
 		if(this.lastAttack == null || this.lastAttack.isAlive()) {
 			this.lastAttack = new SimpleArrow(map, row, column, direction, atkPT);
+			manaPts = MANACONSUME;
 		}
+		return manaPts;
 	}
 
 	@Override

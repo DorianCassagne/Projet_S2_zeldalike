@@ -6,6 +6,8 @@ import model.gameMap.GameMap;
 import model.gameMap.move.Movement;
 
 public class DefaultAttackLauncher implements Launcher{
+	private final static int MANACONSUME = 0;
+	
 	private Attack lastAttack;
 	private AttackItemEnum type;
 
@@ -21,10 +23,11 @@ public class DefaultAttackLauncher implements Launcher{
 	
 	
 	@Override
-	public void launch(GameMap map,Movement direction,int row,int column,int attackPt) {
+	public int launch(GameMap map,Movement direction,int row,int column,int attackPt) {
 		if(this.lastAttack == null || !this.lastAttack.isAlive()) {
 			this.lastAttack = new DefaultAttack(map,row,column,direction,this.type,attackPt);
 		}
+		return MANACONSUME;
 	}
 	
 	@Override

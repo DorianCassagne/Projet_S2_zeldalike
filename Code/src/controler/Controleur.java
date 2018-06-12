@@ -44,13 +44,11 @@ public class Controleur implements Initializable,SceneLoader{
     @FXML   private ProgressBar HPProgressBar;
     @FXML   private Label MPLabel;
     @FXML   private ProgressBar MPProgressBar;
-    @FXML    private ImageView itemImageView;
     @FXML   private ImageView attackImageView;
     @FXML   private ImageView defImageView;
     @FXML   private TextArea messageText;
     
     @FXML	private Button DefenseButton;
-    @FXML	private Button itemButton;
     @FXML   private Button attackButton;
     
 	private Game myGame;
@@ -106,7 +104,6 @@ public class Controleur implements Initializable,SceneLoader{
 	private void initControllerData() {
 		this.controllerData = new ControlerEncoder(this.characterAnchorPane, this.HPLabel, this.HPProgressBar,this.MPLabel,this.MPProgressBar,this.myGame);
 		this.controllerData.addButtonImage(attackImageView, attackButton,HeroView.ATTACKINDEX);
-		this.controllerData.addButtonImage(itemImageView, itemButton,HeroView.ITEMINDEX);
 		this.controllerData.addButtonImage(defImageView, DefenseButton,HeroView.DEFENSEINDEX);
 
 		

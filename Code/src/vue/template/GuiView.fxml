@@ -62,11 +62,6 @@
                         <ImageView fx:id="itemImageView" accessibleHelp="omar" accessibleRoleDescription="omar" accessibleText="omar" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
                   </Button>
-                  <Button fx:id="itemButton" contentDisplay="RIGHT" mnemonicParsing="false" style="-fx-background-color: inherit; -fx-background-radius: 20;" text="Item" underline="true">
-                     <graphic>
-                        <ImageView fx:id="defImageView" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
-                     </graphic>
-                  </Button>
                   <Button fx:id="attackButton" contentDisplay="RIGHT" mnemonicParsing="false" style="-fx-background-color: inherit; -fx-background-radius: 20;" text="Atk" underline="true">
                      <graphic>
                         <ImageView fx:id="attackImageView" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />

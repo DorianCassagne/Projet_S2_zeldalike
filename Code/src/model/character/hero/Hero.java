@@ -93,6 +93,7 @@ public class Hero extends GameHero{
 			break;
 		}
 		updateReference();
+		
 		if(attackLaunch) {
 			launchAttack(this.direction);
 		}

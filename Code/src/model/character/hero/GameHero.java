@@ -17,7 +17,7 @@ import model.gameMap.move.Movement;
 public abstract class GameHero extends GameCharacter {
 	
 	 final static int DEFAULTCYCLE = 20;
-	 final static double DEFAULTCOEFFICIENT = 1;
+	 final static double DEFAULTCOEFFICIENT = 1.5;
 	 final static int DEFAULTHP = 300;
 	 final static int DEFAULTMP = 200;
 	 final static int DEFAULTDEF = 40;
@@ -78,8 +78,9 @@ public abstract class GameHero extends GameCharacter {
 	@Override
 	public void launchAttack(Movement direction) {
 		Launcher attack = this.heroStats.getCurrentAttack();
-		if(attack != null)
+		if(attack != null) {
 			attack.launch(this.getMyMap(), direction, this.getRow(), this.getColumn(),this.heroStats.getAtk());
+		}
 	}
 	
 	public CopyOfHeroStats getHeroStats() {
