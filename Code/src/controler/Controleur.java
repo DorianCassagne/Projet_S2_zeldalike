@@ -4,14 +4,16 @@ package controler;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.function.Function;
+import java.util.function.Supplier;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import controler.conversion.ConversionAndStatics;
 import controler.gameLoop.ControlerEncoder;
 import controler.gameLoop.GameLoop;
+import controler.input.CommandInterpreter;
 import controler.mainGame.GroundControler;
 import controler.mainGame.SceneLoader;
-import controler.withGame.CommandInterpreter;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
@@ -59,6 +61,7 @@ public class Controleur implements Initializable,SceneLoader{
 	private ControlerEncoder controllerData;
 	private GroundControler sceneChanger;
 	
+	
 	static {
 		TEXTURE = new TexturePack(TILESETPATH,Statics.LINELENGTH, ConversionAndStatics.TILEDIMENSION);
 	}
@@ -86,11 +89,21 @@ public class Controleur implements Initializable,SceneLoader{
 
 	@Override
 	public void loadScene(GroundControler groundControler) {
-		this.sceneChanger = groundControler;
-		this.sceneChanger.getScene().setOnKeyPressed(e->interpreter.handleKey(e,groundControler));
+		if(groundControler != null) {
+			this.sceneChanger = groundControler;
+			Supplier<Void> resumeGameLoop = ()->{
+				this.gameLoop.start();
+				return null;
+			};
+			this.sceneChanger.getScene().setOnKeyPressed(e->interpreter.handleKey(e,groundControler));
+			this.sceneChanger.setGameLoopStart(resumeGameLoop);
+		}
 	}
 	
-
+	public void resume() {
+		this.gameLoop.start();
+	}
+	
 	/*
 	 * Private methods
 	 */

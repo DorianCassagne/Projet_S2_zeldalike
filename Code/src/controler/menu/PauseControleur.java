@@ -20,15 +20,16 @@ public class PauseControleur implements SceneLoader{
 	@FXML
 	void loadMenuGame(ActionEvent event) {
 		if(ground != null) {
-    		ground.changeView(Controleur.FXMLLOADMENUPATH,this);
-    	}
+    		ground.changeView(Controleur.FXMLLOADMENUPATH);
+		}
     	else
     		System.exit(1);
 	}
 
 	@FXML
 	void resumeGame(ActionEvent event) {
-		this.ground.remove(this);
+		this.ground.removeLast();
+		this.ground.startGameLoop();
 	}
 
 	@FXML

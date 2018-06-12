@@ -3,11 +3,14 @@ package controler.mainGame;
 import java.io.IOException;
 
 import java.net.URL;
-import java.util.HashMap;
 import java.util.ResourceBundle;
+import java.util.Stack;
+import java.util.function.Supplier;
+
 import app.Main;
 import controler.Controleur;
-import controler.menu.Accueil1Controler;
+import controler.gameLoop.GameLoop;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -42,35 +45,32 @@ public class GroundControler implements Initializable {
 	
 	@FXML private StackPane mainStackPane; 
 	
-	private HashMap<SceneLoader,Node> child;
-	private HashMap<SceneLoader,Node> parent;
+	private Stack<Node[]> anchorStack; 
+	private Supplier<Void> gameLoopStart;
 	private Scene scene;
 	
 	public GroundControler() {
-		this.child = new HashMap<SceneLoader,Node>();
-		this.parent = new HashMap<SceneLoader,Node>();
+		this.anchorStack = new Stack<Node[]>();
 	}
 	
 	
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		this.changeView(Controleur.FXMLMAINMENUPATH,null);
+		this.changeView(Controleur.FXMLMAINMENUPATH);
 	}
 
 	
-	public void changeView(String  viewName,SceneLoader changer ){
-		this.mainStackPane.getChildren().clear();
-		addElements(viewName, changer);
+	public void changeView(String  viewName ){
+		ObservableList<Node> children = this.mainStackPane.getChildren();
+		Node[] nodeList = new Node[children.size()];
+		nodeList = children.toArray(nodeList);
+		this.anchorStack.push(nodeList);
+
+		children.clear();
+		addElement(viewName);
 	}
 	
-	public void addElements(String viewName,SceneLoader changer) {
-		int lastIndex = this.mainStackPane.getChildren().size() - 1;
-		Node parent = null;
-		if(lastIndex > - 1)
-			parent = this.mainStackPane.getChildren().get(lastIndex);
-		this.addElement(viewName, changer,parent);
-	}
 	
-	private void addElement(String viewName,SceneLoader parent,Node parentSource) {
+	public void addElement(String viewName) {
 		try {
 			
 			FXMLLoader loader = new FXMLLoader();
@@ -78,27 +78,43 @@ public class GroundControler implements Initializable {
 			AnchorPane newView = loader.load();
 			newView.setPrefHeight(DEFAULTHEIGHT);
 			newView.setPrefWidth(DEFAULTWIDTH);
+			
 			SceneLoader sceneLoader = loader.getController();
 			sceneLoader.loadScene(this);
-			this.mainStackPane.getChildren().add(newView);
 			
-			this.parent.put(sceneLoader,parentSource);
-			this.child.put(parent,newView);
+			this.mainStackPane.getChildren().add(newView);
+//			this.addToList(parentLoader,sceneLoader,parentNode,newView);
 			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
 	}
-	
-	public void delElements(int nbView) {
-		this.mainStackPane.getChildren().remove(nbView);
-	}
-	
-	public void remove(SceneLoader loader) {
 		
+	
+
+	private boolean loadNodeList(Node[] currentList) {
+		boolean loaded = currentList != null;
+		if(currentList != null) {
+			this.mainStackPane.getChildren().setAll(currentList);
+		}
+		return loaded;
 	}
 	
+	public boolean loadParent() {
+		Node[] currentList = this.anchorStack.pop();
+		return this.loadNodeList(currentList);
+	}
+	
+	public void removeLast() {
+		int lastIndex = this.mainStackPane.getChildren().size() - 1;
+		if(lastIndex > 0)
+			this.mainStackPane.getChildren().remove(lastIndex);
+	}
+	
+	
+
+
 	
 	public void setScene(Scene scene) {
 		if(scene != null)
@@ -110,35 +126,17 @@ public class GroundControler implements Initializable {
 	public Scene getScene() {
 		return this.scene;
 	}
-	
 
-	
-	
-	private void replaceTo(Node newAnchor) {
-		if(newAnchor != null) {
-			this.mainStackPane.getChildren().clear();
-			this.mainStackPane.getChildren().add(newAnchor);
-
+	public void setGameLoopStart(Supplier<Void> gameLoopStart) {
+		if(gameLoopStart != null) {
+			this.gameLoopStart = gameLoopStart;
 		}
-
 	}
 	
-	public void loadParent(SceneLoader loader) {
-		Node parent = null;
-		if(loader != null)
-			parent = this.parent.get(loader);
-	
-		this.replaceTo(parent);
+	public void startGameLoop() {
+		if(this.gameLoopStart != null)
+			this.gameLoopStart.get();
 	}
-	
-	public void loadChild(SceneLoader loader) {
-		Node children = null;
-		if(loader != null) 
-			children = this.child.get(loader);
-		this.replaceTo(children);
-		
-	}
-
 	
 	
 	

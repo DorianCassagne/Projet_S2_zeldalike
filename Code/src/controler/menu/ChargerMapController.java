@@ -14,7 +14,7 @@ public class ChargerMapController implements SceneLoader{
 	@FXML
 	private void newGame(ActionEvent event) {
 		if(ground != null)
-			ground.changeView(Controleur.FXMLGAMEPATH,this);
+			ground.changeView(Controleur.FXMLGAMEPATH);
 		else
 			System.exit(1);
 	}
@@ -27,7 +27,7 @@ public class ChargerMapController implements SceneLoader{
 	@FXML
 	private void previousScene(ActionEvent event) {
 		if(ground != null) {
-			this.ground.loadParent(this);
+			this.ground.loadParent();
 		}else
 			System.exit(1);
 	}

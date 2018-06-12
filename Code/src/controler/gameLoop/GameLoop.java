@@ -1,15 +1,10 @@
 package controler.gameLoop;
 
 import java.util.HashMap;
-
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.StringProperty;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 import model.Game;
 import model.gameMap.additional.NewMovable;

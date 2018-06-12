@@ -1,4 +1,4 @@
-package controler.withGame;
+package controler.input;
 
 
 import controler.Controleur;
@@ -63,9 +63,11 @@ public class CommandInterpreter {
 			break;
 		case ESCAPE :
 			if(this.gameLoop.getIsStopped()) {
+				ground.removeLast();
 				this.gameLoop.start();
 			}
 			else {
+				ground.addElement(Controleur.FXMLPAUSEPATH);
 				this.gameLoop.stop();
 			}
 			break;

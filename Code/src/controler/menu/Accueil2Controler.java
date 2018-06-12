@@ -15,7 +15,7 @@ public class Accueil2Controler implements SceneLoader{
     @FXML
     private void newGame(ActionEvent event) {
     	if(ground != null)
-    		ground.changeView(Controleur.FXMLGAMEPATH,this);
+    		ground.changeView(Controleur.FXMLGAMEPATH);
     	else
     		System.exit(1);
     		
@@ -29,7 +29,7 @@ public class Accueil2Controler implements SceneLoader{
     @FXML
     private void loadMenuGame(ActionEvent event) {
     	if(ground != null) {
-    		ground.changeView(Controleur.FXMLLOADMENUPATH,this);
+    		ground.changeView(Controleur.FXMLLOADMENUPATH);
     	}
     	else
     		System.exit(1);
