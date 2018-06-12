@@ -1,4 +1,4 @@
-package model.character.item.hp;
+package model.character.item.hpPotion;
 
 import model.character.hero.Hero;
 import model.character.item.Item;

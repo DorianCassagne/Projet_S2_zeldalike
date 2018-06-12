@@ -3,7 +3,7 @@ package model.character.item.factory;
 import model.character.item.Item;
 import model.character.item.attack.AttackItem;
 import model.character.item.def.DefenseItem;
-import model.character.item.hp.Healer;
+import model.character.item.hpPotion.Healer;
 import model.character.item.mapChange.MapChanger;
 import resources.additionalClass.UsefulMethods;
 

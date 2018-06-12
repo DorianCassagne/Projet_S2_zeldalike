@@ -27,17 +27,17 @@ public class HealthItem extends Item{
 		hero.setMaxHp(this.healthItem);
 	}
 	
-	public static int isInRange(int imageValue) {
-		int diff = imageValue - Item.HPITEMSTARTINDEX;
-		if(diff < 0 || diff > HealthEnum.values().length) {
-			diff = -1;
-		}
-		return diff;
-	}
-	
-	public static int isInRange(String name) {
-		return isInRange(HealthEnum.valueOf(name).getImage());
-	}
+//	public static int isInRange(int imageValue) {
+//		int diff = imageValue - Item.HPITEMSTARTINDEX;
+//		if(diff < 0 || diff > HealthEnum.values().length) {
+//			diff = -1;
+//		}
+//		return diff;
+//	}
+//	
+//	public static int isInRange(String name) {
+//		return isInRange(HealthEnum.valueOf(name).getImage());
+//	}
 
 
 }

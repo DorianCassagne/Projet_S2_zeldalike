@@ -86,7 +86,7 @@ public class Hero extends GameHero{
 			break;
 		case CHANGEATTACK : 
 			this.setWait(1);
-			this.changeAttack();
+			//this.changeAttack();
 			break;
 			
 		default : 
@@ -146,6 +146,7 @@ public class Hero extends GameHero{
 		this.mapProperty.set(mapChanger.getMapIndex());
 		System.out.println("Changed" + this.mapProperty.get());
 	}
+
 
 	
 

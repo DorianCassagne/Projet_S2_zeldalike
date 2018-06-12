@@ -2,13 +2,15 @@ package model.character.attack.dynamic;
 
 import model.character.attack.Attack;
 import model.character.item.attack.AttackItem;
+import model.character.item.attack.AttackItemEnum;
 import model.gameMap.GameMap;
 import model.gameMap.move.Movement;
 
 public class DefaultAttackLauncher implements Launcher{
 	private Attack lastAttack;
-	private AttackItem type;
-	public DefaultAttackLauncher(AttackItem attackType) {
+	private AttackItemEnum type;
+
+	public DefaultAttackLauncher(AttackItemEnum attackType) {
 		if(attackType != null) {
 			this.lastAttack = null;
 			this.type = attackType;
