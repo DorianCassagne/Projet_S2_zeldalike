@@ -25,7 +25,8 @@ public class SpeedItem extends Item{
 
 	@Override
 	protected void applyTo(Hero hero) {
-		hero.setSpeedItem(speedEnum);
+		//hero.setSpeedItem(speedEnum);
+		//TODO
 	}
 
 }

@@ -39,7 +39,7 @@ public class HeroStats {
 	}
 
 	private  void initialiseProperties() {
-		
+
 		this.hp = new SimpleIntegerProperty(GameHero.DEFAULTHP);
 		this.def = new SimpleIntegerProperty(GameHero.DEFAULTDEF);
 		this.attackItemImage = new SimpleIntegerProperty(0);
@@ -47,6 +47,7 @@ public class HeroStats {
 		this.safeStats = new CopyOfHeroStats(this.hp,this.def,this.attackItemImage,this.mp);
 		this.maxHP = GameHero.DEFAULTHP;
 		this.maxMP = GameHero.DEFAULTMP;
+	
 	}
 
 	
@@ -55,9 +56,6 @@ public class HeroStats {
 			this.attackList.add(launcher);
 	}
 
-	public CopyOfHeroStats getHeroStats() {
-		return this.safeStats;
-	}
 
 	/*
 	 * ITEMS EFFECT ON THESE ONES ............
@@ -104,10 +102,11 @@ public class HeroStats {
 	}
 	
 	
-		
+	
 	
 	private void setAttackIndex(int newAttackIndex) {
 		int nextAttackIndex = newAttackIndex;
+		
 		if(newAttackIndex >= this.attackList.size()) {
 			nextAttackIndex = 0;
 		}
@@ -123,7 +122,7 @@ public class HeroStats {
 		}
 	}
 
-	protected void changeAttack() {
+	public void changeAttack() {
 		setAttackIndex(this.attackType + 1);
 	}
 
@@ -136,12 +135,27 @@ public class HeroStats {
 		return newMP >= 0;
 	}
 	
+	
+	
+	
 	/*
 	 * Getters
 	 */
 	
 	public int getHP() {
 		return this.hp.get();
+	}
+
+	public Launcher getCurrentAttack() {
+		Launcher currentAttack = null;
+		if(this.attackType > 0) {
+			currentAttack = this.attackList.get(this.attackType);
+		}
+		return currentAttack;
+	}
+
+	public CopyOfHeroStats getHeroStats() {
+		return this.safeStats;
 	}
 
 

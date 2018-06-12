@@ -50,7 +50,7 @@ public class BlueFairy extends GameCharacter{
 	public void launchAttack(Movement direction) {
 		int cellId = BFS1.simpleMove(getMyMap(), this.getCellId(), GameCharacter.getHero().getCellId(),true);
 		Movement nextDirection = Movement.getDirectionInto(this.getCellId(), cellId);
-		new DefaultAttack(this.getMyMap(), this.getRow(), this.getColumn(),	nextDirection,new AttackItem(ATTACKITEMINDEX));
+		//new DefaultAttack(this.getMyMap(), this.getRow(), this.getColumn(),	nextDirection,new AttackItem(ATTACKITEMINDEX));
 	}
 
 	@Override

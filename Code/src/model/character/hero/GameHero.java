@@ -8,11 +8,11 @@ import model.character.item.mp.*;
 import model.character.item.hpPotion.*;
 import model.character.item.mpPotion.*;
 import model.character.item.pvItem.*;
-import model.character.item.speed.*;
 import model.character.attack.dynamic.*;
 import model.character.GameCharacter;
 import model.character.attack.Attack;
 import model.gameMap.GameMap;
+import model.gameMap.move.Movement;
 
 public abstract class GameHero extends GameCharacter {
 	
@@ -73,5 +73,17 @@ public abstract class GameHero extends GameCharacter {
 	public void setBasicAtk(AttackItemEnum attackItem) {
 		this.heroStats.setBasicAtk(attackItem);
 	}
+	
+	@Override
+	public void launchAttack(Movement direction) {
+		Launcher attack = this.heroStats.getCurrentAttack();
+		if(attack != null)
+			attack.launch(this.getMyMap(), direction, this.getRow(), this.getColumn());
+	}
+	
+	public void getHeroStats() {
+		this.heroStats.getHeroStats();
+	}
+
 	
 }
