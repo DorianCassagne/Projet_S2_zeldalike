@@ -1,5 +1,6 @@
 package controler.gameLoop;
 
+import controler.mainGame.GroundControler;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
@@ -20,8 +21,10 @@ public class ControlerEncoder {
 	private ImageView defImageView;
 	
 	private Game myGame;
-
 	
+	private GroundControler ground;
+
+
 	public ControlerEncoder(AnchorPane characterAnchorPane, Label hpLabel, ProgressBar hpProgressBar, Label mpLabel,
 			ProgressBar mpProgressBar, ImageView defImageView, ImageView attackImageView, Game myGame) {
 		this.myGame = myGame;
@@ -33,7 +36,17 @@ public class ControlerEncoder {
 		this.attackImageView = attackImageView;
 		this.defImageView = defImageView;
 	}
-
+	
+	public GroundControler getGround() {
+		System.out.println(this.ground);
+		return this.ground;
+	}
+	
+	public void setGround(GroundControler ground) {
+		System.out.println("The ground is set " + ground);
+		this.ground= ground;
+	}	
+	
 	public AnchorPane getCharacterAnchorPane() {
 		return this.characterAnchorPane;
 	}
@@ -53,7 +66,6 @@ public class ControlerEncoder {
 	public Label getMPLabel() {
 		return MPLabel;
 	}
-
 
 	public ProgressBar getMPProgressBar() {
 		return MPProgressBar;

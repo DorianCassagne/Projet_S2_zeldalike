@@ -113,7 +113,7 @@ public class GameMap {
 	
 	public boolean addCharacter(GameCharacter movable,int row,int column) {	
 		boolean correctlyPlaced = false;
-		
+
 		if(Statics.isInMap(row,column)) {
 			int cellId = Statics.convertToCellId(row, column);
 			correctlyPlaced = this.cells[cellId].addMovable(movable);

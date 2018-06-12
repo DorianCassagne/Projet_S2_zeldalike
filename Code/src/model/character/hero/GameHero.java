@@ -19,7 +19,7 @@ import model.gameMap.move.Movement;
 
 public abstract class GameHero extends GameCharacter {
 	
-	private final static int DEFAULTCYCLE = 20;
+	private final static int DEFAULTCYCLE = 25;
 	private final static double DEFAULTCOEFFICIENT = 1.5;
 	private final static int DEFAULTHP = 300;
 	private final static int DEFAULTMP = 200;

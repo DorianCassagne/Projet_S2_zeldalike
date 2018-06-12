@@ -38,28 +38,28 @@ public class CommandInterpreter {
 		char nextMove = Hero.STAY;
 		switch(event.getCode()) {
 		case UP : 
-			nextMove = Hero.MOVEUP;
-			break;
-		case DOWN:
-			nextMove = Hero.MOVEDOWN;
-			break;
-		case LEFT:
-			nextMove = Hero.MOVELEFT;
-			break;
-		case RIGHT: 
-			nextMove = Hero.MOVERIGHT;
-			break;
-		case Z :
 			nextMove = Hero.ATTACKUP;
 			break;
-		case S :
+		case DOWN:
 			nextMove = Hero.ATTACKDOWN ;
 			break;
-		case D :
+		case LEFT:
+			nextMove = Hero.ATTACKLEFT;
+			break;
+		case RIGHT: 
 			nextMove = Hero.ATTACKRIGHT;
 			break;
+		case Z :
+			nextMove = Hero.MOVEUP; 
+			break;
+		case S :
+			nextMove = Hero.MOVEDOWN; 
+			break;
+		case D :
+			nextMove = Hero.MOVERIGHT;
+			break;
 		case Q : 
-			nextMove = Hero.ATTACKLEFT;
+			 nextMove = Hero.MOVELEFT;
 			break;
 		case ESCAPE :
 			if(this.gameLoop.getIsStopped()) {

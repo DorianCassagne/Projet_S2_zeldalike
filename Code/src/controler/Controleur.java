@@ -38,6 +38,7 @@ public class Controleur implements Initializable,SceneLoader{
 	public final static String FXMLMAINMENU2PATH = "menu/MenuAccueil2.fxml";
 	public final static String FXMLLOADMENUPATH = "menu/MenuChargerMap.fxml";
 	public final static String FXMLPAUSEPATH = "menu/MenuDePause.fxml";
+	public final static String FXMLGAMEOVERMENUPATH = "menu/GameOverMenu.fxml";
 	private final static String TILESETPATH = "src/resources/tileset/Image/jeudi7.png";
 	
 	@FXML    private AnchorPane mainAnchorPane;
@@ -95,6 +96,7 @@ public class Controleur implements Initializable,SceneLoader{
 				this.gameLoop.start();
 				return null;
 			};
+			this.controllerData.setGround(groundControler);
 			this.sceneChanger.getScene().setOnKeyPressed(e->interpreter.handleKey(e,groundControler));
 			this.sceneChanger.setGameLoopStart(resumeGameLoop);
 		}
@@ -152,12 +154,6 @@ public class Controleur implements Initializable,SceneLoader{
 			else
 				i++;
 		}
-	}
-
-	
-	
-	
-	
-	
+	}	
 }
  

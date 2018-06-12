@@ -26,7 +26,6 @@ public class HeroView extends MovableView{
 		
 		this.scrollX(this.getLayoutX());
 		this.scrollY(this.getLayoutY());
-
 		relateEveryThing(data);
 		
 	}
@@ -35,30 +34,40 @@ public class HeroView extends MovableView{
 	private void initShownDimension(AnchorPane characterAnchorPane) {
 		this.shownRow = characterAnchorPane.getScene().getHeight() ;
 		this.shownColumn = characterAnchorPane.getScene().getWidth() ;
+		characterAnchorPane.getScene().heightProperty().addListener((obs,oldValue,newValue)->{this.shownRow = newValue.intValue();this.scrollY(this.getY());});
+		characterAnchorPane.getScene().widthProperty().addListener((obs,oldValue,newValue)->{this.shownColumn = newValue.intValue();this.scrollX(this.getX());});
 		this.myAnchorPane = characterAnchorPane;
 
 	}
 	
 	
 	private void relateEveryThing(ControlerEncoder encoder) {
-		this.layoutXProperty().addListener((obs,oldValue,newValue)->this.scrollX(newValue.doubleValue()));
+		
+		this.layoutXProperty().addListener((obs,oldValue,newValue)->{
+			this.scrollX(newValue.doubleValue());
+		});
 		this.layoutYProperty().addListener((obs,oldValue,newValue)->this.scrollY(newValue.doubleValue()));	
 		CopyOfHeroStats heroStats = encoder.getMyGame().getHeroStats();
 		this.linkHP(heroStats.getHPBinding(),encoder.getHPLabel(),encoder.getHPProgressBar());
 		this.linkMP(heroStats.getMPBinding(),encoder.getMPLabel(),encoder.getMPProgressBar());
+
 		ViewUsefulMethods.linkImage(heroStats.getAtkBinding(), encoder.getAttackImageView());
 		ViewUsefulMethods.linkImage(heroStats.getDefBinding(), encoder.getDefImageView());
 	}
 	
 		
 	private void linkHP(IntegerBinding HPproperty,Label HPlabel,ProgressBar HPprogress) {
+	
 		this.maxHP = HPproperty.get();
 		ViewUsefulMethods.linkPropertyToLabelAndProgress(HPproperty,HPlabel,HPprogress);
+	
 	}
 	
 	private void linkMP(IntegerBinding MPProperty,Label MPLabel,ProgressBar MPProgress) {
+	
 		this.maxMP = MPProperty.get();
 		ViewUsefulMethods.linkPropertyToLabelAndProgress(MPProperty,MPLabel,MPProgress);
+	
 	}
 	
 	
@@ -66,7 +75,6 @@ public class HeroView extends MovableView{
 	private void scrollX(double newValue) {
 		double diff = newValue- this.shownColumn/2;
 		boolean isNotAtLimit = (newValue - (ConversionAndStatics.TILEDIMENSION * MapReader.MAPLENGTH) < -this.shownColumn/2);
-		
 		if(diff > 0 && isNotAtLimit) {
 			this.myAnchorPane.setTranslateX(-diff);
 		}
