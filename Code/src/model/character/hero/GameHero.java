@@ -17,10 +17,11 @@ import model.gameMap.move.Movement;
 public abstract class GameHero extends GameCharacter {
 	
 	 final static int DEFAULTCYCLE = 20;
-	 final static double DEFAULTCOEFFICIENT = 1.5;
+	 final static double DEFAULTCOEFFICIENT = 1;
 	 final static int DEFAULTHP = 300;
 	 final static int DEFAULTMP = 200;
 	 final static int DEFAULTDEF = 40;
+	 final static int DEFAULTATK = 50;
 	 final static int DEFAULTIMAGE = 8;
 	 final static AttackItemEnum DEFAULTATKITEM = AttackItemEnum.LANCER;
 	
@@ -78,11 +79,11 @@ public abstract class GameHero extends GameCharacter {
 	public void launchAttack(Movement direction) {
 		Launcher attack = this.heroStats.getCurrentAttack();
 		if(attack != null)
-			attack.launch(this.getMyMap(), direction, this.getRow(), this.getColumn());
+			attack.launch(this.getMyMap(), direction, this.getRow(), this.getColumn(),this.heroStats.getAtk());
 	}
 	
-	public void getHeroStats() {
-		this.heroStats.getHeroStats();
+	public CopyOfHeroStats getHeroStats() {
+		return this.heroStats.getHeroStats();
 	}
 
 	

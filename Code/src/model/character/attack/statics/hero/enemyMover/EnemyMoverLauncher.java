@@ -8,7 +8,7 @@ public class EnemyMoverLauncher implements Launcher{
 	
 
 	@Override
-	public void launch(GameMap map, Movement direction, int row, int column) {
+	public void launch(GameMap map, Movement direction, int row, int column,int attackPT) {
 			new EnemyMover(map, row, column,direction);
 	}
 
@@ -16,7 +16,12 @@ public class EnemyMoverLauncher implements Launcher{
 	public int getImage() {
 		return EnemyMover.DEFAULTIMAGE;
 	}
-	
+
+	@Override
+	public int getDamage() {
+		return EnemyMover.DEFAULTDAMAGE;
+	}
+
 	
 
 }

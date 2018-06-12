@@ -1,5 +1,8 @@
 package controler.gameLoop;
 
+import java.util.ArrayList;
+
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
@@ -16,22 +19,31 @@ public class ControlerEncoder {
 	private ProgressBar HPProgressBar;
 	private ProgressBar MPProgressBar;
 	
-	private ImageView attackImageView;
-	private ImageView defImageView;
+	private ArrayList<ImageView> imageList;
+	private ArrayList<Button> buttonList;
 	
 	private Game myGame;
 
 	
 	public ControlerEncoder(AnchorPane characterAnchorPane, Label hpLabel, ProgressBar hpProgressBar, Label mpLabel,
-			ProgressBar mpProgressBar, ImageView defImageView, ImageView attackImageView, Game myGame) {
+			ProgressBar mpProgressBar, Game myGame) {
 		this.myGame = myGame;
 		this.characterAnchorPane = characterAnchorPane;
 		this.HPLabel = hpLabel;
 		this.MPLabel = mpLabel;
 		this.HPProgressBar = hpProgressBar;
 		this.MPProgressBar = mpProgressBar;
-		this.attackImageView = attackImageView;
-		this.defImageView = defImageView;
+		this.imageList = new ArrayList<ImageView>();
+		this.buttonList = new ArrayList<Button>();
+	}
+	
+	/*
+	 * @Throws IndexOutOfBoundsException
+	 */
+	public void addButtonImage(ImageView view,Button button,int index) {
+		this.imageList.add(view);
+		this.buttonList.add(button);
+
 	}
 
 	public AnchorPane getCharacterAnchorPane() {
@@ -59,14 +71,18 @@ public class ControlerEncoder {
 		return MPProgressBar;
 	}
 
-
-	public ImageView getAttackImageView() {
-		return attackImageView;
+	/*
+	 * @Throws IndexOutOfBoundsException
+	 */
+	public Button getButtonAt(int index){
+		return this.buttonList.get(index);
 	}
-
-
-	public ImageView getDefImageView() {
-		return defImageView;
+	
+	/*
+	 * @Throws IndexOutOfBoundsException
+	 */
+	public ImageView getImageViewAt(int index) {
+		return this.imageList.get(index);
 	}
-
+	
 }

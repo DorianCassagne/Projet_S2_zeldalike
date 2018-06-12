@@ -20,15 +20,20 @@ public class HeroStats {
 	private IntegerProperty hp;
 	private IntegerProperty mp;
 	private CopyOfHeroStats safeStats;
+	private IntegerProperty attackItemImage;
+	private IntegerProperty attackValue;
+	private ArrayList<Launcher> attackList;
+	
+	private int attackType;
 	private int maxHP;
 	private int maxMP;
-	private IntegerProperty attackItemImage;
-	private ArrayList<Launcher> attackList;
-	private int attackType;
+
 	
 	public HeroStats() {
-		this.initAttack();
+
 		this.initialiseProperties();
+		this.initAttack();
+
 	}
 
 	
@@ -44,16 +49,17 @@ public class HeroStats {
 		this.def = new SimpleIntegerProperty(GameHero.DEFAULTDEF);
 		this.attackItemImage = new SimpleIntegerProperty(0);
 		this.mp = new SimpleIntegerProperty(GameHero.DEFAULTMP);
-		this.safeStats = new CopyOfHeroStats(this.hp,this.def,this.attackItemImage,this.mp);
+		this.attackValue = new SimpleIntegerProperty(GameHero.DEFAULTATK);
+		this.safeStats = new CopyOfHeroStats(this.hp,this.def,this.attackItemImage,this.attackValue,this.mp);
 		this.maxHP = GameHero.DEFAULTHP;
 		this.maxMP = GameHero.DEFAULTMP;
-	
 	}
 
 	
 	public void addLauncher(Launcher launcher) {
-		if(launcher !=  null)
+		if(launcher !=  null) {
 			this.attackList.add(launcher);
+		}
 	}
 
 
@@ -74,8 +80,10 @@ public class HeroStats {
 	}
 	
 	public void setBasicAtk(AttackItemEnum attack) {
-		if(attack != null)
+		if(attack != null) {
 			this.attackList.set(0, new DefaultAttackLauncher(attack));
+			this.updateAttackImage();
+		}
 		else
 			throw new IllegalArgumentException("THE ATTACK CHANGE IS NULL");
 	}
@@ -117,8 +125,9 @@ public class HeroStats {
 	
 	private void updateAttackImage() {
 		if(this.attackType < this.attackList.size()) {
-			int newImageValue = this.attackList.get(this.attackType).getImage();
-			this.attackItemImage.set(newImageValue);
+			Launcher newImageValue = this.attackList.get(this.attackType);
+			this.attackItemImage.set(newImageValue.getImage());
+			this.attackValue.set(GameHero.DEFAULTATK + newImageValue.getDamage());
 		}
 	}
 
@@ -157,8 +166,10 @@ public class HeroStats {
 	public CopyOfHeroStats getHeroStats() {
 		return this.safeStats;
 	}
-
-
+	
+	public int getAtk() {
+		return this.attackValue.get();
+	}
 
 
 	private final static void correctlySetProperty(IntegerProperty property,int newValue,int maxValue) {

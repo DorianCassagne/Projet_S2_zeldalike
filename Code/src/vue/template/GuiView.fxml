@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
@@ -11,14 +17,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controler.Controleur">
+<AnchorPane fx:id="mainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controler.Controleur">
    <children>
       <AnchorPane fx:id="characterAnchorPane" prefHeight="600.0" prefWidth="600.0">
          <children>
             <TilePane fx:id="mapTilePane" layoutX="20.0" layoutY="73.0" opacity="0.85" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>
       </AnchorPane>
-      <HBox layoutX="20.0" layoutY="20.0" opacity="0.9" prefHeight="66.0" prefWidth="572.0" spacing="10.0">
+      <HBox layoutX="20.0" layoutY="20.0" opacity="0.9" prefHeight="66.0" prefWidth="572.0" spacing="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
          <children>
             <ImageView fx:id="avatarImage" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                <HBox.margin>
@@ -49,15 +55,30 @@
                   </HBox>
                </children>
             </VBox>
-            <HBox alignment="CENTER_RIGHT" maxHeight="60.0" prefHeight="60.0" prefWidth="326.0" spacing="20.0">
+            <HBox alignment="CENTER_RIGHT" maxHeight="77.0" prefHeight="61.0" prefWidth="397.0" spacing="10.0" HBox.hgrow="ALWAYS">
                <children>
-                  <ImageView fx:id="itemImageView" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="attackImageView" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="defImageView" fitHeight="40.0" fitWidth="40.0" layoutX="207.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true" />
+                  <Button fx:id="DefenseButton" contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="50.0" prefWidth="94.0" style="-fx-background-color: inherit; -fx-background-radius: 20;" text="Def" underline="true">
+                     <graphic>
+                        <ImageView fx:id="itemImageView" accessibleHelp="omar" accessibleRoleDescription="omar" accessibleText="omar" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
+                  </Button>
+                  <Button fx:id="itemButton" contentDisplay="RIGHT" mnemonicParsing="false" style="-fx-background-color: inherit; -fx-background-radius: 20;" text="Item" underline="true">
+                     <graphic>
+                        <ImageView fx:id="defImageView" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
+                  </Button>
+                  <Button fx:id="attackButton" contentDisplay="RIGHT" mnemonicParsing="false" style="-fx-background-color: inherit; -fx-background-radius: 20;" text="Atk" underline="true">
+                     <graphic>
+                        <ImageView fx:id="attackImageView" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
+                  </Button>
                </children>
                <padding>
                   <Insets right="20.0" />
                </padding>
+               <HBox.margin>
+                  <Insets top="5.0" />
+               </HBox.margin>
             </HBox>
          </children>
       </HBox>

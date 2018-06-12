@@ -10,15 +10,20 @@ public class SimpleArrowLauncher implements Launcher {
 	
 	
 	@Override
-	public void launch(GameMap map, Movement direction, int row, int column) {
+	public void launch(GameMap map, Movement direction, int row, int column,int atkPT) {
 		if(this.lastAttack == null || this.lastAttack.isAlive()) {
-			this.lastAttack = new SimpleArrow(map, row, column, direction, 1);
+			this.lastAttack = new SimpleArrow(map, row, column, direction, atkPT);
 		}
 	}
 
 	@Override
 	public int getImage() {
 		return lastAttack.getImageValueProperty().get();
+	}
+
+	@Override
+	public int getDamage() {
+		return this.lastAttack.getDamage();
 	}
 
 	

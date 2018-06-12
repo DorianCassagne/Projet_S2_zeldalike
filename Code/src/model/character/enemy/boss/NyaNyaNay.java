@@ -61,7 +61,7 @@ public class NyaNyaNay  extends NyaSlave {
 					setWait(20);
 					break;
 				case 1:
-					new Bomb(getMyMap(), this.getRow(), this.getColumn()+1, Movement.BOTTOM);
+					new Bomb(getMyMap(), this.getRow(), this.getColumn()+1, Movement.BOTTOM,50);
 					setWait(50);
 					break;
 				case 2:

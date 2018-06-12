@@ -15,6 +15,7 @@ import controler.withGame.CommandInterpreter;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
@@ -24,6 +25,7 @@ import javafx.scene.layout.TilePane;
 import model.Game;
 import model.gameMap.additional.MapReader;
 import model.gameMap.additional.Statics;
+import vue.gameClass.HeroView;
 import vue.gameClass.MapView;
 import vue.gameClass.MessageView;
 import vue.other.TexturePack;
@@ -34,18 +36,22 @@ public class Controleur implements Initializable,SceneLoader{
 	public final static String FXMLPATH = "template/GuiView.fxml";
 	private final static String TILESETPATH = "src/resources/tileset/Image/jeudi7.png";
 	
-	@FXML    private AnchorPane mainAnchorPane;
-    @FXML    private AnchorPane characterAnchorPane;
-    @FXML    private TilePane mapTilePane;
-    @FXML    private ImageView avatarImage;
-    @FXML    private Label HPLabel;
-    @FXML    private ProgressBar HPProgressBar;
-    @FXML    private Label MPLabel;
-    @FXML    private ProgressBar MPProgressBar;
+	@FXML   private AnchorPane mainAnchorPane;
+    @FXML   private AnchorPane characterAnchorPane;
+    @FXML   private TilePane mapTilePane;
+    @FXML   private ImageView avatarImage;
+    @FXML   private Label HPLabel;
+    @FXML   private ProgressBar HPProgressBar;
+    @FXML   private Label MPLabel;
+    @FXML   private ProgressBar MPProgressBar;
     @FXML    private ImageView itemImageView;
-    @FXML    private ImageView attackImageView;
-    @FXML    private ImageView defImageView;
-    @FXML 	 private TextArea messageText;
+    @FXML   private ImageView attackImageView;
+    @FXML   private ImageView defImageView;
+    @FXML   private TextArea messageText;
+    
+    @FXML	private Button DefenseButton;
+    @FXML	private Button itemButton;
+    @FXML   private Button attackButton;
     
 	private Game myGame;
 	private CommandInterpreter interpreter;
@@ -98,15 +104,21 @@ public class Controleur implements Initializable,SceneLoader{
 	}
 	
 	private void initControllerData() {
-		this.controllerData = new ControlerEncoder(this.characterAnchorPane, this.HPLabel, this.HPProgressBar,this.MPLabel,this.MPProgressBar,this.defImageView,this.attackImageView,this.myGame);
+		this.controllerData = new ControlerEncoder(this.characterAnchorPane, this.HPLabel, this.HPProgressBar,this.MPLabel,this.MPProgressBar,this.myGame);
+		this.controllerData.addButtonImage(attackImageView, attackButton,HeroView.ATTACKINDEX);
+		this.controllerData.addButtonImage(itemImageView, itemButton,HeroView.ITEMINDEX);
+		this.controllerData.addButtonImage(defImageView, DefenseButton,HeroView.DEFENSEINDEX);
+
+		
 	}
 
 	private void initGameInterpreterAndLoop() {
 		MessageView message = new MessageView(this.messageText, this.messageZone);
+		
 		this.gameLoop = new GameLoop(this.messageZone,this.controllerData);
-		System.out.println(this.controllerData);
 		this.interpreter = new CommandInterpreter(this.myGame,this.gameLoop,message.waitingProperty());
 		this.gameLoop.start();
+	
 	}
 	
 	private void initMap() {

@@ -52,10 +52,10 @@ public class Cell {
 		boolean isSet = this.gameCharacter == null && this.isWalkable();
 		if (isSet && movable != null) {
 			this.gameCharacter = movable;
-			this.launchAttacks();
 			if(item!=null && this.item.effectOn(movable)) {
 				this.delItem();
 			}
+			this.launchAttacks();
 		}
 		
 		return isSet;
@@ -90,6 +90,10 @@ public class Cell {
 	private void attack(Attack attack) {
 		attack.attack(this.gameCharacter);
 		this.attackList.remove(attack);
+	}
+	
+	public void clearAttacks() {
+		this.attackList.clear();
 	}
 	
 	public void turn() {

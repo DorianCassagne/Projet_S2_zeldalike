@@ -11,9 +11,14 @@ public class Bomb extends Attack {
 	private int count;
 	private boolean start;
 	public final static int DEFAULTIMAGE = 1620;
+	private final static int CELLPERTURN = 1;
+	private final static int MAXDISTANCE = 7;
+	final static int DEFAULTDAMAGE = 100;
+	private final static int DEFAULTCOEFFICIENT = 2; 
 	
-	public Bomb(GameMap map, int row, int column, Movement direction) {
-		super(map, 40, row/*+direction.getVerticalIncrement()*/, column/*+direction.getHorizontalIncrement()*/, direction, 100, 1, 2, DEFAULTIMAGE, 7);
+	
+	public Bomb(GameMap map, int row, int column, Movement direction,int attackPT) {
+		super(map, 40, row, column, direction, Attack.getAttaqueValue(attackPT, DEFAULTDAMAGE), CELLPERTURN, DEFAULTCOEFFICIENT, DEFAULTIMAGE, MAXDISTANCE);
 		count = 6;
 	}
 

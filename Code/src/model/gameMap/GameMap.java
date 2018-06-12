@@ -188,7 +188,14 @@ public class GameMap {
 	}
 	
 	public Move[] turn() {
+		this.clearAttacks();
 		return this.action.turn();
+	}
+	
+	private void clearAttacks() {
+		for(Cell cell : cells) {
+			cell.clearAttacks();
+		}
 	}
 	
 	public int[] getRemovedCharacter() {

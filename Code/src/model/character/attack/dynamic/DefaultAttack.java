@@ -12,8 +12,8 @@ public class DefaultAttack extends Attack{
 	private final static double DEFAULTCOEFFICIENT = 1.6;
 	private final static int CELLPERTURN = 1;
 	
-	public DefaultAttack(GameMap map, int row, int column, Movement direction,AttackItemEnum attackType) {
-		super(map, DEFAULTCYCLE, row, column, direction, attackType.getDmg(), CELLPERTURN, DEFAULTCOEFFICIENT, attackType.getAttackImage(), attackType.getMaxDistance());
+	public DefaultAttack(GameMap map, int row, int column, Movement direction,AttackItemEnum attackType,int attackPT) {
+		super(map, DEFAULTCYCLE, row, column, direction, Attack.getAttaqueValue(attackPT,attackType.getDmg()), CELLPERTURN, DEFAULTCOEFFICIENT, attackType.getAttackImage(), attackType.getMaxDistance());
 	}
 
 	@Override

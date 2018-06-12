@@ -120,5 +120,8 @@ public abstract class Attack extends Movable {
 	
 	protected abstract void establishAttack(GameCharacter gameCharacter);
 	
+	protected final static int getAttaqueValue(int playerAtk,int attackNormalDmg) {
+		return playerAtk + attackNormalDmg;
+	}
 	
 }

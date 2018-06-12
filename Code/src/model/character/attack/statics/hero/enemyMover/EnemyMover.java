@@ -10,7 +10,7 @@ import model.gameMap.move.Movement;
 public class EnemyMover extends Attack implements ExternalMover{
 
 	private static final int DEFAULTCYCLE = 10;
-	private static final int DAMAGE = 0;
+	static final int DEFAULTDAMAGE = 0;
 	private static final double COEFFICIENT = 1.3;
 	public static final int DEFAULTIMAGE = 1624 ;
 	private final static int DEFAULTCELLPERTURN = 1;
@@ -18,7 +18,7 @@ public class EnemyMover extends Attack implements ExternalMover{
 	
 	
 	public EnemyMover(GameMap map,  int row, int column, Movement direction) {
-		super(map, DEFAULTCYCLE, row, column, direction, DAMAGE, DEFAULTCELLPERTURN, COEFFICIENT, DEFAULTIMAGE, DEFAULTMAXDISTANCE);
+		super(map, DEFAULTCYCLE, row, column, direction, DEFAULTDAMAGE, DEFAULTCELLPERTURN, COEFFICIENT, DEFAULTIMAGE, DEFAULTMAXDISTANCE);
 	}
 
 	public boolean handlePlay(byte attackResult) {

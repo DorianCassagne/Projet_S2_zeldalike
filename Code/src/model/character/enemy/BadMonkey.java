@@ -43,7 +43,7 @@ public class BadMonkey extends BlueFairy{
 			Movement currentMovement = Movement.values()[inPlace];
 			this.setImage(currentMovement);
 			//new DoomAttack(getMyMap(),this.getRow(),this.getColumn(),currentMovement, 10);
-			new Bomb(getMyMap(),this.getRow(),this.getColumn(),currentMovement);
+			new Bomb(getMyMap(),this.getRow(),this.getColumn(),currentMovement,10);
 			//new NyanAttHori(getMyMap(), this.getRow(), this.getColumn());
 			setWait(200);
 			return null;

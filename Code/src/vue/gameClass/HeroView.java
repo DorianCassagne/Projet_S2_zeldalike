@@ -7,18 +7,25 @@ import javafx.beans.binding.IntegerBinding;
 import javafx.beans.property.IntegerProperty;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
 import model.Game;
 import model.character.hero.CopyOfHeroStats;
 import model.gameMap.additional.MapReader;
 
 public class HeroView extends MovableView{
+	public final static int ATTACKINDEX = 0;
+	public final static int ITEMINDEX = 1;
+	public final static int DEFENSEINDEX = 2;
+	
+	
 	
 	private double shownRow;
 	private double shownColumn;
 	private AnchorPane myAnchorPane;
 	private int maxHP;
 	private int maxMP;
+	private Tooltip tooltip;
 	
 	public HeroView(int cellId,IntegerProperty imageValue,ControlerEncoder data) {
 		super(cellId,imageValue);
@@ -26,7 +33,8 @@ public class HeroView extends MovableView{
 		
 		this.scrollX(this.getLayoutX());
 		this.scrollY(this.getLayoutY());
-
+		
+		this.tooltip = new Tooltip();
 		relateEveryThing(data);
 		
 	}
@@ -43,13 +51,18 @@ public class HeroView extends MovableView{
 	private void relateEveryThing(ControlerEncoder encoder) {
 		this.layoutXProperty().addListener((obs,oldValue,newValue)->this.scrollX(newValue.doubleValue()));
 		this.layoutYProperty().addListener((obs,oldValue,newValue)->this.scrollY(newValue.doubleValue()));	
+		
 		CopyOfHeroStats heroStats = encoder.getMyGame().getHeroStats();
+		
 		this.linkHP(heroStats.getHPBinding(),encoder.getHPLabel(),encoder.getHPProgressBar());
 		this.linkMP(heroStats.getMPBinding(),encoder.getMPLabel(),encoder.getMPProgressBar());
-		ViewUsefulMethods.linkImage(heroStats.getAtkBinding(), encoder.getAttackImageView());
-		ViewUsefulMethods.linkImage(heroStats.getDefBinding(), encoder.getDefImageView());
-	}
+		
+		
+		ViewUsefulMethods.linkImage(heroStats.getAtkBinding(),heroStats.getAtkImageBinding(),encoder.getImageViewAt(ATTACKINDEX),encoder.getButtonAt(ATTACKINDEX),"Points d'attaque : ",this.tooltip);
+		//ViewUsefulMethods.linkImage(heroStats.getDefBinding(), encoder.getDefImageView());
 	
+	}
+		
 		
 	private void linkHP(IntegerBinding HPproperty,Label HPlabel,ProgressBar HPprogress) {
 		this.maxHP = HPproperty.get();

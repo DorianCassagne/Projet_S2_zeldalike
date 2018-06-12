@@ -4,6 +4,7 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.StringProperty;
+import model.character.enemy.BadMonkey;
 import model.character.hero.CopyOfHeroStats;
 import model.character.hero.Hero;
 import model.gameMap.GameMap;
@@ -31,6 +32,7 @@ public class Game {
 		this.mapChangeProperty = new SimpleBooleanProperty(true);
 		this.messageProperty = messageText;
 		this.changeMap(mapIndex);
+		new BadMonkey(myMap, 20, 11);
 	}
 
 	
@@ -74,7 +76,7 @@ public class Game {
 	//renvoie la liste des movements effectués pendant un tour
 	public Move[] turn() {
 		Move[] listMove = this.myMap.turn();
-		scenario.run();
+		this.scenario.run();
 		return listMove;
 	}
 	
