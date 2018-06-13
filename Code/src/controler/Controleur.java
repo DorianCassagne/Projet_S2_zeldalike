@@ -2,6 +2,7 @@ package controler;
 
 
 import java.net.URL;
+
 import java.util.ResourceBundle;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -16,7 +17,6 @@ import controler.mainGame.GroundControler;
 import controler.mainGame.SceneLoader;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -24,7 +24,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.TilePane;
+import javafx.scene.text.Text;
 import model.Game;
+import model.gameMap.GameMap;
 import model.gameMap.additional.MapReader;
 import model.gameMap.additional.Statics;
 import vue.gameClass.HeroView;
@@ -41,7 +43,7 @@ public class Controleur implements Initializable,SceneLoader{
 	public final static String FXMLLOADMENUPATH = "menu/MenuChargerMap.fxml";
 	public final static String FXMLPAUSEPATH = "menu/MenuDePause.fxml";
 	public final static String FXMLGAMEOVERMENUPATH = "menu/GameOverMenu.fxml";
-	private final static String TILESETPATH = "src/resources/tileset/Image/jeudi7.png";
+	private final static String TILESETPATH = "src/resources/tileset/Image/lundi11.png";
 	
 	@FXML   private AnchorPane mainAnchorPane;
     @FXML   private AnchorPane characterAnchorPane;
@@ -54,7 +56,7 @@ public class Controleur implements Initializable,SceneLoader{
     @FXML   private ImageView attackImageView;
     @FXML   private ImageView defImageView;
     @FXML   private TextArea messageText;
-    
+    @FXML	private Text scoreText;
     @FXML	private Button DefenseButton;
     @FXML   private Button attackButton;
     
@@ -84,7 +86,8 @@ public class Controleur implements Initializable,SceneLoader{
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		this.initMap();
 		this.initControllerData();
-		this.initGameInterpreterAndLoop();	
+		this.initGameInterpreterAndLoop();
+		this.scoreText.textProperty().bind(GameMap.getScoreBinding().asString());
 	}
 	
 	

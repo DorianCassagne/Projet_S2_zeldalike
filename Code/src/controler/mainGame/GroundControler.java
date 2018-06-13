@@ -83,8 +83,6 @@ public class GroundControler implements Initializable {
 			sceneLoader.loadScene(this);
 			this.mainStackPane.getChildren().add(newView);
 			
-			this.mainStackPane.getChildren().add(newView);
-//			this.addToList(parentLoader,sceneLoader,parentNode,newView);
 			
 		} catch (IOException e) {
 			e.printStackTrace();

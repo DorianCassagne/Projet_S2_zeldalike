@@ -29,12 +29,13 @@ public class ViewUsefulMethods {
 	
 	public static void linkImage(IntegerBinding valueProperty,IntegerBinding imageValueProperty, ImageView imageView,Button button,String textPrepend,Tooltip imageTooltip) {
 
-		setImage(imageValueProperty.get(),imageView);
 		button.setTooltip(imageTooltip);
-		imageTooltip.setText("Aucun");
+		setImage(imageValueProperty.get(),imageView);
+		imageTooltip.setText(textPrepend + " " + valueProperty.get() + " pts");
+		
 		valueProperty.addListener(
 				(obs,oldValue,newValue)->{
-					setImage(newValue.intValue(),imageView);
+					setImage(imageValueProperty.get(),imageView);
 					imageTooltip.setText(textPrepend + " " + newValue.intValue() + " pts"); 
 				}
 		);

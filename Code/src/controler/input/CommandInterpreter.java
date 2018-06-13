@@ -2,10 +2,10 @@ package controler.input;
 
 
 import controler.Controleur;
+
 import controler.gameLoop.GameLoop;
 import controler.mainGame.GroundControler;
 import javafx.beans.property.BooleanProperty;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import model.Game;
 import model.character.hero.Hero;
@@ -67,23 +67,31 @@ public class CommandInterpreter {
 			nextMove = Hero.CHANGEATTACK;
 			break;
 		case ESCAPE :
-			if(this.gameLoop.getIsStopped()) {
-				ground.removeLast();
-				this.gameLoop.start();
-			}
-			else {
-				ground.addElement(Controleur.FXMLPAUSEPATH);
-				this.gameLoop.stop();
-			}
+			this.showMenu(ground);
 			break;
 		case SPACE : 
 			this.messagingProperty.set(false);
+			break;
+		case X :
+			nextMove = Hero.TALK;
 			break;
 		default :
 			System.out.println("Unknown key");
 		}
 		this.myGame.communiquerMovement(nextMove);
 
+
+	}
+	
+	private void showMenu(GroundControler ground) {
+		if(this.gameLoop.getIsStopped()) {
+			ground.removeLast();
+			this.gameLoop.start();
+		}
+		else {
+			ground.addElement(Controleur.FXMLPAUSEPATH);
+			this.gameLoop.stop();
+		}
 
 	}
 }

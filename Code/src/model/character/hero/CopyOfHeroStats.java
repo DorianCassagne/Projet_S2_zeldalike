@@ -18,6 +18,7 @@ public class CopyOfHeroStats {
 			this.hp = hp.add(0);
 			this.def = def.add(0);
 			this.defImage = defImage.add(0);
+			this.defImage.addListener((obs,old,newv)->System.out.println("I chnaged to " + newv));
 			this.atk = atkValue.add(0);
 			this.MP = MP.add(0);
 			this.atkImage = atkImage.add(0);

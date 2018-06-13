@@ -26,6 +26,7 @@ public class Hero extends GameHero{
 	public static final char ATTACKDOWN = '2' ;
 	public static final char ATTACKLEFT = '4' ;
 	public static final char CHANGEATTACK = 'c';
+	public static final char TALK = 'x';
 
 	
 	public Hero(GameMap map,int startRow,int startColumn) {
@@ -88,7 +89,8 @@ public class Hero extends GameHero{
 			this.setWait(1);
 			//this.changeAttack();
 			break;
-			
+		case TALK : 
+			this.talk();
 		default : 
 			break;
 		}
@@ -103,6 +105,12 @@ public class Hero extends GameHero{
 		
 		return myMove;
 
+	}
+	
+	private void talk() {
+		int row = this.getRow() + this.direction.getVerticalIncrement();
+		int column = this.getColumn() + this.direction.getHorizontalIncrement();
+		this.getMyMap().talkTo(row,column);
 	}
 	
 	private void updateReference() {

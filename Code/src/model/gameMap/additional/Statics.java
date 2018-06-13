@@ -63,4 +63,8 @@ public class Statics {
 		return backValues;
 	}
 
+	public static boolean isInMap(int cellId) {
+		return cellId >= 0 && cellId < MAPFULLSIZE;
+	}
+
 }

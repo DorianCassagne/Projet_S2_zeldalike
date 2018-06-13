@@ -41,20 +41,23 @@ public class HeroStats {
 	
 	private void initAttack() {
 		this.attackList = new ArrayList<Launcher>();
-		this.setAttackIndex(0);
 		this.attackList.add(new DefaultAttackLauncher(GameHero.DEFAULTATKITEM));
+
+		this.attackValue = new SimpleIntegerProperty(GameHero.DEFAULTATK);
+		this.attackItemImage = new SimpleIntegerProperty();
+		
+		updateAttackImage();
+
 	}
 
 	private  void initialiseProperties() {
 
 		this.hp = new SimpleIntegerProperty(GameHero.DEFAULTHP);
 		this.def = new SimpleIntegerProperty(GameHero.DEFAULTDEF);
-		this.attackItemImage = new SimpleIntegerProperty(0);
 		this.mp = new SimpleIntegerProperty(GameHero.DEFAULTMP);
-		this.attackValue = new SimpleIntegerProperty(GameHero.DEFAULTATK);
 		this.maxHP = new SimpleIntegerProperty(GameHero.DEFAULTHP);
 		this.maxMP = new SimpleIntegerProperty(GameHero.DEFAULTMP);
-		this.defImage = new SimpleIntegerProperty(0);
+		this.defImage = new SimpleIntegerProperty(824);
 		
 	}
 
@@ -92,6 +95,7 @@ public class HeroStats {
 	
 	public void setBasicDef(DefenseItemEnum defenseItem) {
 		if(defenseItem != null) {
+			this.defImage.set(defenseItem.getImage());
 			this.def.set(defenseItem.getMoreDef() + GameHero.DEFAULTDEF);
 		}
 	}

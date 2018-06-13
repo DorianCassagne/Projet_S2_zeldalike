@@ -42,6 +42,7 @@ public enum AttackItemEnum implements ItemEnum{
 
 	@Override
 	public int getImage() {
+		System.out.println("Asked for image and answered " + this.ordinal() + Item.ATTACKITEMSTARTINDEX);
 		return this.ordinal() + Item.ATTACKITEMSTARTINDEX;
 	}
 	

@@ -37,6 +37,7 @@ public class Main extends Application {
         try {
 			root = loader.load();
 		} catch (IOException e) {
+			e.printStackTrace();
 			throw new Error("ERROR LOADING JAVAFX");
 		} 
         

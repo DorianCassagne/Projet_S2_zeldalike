@@ -9,6 +9,7 @@ import model.character.GameCharacter;
 import model.character.attack.Attack;
 import model.character.enemy.Enemy;
 import model.character.item.Item;
+import model.character.npc.TalkingNPC;
 import model.gameMap.additional.MapReader;
 import model.gameMap.additional.NewMovable;
 import model.gameMap.additional.Statics;
@@ -170,6 +171,16 @@ public class GameMap {
 		}
 	}	
 	
+	public void addNPC(TalkingNPC npc,int row,int column) {
+		if(Statics.isInMap(row,column)) {
+			int cellId = Statics.convertToCellId(row, column);
+			this.cells[cellId].setNPC(npc);
+		}
+		else {
+			throw new IllegalArgumentException("ENDCELL NOT FOUND");
+		}
+	}
+	
 	public Integer[] getLayerForCell(int cellId) {
 		return this.cells[cellId].getCellBackgroundLayer();
 	}	
@@ -213,18 +224,25 @@ public class GameMap {
 	}
 	
 	public Move[] turn() {
-		this.clearAttacks();
 		return this.action.turn();
 	}
 	
-	private void clearAttacks() {
-		for(Cell cell : cells) {
-			cell.clearAttacks();
-		}
+	public void clearAttack(int row,int column,Attack attackToClear) {
+		if(Statics.isInMap(row, column))
+			this.cells[Statics.convertToCellId(row, column)].clearAttack(attackToClear);
 	}
 	
 	public int[] getRemovedCharacter() {
 		return this.action.getRemovedCharacter();
 	}
+
+	public void talkTo(int row, int column) {
+		if(Statics.isInMap(row, column)) {
+			this.cells[Statics.convertToCellId(row, column)].talk();
+		}	
+	}
+	
+	
+	
 }
 

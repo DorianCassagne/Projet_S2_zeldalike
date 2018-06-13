@@ -64,7 +64,7 @@ public class HeroView extends MovableView{
 		
 		
 		ViewUsefulMethods.linkImage(heroStats.getAtkBinding(),heroStats.getAtkImageBinding(),encoder.getImageViewAt(ATTACKINDEX),encoder.getButtonAt(ATTACKINDEX),"Points d'attaque : ",this.attackTooltip);
-		ViewUsefulMethods.linkImage(heroStats.getDefBinding(),heroStats.getAtkBinding(),encoder.getImageViewAt(DEFENSEINDEX),encoder.getButtonAt(DEFENSEINDEX),"Points de défense : ",this.defenseTooltip);
+		ViewUsefulMethods.linkImage(heroStats.getDefBinding(),heroStats.getDefImage(),encoder.getImageViewAt(DEFENSEINDEX),encoder.getButtonAt(DEFENSEINDEX),"Points de défense : ",this.defenseTooltip);
 	
 	}
 		
