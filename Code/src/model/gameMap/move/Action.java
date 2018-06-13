@@ -1,6 +1,7 @@
 package model.gameMap.move;
 
 import java.util.ArrayList;
+
 import java.util.HashMap;
 import model.character.Movable;
 import model.character.PendingMovable;
@@ -10,11 +11,13 @@ import model.gameMap.additional.Statics;
 
 public class Action {
 	private static int movableId;
+	
 	private HashMap<Movable,Integer> movableList;
 	private ArrayList<NewMovable> addedCharacter;//Caract�res qui sont ajout�s r�cement mais pas encore r�cup�r�s
 	private ArrayList<Integer> removedMovable;//Caract�re qui seront retir� au prochain tour
 	private ArrayList<PendingMovable> pendingMovable;//Caract�res qui vont �tre ajout� au prochain tour
 	private ArrayList<Move> pendingMoves;
+	
 	
 	static {
 		movableId = 0;

@@ -1,12 +1,13 @@
 package model.scenario;
 
 import java.io.BufferedReader;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.function.Supplier;
 
 import javafx.beans.property.StringProperty;
-import model.character.enemy.BlueFairy;
+import model.character.enemy.Enemy;
 import model.gameMap.GameMap;
 import model.scenario.action.Action;
 import model.scenario.action.ActionData;
@@ -24,12 +25,12 @@ public class Scenario {
 	
 	private int counter;
 	private ArrayList<Evenement> events ;
-	private HashMap<String,BlueFairy> elementsList;
+	private HashMap<String,Enemy> elementsList;
 	private ActionData data;
 	private ArrayList<Integer> finishedEvents;
 	
 	public Scenario(String filename,StringProperty textMessages,GameMap map) {
-		this.elementsList = new HashMap<String,BlueFairy>();
+		this.elementsList = new HashMap<String,Enemy>();
 		this.finishedEvents = new ArrayList<Integer>();
 		this.data = new ActionData(map,textMessages,elementsList,finishedEvents); 
 		this.events = new ArrayList<Evenement>();

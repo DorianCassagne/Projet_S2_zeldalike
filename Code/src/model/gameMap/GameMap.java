@@ -1,10 +1,13 @@
 package model.gameMap;
 
 
+import javafx.beans.binding.IntegerBinding;
+
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import model.character.GameCharacter;
 import model.character.attack.Attack;
+import model.character.enemy.Enemy;
 import model.character.item.Item;
 import model.gameMap.additional.MapReader;
 import model.gameMap.additional.NewMovable;
@@ -17,10 +20,31 @@ import resources.additionalClass.UsefulMethods;
 
 public class GameMap {	
 	
+	
+	private static IntegerProperty realScore;
+	private static IntegerBinding safeScore;
+
 	private final IntegerProperty changeProperty;
 	private final IntegerProperty safeChangeProperty;
 	private Cell[] cells ;
 	private Action action;
+	
+	
+	static {
+		realScore = new SimpleIntegerProperty(0);
+		safeScore = realScore.add(0);
+	}
+	
+	public static IntegerBinding getScoreBinding() {
+		return safeScore;
+	}
+	
+	private static void addScore(Enemy enemy) {
+		if(enemy != null )
+			realScore.set(realScore.get() + enemy.getScore());
+	}
+	
+
 	
 	//Cr�e une map en se r�f�rant � un fichier csv qui initilialise les fond des cases
 	//Dans ce cas l� il n'est autoris� qu'un layer, d�clenche une exception si le fichier n'est pas valid
@@ -172,10 +196,11 @@ public class GameMap {
 	/*
 	 * Retire un caractère de la liste courante dans la map
 	 */
-	public void delCharacter(GameCharacter character,int row,int column) {
+	public void delEnemy(Enemy character,int row,int column) {
 		if(this.action.deleteMovableFromList(character)) {
 			int cellId = Statics.convertToCellId(row, column);
 			this.cells[cellId].removeMovable();
+			addScore(character);
 		}
 	}
 	

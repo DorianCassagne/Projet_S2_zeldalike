@@ -2,16 +2,15 @@ package model.character.enemy.boss;
 
 
 import java.util.Random;
-
-import model.character.GameCharacter;
 import model.character.attack.Attack;
 import model.character.attack.statics.boss.Missile;
 import model.character.attack.statics.boss.NyanAttHori;
+import model.character.enemy.Enemy;
 import model.gameMap.GameMap;
 import model.gameMap.move.Move;
 import model.gameMap.move.Movement;
 
-public class NyaBlock  extends GameCharacter{
+public class NyaBlock  extends Enemy{
 	private final static int DEFAULTCYCLE = 3;
 	private final static double DEFAULTCOEF = 1;
 	private final static int DEFAULTIMG = 48;
@@ -19,8 +18,9 @@ public class NyaBlock  extends GameCharacter{
 	private int img;
 	private Random ran = new Random();
 	private boolean mov;
-	public NyaBlock(GameMap map, int startRow, int startColumn,Movement mov) {
-		super(map, startRow, startColumn, DEFAULTCYCLE, DEFAULTCOEF, DEFAULTIMG+mov.getIndex());
+	
+	public NyaBlock(GameMap map, int startRow, int startColumn,Movement mov,int score) {
+		super(map, startRow, startColumn, DEFAULTCYCLE, DEFAULTCOEF, DEFAULTIMG+mov.getIndex(),score);
 		img=mov.getIndex()+1;
 		att=false;
 		this.mov=mov==Movement.LEFT;
@@ -77,6 +77,11 @@ public class NyaBlock  extends GameCharacter{
 		}
 			
 		return null;
+	}
+
+	@Override
+	public int getHP() {
+		return Integer.MAX_VALUE;
 	}
 
 	

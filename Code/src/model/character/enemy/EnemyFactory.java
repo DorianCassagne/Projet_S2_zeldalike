@@ -1,5 +1,7 @@
 package model.character.enemy;
 
+import model.character.enemy.normal.BadMonkey;
+import model.character.enemy.normal.BlueFairy;
 import model.gameMap.GameMap;
 
 public class EnemyFactory {

@@ -86,6 +86,7 @@ public abstract class GameHero extends GameCharacter {
 	public CopyOfHeroStats getHeroStats() {
 		return this.heroStats.getHeroStats();
 	}
-
+	
+	
 	
 }

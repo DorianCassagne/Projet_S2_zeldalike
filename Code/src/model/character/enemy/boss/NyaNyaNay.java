@@ -22,6 +22,7 @@ public class NyaNyaNay  extends NyaSlave {
 	private final static int DEFALTIMG=64;
 	private final static int DEFAULTCYCLE=4;
 	//private final static int COEF=2.0;
+	private final static int DEFAULTSCORE = 350;
 	private static BooleanProperty dead=new SimpleBooleanProperty(false);
 	private static IntegerProperty def =new SimpleIntegerProperty(10);
 	private static IntegerProperty hp=new SimpleIntegerProperty(200);
@@ -35,8 +36,8 @@ public class NyaNyaNay  extends NyaSlave {
 	private boolean att;
 	private int positionLeft;
 	public NyaNyaNay(GameMap map, int startRow, int startColumn, int sliderSize) {
-		super(map, startRow, startColumn, DEFAULTCYCLE, COEF, DEFALTIMG, hp, def, dead, DEFAULTCYCLE);
-		this.slave1= new NyaSlave(map, startRow, startColumn+1, 1, COEF,DEFALTIMG+1, hp, def, dead, DEFAULTCYCLE);
+		super(map, startRow, startColumn, DEFAULTCYCLE, COEF, DEFALTIMG, hp, def, dead, DEFAULTCYCLE,DEFAULTSCORE);
+		this.slave1= new NyaSlave(map, startRow, startColumn+1, 1, COEF,DEFALTIMG+1, hp, def, dead, DEFAULTCYCLE,DEFAULTSCORE);
 		setWait(200);
 		this.maxPos=(sliderSize*2)+1;
 		positionLeft= startColumn-sliderSize;

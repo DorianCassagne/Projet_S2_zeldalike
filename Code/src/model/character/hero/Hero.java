@@ -145,9 +145,15 @@ public class Hero extends GameHero{
 		if(mapChanger == null)
 			throw new IllegalArgumentException("MAPCHANGER MUST NOT BE NULL");
 		this.mapProperty.set(mapChanger.getMapIndex());
-		System.out.println("Changed" + this.mapProperty.get());
 	}
 
+	@Override
+	protected void removeCharacter() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
 
 
 	

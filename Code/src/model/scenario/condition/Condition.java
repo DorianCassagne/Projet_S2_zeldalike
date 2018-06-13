@@ -85,7 +85,7 @@ public class Condition {
 		Supplier<Boolean> supplier = ()->{
 			boolean isGreater = false;
 			try {
-				isGreater = actionData.getElementsList().get(this.id).getHp() <= this.numberValue;
+				isGreater = actionData.getElementsList().get(this.id).getHP() <= this.numberValue;
 			}catch(NullPointerException e) {
 				
 			}

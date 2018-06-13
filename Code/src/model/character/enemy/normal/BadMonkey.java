@@ -1,4 +1,4 @@
-package model.character.enemy;
+package model.character.enemy.normal;
 
 import model.PathFinder.BFS1;
 import model.character.GameCharacter;
@@ -14,10 +14,12 @@ public class BadMonkey extends BlueFairy{
 	private final static int DEFAULTDEF = 10;
 	private final static int DEFAULTCYCLE = 40;
 	private final static int DEFAULTIMAGE = 16;
+	private final static int DEFAULTDMG = 90;
+	private final static int DEFAULTSCORE = 100;
 	
 	
 	public BadMonkey(GameMap map, int startRow, int startColumn) {
-		super(map, startRow, startColumn,DEFAULTCYCLE,DEFAULTIMAGE,DEFAULTHP, DEFAULTDEF,90);
+		super(map, startRow, startColumn,DEFAULTCYCLE,DEFAULTIMAGE,DEFAULTHP, DEFAULTDEF,DEFAULTDMG,DEFAULTSCORE);
 	}
 
 	@Override
