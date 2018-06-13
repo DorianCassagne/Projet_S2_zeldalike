@@ -1,8 +1,11 @@
-package controler.withGame;
+package controler.input;
 
 
+import controler.Controleur;
 import controler.gameLoop.GameLoop;
+import controler.mainGame.GroundControler;
 import javafx.beans.property.BooleanProperty;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import model.Game;
 import model.character.hero.Hero;
@@ -11,16 +14,16 @@ public class CommandInterpreter {
 	private Game myGame;
 	private GameLoop gameLoop;
 	private BooleanProperty messagingProperty;
-	
+
 	public CommandInterpreter(Game game,GameLoop gameLoop,BooleanProperty waitingForAnswer)  {
 		this.myGame = game;
 		this.gameLoop = gameLoop;
 		this.initMessageProperty(waitingForAnswer);
-		
+
 	}
-	
+
 	private void initMessageProperty(BooleanProperty waitingForMessage) {
-		
+
 		this.messagingProperty = waitingForMessage;
 		this.messagingProperty.addListener((obs,oldValue,newValue)->{
 			if(newValue) {
@@ -31,41 +34,49 @@ public class CommandInterpreter {
 		});
 
 	}
-	
-	public void handleKey(KeyEvent event) {
+
+	public void handleKey(KeyEvent event,GroundControler ground) {
 		char nextMove = Hero.STAY;
+		
 		switch(event.getCode()) {
-		case UP : 
-			nextMove = Hero.MOVEUP;
-			break;
-		case DOWN:
-			nextMove = Hero.MOVEDOWN;
-			break;
-		case LEFT:
-			nextMove = Hero.MOVELEFT;
-			break;
-		case RIGHT: 
-			nextMove = Hero.MOVERIGHT;
-			break;
-		case Z :
+		case UP: 
 			nextMove = Hero.ATTACKUP;
 			break;
-		case S :
+		case DOWN:
 			nextMove = Hero.ATTACKDOWN ;
 			break;
-		case D :
-			nextMove = Hero.ATTACKRIGHT;
-			break;
-		case Q : 
+		case LEFT:
 			nextMove = Hero.ATTACKLEFT;
 			break;
-		case B :
-			this.gameLoop.stop();
+		case RIGHT: 
+			nextMove = Hero.ATTACKRIGHT;
+			break;
+		case Z :
+			nextMove = Hero.MOVEUP; 
+			break;
+		case S :
+			nextMove = Hero.MOVEDOWN; 
+			break;
+		case D :
+			nextMove = Hero.MOVERIGHT;
+			break;
+		case Q : 
+			nextMove = Hero.MOVELEFT;
 			break;
 		case E : 
 			nextMove = Hero.CHANGEATTACK;
 			break;
-		case T : 
+		case ESCAPE :
+			if(this.gameLoop.getIsStopped()) {
+				ground.removeLast();
+				this.gameLoop.start();
+			}
+			else {
+				ground.addElement(Controleur.FXMLPAUSEPATH);
+				this.gameLoop.stop();
+			}
+			break;
+		case SPACE : 
 			this.messagingProperty.set(false);
 			break;
 		default :

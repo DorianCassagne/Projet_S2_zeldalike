@@ -19,7 +19,7 @@
                      </VBox.margin>
                   </Button>
                   <Button fx:id="NewGameButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" text="Nouvelle Partie" />
-                  <Button fx:id="LoadButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" text="Charger une partie" />
+                  <Button fx:id="LoadMenuButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" text="Charger une partie" />
                   <Button fx:id="LeaveButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" text="Quitter" />
                </children>
             </VBox>

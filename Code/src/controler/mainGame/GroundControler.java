@@ -2,13 +2,19 @@ package controler.mainGame;
 
 import java.io.IOException;
 
+
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Stack;
+import java.util.function.Supplier;
+
 import app.Main;
-import controler.menu.Accueil1Controler;
+import controler.Controleur;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
@@ -35,35 +41,81 @@ public class GroundControler implements Initializable {
 	public final static String FXMLPATH = "/vue/template/Ground.fxml";
 	public final static int DEFAULTWIDTH = 960;
 	public final static int DEFAULTHEIGHT = 640;
-	
 	//Le stackPane qui contiendra l'ensemble des éléments ajouté à la fenêtre.
+	
 	@FXML private StackPane mainStackPane; 
 	
+	private Stack<Node[]> anchorStack; 
+	private Supplier<Void> gameLoopStart;
 	private Scene scene;
 	
-	public void changeView(String ... viewNames){
-		this.mainStackPane.getChildren().clear();
-		for(String viewName : viewNames) {
-			this.addElements(viewName);
-		}
+	public GroundControler() {
+		this.anchorStack = new Stack<Node[]>();
 	}
 	
-	private void addElements(String viewName) {
+	
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		this.changeView(Controleur.FXMLMAINMENUPATH);
+	}
+
+	
+	public void changeView(String  viewName ){
+		ObservableList<Node> children = this.mainStackPane.getChildren();
+		Node[] nodeList = new Node[children.size()];
+		nodeList = children.toArray(nodeList);
+		this.anchorStack.push(nodeList);
+
+		children.clear();
+		addElement(viewName);
+	}
+	
+	
+	public void addElement(String viewName) {
 		try {
+			
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(Main.class.getResource(VIEWPATH + viewName));
 			AnchorPane newView = loader.load();
 			newView.setPrefHeight(DEFAULTHEIGHT);
 			newView.setPrefWidth(DEFAULTWIDTH);
+			
 			SceneLoader sceneLoader = loader.getController();
 			sceneLoader.loadScene(this);
-			this.mainStackPane.getChildren().add(0,newView);
+			this.mainStackPane.getChildren().add(newView);
+			
+			this.mainStackPane.getChildren().add(newView);
+//			this.addToList(parentLoader,sceneLoader,parentNode,newView);
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
 	}
+		
 	
+
+	private boolean loadNodeList(Node[] currentList) {
+		boolean loaded = currentList != null;
+		if(currentList != null) {
+			this.mainStackPane.getChildren().setAll(currentList);
+		}
+		return loaded;
+	}
+	
+	public boolean loadParent() {
+		Node[] currentList = this.anchorStack.pop();
+		return this.loadNodeList(currentList);
+	}
+	
+	public void removeLast() {
+		int lastIndex = this.mainStackPane.getChildren().size() - 1;
+		if(lastIndex > 0)
+			this.mainStackPane.getChildren().remove(lastIndex);
+	}
+	
+	
+
+
 	
 	public void setScene(Scene scene) {
 		if(scene != null)
@@ -75,10 +127,19 @@ public class GroundControler implements Initializable {
 	public Scene getScene() {
 		return this.scene;
 	}
-	
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		this.changeView(Accueil1Controler.FXMLPATH);
+
+	public void setGameLoopStart(Supplier<Void> gameLoopStart) {
+		if(gameLoopStart != null) {
+			this.gameLoopStart = gameLoopStart;
+		}
 	}
+	
+	public void startGameLoop() {
+		if(this.gameLoopStart != null)
+			this.gameLoopStart.get();
+	}
+	
+	
 	
 	
 	

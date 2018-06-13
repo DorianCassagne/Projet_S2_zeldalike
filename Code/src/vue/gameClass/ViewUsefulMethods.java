@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 public class ViewUsefulMethods {
 	public static void linkPropertyToLabelAndProgress(IntegerBinding property,IntegerBinding propertyMax,Label label,ProgressBar progress) {
 		label.setText(property.getValue().toString());
+
 		property.addListener(
 				(obs,oldValue,newValue)->{
 					label.setText(newValue.toString());
@@ -23,6 +24,7 @@ public class ViewUsefulMethods {
 					progress.setProgress(property.get()/newValue.doubleValue());
 				}
 		);
+		
 	}
 	
 	public static void linkImage(IntegerBinding valueProperty,IntegerBinding imageValueProperty, ImageView imageView,Button button,String textPrepend,Tooltip imageTooltip) {

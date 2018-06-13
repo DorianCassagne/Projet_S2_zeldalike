@@ -4,14 +4,16 @@ package controler;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.function.Function;
+import java.util.function.Supplier;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import controler.conversion.ConversionAndStatics;
 import controler.gameLoop.ControlerEncoder;
 import controler.gameLoop.GameLoop;
+import controler.input.CommandInterpreter;
 import controler.mainGame.GroundControler;
 import controler.mainGame.SceneLoader;
-import controler.withGame.CommandInterpreter;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
@@ -33,7 +35,12 @@ import vue.other.TexturePack;
 public class Controleur implements Initializable,SceneLoader{
 	
 	public final static TexturePack TEXTURE ;
-	public final static String FXMLPATH = "template/GuiView.fxml";
+	public final static String FXMLGAMEPATH = "template/GuiView.fxml";
+	public final static String FXMLMAINMENUPATH = "menu/MenuAccueil.fxml";
+	public final static String FXMLMAINMENU2PATH = "menu/MenuAccueil2.fxml";
+	public final static String FXMLLOADMENUPATH = "menu/MenuChargerMap.fxml";
+	public final static String FXMLPAUSEPATH = "menu/MenuDePause.fxml";
+	public final static String FXMLGAMEOVERMENUPATH = "menu/GameOverMenu.fxml";
 	private final static String TILESETPATH = "src/resources/tileset/Image/jeudi7.png";
 	
 	@FXML   private AnchorPane mainAnchorPane;
@@ -58,6 +65,7 @@ public class Controleur implements Initializable,SceneLoader{
 	private StringProperty messageZone;
 	private ControlerEncoder controllerData;
 	private GroundControler sceneChanger;
+	
 	
 	static {
 		TEXTURE = new TexturePack(TILESETPATH,Statics.LINELENGTH, ConversionAndStatics.TILEDIMENSION);
@@ -84,11 +92,24 @@ public class Controleur implements Initializable,SceneLoader{
 	 * Public methods
 	 */
 
-	public void startScene(Scene scene) {
-		scene.setOnKeyPressed(e->interpreter.handleKey(e));
+	@Override
+	public void loadScene(GroundControler groundControler) {
+		if(groundControler != null) {
+			this.sceneChanger = groundControler;
+			Supplier<Void> resumeGameLoop = ()->{
+				this.gameLoop.start();
+				return null;
+			};
+			this.controllerData.setGround(groundControler);
+			this.sceneChanger.getScene().setOnKeyPressed(e->interpreter.handleKey(e,groundControler));
+			this.sceneChanger.setGameLoopStart(resumeGameLoop);
+		}
 	}
 	
-
+	public void resume() {
+		this.gameLoop.start();
+	}
+	
 	/*
 	 * Private methods
 	 */
@@ -142,17 +163,6 @@ public class Controleur implements Initializable,SceneLoader{
 			else
 				i++;
 		}
-	}
-
-	@Override
-	public void loadScene(GroundControler groundControler) {
-		this.sceneChanger = groundControler;
-		this.sceneChanger.getScene().setOnKeyPressed(e->interpreter.handleKey(e));
-	}
-
-	
-	
-	
-	
+	}	
 }
  

@@ -1,17 +1,45 @@
 package controler.menu;
 
+import controler.Controleur;
+import controler.mainGame.GroundControler;
+import controler.mainGame.SceneLoader;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 
-public class Accueil2Controler {
+public class Accueil2Controler implements SceneLoader{
 
+
+	
+	private GroundControler ground;
+	
     @FXML
-    private Button ContinueButton;
+    private void newGame(ActionEvent event) {
+    	if(ground != null)
+    		ground.changeView(Controleur.FXMLGAMEPATH);
+    	else
+    		System.exit(1);
+    		
+    }
+    
     @FXML
-    private Button NewGameButton;
+    private void exit(ActionEvent event) {
+    	System.exit(1);
+    }
+    
     @FXML
-    private Button LoadButton;
-    @FXML
-    private Button LeaveButton;
+    private void loadMenuGame(ActionEvent event) {
+    	if(ground != null) {
+    		ground.changeView(Controleur.FXMLLOADMENUPATH);
+    	}
+    	else
+    		System.exit(1);
+    }
+
+	@Override
+	public void loadScene(GroundControler controller) {
+		this.ground = controller;
+	}
+	
+	
 
 }
