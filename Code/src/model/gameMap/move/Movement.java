@@ -15,6 +15,7 @@ public enum Movement {
 	DIAGTL(-Statics.STEP,-Statics.STEP),
 	DIAGDR(Statics.STEP,Statics.STEP),
 	DIAGDL(Statics.STEP,-Statics.STEP);
+	
 	private int verticaly;
 	private int horizontaly;
 	

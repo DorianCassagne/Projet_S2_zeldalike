@@ -22,7 +22,6 @@ public class Move {
 	}
 	
 	
-
 	
 	public void setMovableId(int movableId) {
 		this.movableId = movableId;

@@ -60,13 +60,15 @@ public abstract class Attack extends Movable {
 			column +=  this.direction.getHorizontalIncrement() ;
 			byte playAttack = this.getMyMap().playAttack(this, row, column);
 			this.maxDistance--;
-
+			
 			if(!handleMove(playAttack)) {
 				row = this.getRow();
 				column = this.getColumn();
 				this.isAlive = false;
 			}
 			this.setCellId(row, column);
+			//System.out.println("My row " + this.getRow() + " And column : " + this.getColumn());
+
 			index++;
 		}
 		
@@ -96,9 +98,9 @@ public abstract class Attack extends Movable {
 	public Movement getDirection() {
 		return this.direction;
 	}
-//	protected void setDirection(Movement dir) {
-//		this.direction=dir;
-//	}
+	protected void setDirection(Movement dir) {
+		this.direction=dir;
+	}
 	
 	protected boolean handleMove(byte attackResult) {
 		return attackResult % Cell.NOTWALKABLE != 0;

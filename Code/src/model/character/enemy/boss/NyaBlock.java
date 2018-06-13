@@ -65,7 +65,7 @@ public class NyaBlock  extends GameCharacter{
 	protected Move act() {
 		if (att) {
 			setImage(img);
-			new NyanAttHori(getMyMap(), getRow(), getColumn(), mov);
+			//new NyanAttHori(getMyMap(), getRow(), getColumn(), mov);
 			new Missile(getMyMap(), getRow(), getColumn(), Movement.RIGHT);
 			att = false;
 		}
