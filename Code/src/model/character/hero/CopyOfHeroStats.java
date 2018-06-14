@@ -66,7 +66,4 @@ public class CopyOfHeroStats {
 		return this.maxMp;
 	}
 	
-	public IntegerBinding getDefValue() {
-		return this.defImage;
-	}
 }

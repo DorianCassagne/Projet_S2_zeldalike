@@ -5,6 +5,7 @@ import controler.mainGame.GroundControler;
 import controler.mainGame.SceneLoader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import model.character.GameCharacter;
 
 public class PauseControleur implements SceneLoader{
 
@@ -34,7 +35,7 @@ public class PauseControleur implements SceneLoader{
 
 	@FXML
 	void saveGame(ActionEvent event) {
-		
+		GameCharacter.getHero().getGameStatus().saveState();
 	}
 
 	@Override

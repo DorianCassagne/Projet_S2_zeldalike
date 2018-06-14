@@ -34,7 +34,7 @@ public class Scenario {
 		this.finishedEvents = new ArrayList<Integer>();
 		this.data = new ActionData(map,textMessages,elementsList,finishedEvents); 
 		this.events = new ArrayList<Evenement>();
-		BufferedReader reader = SeparatorFileReader.openTextFile(SCENARIOPATH + filename);
+		BufferedReader reader = SeparatorFileReader.openTextFile(SCENARIOPATH + filename,true);
 		ArrayList<ArrayList<String[]>> scenario = SeparatorFileReader.readFileWithTwoSeparator(reader, EXTERNALSEPARATOR, INTERNALSEPARTOR);
 		this.counter = 0;
 		readScenario(scenario);
