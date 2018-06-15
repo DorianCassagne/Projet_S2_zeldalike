@@ -2,11 +2,10 @@ package model.character.enemy;
 
 import model.PathFinder.BFS1;
 import model.character.GameCharacter;
-import model.character.attack.Attack;
 import model.character.attack.statics.hero.bomb.Bomb;
+import model.character.enemy.normal.Bomber;
 import model.character.enemy.normal.EnemyNormal;
 import model.gameMap.GameMap;
-import model.gameMap.MapEnum;
 import model.gameMap.additional.Statics;
 import model.gameMap.move.Move;
 import model.gameMap.move.Movement;
@@ -60,10 +59,10 @@ public class MonkeyGuard extends EnemyNormal{
 
 		//exmple pour attackmove attention a l'ordre des cases
 		int[]tab= {
-				Statics.convertToCellId(row+1,column),
-				Statics.convertToCellId(row,column-1),
-				Statics.convertToCellId(row-1,column),
-				Statics.convertToCellId(row,column+1)
+				Statics.convertToCellId(row+2,column),
+				Statics.convertToCellId(row,column-2),
+				Statics.convertToCellId(row-2,column),
+				Statics.convertToCellId(row,column+2)
 		};
 
 		int[] tab2 = {
@@ -121,6 +120,10 @@ public class MonkeyGuard extends EnemyNormal{
 	@Override
 	public void launchAttack(Movement movement) {
 		new Bomb(getMyMap(),this.getRow(),this.getColumn(),movement,DEFAULTATK);
+		int row = this.getRow() + movement.getVerticalIncrement();
+		int column = this.getColumn() + movement.getHorizontalIncrement();
+		new Bomber(getMyMap(), row, column);
+		
 	}
 
 

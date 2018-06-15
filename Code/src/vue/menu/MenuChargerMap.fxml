@@ -10,11 +10,8 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<<<<<<< HEAD
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: 690f0f;" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controler.menu.ChargerMapController">
-=======
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: 690f0f;" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controler.menu.ChargerMapController">
->>>>>>> Omar
+
    <children>
       <VBox alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -64,11 +61,7 @@
                   </VBox>
                </children>
             </HBox>
-<<<<<<< HEAD
-            <Button fx:id="PreviousButton" mnemonicParsing="false" onAction="#previousScene" prefHeight="30.0" prefWidth="200.0" text="Retour en arrière">
-=======
             <Button  mnemonicParsing="false" onAction="#previousScene" prefHeight="30.0" prefWidth="200.0" text="Retour en arrière">
->>>>>>> Omar
                <VBox.margin>
                   <Insets top="20.0" />
                </VBox.margin>
