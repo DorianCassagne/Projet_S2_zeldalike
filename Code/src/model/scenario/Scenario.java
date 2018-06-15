@@ -106,9 +106,10 @@ public class Scenario {
 			while(i < events.size()) {
 				currentEvent = events.get(i);  
 				if(currentEvent.evaluate()) {
-					System.out.println("The current event id is : "+i);
+
 					this.events.remove(i);
 					this.finishedEvents.add(currentEvent.getId());
+				
 				}
 				i++;
 			}

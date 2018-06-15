@@ -45,7 +45,7 @@ public final class BFS1 {
 			nbCycle--;
 			if (last.isEmpty())
 				break;
-		}while (find==null && !last.isEmpty()&& nbCycle !=0);
+		}while (find==null && !last.isEmpty() && nbCycle != 0);
 		if (find==null) {
 			//System.out.println("no way to join him");
 			return cellStart;

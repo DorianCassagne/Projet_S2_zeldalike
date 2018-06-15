@@ -19,6 +19,7 @@ public class StatsLoader {
 	//Pour recharger à chaque fois .
 	public static ObservableList<GameStatus> loadState() throws IOException {
 		BufferedReader reader = SeparatorFileReader.openTextFile(FILEPATH,false);
+		
 		ArrayList<String[]> stringList = SeparatorFileReader.readFileWithOneSeparator(reader, GameStatus.SEPARATOR);
 		
 		return createGameStatus(stringList);

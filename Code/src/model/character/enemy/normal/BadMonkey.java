@@ -51,10 +51,9 @@ public class BadMonkey extends BlueFairy{
 			return null;
 		}
 		else {
-	
 			int nextCell= BFS1.simpleMove(this.getMyMap(), 
 					actualCell,
-					tab, true, 0);
+					tab, true, 3);
 			
 			if (actualCell==nextCell) {
 				return null;

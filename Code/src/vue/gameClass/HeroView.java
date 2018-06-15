@@ -32,6 +32,7 @@ public class HeroView extends MovableView{
 		this.scrollX(this.getLayoutX());
 		this.scrollY(this.getLayoutY());
 		
+		
 		this.attackTooltip = new Tooltip();
 		this.defenseTooltip = new Tooltip();
 		
@@ -79,20 +80,32 @@ public class HeroView extends MovableView{
 	
 	
 	private void scrollX(double newValue) {
-		double diff = newValue- this.shownColumn/2;
+		double diff = newValue - this.shownColumn/2;
 		boolean isNotAtLimit = (newValue - (ConversionAndStatics.TILEDIMENSION * MapReader.MAPLENGTH) < -this.shownColumn/2);
-		if(diff > 0 && isNotAtLimit) {
-			this.myAnchorPane.setTranslateX(-diff);
+		
+		if(diff < 0) {
+			diff = 0;
 		}
+		else if(!isNotAtLimit) {
+			diff = ConversionAndStatics.TILEDIMENSION * MapReader.MAPLENGTH - this.shownColumn;
+		}
+		
+		this.myAnchorPane.setTranslateX(-diff);
+
+		
 	}
 	
 	private void scrollY(double newValue) {
 		double diff = newValue - this.shownRow/2;
 		boolean isNotAtLimit = (newValue - (ConversionAndStatics.TILEDIMENSION * MapReader.MAPLENGTH) < -this.shownRow/2);
 		
-		if(diff > 0 && isNotAtLimit) {
-			this.myAnchorPane.setTranslateY(-diff);
-		}
+		if(diff < 0)
+			diff = 0;
+		
+		else if(!isNotAtLimit)
+			diff = ConversionAndStatics.TILEDIMENSION * MapReader.MAPLENGTH - this.shownRow ;
+		
+		this.myAnchorPane.setLayoutY(-diff);
 
 	}
 }

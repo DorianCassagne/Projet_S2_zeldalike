@@ -105,9 +105,9 @@ public class GameMap {
 		return added;
 	}
 	
-	public void clearBackgroundConstraint(int cellId,model.scenario.action.Action action) {
+	public void clearBackgroundConstraint(int cellId,model.scenario.action.Action action,int replace) {
 		if(action != null && action.isActive())
-			this.cells[cellId].setToWalkable();
+			this.cells[cellId].setToWalkable(replace);
 	}
 	
 	public boolean containsItemAt(int cellId) {
@@ -142,6 +142,7 @@ public class GameMap {
 
 		if(Statics.isInMap(row,column)) {
 			int cellId = Statics.convertToCellId(row, column);
+
 			correctlyPlaced = this.cells[cellId].addMovable(movable);
 
 			if(correctlyPlaced) {

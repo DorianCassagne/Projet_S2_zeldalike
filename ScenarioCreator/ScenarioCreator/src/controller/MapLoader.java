@@ -1,20 +1,11 @@
 package controller;
 
 import java.net.URL;
-
-
-
-
-
 import java.util.ResourceBundle;
 import java.util.function.Function;
-
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
@@ -98,8 +89,9 @@ public class MapLoader implements Initializable{
 	}
 	
 	private void setCurrentCell(MouseEvent event) {
-		Double row = event.getX() / MapLoader.TILEPREFDIMENSION;
-		Double column = event.getY() / MapLoader.TILEPREFDIMENSION;
+		Double row = event.getY() / MapLoader.TILEPREFDIMENSION;
+		Double column = event.getX() / MapLoader.TILEPREFDIMENSION;
+		System.out.printf("Mon x : %f and y : %f \n",row,column);
 		this.cellId = Conversion.convertToCellId(row.intValue(), column.intValue());
 		this.stage.close();
 	}

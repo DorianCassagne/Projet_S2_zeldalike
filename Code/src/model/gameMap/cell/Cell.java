@@ -44,8 +44,8 @@ public class Cell {
 		this.gameCharacter=null;
 	}
 	
-	public void setToWalkable() {
-		this.background.setToWalkable();
+	public void setToWalkable(int replace) {
+		this.background.setToWalkable(replace);
 		this.cellNPC = null;
 		this.triggerChange();
 	}

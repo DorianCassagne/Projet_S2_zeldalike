@@ -1,9 +1,8 @@
 package model;
 
-import java.io.FileWriter;
 
 
-import java.io.IOException;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javafx.beans.property.SimpleStringProperty;
@@ -14,6 +13,7 @@ import resources.additionalClass.SeparatorFileWriter;
 public class GameStatus {
 
 	static final String SEPARATOR = "-";
+	static final String ENDSEPARATOR = "\n";
     private final static SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
     private final static int STATUSLENGTH = 11;
    
@@ -54,6 +54,7 @@ public class GameStatus {
 
 		if(status.length == STATUSLENGTH) {
 			try {
+			
 				this.hp = Integer.parseInt(status[0]);
 				this.maxHP = Integer.parseInt(status[1]);
 				this.mp = Integer.parseInt(status[2]);
@@ -65,8 +66,11 @@ public class GameStatus {
 				this.scenarioLine = Integer.parseInt(status[8]);
 				this.idMap = Integer.parseInt(status[9]);
 				this.date = new SimpleStringProperty(status[10]);
+		
 			}catch(NumberFormatException e) {
+
 				throw new IllegalArgumentException("INVALID STATE");
+			
 			}
 		}
 		
@@ -77,6 +81,7 @@ public class GameStatus {
 	public String toString() {
 		
 		String encode = this.hp + SEPARATOR;
+		
 		encode += this.maxHP + SEPARATOR;
 		encode += this.mp + SEPARATOR;
 		encode += this.maxMp + SEPARATOR;
@@ -86,7 +91,8 @@ public class GameStatus {
 		encode += this.column + SEPARATOR;
 		encode += this.scenarioLine + SEPARATOR ;
 		encode += this.idMap + SEPARATOR;
-		encode += this.date.get();
+		encode += this.date.get() + ENDSEPARATOR ;
+
 		return encode;
 		
 	}

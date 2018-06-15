@@ -1,5 +1,4 @@
-N->S-M- -IL est un message
-N->C-M-BADMONKEY-ts-1420
-N->C-N-11-BONJOUR CE CHEMIN EST BLOQUÉ-1420
-H:1421->C-M-BADMONKEY-omar-1430->S-M- -Un monstre vient d'apparaitre
-O:A: :2-AND-M:omar: :50->S-M- -Le monstre est presque mort
+//
+N:8: :->C-M-BADMONKEY-m1-3627->C-M-BADMONKEY-m2-3171->C-M-BADMONKEY-m3-3030->C-M-BADMONKEY-m4-3799
+//Ouvrir les portes
+M:m1: :-AND-M:m2: :-OR-H:3031: :->S-m--Vous avez réussi à ouvrir les portes-3239->D-W--Vous avez réussi à ouvrir les portes-3040->D-W--Vous avez réussi à ouvrir les portes-3039

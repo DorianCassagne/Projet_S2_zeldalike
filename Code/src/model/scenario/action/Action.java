@@ -123,7 +123,11 @@ public class Action {
 			break;
 		case WALKABLE : 
 			supplier = () -> {
-				actionData.getMap().clearBackgroundConstraint(this.cellId,this);
+				try {
+					actionData.getMap().clearBackgroundConstraint(this.cellId,this,Integer.parseInt(this.info));
+				}catch(NumberFormatException e) {
+					System.err.println("ERROR ON ESTABLISH DROP() OF WALKABLE"); 
+				}
 				return true;
 			};
 			break;

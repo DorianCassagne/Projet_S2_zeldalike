@@ -14,7 +14,7 @@ public class SeparatorFileReader {
 	public static BufferedReader openTextFile(String path,boolean localFile)  {
 		try {
 			File file;
-			
+			System.out.println(path);
 			if(localFile )
 				file = new File(SeparatorFileReader.class.getResource(path).toURI().toURL().getPath());
 			else

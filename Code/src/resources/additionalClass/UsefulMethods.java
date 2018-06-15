@@ -28,4 +28,14 @@ public class UsefulMethods {
 		copy.bind(source);
 		return copy;
 	}
+	
+	
+	public static void showIntegerTab(Integer[] tab) {
+		System.out.println("Start");
+		for(Integer i : tab) {
+			System.out.print(i + "\t" );
+		}
+		
+		System.out.println("End");
+	}
 }

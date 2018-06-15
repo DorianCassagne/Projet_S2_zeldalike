@@ -5,7 +5,7 @@ import model.character.item.factory.ItemEnum;
 
 public enum AttackItemEnum implements ItemEnum{
 	AXE(50,1,1616),
-	LANCERAVANCE(40,4,1624),
+	LANCERAVANCE(40,4,1620),
 	LANCER(30,4,1640),
 	FAUX(60,1,1620),
 	EPEEAVANCE(70,2,1672),

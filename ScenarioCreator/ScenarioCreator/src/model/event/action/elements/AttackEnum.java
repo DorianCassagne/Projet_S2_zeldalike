@@ -5,7 +5,7 @@ import javafx.beans.property.StringProperty;
 import model.event.condition.elements.ElementNames;
 
 public enum AttackEnum implements ElementNames,TypeAction {
-	NOTYETIMPLEMENTED;
+	BADMONKEY;
 	private StringProperty representationProperty;
 	
 	AttackEnum(){
