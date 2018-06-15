@@ -122,7 +122,11 @@ public class MonkeyGuard extends EnemyNormal{
 		new Bomb(getMyMap(),this.getRow(),this.getColumn(),movement,DEFAULTATK);
 		int row = this.getRow() + movement.getVerticalIncrement();
 		int column = this.getColumn() + movement.getHorizontalIncrement();
-		new Bomber(getMyMap(), row, column);
+		try{
+			new Bomber(getMyMap(), row, column);
+		}catch(Exception e) {
+			
+		}
 		
 	}
 

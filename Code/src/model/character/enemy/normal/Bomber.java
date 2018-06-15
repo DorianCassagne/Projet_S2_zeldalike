@@ -7,10 +7,10 @@ import model.gameMap.move.Movement;
 
 public class Bomber extends EnemyNormal{
 	
-	private final static int DEFAULTCYCLE = 20;
+	private final static int DEFAULTCYCLE = 80;
 	private final static int COEFFICIENT = 2;
-	private final static int DEFAULTIMAGE = 1688;
-	private final static int DEFAULTHP = Integer.MAX_VALUE;
+	private final static int DEFAULTIMAGE = 1680;
+	private final static int DEFAULTHP = 800000;
 	private final static int DEFAULTDEF = Integer.MAX_VALUE;
 	private final static int SCORE = 0;
 	private final static int MAXCOUNTER = 7;
@@ -33,7 +33,7 @@ public class Bomber extends EnemyNormal{
 		int nextRow ;
 		int nextColumn;
 		for(Movement movement : Movement.values()) {
-			
+
 			nextRow = this.getRow() + movement.getVerticalIncrement();
 			nextColumn = this.getColumn() + movement.getHorizontalIncrement();
 			
@@ -44,16 +44,18 @@ public class Bomber extends EnemyNormal{
 	@Override
 	protected Move act() {
 		if(this.counter == MAXCOUNTER) {
+			this.setImage(Movement.BOTTOM);
 			this.launchAttack(null);
 		}
 		else if(this.counter % 2 == 0) {
 			this.setImage(Movement.RIGHT);
 		}
 		else {
-			this.setImage(Movement.TOP);	
+			this.setImage(Movement.TOP);
 		}
-		counter++;
-		return new Move(this.getRow(),this.getMoveCycle());
+		
+		this.counter++;
+		return null;
 	}
 
 }

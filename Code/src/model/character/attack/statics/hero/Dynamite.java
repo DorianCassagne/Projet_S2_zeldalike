@@ -9,12 +9,13 @@ public class Dynamite extends Attack {
 	
 	private final static int CELLPERTURN = 1;
 	private final static int DEFAULTDAMAGE = 100;
-	private final static int DEFAULTCOEFFICIENT = 0;
+	private final static int DEFAULTCOEFFICIENT = 1;
 	private final static int DEFAULTMAXDISTANCE = 1;
-	private final static int DEFAULTCYCLE = 0;
-	private final static int DEFAULTIMAGE = 1696; 
+	private final static int DEFAULTCYCLE = 1;
+	private final static int DEFAULTIMAGE = 1688; 
 
 	public Dynamite(GameMap map, int row, int column , int direction) {
+		
 		super(map,DEFAULTCYCLE, row, column, Movement.STAY, DEFAULTDAMAGE , CELLPERTURN, DEFAULTCOEFFICIENT,DEFAULTIMAGE + direction, DEFAULTMAXDISTANCE);
 
 	}

@@ -18,6 +18,7 @@ public enum Movement {
 	DIAGTL(-Statics.STEP,-Statics.STEP),
 	DIAGDR(Statics.STEP,Statics.STEP),
 	DIAGDL(Statics.STEP,-Statics.STEP);
+	
 	private final static int MAXPOSSIBILERANGE = 66;
 	
 	private int verticaly;

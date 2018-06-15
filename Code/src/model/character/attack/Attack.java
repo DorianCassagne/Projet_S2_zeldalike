@@ -56,11 +56,13 @@ public abstract class Attack extends Movable {
 	private void clearLastAttack() {
 		int row = this.getRow();
 		int column = this.getColumn();
+		
 		for(int i = 0 ; i < this.cellPerTurn;i++) {
 			row -= this.direction.getVerticalIncrement();
 			column -= this.direction.getHorizontalIncrement();
 			this.getMyMap().clearAttack(row,column,this);
 		}
+		
 	}
 	
 	private void launchAttack() {
