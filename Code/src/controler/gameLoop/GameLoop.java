@@ -3,6 +3,7 @@ package controler.gameLoop;
 import java.util.HashMap;
 
 
+import controler.Controleur;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -16,17 +17,19 @@ import vue.gameClass.MovableView;
 
 public class GameLoop {
 	
-	public final static int FRAMEDURATION = 17;
+	public final static int FRAMEDURATION = 12;
 	public final static int FADEDURATION = 200;
 	
 	private Timeline gameLoop ;
 	private HashMap<Integer,MovableView> movableList;
 	private ControlerEncoder workingData;
+	private boolean isStopped;
 	
 	public GameLoop(StringProperty messageZone,ControlerEncoder data) {
 		this.movableList = new HashMap<Integer,MovableView>();
 		this.gameLoop = new Timeline();
 		this.workingData = data;
+		this.isStopped=false;
 		initialiseLoop();
 
 	}
@@ -34,11 +37,17 @@ public class GameLoop {
 	/*Public Methods*/
 	public void start() {
 		this.gameLoop.play();
+		this.isStopped=false;
 	}
 	
 	
+	public boolean getIsStopped() {
+		return isStopped;
+	}
+
 	public void stop() {
 		this.gameLoop.stop();
+		this.isStopped=true;
 	}
 	
 	
@@ -58,6 +67,7 @@ public class GameLoop {
 		
 		if(this.workingData.getMyGame().end()) {
 			gameLoop.stop();
+			this.workingData.getGround().addElement(Controleur.FXMLGAMEOVERMENUPATH);
 		}
 		else {
 			addPlayers(this.workingData.getMyGame().getNewPlayers());
@@ -105,7 +115,7 @@ public class GameLoop {
 	private void addMovable(NewMovable newCharacter) {
 		MovableView newMovable ;
 		if(newCharacter != null) {
-			if(newCharacter.getKey() == Game.HEROKEY)
+			if(newCharacter.getKey() == Game.HEROKEY) 
 				newMovable = new HeroView(newCharacter.getCellId(),newCharacter.getImageValue(),this.workingData);
 			else
 				newMovable = new MovableView(newCharacter.getCellId(),newCharacter.getImageValue());

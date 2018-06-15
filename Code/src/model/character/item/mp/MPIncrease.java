@@ -9,7 +9,7 @@ public class MPIncrease extends Item{
 	
 	public MPIncrease(int imageId){
 		super(imageId);
-		int diff = imageId - Item.HPPOTIONSTARTINDEX;
+		int diff = imageId - Item.MPITEMSTARTINDEX;
 		if(diff >= 0 && diff < MPItemEnum.values().length ) {
 			this.mpItem = MPItemEnum.values()[diff];
 		}

@@ -9,6 +9,7 @@ import model.character.enemy.Enemy;
 import model.character.enemy.EnemyFactory;
 import model.character.item.Item;
 import model.character.item.factory.ItemFactory;
+import model.character.npc.TalkingNPC;
 import model.gameMap.additional.Statics;
 
 public class Action {
@@ -16,16 +17,18 @@ public class Action {
 	 * Syntaxe action
 	 *  Action-TypeGeneral-TypeParticulier-Info-IdCase
 	 * 	S/C/D/A-I/M/m/A/W-' '/{type_monstre}/{type_item}-contenuMessage/idMonstre-CELLID
+	 *  Pour NPC : C-N-IDIMAGE-MESSAGE-CELLID
 	 */
-	private final static char CREATION = 'C';
-	private final static char ITEM = 'I';
-	private final static char WALKABLE = 'W';
-	private final static char MONSTER=  'M';
-	private final static char DROP = 'D';
-	private final static char SHOW = 'S';
-	private final static char ADD = 'A';
-	private final static char ATTACK = 'A';
+	public final static char CREATION = 'C';
+	public final static char ITEM = 'I';
+	public final static char WALKABLE = 'W';
+	public final static char MONSTER=  'M';
+	public final static char DROP = 'D';
+	public final static char SHOW = 'S';
+	public final static char ADD = 'A';
+	public final static char ATTACK = 'A';
 	public final static char NOTHING = 'N';
+	public final static char NPC = 'N';
 	
 	private static ActionData actionData;
 	private char generalType;
@@ -66,6 +69,9 @@ public class Action {
 		case MONSTER:
 			supplier = ()->createMonster();
 			break;
+		case NPC : 
+			supplier = ()->createNPC();
+			break;
 		default:
 			throw new IllegalArgumentException("ERROR IN CREATION WHILE PROCESSING GENERAL TYPE" + this.generalType);
 		}
@@ -85,6 +91,19 @@ public class Action {
 		}
 		
 		return added;
+	}
+	
+	
+	private boolean createNPC() {
+		
+		try {
+			int idImage = Integer.parseInt(this.specificType);
+			new TalkingNPC(actionData.messageProperty(), this.info,idImage,actionData.getMap(),Statics.convertToRow(this.cellId),Statics.convertToColomn(this.cellId));
+		}catch(Exception e) {
+			System.err.println("ERROR ON TALKING NPC, MAYBE THE ID WAS NOT A NUMBER : " + this.specificType);
+		}
+		
+		return true;
 	}
 	
 	private boolean createItem() {

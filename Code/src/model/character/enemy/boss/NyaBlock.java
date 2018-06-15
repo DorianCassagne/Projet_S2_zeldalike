@@ -84,5 +84,12 @@ public class NyaBlock  extends Enemy{
 		return Integer.MAX_VALUE;
 	}
 
+	@Override
+	public String getName() {
+		
+		return "NYABLOCK";
+		
+	}
+
 	
 }

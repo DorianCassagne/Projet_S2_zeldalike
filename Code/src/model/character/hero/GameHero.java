@@ -8,7 +8,9 @@ import model.character.item.mp.*;
 import model.character.item.hpPotion.*;
 import model.character.item.mpPotion.*;
 import model.character.item.pvItem.*;
+import model.character.item.speed.SpeedItemEnum;
 import model.character.attack.dynamic.*;
+import model.GameStatus;
 import model.character.GameCharacter;
 import model.character.attack.Attack;
 import model.gameMap.GameMap;
@@ -24,17 +26,15 @@ public abstract class GameHero extends GameCharacter {
 	 final static int DEFAULTATK = 50;
 	 final static int DEFAULTIMAGE = 8;
 	 final static AttackItemEnum DEFAULTATKITEM = AttackItemEnum.LANCER;
-	
-	private HeroStats heroStats;
 	 
-	public GameHero(GameMap map, int startRow, int startColumn, int defaultImage,int startDef) {
-		super(map, startRow, startColumn, DEFAULTCYCLE, DEFAULTCOEFFICIENT, defaultImage);
-		this.heroStats = new HeroStats();
+	private HeroStats heroStats;
+		
+	public GameHero(GameMap map, int startRow, int startColumn,GameStatus gameStatus) {
+		super(map, startRow, startColumn, DEFAULTCYCLE, DEFAULTCOEFFICIENT, DEFAULTIMAGE);
+		this.heroStats = new HeroStats(gameStatus);
+		this.loadState(gameStatus);
 	}
 				
-	public GameHero(GameMap map, int startRow, int startColumn) {
-		this(map, startRow, startColumn,DEFAULTIMAGE,DEFAULTDEF);
-	}
 		
 	@Override
 	public void getDmg(Attack attack) {
@@ -87,6 +87,35 @@ public abstract class GameHero extends GameCharacter {
 		return this.heroStats.getHeroStats();
 	}
 	
+	public void setSpeed(SpeedItemEnum speedItem) {
+		if(this.getMoveCycle() == DEFAULTCYCLE) {
+			int newSpeed = DEFAULTCYCLE * (1 - speedItem.getItemSpeed()/100);
+			this.setWait(newSpeed);
+
+		}
+	}
+	
+	public GameStatus getGameStatus() {
+		
+		CopyOfHeroStats myStats = this.heroStats.getHeroStats();
+		GameStatus status = new GameStatus(myStats,this.getRow(),this.getColumn(),0,this.getMyMap().getMapId());
+		return status;
+	}
+	
+	
+	//@throws IllegalArgumentException
+	private void loadState(GameStatus mapStat) {
+		
+		if(mapStat != null) {
+			AttackItem attackItem = new AttackItem(mapStat.getAttackItem());
+			attackItem.effectOn(this);
+			
+			DefenseItem defenseItem = new DefenseItem(mapStat.getDefenseItem());
+			defenseItem.effectOn(this);
+		}
+	
+	}
+
 	
 	
 }

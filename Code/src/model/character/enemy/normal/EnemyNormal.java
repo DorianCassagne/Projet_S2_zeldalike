@@ -44,4 +44,8 @@ public abstract class EnemyNormal extends Enemy{
 	public int getHP() {
 		return this.hp;
 	}
+
+	public String getName() {
+		return "ENEMYNORMAL";
+	}
 }

@@ -3,6 +3,7 @@ package model.character.hero;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import model.GameStatus;
 import model.character.GameCharacter;
 import model.character.item.mapChange.MapChangerEnum;
 import model.gameMap.GameMap;
@@ -26,17 +27,20 @@ public class Hero extends GameHero{
 	public static final char ATTACKDOWN = '2' ;
 	public static final char ATTACKLEFT = '4' ;
 	public static final char CHANGEATTACK = 'c';
+	public static final char TALK = 'x';
+	
+	
+	
 
 	
-	public Hero(GameMap map,int startRow,int startColumn) {
-		super(map,startRow,startColumn);
+	public Hero(GameMap map,int startRow,int startColumn,GameStatus gameStatus) {
+		super(map,startRow,startColumn,gameStatus);
 		GameCharacter.setHero(this);
 		this.nextMove = STAY;
 		this.direction = Movement.TOP;
 		this.mapProperty = new SimpleIntegerProperty();
-		
 	}
-
+	
 	public void setNextMove(char nextMove) {
 		this.nextMove = nextMove;
 	}
@@ -88,7 +92,8 @@ public class Hero extends GameHero{
 			this.setWait(1);
 			//this.changeAttack();
 			break;
-			
+		case TALK : 
+			this.talk();
 		default : 
 			break;
 		}
@@ -103,6 +108,12 @@ public class Hero extends GameHero{
 		
 		return myMove;
 
+	}
+	
+	private void talk() {
+		int row = this.getRow() + this.direction.getVerticalIncrement();
+		int column = this.getColumn() + this.direction.getHorizontalIncrement();
+		this.getMyMap().talkTo(row,column);
 	}
 	
 	private void updateReference() {

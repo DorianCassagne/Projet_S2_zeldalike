@@ -4,17 +4,18 @@ package controler;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.function.Function;
+import java.util.function.Supplier;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import controler.conversion.ConversionAndStatics;
 import controler.gameLoop.ControlerEncoder;
 import controler.gameLoop.GameLoop;
+import controler.input.CommandInterpreter;
 import controler.mainGame.GroundControler;
 import controler.mainGame.SceneLoader;
-import controler.withGame.CommandInterpreter;
+import controler.menu.ChargerMapController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -22,7 +23,10 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.TilePane;
+import javafx.scene.text.Text;
 import model.Game;
+import model.GameStatus;
+import model.gameMap.GameMap;
 import model.gameMap.additional.MapReader;
 import model.gameMap.additional.Statics;
 import vue.gameClass.HeroView;
@@ -33,9 +37,15 @@ import vue.other.TexturePack;
 public class Controleur implements Initializable,SceneLoader{
 	
 	public final static TexturePack TEXTURE ;
-	public final static String FXMLPATH = "template/GuiView.fxml";
-	private final static String TILESETPATH = "src/resources/tileset/Image/jeudi7.png";
-	
+	public final static String FXMLGAMEPATH = "template/GuiView.fxml";
+	public final static String FXMLMAINMENUPATH = "menu/MenuAccueil.fxml";
+	public final static String FXMLMAINMENU2PATH = "menu/MenuAccueil2.fxml";
+	public final static String FXMLLOADMENUPATH = "menu/MenuChargerMap.fxml";
+	public final static String FXMLPAUSEPATH = "menu/MenuDePause.fxml";
+	public final static String FXMLGAMEOVERMENUPATH = "menu/GameOverMenu.fxml";
+	private final static String TILESETPATH = "src/resources/tileset/Image/lundi11.png";
+	private static GameStatus myGameStat ;
+
 	@FXML   private AnchorPane mainAnchorPane;
     @FXML   private AnchorPane characterAnchorPane;
     @FXML   private TilePane mapTilePane;
@@ -47,7 +57,7 @@ public class Controleur implements Initializable,SceneLoader{
     @FXML   private ImageView attackImageView;
     @FXML   private ImageView defImageView;
     @FXML   private TextArea messageText;
-    
+    @FXML	private Text scoreText;
     @FXML	private Button DefenseButton;
     @FXML   private Button attackButton;
     
@@ -59,8 +69,18 @@ public class Controleur implements Initializable,SceneLoader{
 	private ControlerEncoder controllerData;
 	private GroundControler sceneChanger;
 	
+	
 	static {
 		TEXTURE = new TexturePack(TILESETPATH,Statics.LINELENGTH, ConversionAndStatics.TILEDIMENSION);
+		myGameStat = null;
+	}
+	
+	
+
+	public static void setGameStat(ChargerMapController mapLoader , GameStatus gameStatus) {
+		if(mapLoader != null) {
+			myGameStat = gameStatus;
+		}
 	}
 	
 	/*
@@ -76,7 +96,8 @@ public class Controleur implements Initializable,SceneLoader{
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		this.initMap();
 		this.initControllerData();
-		this.initGameInterpreterAndLoop();	
+		this.initGameInterpreterAndLoop();
+		this.scoreText.textProperty().bind(GameMap.getScoreBinding().asString());
 	}
 	
 	
@@ -84,18 +105,31 @@ public class Controleur implements Initializable,SceneLoader{
 	 * Public methods
 	 */
 
-	public void startScene(Scene scene) {
-		scene.setOnKeyPressed(e->interpreter.handleKey(e));
+	@Override
+	public void loadScene(GroundControler groundControler) {
+		if(groundControler != null) {
+			this.sceneChanger = groundControler;
+			Supplier<Void> resumeGameLoop = ()->{
+				this.gameLoop.start();
+				return null;
+			};
+			this.controllerData.setGround(groundControler);
+			this.sceneChanger.getScene().setOnKeyPressed(e->interpreter.handleKey(e,groundControler));
+			this.sceneChanger.setGameLoopStart(resumeGameLoop);
+		}
 	}
 	
-
+	public void resume() {
+		this.gameLoop.start();
+	}
+	
 	/*
 	 * Private methods
 	 */
 	
 	//Initialiser
 	private void initGame() {
-		this.myGame = new Game(this.messageZone);
+		this.myGame = new Game(this.messageZone,myGameStat);
 		this.myGame.changeMapProperty().addListener(
 				(obs,oldValue,newValue)->this.createMap()
 		);
@@ -106,7 +140,6 @@ public class Controleur implements Initializable,SceneLoader{
 		this.controllerData.addButtonImage(attackImageView, attackButton,HeroView.ATTACKINDEX);
 		this.controllerData.addButtonImage(defImageView, DefenseButton,HeroView.DEFENSEINDEX);
 
-		
 	}
 
 	private void initGameInterpreterAndLoop() {
@@ -114,6 +147,7 @@ public class Controleur implements Initializable,SceneLoader{
 		
 		this.gameLoop = new GameLoop(this.messageZone,this.controllerData);
 		this.interpreter = new CommandInterpreter(this.myGame,this.gameLoop,message.waitingProperty());
+		
 		this.gameLoop.start();
 	
 	}
@@ -142,17 +176,6 @@ public class Controleur implements Initializable,SceneLoader{
 			else
 				i++;
 		}
-	}
-
-	@Override
-	public void loadScene(GroundControler groundControler) {
-		this.sceneChanger = groundControler;
-		this.sceneChanger.getScene().setOnKeyPressed(e->interpreter.handleKey(e));
-	}
-
-	
-	
-	
-	
+	}	
 }
  

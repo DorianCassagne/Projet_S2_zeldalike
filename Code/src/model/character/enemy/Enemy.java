@@ -24,4 +24,6 @@ public abstract class Enemy extends GameCharacter{
 
 	public abstract int getHP() ;
 	
+	public abstract String getName();
+	
 }

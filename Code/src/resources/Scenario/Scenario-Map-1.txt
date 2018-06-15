@@ -1,0 +1,5 @@
+N->S-M- -IL est un message
+N->C-M-BADMONKEY-ts-1420
+N->C-N-11-BONJOUR CE CHEMIN EST BLOQUÉ-1420
+H:1421->C-M-BADMONKEY-omar-1430->S-M- -Un monstre vient d'apparaitre
+O:A: :2-AND-M:omar: :50->S-M- -Le monstre est presque mort

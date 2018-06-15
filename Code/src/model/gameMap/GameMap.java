@@ -9,6 +9,7 @@ import model.character.GameCharacter;
 import model.character.attack.Attack;
 import model.character.enemy.Enemy;
 import model.character.item.Item;
+import model.character.npc.TalkingNPC;
 import model.gameMap.additional.MapReader;
 import model.gameMap.additional.NewMovable;
 import model.gameMap.additional.Statics;
@@ -28,7 +29,7 @@ public class GameMap {
 	private final IntegerProperty safeChangeProperty;
 	private Cell[] cells ;
 	private Action action;
-	
+	private int idMap;
 	
 	static {
 		realScore = new SimpleIntegerProperty(0);
@@ -48,9 +49,10 @@ public class GameMap {
 	
 	//Cr�e une map en se r�f�rant � un fichier csv qui initilialise les fond des cases
 	//Dans ce cas l� il n'est autoris� qu'un layer, d�clenche une exception si le fichier n'est pas valid
-	public GameMap(String ... mapPath) {
+	public GameMap(int idMap,String ... mapPath) {
 		
 		Integer[][] values = MapReader.readAndConvertMapFile(mapPath);
+		this.idMap = idMap;
 		this.action = new Action();
 		this.changeProperty = new SimpleIntegerProperty();
 		this.safeChangeProperty = UsefulMethods.copyIntegerProperty(this.changeProperty);
@@ -137,7 +139,7 @@ public class GameMap {
 	
 	public boolean addCharacter(GameCharacter movable,int row,int column) {	
 		boolean correctlyPlaced = false;
-		
+
 		if(Statics.isInMap(row,column)) {
 			int cellId = Statics.convertToCellId(row, column);
 			correctlyPlaced = this.cells[cellId].addMovable(movable);
@@ -169,6 +171,16 @@ public class GameMap {
 		
 		}
 	}	
+	
+	public void addNPC(TalkingNPC npc,int row,int column) {
+		if(Statics.isInMap(row,column)) {
+			int cellId = Statics.convertToCellId(row, column);
+			this.cells[cellId].setNPC(npc);
+		}
+		else {
+			throw new IllegalArgumentException("ENDCELL NOT FOUND");
+		}
+	}
 	
 	public Integer[] getLayerForCell(int cellId) {
 		return this.cells[cellId].getCellBackgroundLayer();
@@ -213,18 +225,27 @@ public class GameMap {
 	}
 	
 	public Move[] turn() {
-		this.clearAttacks();
 		return this.action.turn();
 	}
 	
-	private void clearAttacks() {
-		for(Cell cell : cells) {
-			cell.clearAttacks();
-		}
+	public void clearAttack(int row,int column,Attack attackToClear) {
+		if(Statics.isInMap(row, column))
+			this.cells[Statics.convertToCellId(row, column)].clearAttack(attackToClear);
 	}
 	
 	public int[] getRemovedCharacter() {
 		return this.action.getRemovedCharacter();
 	}
+
+	public void talkTo(int row, int column) {
+		if(Statics.isInMap(row, column)) {
+			this.cells[Statics.convertToCellId(row, column)].talk();
+		}	
+	}
+	
+	public int getMapId() {
+		return this.idMap;
+	}
+	
 }
 

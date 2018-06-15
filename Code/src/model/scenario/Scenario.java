@@ -11,14 +11,17 @@ import model.character.enemy.Enemy;
 import model.gameMap.GameMap;
 import model.scenario.action.Action;
 import model.scenario.action.ActionData;
+import model.scenario.action.ActionEncode;
 import model.scenario.condition.Condition;
 import resources.additionalClass.SeparatorFileReader;
+import resources.additionalClass.SeparatorFileWriter;
 
 public class Scenario {
 	
 	private final static String SCENARIOPATH = "/resources/Scenario/";
-	private final static String EXTERNALSEPARATOR = "->";
-	private final static String INTERNALSEPARTOR = "-";
+	private final static String SCENARIOSAVEPATH = System.getProperty("user.dir") + "Scenario";
+	public final static String EXTERNALSEPARATOR = "->";
+	public final static String INTERNALSEPARTOR = "-";
 	private final static int CONDITIONINDEX = 0;
 	private final static int CYCLE = 10;
 	private final static String CONDITIONINTERNALSEPARATOR = ":";
@@ -34,9 +37,11 @@ public class Scenario {
 		this.finishedEvents = new ArrayList<Integer>();
 		this.data = new ActionData(map,textMessages,elementsList,finishedEvents); 
 		this.events = new ArrayList<Evenement>();
-		BufferedReader reader = SeparatorFileReader.openTextFile(SCENARIOPATH + filename);
-		ArrayList<ArrayList<String[]>> scenario = SeparatorFileReader.readFileWithTwoSeparator(reader, EXTERNALSEPARATOR, INTERNALSEPARTOR);
 		this.counter = 0;
+
+		BufferedReader reader = SeparatorFileReader.openTextFile(SCENARIOPATH + filename,true);
+		ArrayList<ArrayList<String[]>> scenario = SeparatorFileReader.readFileWithTwoSeparator(reader, EXTERNALSEPARATOR, INTERNALSEPARTOR);
+
 		readScenario(scenario);
 	}
 	
@@ -110,4 +115,25 @@ public class Scenario {
 
 		}
 	}
+	
+	
+	public boolean saveScenario() {
+		final StringBuilder scenarioCode = new StringBuilder("N");
+		
+		elementsList.forEach((name,monster)->
+			scenarioCode.append(ActionEncode.encodeToMonster(name,monster))
+		);
+		
+		scenarioCode.append("\n");
+		this.finishedEvents.forEach(e->{
+			scenarioCode.append(e + INTERNALSEPARTOR);
+		});
+		
+		return SeparatorFileWriter.writeToFile(SCENARIOSAVEPATH,scenarioCode.toString(),true);
+		
+				
+		
+	}
+	
+	
 }

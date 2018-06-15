@@ -37,8 +37,11 @@ public class Main extends Application {
         try {
 			root = loader.load();
 		} catch (IOException e) {
+			e.printStackTrace();
 			throw new Error("ERROR LOADING JAVAFX");
 		} 
+        
+
         Scene  scene = new Scene(root,GroundControler.DEFAULTWIDTH,GroundControler.DEFAULTHEIGHT);
         GroundControler ground = loader.getController();
         ground.setScene(scene);

@@ -53,7 +53,7 @@ public class Scenario {
 	public String generateScenario() {
 		String path = System.getProperty("user.home")+"/Scenario-ZeldaLike.txt";
 		File file = new File(path);
-		if(file.exists()) {
+		if(true) {
 			try{
 				PrintWriter writer = new PrintWriter(path,"UTF-8");
 				writer.println(this.toString());

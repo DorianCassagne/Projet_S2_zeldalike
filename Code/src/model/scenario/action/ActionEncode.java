@@ -1,10 +1,11 @@
 package model.scenario.action;
 
+import model.character.enemy.Enemy;
+import model.scenario.Scenario;
 import resources.additionalClass.Conversion;
 
 public class ActionEncode {
 	
-	private final static int NBPARAMS = 5;
 
 	private char action ;
 	private char generalType;
@@ -47,5 +48,14 @@ public class ActionEncode {
 	}
 
 	
+	public static String encodeToMonster(String name,Enemy monster) {
+		String value = Scenario.EXTERNALSEPARATOR + Action.CREATION;
+		value += Scenario.INTERNALSEPARTOR + Action.MONSTER;
+		value += Scenario.INTERNALSEPARTOR + monster.getName();
+		value += Scenario.INTERNALSEPARTOR + name;
+		value += Scenario.INTERNALSEPARTOR + monster.getCellId();
+		
+		return value;
+	}
 	
 }

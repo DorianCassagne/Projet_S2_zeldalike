@@ -95,4 +95,11 @@ public class NyaSlave  extends Enemy{
 	public int getHP() {
 		return this.hp.get();
 	}
+
+
+
+	@Override
+	public String getName() {
+		return "NYASLAVE";
+	}
 }

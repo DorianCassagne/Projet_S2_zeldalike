@@ -73,6 +73,13 @@ public class BadMonkey extends BlueFairy{
 		
 	}
 	
+	@Override
+	public String getName() {
+		return "BADMONKEY";
+	} 
+
+	
+	
 	private int inPlace(int[] tab, int actualCell) {
 		int ret=-1;
 		for (int i = 0; i < tab.length; i++) {

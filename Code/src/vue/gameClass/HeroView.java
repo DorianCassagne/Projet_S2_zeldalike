@@ -43,13 +43,18 @@ public class HeroView extends MovableView{
 	private void initShownDimension(AnchorPane characterAnchorPane) {
 		this.shownRow = characterAnchorPane.getScene().getHeight() ;
 		this.shownColumn = characterAnchorPane.getScene().getWidth() ;
+		characterAnchorPane.getScene().heightProperty().addListener((obs,oldValue,newValue)->{this.shownRow = newValue.intValue();this.scrollY(this.getY());});
+		characterAnchorPane.getScene().widthProperty().addListener((obs,oldValue,newValue)->{this.shownColumn = newValue.intValue();this.scrollX(this.getX());});
 		this.myAnchorPane = characterAnchorPane;
 
 	}
 	
 	
 	private void relateEveryThing(ControlerEncoder encoder) {
-		this.layoutXProperty().addListener((obs,oldValue,newValue)->this.scrollX(newValue.doubleValue()));
+		
+		this.layoutXProperty().addListener((obs,oldValue,newValue)->{
+			this.scrollX(newValue.doubleValue());
+		});
 		this.layoutYProperty().addListener((obs,oldValue,newValue)->this.scrollY(newValue.doubleValue()));	
 		
 		CopyOfHeroStats heroStats = encoder.getMyGame().getHeroStats();
@@ -59,27 +64,23 @@ public class HeroView extends MovableView{
 		
 		
 		ViewUsefulMethods.linkImage(heroStats.getAtkBinding(),heroStats.getAtkImageBinding(),encoder.getImageViewAt(ATTACKINDEX),encoder.getButtonAt(ATTACKINDEX),"Points d'attaque : ",this.attackTooltip);
-		ViewUsefulMethods.linkImage(heroStats.getDefBinding(),heroStats.getAtkBinding(),encoder.getImageViewAt(DEFENSEINDEX),encoder.getButtonAt(DEFENSEINDEX),"Points de défense : ",this.defenseTooltip);
+		ViewUsefulMethods.linkImage(heroStats.getDefBinding(),heroStats.getDefImage(),encoder.getImageViewAt(DEFENSEINDEX),encoder.getButtonAt(DEFENSEINDEX),"Points de défense : ",this.defenseTooltip);
 	
 	}
 		
 		
 	private void linkHP(IntegerBinding HPproperty,IntegerBinding maxHP ,Label HPlabel,ProgressBar HPprogress) {
 		ViewUsefulMethods.linkPropertyToLabelAndProgress(HPproperty,maxHP,HPlabel,HPprogress);
-		
 	}
 	
 	private void linkMP(IntegerBinding MPProperty,IntegerBinding maxMP,Label MPLabel,ProgressBar MPProgress) {
-		ViewUsefulMethods.linkPropertyToLabelAndProgress(MPProperty,maxMP,MPLabel,MPProgress);
-		
+		ViewUsefulMethods.linkPropertyToLabelAndProgress(MPProperty,maxMP,MPLabel,MPProgress);	
 	}
-	
 	
 	
 	private void scrollX(double newValue) {
 		double diff = newValue- this.shownColumn/2;
 		boolean isNotAtLimit = (newValue - (ConversionAndStatics.TILEDIMENSION * MapReader.MAPLENGTH) < -this.shownColumn/2);
-		
 		if(diff > 0 && isNotAtLimit) {
 			this.myAnchorPane.setTranslateX(-diff);
 		}

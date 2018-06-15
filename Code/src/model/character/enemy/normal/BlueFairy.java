@@ -57,5 +57,10 @@ public class BlueFairy extends EnemyNormal{
 		return null;                                               
 	}
 
+	@Override
+	public String getName() {
+		return "BLUEFAIRY";
+	}
+
 
 }

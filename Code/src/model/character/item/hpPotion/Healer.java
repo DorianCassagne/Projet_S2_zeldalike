@@ -14,7 +14,7 @@ public class Healer extends Item{
 			this.healType = HealEnum.values()[diff];
 		}
 		else
-			throw new IllegalArgumentException("ITEM NOT A POTION");
+			throw new IllegalArgumentException("ITEM NOT A POTION " + diff);
 	}
 	
 	public Healer(String name) {

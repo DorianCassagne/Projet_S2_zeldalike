@@ -21,17 +21,18 @@ public class Game {
 	private Hero hero;
 	private Scenario scenario;
 	private StringProperty messageProperty;
-	
+	private GameStatus gameStat;
 	//Initialise le jeu avec une map
 	
-	public Game(StringProperty messageProperty) {
-		this(1,messageProperty);
-	}
 	
-	public Game(int mapIndex,StringProperty messageText ) {
+	public Game(StringProperty messageText,GameStatus gameStat ) {
 		this.mapChangeProperty = new SimpleBooleanProperty(true);
 		this.messageProperty = messageText;
-		this.changeMap(mapIndex);
+		this.gameStat = gameStat;
+		if(gameStat == null)
+			this.changeMap(1);
+		else
+			this.changeMap(gameStat.getMapId());
 		new BadMonkey(myMap, 20, 11);
 	}
 
@@ -39,16 +40,24 @@ public class Game {
 	private void changeMap(int mapIndex) {
 		if(mapIndex >= 0 && mapIndex < MapEnum.values().length) {
 			MapEnum mapHash = MapEnum.values()[mapIndex];
-			this.myMap = new GameMap(mapHash.getLayers());
+			this.myMap = new GameMap(mapIndex,mapHash.getLayers());
 			this.scenario = new Scenario(mapHash.getScenario(),this.messageProperty,this.myMap);
-			createHero(mapHash.getPosY(),mapHash.getPosX());
 			this.mapChangeProperty.set(!this.mapChangeProperty.get());
+			
+			if(this.gameStat != null) {
+				createHero(this.gameStat.getRow(), this.gameStat.getColumn());
+			}
+			else {
+				createHero(mapHash.getPosY(),mapHash.getPosX());
+			}
+			
 		}
 	}
 		
 	private void createHero(int startRow,int startColumn) {
+		
 		if(this.hero == null) {
-			this.hero = new Hero(this.myMap,startRow,startColumn);
+			this.hero = new Hero(this.myMap,startRow,startColumn,this.gameStat);
 			this.hero.mapChangerProperty().addListener(
 					(obs,oldValue,newValue)->changeMap(newValue.intValue())
 			);

@@ -1,13 +1,14 @@
 package model.character.hero;
 
 import java.util.ArrayList;
-
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import model.GameStatus;
 import model.character.GameCharacter;
 import model.character.attack.Attack;
 import model.character.attack.dynamic.DefaultAttackLauncher;
 import model.character.attack.dynamic.Launcher;
+import model.character.item.attack.AttackItem;
 import model.character.item.attack.AttackItemEnum;
 import model.character.item.def.DefenseItemEnum;
 import model.character.item.hpPotion.HealEnum;
@@ -31,39 +32,105 @@ public class HeroStats {
 
 
 	
-	public HeroStats() {
+	public HeroStats(GameStatus gameStatus) {
 
-		this.initialiseProperties();
-		this.initAttack();
+		this.initialiseProperties(gameStatus);
+		this.initAttack(gameStatus);
 		this.safeStats = new CopyOfHeroStats(this.hp,this.def,this.defImage,this.attackItemImage,this.attackValue,this.mp,this.maxHP,this.maxMP);
+	
 	}
 
 	
-	private void initAttack() {
+	/*
+	 * Attaques
+	 */
+	
+	private void initAttack(GameStatus gameStatus) {
 		this.attackList = new ArrayList<Launcher>();
-		this.setAttackIndex(0);
-		this.attackList.add(new DefaultAttackLauncher(GameHero.DEFAULTATKITEM));
-	}
-
-	private  void initialiseProperties() {
-
-		this.hp = new SimpleIntegerProperty(GameHero.DEFAULTHP);
-		this.def = new SimpleIntegerProperty(GameHero.DEFAULTDEF);
-		this.attackItemImage = new SimpleIntegerProperty(0);
-		this.mp = new SimpleIntegerProperty(GameHero.DEFAULTMP);
-		this.attackValue = new SimpleIntegerProperty(GameHero.DEFAULTATK);
-		this.maxHP = new SimpleIntegerProperty(GameHero.DEFAULTHP);
-		this.maxMP = new SimpleIntegerProperty(GameHero.DEFAULTMP);
-		this.defImage = new SimpleIntegerProperty(0);
+		this.attackValue = new SimpleIntegerProperty();
+		this.attackItemImage = new SimpleIntegerProperty();		
+		Launcher defaultLauncher = new DefaultAttackLauncher(GameHero.DEFAULTATKITEM);
 		
-	}
+		if(gameStatus != null) {
+			defaultLauncher = new DefaultAttackLauncher(gameStatus.getAttackItem());
+		}
+		
+		this.attackList.add(defaultLauncher);
 
+		
+		updateAttackImage();
+	}
 	
 	public void addLauncher(Launcher launcher) {
 		if(launcher !=  null) {
 			this.attackList.add(launcher);
 		}
 	}
+
+	public void setBasicAtk(AttackItemEnum attack) {
+		if(attack != null) {
+			this.attackList.set(0, new DefaultAttackLauncher(attack));
+			this.updateAttackImage();
+		}
+		else
+			throw new IllegalArgumentException("THE ATTACK CHANGE IS NULL");
+	}
+
+	private void setAttackIndex(int newAttackIndex) {
+		int nextAttackIndex = newAttackIndex;
+		
+		if(newAttackIndex >= this.attackList.size()) {
+			nextAttackIndex = 0;
+		}
+		this.attackType = nextAttackIndex;
+		updateAttackImage();
+	}
+
+	
+	private void updateAttackImage() {
+		
+		if(this.attackType < this.attackList.size()) {
+			Launcher newImageValue = this.attackList.get(this.attackType);
+			this.attackItemImage.set(newImageValue.getImage());
+			this.attackValue.set(GameHero.DEFAULTATK + newImageValue.getDamage());
+		}
+		
+	}
+
+	public void changeAttack() {
+		
+		setAttackIndex(this.attackType + 1);
+	
+	}
+
+	
+	
+	
+	//Raison de ne pas confondre les deux ( Chargement du state se fasse en utilisant les setter dédiés
+	private  void initialiseProperties(GameStatus gameStatus) {		
+		this.hp = new SimpleIntegerProperty(GameHero.DEFAULTHP);
+		this.mp = new SimpleIntegerProperty(GameHero.DEFAULTMP);
+
+		if(gameStatus != null) {
+			
+			this.maxHP = new SimpleIntegerProperty(gameStatus.getMaxHP());
+			this.maxMP = new SimpleIntegerProperty(gameStatus.getMaxMp());
+			this.setHP(gameStatus.getHp());
+			this.setMP(gameStatus.getMp());
+			
+		}else {
+	
+			this.maxHP = new SimpleIntegerProperty(GameHero.DEFAULTHP);
+			this.maxMP = new SimpleIntegerProperty(GameHero.DEFAULTMP);
+
+		}
+		
+		this.def = new SimpleIntegerProperty(GameHero.DEFAULTDEF);
+		this.defImage = new SimpleIntegerProperty(824);
+	
+	}
+
+	
 
 
 	/*
@@ -81,17 +148,12 @@ public class HeroStats {
 			this.setHP(this.hp.get() + healer.getHeal());
 	}
 	
-	public void setBasicAtk(AttackItemEnum attack) {
-		if(attack != null) {
-			this.attackList.set(0, new DefaultAttackLauncher(attack));
-			this.updateAttackImage();
-		}
-		else
-			throw new IllegalArgumentException("THE ATTACK CHANGE IS NULL");
-	}
+	
+
 	
 	public void setBasicDef(DefenseItemEnum defenseItem) {
 		if(defenseItem != null) {
+			this.defImage.set(defenseItem.getImage());
 			this.def.set(defenseItem.getMoreDef() + GameHero.DEFAULTDEF);
 		}
 	}
@@ -111,31 +173,6 @@ public class HeroStats {
 	}
 	
 	
-	
-	
-	private void setAttackIndex(int newAttackIndex) {
-		int nextAttackIndex = newAttackIndex;
-		
-		if(newAttackIndex >= this.attackList.size()) {
-			nextAttackIndex = 0;
-		}
-		this.attackType = nextAttackIndex;
-		updateAttackImage();
-	}
-
-	
-	private void updateAttackImage() {
-		if(this.attackType < this.attackList.size()) {
-			Launcher newImageValue = this.attackList.get(this.attackType);
-			this.attackItemImage.set(newImageValue.getImage());
-			this.attackValue.set(GameHero.DEFAULTATK + newImageValue.getDamage());
-		}
-	}
-
-	public void changeAttack() {
-		setAttackIndex(this.attackType + 1);
-	}
-
 	private void setHP(int newHP) {
 		correctlySetProperty(this.hp,newHP,this.maxHP.get());
 	}
@@ -144,10 +181,6 @@ public class HeroStats {
 		correctlySetProperty(this.mp, newMP, this.maxMP.get());
 		return newMP >= 0;
 	}
-	
-	
-	
-	
 	
 	
 	/*

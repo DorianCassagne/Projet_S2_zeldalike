@@ -12,27 +12,34 @@ import javafx.scene.image.ImageView;
 public class ViewUsefulMethods {
 	public static void linkPropertyToLabelAndProgress(IntegerBinding property,IntegerBinding propertyMax,Label label,ProgressBar progress) {
 		label.setText(property.getValue().toString());
+
+		progress.setProgress(property.get()/propertyMax.doubleValue());
+		
 		property.addListener(
 				(obs,oldValue,newValue)->{
 					label.setText(newValue.toString());
 					progress.setProgress(newValue.doubleValue()/propertyMax.get());
 				}
 		);
+		
 		propertyMax.addListener(
 				(obs,oldValue,newValue)->{
 					progress.setProgress(property.get()/newValue.doubleValue());
 				}
 		);
+		
+		
 	}
 	
 	public static void linkImage(IntegerBinding valueProperty,IntegerBinding imageValueProperty, ImageView imageView,Button button,String textPrepend,Tooltip imageTooltip) {
 
-		setImage(imageValueProperty.get(),imageView);
 		button.setTooltip(imageTooltip);
-		imageTooltip.setText("Aucun");
+		setImage(imageValueProperty.get(),imageView);
+		imageTooltip.setText(textPrepend + " " + valueProperty.get() + " pts");
+		
 		valueProperty.addListener(
 				(obs,oldValue,newValue)->{
-					setImage(newValue.intValue(),imageView);
+					setImage(imageValueProperty.get(),imageView);
 					imageTooltip.setText(textPrepend + " " + newValue.intValue() + " pts"); 
 				}
 		);
