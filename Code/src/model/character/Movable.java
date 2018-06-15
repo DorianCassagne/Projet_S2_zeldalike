@@ -136,6 +136,9 @@ public abstract class Movable {
 		}
 	}
 
+	public final void setCoefficient(double newCoefficient) {
+		this.moveCoefficient = newCoefficient;
+	}
 	
 	protected abstract void removeCharacter();	
 	public abstract boolean isAlive();

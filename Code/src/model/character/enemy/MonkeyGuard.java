@@ -2,8 +2,11 @@ package model.character.enemy;
 
 import model.PathFinder.BFS1;
 import model.character.GameCharacter;
-import model.character.attack.statics.Bomb;
+import model.character.attack.Attack;
+import model.character.attack.statics.hero.bomb.Bomb;
+import model.character.enemy.normal.EnemyNormal;
 import model.gameMap.GameMap;
+import model.gameMap.MapEnum;
 import model.gameMap.additional.Statics;
 import model.gameMap.move.Move;
 import model.gameMap.move.Movement;
@@ -19,26 +22,42 @@ import model.gameMap.move.Movement;
  * lorsque le joueur est a sa portee, vitesse doublee et attaque au corps a corps
  */
 
-public class MonkeyGuard extends Enemy{
-	
+public class MonkeyGuard extends EnemyNormal{
+
+	private final static int DEFAULTATK = 50;
 	private final static int DEFAULTHP = 150;
 	private final static int DEFAULTDEF = 10;
 	private final static int DEFAULTCYCLE = 40;
 	private final static int DEFAULTIMAGE = 16;
+	private final static double DEFAULTCOEFFICIENT = 1.7;
+	private final static int SCORE = 100;
+	private final static int[][][] POSITIONS = {
+			{{3740,3750},{3047,2967}},
+			{{6,4},{4,9}},
+			{{7,6},{4,9}},
+			{{4,5},{4,9}},
+	};
 
-	
-	public MonkeyGuard(GameMap map, int startRow, int startColumn) {
-		super(map, startRow, startColumn,DEFAULTCYCLE,DEFAULTIMAGE,DEFAULTHP, DEFAULTDEF,90);
+	private int choice;
+	private int nextDestination;
+
+	public MonkeyGuard(GameMap map, int startRow, int startColumn,int choice) {
+		super(map, startRow, startColumn, DEFAULTCYCLE, DEFAULTCOEFFICIENT, DEFAULTIMAGE, DEFAULTHP, DEFAULTDEF, SCORE);
+		this.choice = choice ;
+		updateDestination();
+		
 	}
-	
+
 	@Override
 	public Move act() {
-		
+
 		int row = GameCharacter.getHero().getRow() ;
 		int column = GameCharacter.getHero().getColumn();
 		int actualCell= Statics.convertToCellId(this.getRow(), this.getColumn());
-		
-		
+		int mapId = this.getMyMap().getMapId();
+
+		Move nextMove = null;
+
 		//exmple pour attackmove attention a l'ordre des cases
 		int[]tab= {
 				Statics.convertToCellId(row+1,column),
@@ -46,33 +65,50 @@ public class MonkeyGuard extends Enemy{
 				Statics.convertToCellId(row-1,column),
 				Statics.convertToCellId(row,column+1)
 		};
-		
+
+		int[] tab2 = {
+				POSITIONS[mapId][choice][nextDestination]
+		};
+
 		int inPlace= inPlace(tab, actualCell);
 		if (inPlace != -1) {
 			Movement currentMovement = Movement.values()[inPlace];
 			this.setImage(currentMovement);
-			
-			new Bomb(getMyMap(),this.getRow(),this.getColumn(),currentMovement);
-			
+			this.launchAttack(currentMovement);
 			setWait(200);
-			return null;
 		}
 		else {
-	
-			int nextCell= BFS1.simpleMove(this.getMyMap(),actualCell,tab, true, 0);
-			
+
+			int nextCell= BFS1.simpleMove(this.getMyMap(),actualCell,tab, true,5);
+
 			if (actualCell==nextCell) {
-				return null;
+				nextCell = BFS1.simpleMove(this.getMyMap(),actualCell,tab2, true,0);
 			}
-			if(this.getMyMap().changeCell(this,this.getRow(),this.getColumn(),Statics.convertToRow(nextCell),Statics.convertToColomn(nextCell))){
-				return new Move(nextCell,this.getMoveCycle());
+			else {
+				this.setCoefficient(3);
 			}
 			
-			return null;
+			if(this.getMyMap().changeCell(this,this.getRow(),this.getColumn(),Statics.convertToRow(nextCell),Statics.convertToColomn(nextCell))){
+				updateDestination();
+				nextMove = new Move(nextCell,this.getMoveCycle());
+			}
 		}
+		return nextMove;
+	}
+
+	
+	private void updateDestination() {
+		int mapId = this.getMyMap().getMapId();
+		if(this.getCellId() == POSITIONS[mapId][choice][0]) {
+			this.nextDestination = 1;
+		}
+		else if(this.getCellId() == POSITIONS[mapId][choice][1]) {
+			this.nextDestination = 0;
+		}
+			
 	}
 	
-	
+
 	private int inPlace(int[] tab, int actualCell) {
 		int ret=-1;
 		for (int i = 0; i < tab.length; i++) {
@@ -81,10 +117,18 @@ public class MonkeyGuard extends Enemy{
 		}
 		return ret%4;
 	}
-	
+
 	@Override
 	public void launchAttack(Movement movement) {
+		new Bomb(getMyMap(),this.getRow(),this.getColumn(),movement,DEFAULTATK);
 	}
+
+
+	@Override
+	public String getName() {
+		return "MonkeyGuard";
+	}
+
 
 
 }

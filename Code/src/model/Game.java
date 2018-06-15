@@ -4,7 +4,7 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.StringProperty;
-import model.character.enemy.normal.BadMonkey;
+import model.character.enemy.MonkeyGuard;
 import model.character.hero.CopyOfHeroStats;
 import model.character.hero.Hero;
 import model.gameMap.GameMap;
@@ -30,10 +30,10 @@ public class Game {
 		this.messageProperty = messageText;
 		this.gameStat = gameStat;
 		if(gameStat == null)
-			this.changeMap(1);
+			this.changeMap(0);
 		else
 			this.changeMap(gameStat.getMapId());
-		new BadMonkey(myMap, 20, 11);
+		new MonkeyGuard(myMap, 58, 26, 1);
 	}
 
 	
