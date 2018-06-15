@@ -13,11 +13,12 @@ import model.gameMap.move.Movement;
  * tant que le joueur n'est pas a sa portee (5 par ex)
  * 
  * ou alors 
- * ennemi qui lorsqu'il spawn se dirige vers une position précise puis ensuite retourne a se position initiale
+ * ennemi qui lorsqu'il spawn se dirige vers une position prï¿½cise puis ensuite retourne a sa position initiale
  * tant que le joueur n'est pas a sa portee 
  * 
  * lorsque le joueur est a sa portee, vitesse doublee et attaque au corps a corps
  */
+
 public class MonkeyGuard extends Enemy{
 	
 	private final static int DEFAULTHP = 150;
@@ -71,13 +72,13 @@ public class MonkeyGuard extends Enemy{
 		}
 	}
 	
+	
 	private int inPlace(int[] tab, int actualCell) {
 		int ret=-1;
 		for (int i = 0; i < tab.length; i++) {
 			if(tab[i]==actualCell)
 				ret=i;
 		}
-
 		return ret%4;
 	}
 	
