@@ -11,11 +11,16 @@ public class SeparatorFileReader {
 
 	public final static String TOIGNORE = "//";
 	
-	public static BufferedReader openTextFile(String path)  {
+	public static BufferedReader openTextFile(String path,boolean localFile)  {
 		try {
+			File file;
 			System.out.println(path);
-			File file = new File(SeparatorFileReader.class.getResource(path).toURI().toURL().getPath());
-
+			
+			if(localFile )
+				file = new File(SeparatorFileReader.class.getResource(path).toURI().toURL().getPath());
+			else
+				file = new File(path);
+			
 			FileReader fileReader = new FileReader(file);
 			BufferedReader reader = new BufferedReader(fileReader);
 
@@ -94,5 +99,18 @@ public class SeparatorFileReader {
 		}
 	}
 	
+	
+	public static ArrayList<String[]> readFileWithOneSeparator(BufferedReader reader,String separator) throws IOException{
+		ArrayList<String[]> list = new ArrayList<String[]>();
+		String line = reader.readLine();
+		
+		while(line != null) {
+			list.add(line.split(separator));
+			line = reader.readLine();
+		}
+		
+		return list;
+		
+	}
 	
 }

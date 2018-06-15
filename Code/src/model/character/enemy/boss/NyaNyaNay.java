@@ -1,17 +1,15 @@
 package model.character.enemy.boss;
 
 import java.util.Random;
-
-
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import model.character.GameCharacter;
-import model.character.attack.statics.Bomb;
-import model.character.attack.statics.DoomAttack;
-import model.character.attack.statics.SimpleArrow;
 import model.character.attack.statics.boss.NyanAttHori;
+import model.character.attack.statics.hero.arrow.SimpleArrow;
+import model.character.attack.statics.hero.bomb.Bomb;
+import model.character.attack.statics.hero.doomAttack.DoomAttack;
 import model.gameMap.GameMap;
 import model.gameMap.move.Move;
 import model.gameMap.move.Movement;
@@ -24,6 +22,7 @@ public class NyaNyaNay  extends NyaSlave {
 	private final static int DEFALTIMG=64;
 	private final static int DEFAULTCYCLE=4;
 	//private final static int COEF=2.0;
+	private final static int DEFAULTSCORE = 350;
 	private static BooleanProperty dead=new SimpleBooleanProperty(false);
 	private static IntegerProperty def =new SimpleIntegerProperty(10);
 	private static IntegerProperty hp=new SimpleIntegerProperty(200);
@@ -37,8 +36,8 @@ public class NyaNyaNay  extends NyaSlave {
 	private boolean att;
 	private int positionLeft;
 	public NyaNyaNay(GameMap map, int startRow, int startColumn, int sliderSize) {
-		super(map, startRow, startColumn, DEFAULTCYCLE, COEF, DEFALTIMG, hp, def, dead, DEFAULTCYCLE);
-		this.slave1= new NyaSlave(map, startRow, startColumn+1, 1, COEF,DEFALTIMG+1, hp, def, dead, DEFAULTCYCLE);
+		super(map, startRow, startColumn, DEFAULTCYCLE, COEF, DEFALTIMG, hp, def, dead, DEFAULTCYCLE,DEFAULTSCORE);
+		this.slave1= new NyaSlave(map, startRow, startColumn+1, 1, COEF,DEFALTIMG+1, hp, def, dead, DEFAULTCYCLE,DEFAULTSCORE);
 		setWait(200);
 		this.maxPos=(sliderSize*2)+1;
 		positionLeft= startColumn-sliderSize;
@@ -59,11 +58,11 @@ public class NyaNyaNay  extends NyaSlave {
 			if (att) {
 				switch (ran.nextInt(3)) {
 				case 0:
-					new SimpleArrow(getMyMap(), this.getRow(), this.getColumn(),Movement.BOTTOM, 20, 1 );
+					new SimpleArrow(getMyMap(), this.getRow(), this.getColumn(),Movement.BOTTOM, 1);
 					setWait(20);
 					break;
 				case 1:
-					new Bomb(getMyMap(), this.getRow(), this.getColumn()+1, Movement.BOTTOM);
+					new Bomb(getMyMap(), this.getRow(), this.getColumn()+1, Movement.BOTTOM,50);
 					setWait(50);
 					break;
 				case 2:

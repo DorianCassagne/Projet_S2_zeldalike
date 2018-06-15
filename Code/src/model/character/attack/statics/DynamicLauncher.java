@@ -1,7 +1,7 @@
 package model.character.attack.statics;
 
 import model.character.attack.dynamic.Launcher;
-import model.character.attack.statics.enemyMover.EnemyMoverLauncher;
+import model.character.attack.statics.hero.enemyMover.EnemyMoverLauncher;
 import model.gameMap.GameMap;
 import model.gameMap.move.Movement;
 
@@ -20,11 +20,15 @@ public class DynamicLauncher implements Launcher {
 		
 	}
 	@Override
-	public void launch(GameMap map, Movement direction, int row, int column) {
-		this.launcher.launch(map, direction, row, column);
+	public int launch(GameMap map, Movement direction, int row, int column,int attackPT) {
+		return this.launcher.launch(map, direction, row, column,attackPT);
 	}
 	@Override
 	public int getImage() {
 		return this.launcher.getImage();
+	}
+	@Override
+	public int getDamage() {
+		return this.launcher.getDamage();
 	}
 }

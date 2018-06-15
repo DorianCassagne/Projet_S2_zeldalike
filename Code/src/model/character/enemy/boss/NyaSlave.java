@@ -4,20 +4,22 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
 import model.character.GameCharacter;
 import model.character.attack.Attack;
+import model.character.enemy.Enemy;
 import model.gameMap.GameMap;
 import model.gameMap.additional.Statics;
 import model.gameMap.move.Move;
 import model.gameMap.move.Movement;
 
-public class NyaSlave extends GameCharacter{
+public class NyaSlave  extends Enemy{
 	private static boolean done;
 	private Movement mov;
 	private BooleanProperty dead;
 	private IntegerProperty hp;
 	private IntegerProperty def;
 	private int realcycle;
-	protected NyaSlave(GameMap map, int startRow, int startColumn, int cycle, double coefficient, int defaultImage, IntegerProperty hp, IntegerProperty def, BooleanProperty dead, int realCycle) {
-		super(map, startRow, startColumn, cycle, coefficient, defaultImage);
+	
+	protected NyaSlave(GameMap map, int startRow, int startColumn, int cycle, double coefficient, int defaultImage, IntegerProperty hp, IntegerProperty def, BooleanProperty dead, int realCycle,int score) {
+		super(map, startRow, startColumn, cycle, coefficient, defaultImage,score);
 		this.dead=dead;		
 		this.hp=hp;
 		this.def=def;
@@ -85,5 +87,19 @@ public class NyaSlave extends GameCharacter{
 	}
 	private void kill() {
 		dead.set(true);
+	}
+
+
+
+	@Override
+	public int getHP() {
+		return this.hp.get();
+	}
+
+
+
+	@Override
+	public String getName() {
+		return "NYASLAVE";
 	}
 }

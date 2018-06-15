@@ -21,22 +21,10 @@ public class AttackItem extends Item{
 	public AttackItem(String name) {
 		this(AttackItemEnum.valueOf(name).getImage());
 	}
-
-	public int getDamage() {
-		return this.attackItem.getDmg();
-	}
-	
-	public int getMaxDistance() {
-		return this.attackItem.getMaxDistance();
-	}
-	
-	public int getAttackImage() {
-		return this.attackItem.getAttackImage();
-	}
 	
 	@Override
 	protected void applyTo(Hero hero) {
-		hero.setBasicAtk(this);
+		hero.setBasicAtk(this.attackItem);
 	}
 
 }

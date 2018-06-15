@@ -2,8 +2,9 @@ package controler.gameLoop;
 
 import java.util.HashMap;
 
-import controler.Controleur;
 import controler.mainGame.GroundControler;
+
+import controler.Controleur;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;

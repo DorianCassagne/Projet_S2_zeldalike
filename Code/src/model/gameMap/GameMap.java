@@ -1,11 +1,15 @@
 package model.gameMap;
 
 
+import javafx.beans.binding.IntegerBinding;
+
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import model.character.GameCharacter;
 import model.character.attack.Attack;
+import model.character.enemy.Enemy;
 import model.character.item.Item;
+import model.character.npc.TalkingNPC;
 import model.gameMap.additional.MapReader;
 import model.gameMap.additional.NewMovable;
 import model.gameMap.additional.Statics;
@@ -17,16 +21,38 @@ import resources.additionalClass.UsefulMethods;
 
 public class GameMap {	
 	
+	
+	private static IntegerProperty realScore;
+	private static IntegerBinding safeScore;
+
 	private final IntegerProperty changeProperty;
 	private final IntegerProperty safeChangeProperty;
 	private Cell[] cells ;
 	private Action action;
+	private int idMap;
+	
+	static {
+		realScore = new SimpleIntegerProperty(0);
+		safeScore = realScore.add(0);
+	}
+	
+	public static IntegerBinding getScoreBinding() {
+		return safeScore;
+	}
+	
+	private static void addScore(Enemy enemy) {
+		if(enemy != null )
+			realScore.set(realScore.get() + enemy.getScore());
+	}
+	
+
 	
 	//Cr�e une map en se r�f�rant � un fichier csv qui initilialise les fond des cases
 	//Dans ce cas l� il n'est autoris� qu'un layer, d�clenche une exception si le fichier n'est pas valid
-	public GameMap(String ... mapPath) {
+	public GameMap(int idMap,String ... mapPath) {
 		
 		Integer[][] values = MapReader.readAndConvertMapFile(mapPath);
+		this.idMap = idMap;
 		this.action = new Action();
 		this.changeProperty = new SimpleIntegerProperty();
 		this.safeChangeProperty = UsefulMethods.copyIntegerProperty(this.changeProperty);
@@ -146,6 +172,16 @@ public class GameMap {
 		}
 	}	
 	
+	public void addNPC(TalkingNPC npc,int row,int column) {
+		if(Statics.isInMap(row,column)) {
+			int cellId = Statics.convertToCellId(row, column);
+			this.cells[cellId].setNPC(npc);
+		}
+		else {
+			throw new IllegalArgumentException("ENDCELL NOT FOUND");
+		}
+	}
+	
 	public Integer[] getLayerForCell(int cellId) {
 		return this.cells[cellId].getCellBackgroundLayer();
 	}	
@@ -172,10 +208,11 @@ public class GameMap {
 	/*
 	 * Retire un caractère de la liste courante dans la map
 	 */
-	public void delCharacter(GameCharacter character,int row,int column) {
+	public void delEnemy(Enemy character,int row,int column) {
 		if(this.action.deleteMovableFromList(character)) {
 			int cellId = Statics.convertToCellId(row, column);
 			this.cells[cellId].removeMovable();
+			addScore(character);
 		}
 	}
 	
@@ -191,8 +228,24 @@ public class GameMap {
 		return this.action.turn();
 	}
 	
+	public void clearAttack(int row,int column,Attack attackToClear) {
+		if(Statics.isInMap(row, column))
+			this.cells[Statics.convertToCellId(row, column)].clearAttack(attackToClear);
+	}
+	
 	public int[] getRemovedCharacter() {
 		return this.action.getRemovedCharacter();
 	}
+
+	public void talkTo(int row, int column) {
+		if(Statics.isInMap(row, column)) {
+			this.cells[Statics.convertToCellId(row, column)].talk();
+		}	
+	}
+	
+	public int getMapId() {
+		return this.idMap;
+	}
+	
 }
 

@@ -9,6 +9,7 @@ import model.character.GameCharacter;
 import model.character.attack.Attack;
 import model.character.item.Item;
 import model.character.item.factory.ItemFactory;
+import model.character.npc.TalkingNPC;
 import resources.additionalClass.Fusion;
 
 public class Cell {
@@ -25,7 +26,7 @@ public class Cell {
 	private GameCharacter gameCharacter;
 	private IntegerProperty mapProperty;
 	private int cellId;
-	
+	private TalkingNPC cellNPC;
 	
 	public Cell(Integer[] backgroundValue,int itemValue,IntegerProperty mapProperty,int cellId){
 		this.background = new Background(backgroundValue);
@@ -45,19 +46,22 @@ public class Cell {
 	
 	public void setToWalkable() {
 		this.background.setToWalkable();
+		this.cellNPC = null;
 		this.triggerChange();
 	}
 
 	public boolean addMovable(GameCharacter movable) {
-		boolean isSet = this.gameCharacter == null && this.isWalkable();
+		
+		//boolean isSet = this.gameCharacter == null && this.isWalkable();
+		boolean isSet = this.isWalkable();
 		if (isSet && movable != null) {
 			this.gameCharacter = movable;
-			this.launchAttacks();
 			if(item!=null && this.item.effectOn(movable)) {
 				this.delItem();
 			}
+			this.launchAttacks();
 		}
-		
+	
 		return isSet;
 	}
 
@@ -92,6 +96,11 @@ public class Cell {
 		this.attackList.remove(attack);
 	}
 	
+	public void clearAttack(Attack attack) {
+		if(attack != null)
+			this.attackList.remove(attack);
+	}
+	
 	public void turn() {
 		this.attackList.clear();
 	}
@@ -112,14 +121,17 @@ public class Cell {
 	}
 
 	public boolean isWalkable() {
-		return (this.background.isWalkable() && this.gameCharacter==null);
+		return (this.background.isWalkable() && this.gameCharacter==null && this.cellNPC == null);
 	}
 
 	public Integer[] getCellBackgroundLayer() {
+		Integer[] layers = this.background.getBackgroundList();
 		if(item != null)
-			return Fusion.fuseIntegerWithArray(this.background.getBackgroundList(),this.item.getImageValue());
-		else
-			return this.background.getBackgroundList();
+			layers = Fusion.fuseIntegerWithArray(layers,this.item.getImageValue());
+		if(cellNPC != null)
+			layers = Fusion.fuseIntegerWithArray(layers, cellNPC.getImageId());
+		
+		return layers;
 	}
 	
 	
@@ -135,6 +147,17 @@ public class Cell {
 			this.mapProperty.set(this.cellId);
 	}
 	
+	public void talk() {
+		if(this.cellNPC != null)
+			this.cellNPC.talk();
+	}
 	
+	//Cette méthode est utilisée pour : l'ajout d'un NPC (valeur != null)
+	//Par la suppression d'un NPC, valeur = null
+	public void setNPC(TalkingNPC npc) {
+		this.cellNPC = npc;
+		if(this.cellNPC != null)
+			this.triggerChange();
+	}
 	
 }

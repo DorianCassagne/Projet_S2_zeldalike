@@ -1,8 +1,8 @@
 package model.character.item.factory;
 
 import model.character.attack.dynamic.Launcher;
-import model.character.attack.statics.BoomerangLauncher;
-import model.character.attack.statics.enemyMover.EnemyMoverLauncher;
+import model.character.attack.statics.hero.bomb.BombLauncher;
+import model.character.attack.statics.hero.enemyMover.EnemyMoverLauncher;
 import model.character.hero.Hero;
 import model.character.item.Item;
 
@@ -16,7 +16,7 @@ public class SpecialAttackItem extends Item{
 		super(launcherValue);
 		switch(launcherValue) {
 		case LAUNCHERBOOMERANG : 
-			launcher = new BoomerangLauncher();
+			launcher = new BombLauncher();
 			break;
 		case LAUNCHERENEMYMOVER : 
 			launcher = new EnemyMoverLauncher();

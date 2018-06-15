@@ -2,6 +2,7 @@ package controler.mainGame;
 
 import java.io.IOException;
 
+
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Stack;
@@ -81,17 +82,15 @@ public class GroundControler implements Initializable {
 			
 			SceneLoader sceneLoader = loader.getController();
 			sceneLoader.loadScene(this);
-			
 			this.mainStackPane.getChildren().add(newView);
-//			this.addToList(parentLoader,sceneLoader,parentNode,newView);
+			
 			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
 	}
-		
-	
+			
 
 	private boolean loadNodeList(Node[] currentList) {
 		boolean loaded = currentList != null;
@@ -112,6 +111,9 @@ public class GroundControler implements Initializable {
 			this.mainStackPane.getChildren().remove(lastIndex);
 	}
 	
+	
+
+
 	
 
 

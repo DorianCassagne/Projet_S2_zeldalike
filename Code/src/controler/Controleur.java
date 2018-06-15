@@ -14,18 +14,23 @@ import controler.gameLoop.GameLoop;
 import controler.input.CommandInterpreter;
 import controler.mainGame.GroundControler;
 import controler.mainGame.SceneLoader;
+import controler.menu.ChargerMapController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.TilePane;
+import javafx.scene.text.Text;
 import model.Game;
+import model.GameStatus;
+import model.gameMap.GameMap;
 import model.gameMap.additional.MapReader;
 import model.gameMap.additional.Statics;
+import vue.gameClass.HeroView;
 import vue.gameClass.MapView;
 import vue.gameClass.MessageView;
 import vue.other.TexturePack;
@@ -39,20 +44,23 @@ public class Controleur implements Initializable,SceneLoader{
 	public final static String FXMLLOADMENUPATH = "menu/MenuChargerMap.fxml";
 	public final static String FXMLPAUSEPATH = "menu/MenuDePause.fxml";
 	public final static String FXMLGAMEOVERMENUPATH = "menu/GameOverMenu.fxml";
-	private final static String TILESETPATH = "src/resources/tileset/Image/jeudi7.png";
-	
-	@FXML    private AnchorPane mainAnchorPane;
-    @FXML    private AnchorPane characterAnchorPane;
-    @FXML    private TilePane mapTilePane;
-    @FXML    private ImageView avatarImage;
-    @FXML    private Label HPLabel;
-    @FXML    private ProgressBar HPProgressBar;
-    @FXML    private Label MPLabel;
-    @FXML    private ProgressBar MPProgressBar;
-    @FXML    private ImageView itemImageView;
-    @FXML    private ImageView attackImageView;
-    @FXML    private ImageView defImageView;
-    @FXML 	 private TextArea messageText;
+	private final static String TILESETPATH = "src/resources/tileset/Image/lundi11.png";
+	private static GameStatus myGameStat ;
+
+	@FXML   private AnchorPane mainAnchorPane;
+    @FXML   private AnchorPane characterAnchorPane;
+    @FXML   private TilePane mapTilePane;
+    @FXML   private ImageView avatarImage;
+    @FXML   private Label HPLabel;
+    @FXML   private ProgressBar HPProgressBar;
+    @FXML   private Label MPLabel;
+    @FXML   private ProgressBar MPProgressBar;
+    @FXML   private ImageView attackImageView;
+    @FXML   private ImageView defImageView;
+    @FXML   private TextArea messageText;
+    @FXML	private Text scoreText;
+    @FXML	private Button DefenseButton;
+    @FXML   private Button attackButton;
     
 	private Game myGame;
 	private CommandInterpreter interpreter;
@@ -65,6 +73,15 @@ public class Controleur implements Initializable,SceneLoader{
 	
 	static {
 		TEXTURE = new TexturePack(TILESETPATH,Statics.LINELENGTH, ConversionAndStatics.TILEDIMENSION);
+		myGameStat = null;
+	}
+	
+	
+
+	public static void setGameStat(ChargerMapController mapLoader , GameStatus gameStatus) {
+		if(mapLoader != null) {
+			myGameStat = gameStatus;
+		}
 	}
 	
 	/*
@@ -80,7 +97,8 @@ public class Controleur implements Initializable,SceneLoader{
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		this.initMap();
 		this.initControllerData();
-		this.initGameInterpreterAndLoop();	
+		this.initGameInterpreterAndLoop();
+		this.scoreText.textProperty().bind(GameMap.getScoreBinding().asString());
 	}
 	
 	
@@ -112,22 +130,27 @@ public class Controleur implements Initializable,SceneLoader{
 	
 	//Initialiser
 	private void initGame() {
-		this.myGame = new Game(this.messageZone);
+		this.myGame = new Game(this.messageZone,myGameStat);
 		this.myGame.changeMapProperty().addListener(
 				(obs,oldValue,newValue)->this.createMap()
 		);
 	}
 	
 	private void initControllerData() {
-		this.controllerData = new ControlerEncoder(this.characterAnchorPane, this.HPLabel, this.HPProgressBar,this.MPLabel,this.MPProgressBar,this.defImageView,this.attackImageView,this.myGame);
+		this.controllerData = new ControlerEncoder(this.characterAnchorPane, this.HPLabel, this.HPProgressBar,this.MPLabel,this.MPProgressBar,this.myGame);
+		this.controllerData.addButtonImage(attackImageView, attackButton,HeroView.ATTACKINDEX);
+		this.controllerData.addButtonImage(defImageView, DefenseButton,HeroView.DEFENSEINDEX);
+
 	}
 
 	private void initGameInterpreterAndLoop() {
 		MessageView message = new MessageView(this.messageText, this.messageZone);
+		
 		this.gameLoop = new GameLoop(this.messageZone,this.controllerData);
-		System.out.println(this.controllerData);
 		this.interpreter = new CommandInterpreter(this.myGame,this.gameLoop,message.waitingProperty());
+		
 		this.gameLoop.start();
+	
 	}
 	
 	private void initMap() {

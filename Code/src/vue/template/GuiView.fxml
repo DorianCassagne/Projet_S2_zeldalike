@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.TextArea?>
@@ -14,10 +15,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.TilePane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="mainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controler.Controleur">
+<AnchorPane fx:id="mainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controler.Controleur">
    <children>
       <AnchorPane fx:id="characterAnchorPane" prefHeight="600.0" prefWidth="960.0">
          <children>
@@ -51,11 +52,25 @@
                   <ProgressBar fx:id="MPProgressBar" prefHeight="25.0" prefWidth="150.0" progress="1.0" style="-fx-accent: #05d8cc; -fx-border-color: #05d8aa; -fx-border-radius: 10;" />
                </children>
             </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <Label text="Score" textFill="#dadada">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+                  <Text fx:id="scoreText" fill="#6cf85f" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
+               </children>
+            </HBox>
             <HBox alignment="CENTER_RIGHT" maxHeight="77.0" prefHeight="61.0" prefWidth="294.0" spacing="10.0" HBox.hgrow="ALWAYS">
                <children>
                   <Button fx:id="DefenseButton" contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="50.0" prefWidth="116.0" style="-fx-background-color: inherit; -fx-background-radius: 20;" underline="true">
                      <graphic>
-                        <ImageView fx:id="itemImageView" accessibleHelp="omar" accessibleRoleDescription="omar" accessibleText="omar" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="defImageView" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
                   </Button>
                   <Button fx:id="attackButton" contentDisplay="RIGHT" mnemonicParsing="false" style="-fx-background-color: inherit; -fx-background-radius: 20;" underline="true">
@@ -70,6 +85,9 @@
                <padding>
                   <Insets right="20.0" />
                </padding>
+               <HBox.margin>
+                  <Insets top="5.0" />
+               </HBox.margin>
             </HBox>
          </children>
       </HBox>

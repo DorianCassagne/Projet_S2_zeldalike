@@ -55,9 +55,6 @@ public abstract class GameCharacter extends Movable{
 	}
 	
 
-	protected void removeCharacter() {
-		this.getMyMap().delCharacter(this, getRow(), getColumn());
-	}
 
 	public abstract void launchAttack(Movement move);
 	public abstract void getDmg(Attack attack);

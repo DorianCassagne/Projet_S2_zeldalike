@@ -18,7 +18,7 @@ public class MapReader {
 		BufferedReader reader;
 		
 		for(int i = 0 ; i < path.length;i++) {
-			reader = SeparatorFileReader.openTextFile(MAPFILEPATH + path[i]);
+			reader = SeparatorFileReader.openTextFile(MAPFILEPATH + path[i],true);
 			Integer[] values = SeparatorFileReader.readAllIntLines(reader, SEPARATOR, MAPLENGTH);
 			result[i] = values;
 		}

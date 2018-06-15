@@ -1,6 +1,7 @@
 package model.gameMap.move;
 
 import java.util.ArrayList;
+
 import java.util.HashMap;
 import model.character.Movable;
 import model.character.PendingMovable;

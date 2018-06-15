@@ -18,4 +18,13 @@ public class Conversion {
 		
 		return result;
 	}
+	
+	public final static int getNegatifCoefficient(int diff) {
+		int coefficient = 1;
+		if(diff < 0)
+			coefficient = -1;
+		else if(coefficient == 0)
+			coefficient = 0;
+		return coefficient;
+	}
 }

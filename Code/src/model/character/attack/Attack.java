@@ -33,14 +33,18 @@ public abstract class Attack extends Movable {
 			this.cellPerTurn = cellPerTurn;
 			this.maxDistance = maxDistance;
 			this.isAlive = true;
-			row += direction.getVerticalIncrement() ;
-			column += direction.getHorizontalIncrement();
-			this.getMyMap().addAttack(this, row, column);
-			this.establishMove();
+			initAttack();
 		}
 
 	}	
 
+	
+	private void initAttack() {
+		this.moveAttack();
+		this.getMyMap().addAttack(this, this.getRow(), this.getColumn());
+		this.launchAttack();
+
+	}
 	
 	@Override
 	public Move act() {
@@ -49,28 +53,48 @@ public abstract class Attack extends Movable {
 	}
 
 	
-	
-	private int establishMove() {
+	private void clearLastAttack() {
 		int row = this.getRow();
 		int column = this.getColumn();
+		for(int i = 0 ; i < this.cellPerTurn;i++) {
+			row -= this.direction.getVerticalIncrement();
+			column -= this.direction.getHorizontalIncrement();
+			this.getMyMap().clearAttack(row,column,this);
+		}
+	}
+	
+	private void launchAttack() {
+		byte playAttack = this.getMyMap().playAttack(this, this.getRow(), this.getColumn());
+		this.maxDistance--;
+	
+		if(!handleMove(playAttack)) {
+			int row = this.getRow() - this.direction.getVerticalIncrement();
+			int column = this.getColumn() - this.direction.getHorizontalIncrement();
+			this.setCellId(row, column);
+			this.isAlive = false;
+		}
+		
+	}
+	
+	private int establishMove() {
+
+		this.clearLastAttack();
 		int index = 0;
 
 		while(index < this.cellPerTurn && this.isAlive()) {
-			row +=  this.direction.getVerticalIncrement();
-			column +=  this.direction.getHorizontalIncrement() ;
-			byte playAttack = this.getMyMap().playAttack(this, row, column);
-			this.maxDistance--;
-
-			if(!handleMove(playAttack)) {
-				row = this.getRow();
-				column = this.getColumn();
-				this.isAlive = false;
-			}
-			this.setCellId(row, column);
+			this.moveAttack();
+			this.launchAttack();
 			index++;
 		}
 		
-		return Statics.convertToCellId(row, column);
+		return this.getCellId();
+
+	}
+	
+	private void moveAttack() {
+		int row = this.getRow() + this.direction.getVerticalIncrement();
+		int column = this.getColumn() +  this.direction.getHorizontalIncrement() ;
+		this.setCellId(row, column);
 
 	}
 		
@@ -120,5 +144,8 @@ public abstract class Attack extends Movable {
 	
 	protected abstract void establishAttack(GameCharacter gameCharacter);
 	
+	protected final static int getAttaqueValue(int playerAtk,int attackNormalDmg) {
+		return playerAtk + attackNormalDmg;
+	}
 	
 }

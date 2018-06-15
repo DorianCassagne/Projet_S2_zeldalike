@@ -1,12 +1,12 @@
 package model.scenario.action;
 
 import java.util.ArrayList;
+
 import java.util.HashMap;
 
 import javafx.beans.property.StringProperty;
 import model.character.enemy.Enemy;
 import model.gameMap.GameMap;
-import model.scenario.Evenement;
 
 public class ActionData {
 	private StringProperty messageProperty;

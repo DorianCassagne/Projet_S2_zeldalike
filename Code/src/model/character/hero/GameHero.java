@@ -1,146 +1,121 @@
+
 package model.character.hero;
 
 
-import java.util.ArrayList;
-
-
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
+import model.character.item.attack.*;
+import model.character.item.def.*;
+import model.character.item.mp.*;
+import model.character.item.hpPotion.*;
+import model.character.item.mpPotion.*;
+import model.character.item.pvItem.*;
+import model.character.item.speed.SpeedItemEnum;
+import model.character.attack.dynamic.*;
+import model.GameStatus;
 import model.character.GameCharacter;
 import model.character.attack.Attack;
-import model.character.attack.dynamic.DefaultAttackLauncher;
-import model.character.attack.dynamic.Launcher;
-import model.character.item.attack.AttackItem;
-import model.character.item.def.DefenseItemEnum;
-import model.character.item.hp.HealEnum;
-import model.character.item.pvItem.HealthEnum;
 import model.gameMap.GameMap;
 import model.gameMap.move.Movement;
 
 public abstract class GameHero extends GameCharacter {
 	
-	private final static int DEFAULTCYCLE = 25;
-	private final static double DEFAULTCOEFFICIENT = 0.5;
-	private final static int DEFAULTHP = 300;
-	private final static int DEFAULTMP = 200;
-	private final static int DEFAULTDEF = 40;
-	private final static int DEFAULTIMAGE = 8;
-	private final static AttackItem DEFAULTATKITEM = new AttackItem(809);
-	
-	private IntegerProperty def;
-	private IntegerProperty hp;
-	private IntegerProperty mp;
-	private CopyOfHeroStats safeStats;
-	private int maxHP;
-	private IntegerProperty attackItemImage;
-	private ArrayList<Launcher> attackList;
-	private int attackType;
-	
-	public GameHero(GameMap map, int startRow, int startColumn, int defaultImage,int startDef) {
-		super(map, startRow, startColumn, DEFAULTCYCLE, DEFAULTCOEFFICIENT, defaultImage);
-		initialiseProperties(startDef);
-		initAttack();
+	 final static int DEFAULTCYCLE = 20;
+	 final static double DEFAULTCOEFFICIENT = 1.5;
+	 final static int DEFAULTHP = 300;
+	 final static int DEFAULTMP = 200;
+	 final static int DEFAULTDEF = 40;
+	 final static int DEFAULTATK = 50;
+	 final static int DEFAULTIMAGE = 8;
+	 final static AttackItemEnum DEFAULTATKITEM = AttackItemEnum.LANCER;
+	 
+	private HeroStats heroStats;
+		
+	public GameHero(GameMap map, int startRow, int startColumn,GameStatus gameStatus) {
+		super(map, startRow, startColumn, DEFAULTCYCLE, DEFAULTCOEFFICIENT, DEFAULTIMAGE);
+		this.heroStats = new HeroStats(gameStatus);
+		this.loadState(gameStatus);
 	}
 				
-	public GameHero(GameMap map, int startRow, int startColumn) {
-		this(map, startRow, startColumn,DEFAULTIMAGE,DEFAULTDEF);
-	}
-
-	
-	private void initAttack() {
-		this.attackList = new ArrayList<Launcher>();
-		this.setAttackIndex(0);
-		this.attackList.add(new DefaultAttackLauncher(DEFAULTATKITEM));
-	}
-	
-
-	
-	private  void initialiseProperties(int def) {
 		
-		this.hp = new SimpleIntegerProperty(DEFAULTHP);
-		this.def = new SimpleIntegerProperty(def);
-		this.attackItemImage = new SimpleIntegerProperty(0);
-		this.mp = new SimpleIntegerProperty(DEFAULTMP);
-		this.safeStats = new CopyOfHeroStats(this.hp,this.def,this.attackItemImage,this.mp);
-		this.maxHP = DEFAULTHP;
-	}
-
-	public void addLauncher(Launcher launcher) {
-		if(launcher !=  null)
-			this.attackList.add(launcher);
+	@Override
+	public void getDmg(Attack attack) {
+		this.heroStats.getDmg(attack);
 	}
 	
-	public CopyOfHeroStats getHeroStats() {
-		return this.safeStats;
+	
+	@Override
+	public boolean isAlive() {
+		return this.heroStats.getHP() > 0;
+	}
+
+	public void setBasicDef(DefenseItemEnum defenseItem) {
+		this.heroStats.setBasicDef(defenseItem);
+	}
+	
+	public void heal(HealEnum healer) {
+		this.heroStats.heal(healer);
+	}
+	
+	public void increaseMP(MPItemEnum MPItem) {
+		this.heroStats.increaseMP(MPItem);
+	}
+	
+	public void healMP(MPPotionItemEnum MPPotion) {
+		this.heroStats.healMP(MPPotion);
 	}
 	
 	public void setMaxHp(HealthEnum healthItem) {
-		if(healthItem != null) {
-			this.maxHP = DEFAULTHP + healthItem.getMoreHp();
-		}
+		this.heroStats.setMaxHp(healthItem);
+	}
+	
+	public void addLauncher(Launcher launcher) {
+		this.heroStats.addLauncher(launcher);
+	}
+	
+	public void setBasicAtk(AttackItemEnum attackItem) {
+		this.heroStats.setBasicAtk(attackItem);
 	}
 	
 	@Override
 	public void launchAttack(Movement direction) {
-		this.attackList.get(this.attackType).launch(this.getMyMap(), direction, this.getRow(), this.getColumn());
-	}
-
-	
-	public void heal(HealEnum healer) {
-		this.setHP(this.hp.get() + healer.getHeal());
-	}
-	
-	public void setBasicAtk(AttackItem attack) {
-		if(attack != null)
-			this.attackList.set(0, new DefaultAttackLauncher(attack));
-		else
-			throw new IllegalArgumentException("THE ATTACK CHANGE IS NULL");
-	}
-	
-	public void setBasicDef(DefenseItemEnum defenseItem) {
-		if(defenseItem != null) {
-			this.def.set(defenseItem.getMoreDef() + DEFAULTDEF);
+		Launcher attack = this.heroStats.getCurrentAttack();
+		if(attack != null) {
+			attack.launch(this.getMyMap(), direction, this.getRow(), this.getColumn(),this.heroStats.getAtk());
 		}
 	}
 	
-	@Override
-	public void getDmg(Attack attack) {
-		this.hp.set(this.hp.get() - GameCharacter.calculateDamage(attack.getDamage(), this.def.get()));
+	public CopyOfHeroStats getHeroStats() {
+		return this.heroStats.getHeroStats();
+	}
+	
+	public void setSpeed(SpeedItemEnum speedItem) {
+		if(this.getMoveCycle() == DEFAULTCYCLE) {
+			int newSpeed = DEFAULTCYCLE * (1 - speedItem.getItemSpeed()/100);
+			this.setWait(newSpeed);
+
+		}
+	}
+	
+	public GameStatus getGameStatus() {
+		
+		CopyOfHeroStats myStats = this.heroStats.getHeroStats();
+		GameStatus status = new GameStatus(myStats,this.getRow(),this.getColumn(),0,this.getMyMap().getMapId());
+		return status;
 	}
 	
 	
-	private void setHP(int newHP) {
-		if(newHP < 0) 
-			newHP = 0;
-		else if(newHP > this.maxHP)
-			newHP = this.maxHP;
-		this.hp.set(newHP);
+	//@throws IllegalArgumentException
+	private void loadState(GameStatus mapStat) {
+		
+		if(mapStat != null) {
+			AttackItem attackItem = new AttackItem(mapStat.getAttackItem());
+			attackItem.effectOn(this);
+			
+			DefenseItem defenseItem = new DefenseItem(mapStat.getDefenseItem());
+			defenseItem.effectOn(this);
+		}
 	
 	}
 
 	
-	@Override
-	public boolean isAlive() {
-		return this.hp.get() > 0;
-	}
 	
-	private void setAttackIndex(int newAttackIndex) {
-		int nextAttackIndex = newAttackIndex;
-		if(newAttackIndex >= this.attackList.size()) {
-			nextAttackIndex = 0;
-		}
-		this.attackType = nextAttackIndex;
-		updateAttackImage();
-	}
-	
-	private void updateAttackImage() {
-		if(this.attackType < this.attackList.size()) {
-			int newImageValue = this.attackList.get(this.attackType).getImage();
-			this.attackItemImage.set(newImageValue);
-		}
-	}
-
-	protected void changeAttack() {
-		setAttackIndex(this.attackType + 1);
-	}
 }
