@@ -28,4 +28,9 @@ public class DynamicLauncher implements Launcher {
 	public int getDamage() {
 		return this.launcher.getDamage();
 	}
+	@Override
+	public int getImage() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

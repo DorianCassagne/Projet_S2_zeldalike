@@ -19,4 +19,11 @@ public class BombLauncher implements Launcher{
 		return Bomb.DEFAULTDAMAGE;
 	}
 
+
+	@Override
+	public int getImage() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

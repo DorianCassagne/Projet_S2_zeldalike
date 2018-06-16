@@ -87,6 +87,12 @@ public class DefaultAttackLauncher implements Launcher{
 	public int getDamage() {
 		return this.type.getDmg();
 	}
+
+
+	@Override
+	public int getImage() {
+		return this.type.getImage();
+	}
 	
 
 }

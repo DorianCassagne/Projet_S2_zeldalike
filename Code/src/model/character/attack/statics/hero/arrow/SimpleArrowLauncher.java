@@ -1,6 +1,7 @@
 package model.character.attack.statics.hero.arrow;
 
 import model.character.attack.Launcher;
+import model.character.item.attack.AttackItemEnum;
 import model.gameMap.GameMap;
 import model.gameMap.move.Movement;
 
@@ -24,6 +25,12 @@ public class SimpleArrowLauncher implements Launcher {
 	@Override
 	public int getDamage() {
 		return this.lastAttack.getDamage();
+	}
+
+
+	@Override
+	public int getImage() {
+		return 0;
 	}
 
 	

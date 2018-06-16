@@ -19,6 +19,13 @@ public class EnemyMoverLauncher implements Launcher{
 		return EnemyMover.DEFAULTDAMAGE;
 	}
 
+
+	@Override
+	public int getImage() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 	
 
 }
