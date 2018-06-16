@@ -54,6 +54,7 @@ public abstract class Movable {
 	protected void setImage(int i) {
 		this.imageValueProperty.set(this.defaultImage +i);
 	}
+	
 			
 	public final IntegerProperty getImageValueProperty() {
 		return this.safeImageValueProperty;

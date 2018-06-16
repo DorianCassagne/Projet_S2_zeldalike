@@ -66,12 +66,12 @@ public class NyaBlock  extends Enemy{
 		if (att) {
 			setImage(img);
 			new NyanAttHori(getMyMap(), getRow(), getColumn(), mov);
-			new Missile(getMyMap(), getRow(), getColumn(), Movement.RIGHT);
+			//new Missile(getMyMap(), getRow(), getColumn(), Movement.RIGHT);
 			att = false;
 		}
 		
-		else if (ran.nextInt(50)==0) {
-			setWait(100);
+		else if (ran.nextInt(150)==0) {
+			setWait(150);
 			setImage(img-1);
 			att=true;
 		}

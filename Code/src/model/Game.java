@@ -3,10 +3,9 @@ package model;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import model.character.enemy.Fairy;
 import javafx.beans.property.StringProperty;
-import model.character.enemy.MonkeyGuard;
 import model.character.enemy.normal.IntelligentTower;
-import model.character.enemy.normal.Tower;
 import model.character.hero.CopyOfHeroStats;
 import model.character.hero.Hero;
 import model.gameMap.GameMap;
@@ -37,7 +36,9 @@ public class Game {
 			this.changeMap(0);
 		else
 			this.changeMap(gameStat.getMapId());
+		
 		new IntelligentTower(myMap, 58, 26);
+		new Fairy(myMap, 12, 13);
 	}
 
 	
