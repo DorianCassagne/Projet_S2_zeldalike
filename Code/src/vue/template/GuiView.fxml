@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="mainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controler.Controleur">
+   <children>
+      <AnchorPane fx:id="characterAnchorPane" prefHeight="600.0" prefWidth="960.0">
+         <children>
+            <TilePane fx:id="mapTilePane" layoutX="20.0" layoutY="73.0" opacity="0.85" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+         </children>
+      </AnchorPane>
+      <HBox layoutX="20.0" layoutY="20.0" opacity="0.7" prefHeight="10.0" spacing="10.0" style="-fx-background-color: black;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fx:id="avatarImage" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <HBox.margin>
+                  <Insets top="10.0" />
+               </HBox.margin>
+            </ImageView>
+            <HBox alignment="CENTER_LEFT" prefHeight="66.0" prefWidth="244.0" spacing="5.0">
+               <children>
+                  <Label fx:id="HPLabel" maxWidth="40.0" minWidth="40.0" prefHeight="76.0" prefWidth="40.0" text="200" textFill="#eb0505">
+                     <font>
+                        <Font name="KacstOne Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <ProgressBar fx:id="HPProgressBar" prefHeight="25.0" prefWidth="150.0" progress="1.0" style="-fx-accent: red; -fx-border-color: red; -fx-border-radius: 5;" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="66.0" prefWidth="270.0" spacing="5.0">
+               <children>
+                  <Label fx:id="MPLabel" maxWidth="40.0" minHeight="0.0" minWidth="40.0" prefHeight="33.0" prefWidth="40.0" text="200" textFill="#1998dd">
+                     <font>
+                        <Font name="KacstOne Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <ProgressBar fx:id="MPProgressBar" prefHeight="25.0" prefWidth="150.0" progress="1.0" style="-fx-accent: #05d8cc; -fx-border-color: #05d8aa; -fx-border-radius: 10;" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <Label text="Score" textFill="#dadada">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+                  <Text fx:id="scoreText" fill="#6cf85f" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" maxHeight="77.0" prefHeight="61.0" prefWidth="294.0" spacing="10.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Button fx:id="DefenseButton" contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="50.0" prefWidth="116.0" style="-fx-background-color: inherit; -fx-background-radius: 20;" underline="true">
+                     <graphic>
+                        <ImageView fx:id="defImageView" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
+                  </Button>
+                  <Button fx:id="attackButton" contentDisplay="RIGHT" mnemonicParsing="false" style="-fx-background-color: inherit; -fx-background-radius: 20;" underline="true">
+                     <graphic>
+                        <ImageView fx:id="attackImageView" fitHeight="40.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
+                  </Button>
+               </children>
+               <HBox.margin>
+                  <Insets top="5.0" />
+               </HBox.margin>
+               <padding>
+                  <Insets right="20.0" />
+               </padding>
+               <HBox.margin>
+                  <Insets top="5.0" />
+               </HBox.margin>
+            </HBox>
+         </children>
+      </HBox>
+      <AnchorPane cacheShape="false" layoutY="383.0" opacity="0.96" prefHeight="197.0" prefWidth="560.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="383.0">
+         <children>
+            <TextArea fx:id="messageText" editable="false" prefHeight="200.0" prefWidth="200.0" style="-text-area-background: #555;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <font>
+                  <Font name="FreeSerif" size="22.0" />
+               </font>
+            </TextArea>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
