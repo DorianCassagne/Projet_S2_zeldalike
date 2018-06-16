@@ -38,7 +38,7 @@ public class Game {
 			this.changeMap(gameStat.getMapId());
 		
 		new IntelligentTower(myMap, 58, 26);
-		new Fairy(myMap, 12, 13);
+		new Fairy(myMap, 54, 27);
 	}
 
 	

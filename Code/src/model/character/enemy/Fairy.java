@@ -16,7 +16,7 @@ import model.gameMap.move.Movement;
 
 public class Fairy extends EnemyNormal {
 	private final static int CYCLE=30;
-	private final static int IMG=32;
+	private final static int IMG=9;
 	private final static int DEF=30;
 	private final static int DMG=30;
 	private final static int HP=3000;
@@ -30,9 +30,11 @@ public class Fairy extends EnemyNormal {
 	
 	public Fairy(GameMap map, int startRow, int startColumn) {
 		super(map, startRow, startColumn, CYCLE, IMG, HP, DEF, DMG,SCORE);
+		
 		state=ran.nextBoolean();
+		
 		if (!state)
-			valImg=8;
+			valImg = 0;
 			
 		this.setImage(valImg);
 	}
