@@ -98,5 +98,28 @@ public enum Movement {
 		
 		return movement;
 	}
+	
+	
+	public static Movement getOppositeOf(Movement actualMovement) {
+		
+		Movement opposite = Movement.STAY;
+		
+		if(actualMovement != Movement.STAY) {
+			int index = actualMovement.getIndex();
+			int offset = 0;
+			
+			if(index > Movement.STAY.ordinal()) {
+				offset = 5;
+			}
+			
+			int oppositeIndex = (index + 2) % 4 ;
+			
+			opposite = Movement.values()[offset + oppositeIndex];
+			
+		}
+		
+		return opposite;
+		
+	}
 
 }

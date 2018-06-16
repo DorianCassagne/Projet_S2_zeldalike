@@ -15,24 +15,27 @@ import model.gameMap.move.Move;
 import model.gameMap.move.Movement;
 
 public class Fairy extends EnemyNormal {
-	private final static int CYCLE=30;
-	private final static int IMG=9;
-	private final static int DEF=30;
-	private final static int DMG=30;
-	private final static int HP=3000;
+	private final static int CYCLE = 30;
+	private final static int IMG = 32;
+	private final static int DEF = 30;
+	private final static int HP = 3000;
 	private final static int SCORE = 1000;
+	private final static double DEFAULTCOEFFICIENT = 1.7;
+	private final static Random RAND = new Random();
+
 	private boolean state;
 	private boolean att;
 	private int valImg;
 	private int[] joinTab;
 	private Movement attDir;
-	private final Random ran = new Random();
+	
 	
 	public Fairy(GameMap map, int startRow, int startColumn) {
-		super(map, startRow, startColumn, CYCLE, IMG, HP, DEF, DMG,SCORE);
+		super(map, startRow, startColumn, CYCLE, DEFAULTCOEFFICIENT, IMG, HP, DEF,SCORE);
 		
-		state=ran.nextBoolean();
+		state = RAND.nextBoolean();
 		
+		System.out.println("My Image is : " + this.getImageValueProperty().get());
 		if (!state)
 			valImg = 0;
 			
@@ -52,64 +55,90 @@ public class Fairy extends EnemyNormal {
 		return ret%4;
 	}
 	
+	private void updateState() {
+		att=false;
+		this.setWait(200);
+		state=RAND.nextBoolean();
+		
+		if (!state)
+			valImg=8;
+		
+		else
+			valImg=0;
+
+	}
+	
+	/*
+	 * @see model.character.Movable#act()
+	 */
 	@Override
 	protected Move act() {
+		
+		Move move  = null;
+		
 		if(att) {
-		att=false;
-			if (state) 
-				new Missile(this.getMyMap(), this.getRow(), this.getColumn(), attDir);
-			else
-				new Bommerang(getMyMap(), getRow(), getColumn(), attDir);
 			
-			this.setWait(200);
-			att=false;
-			state=ran.nextBoolean();
-			if (!state)
-				valImg=8;
-			else
-				valImg=0;
+			this.launchAttack(attDir);
+			this.updateState();
+			
 		}
 		else {
+			
 			getAround((state)?2:5);
-			if(inPlace()!=-1) {
-				att=true;
-				this.attDir= Movement.values()[inPlace()];
-				this.setImage(attDir.getIndex()+4+valImg);
+			
+			if(inPlace() != -1) {
+				att = true;
+				
 				setWait((state)?(CYCLE*3):(CYCLE*4));
+				
+				this.attDir = Movement.values()[inPlace()];
+				this.setImage(attDir.getIndex() + 4);
+			
 			}
 			else {
-				int nextCell= BFS1.simpleMove(this.getMyMap(), this.getCellId(), joinTab, true, 0);
-				int actualCell= this.getCellId();
-				if(this.getMyMap().changeCell(this,this.getRow(),this.getColumn(),Statics.convertToRow(nextCell),Statics.convertToColomn(nextCell))){
-					if (!state)
-						setWait(CYCLE*2);
-					
-					if(actualCell + MapReader.MAPLENGTH == nextCell) {
-						this.setImage(valImg+2);
-					}
-					
-					else if(actualCell - MapReader.MAPLENGTH == nextCell) {
-						this.setImage(valImg);
-					}
-					
-					else if(actualCell + 1 == nextCell) {
-						this.setImage(valImg+1);
-					}
-					
-					else if(actualCell - 1 == nextCell) {
-						this.setImage(valImg+3);
-					}
-					else
-						System.out.println("merde"+actualCell+"  "+nextCell);
-					
-					return new Move(nextCell,this.getMoveCycle());
-				}
+				move = this.runBFS();
 			}
 		}
 		
-		return null;
+		return move;
 	
 	}
+	
+	
+	private Move runBFS() {
+		int nextCell= BFS1.simpleMove(this.getMyMap(), this.getCellId(), joinTab, true, 0);
+		int actualCell= this.getCellId();
+		Move BFSMove = null;
+		
+		if(this.getMyMap().changeCell(this,this.getRow(),this.getColumn(),Statics.convertToRow(nextCell),Statics.convertToColomn(nextCell))){
+			
+			if (!state)
+				setWait(CYCLE*2);
+			
+			if(actualCell + MapReader.MAPLENGTH == nextCell) {
+				this.setImage(valImg+2);
+			}
+			
+			else if(actualCell - MapReader.MAPLENGTH == nextCell) {
+				this.setImage(valImg);
+			}
+			
+			else if(actualCell + 1 == nextCell) {
+				this.setImage(valImg+1);
+			}
+			
+			else if(actualCell - 1 == nextCell) {
+				this.setImage(valImg+3);
+			}
+			else
+				System.out.println("PAS A COTÉ : "+actualCell+"  "+nextCell);
+			
+			BFSMove = new Move(nextCell,this.getMoveCycle());
+		}
+
+		return BFSMove;
+	}
+	
 	/**
 	 * put in jointtab all the cells around the hero
 	 * @param decal
@@ -137,7 +166,13 @@ public class Fairy extends EnemyNormal {
 	}
 	@Override
 	public void launchAttack(Movement move) {
-		// TODO Auto-generated method stub
+
+		
+		if (state) 
+			new Missile(this.getMyMap(), this.getRow(), this.getColumn(), attDir);
+		else
+			new Bommerang(getMyMap(), getRow(), getColumn(), attDir);
+		
 		
 	}
 	

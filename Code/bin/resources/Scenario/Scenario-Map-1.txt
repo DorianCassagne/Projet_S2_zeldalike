@@ -1,0 +1,4 @@
+//
+N:8: :->C-M-BADMONKEY-m1-3627->C-M-BADMONKEY-m2-3171->C-M-BADMONKEY-m3-3030->C-M-BADMONKEY-m4-3799
+//Ouvrir les portes
+M:m1: :-AND-M:m2: :-OR-H:3031: :->S-m--Vous avez réussi à ouvrir les portes-3239->D-W--Vous avez réussi à ouvrir les portes-3040->D-W--Vous avez réussi à ouvrir les portes-3039

@@ -123,7 +123,8 @@ public abstract class Attack extends Movable {
 	}
 
 	protected void setDirection(Movement dir) {
-		this.direction=dir;
+		this.direction = dir;
+		this.setImage(dir);
 	}
 	
 	protected boolean handleMove(byte attackResult) {

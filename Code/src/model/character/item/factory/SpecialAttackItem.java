@@ -1,6 +1,6 @@
 package model.character.item.factory;
 
-import model.character.attack.dynamic.Launcher;
+import model.character.attack.Launcher;
 import model.character.attack.statics.hero.bomb.BombLauncher;
 import model.character.attack.statics.hero.enemyMover.EnemyMoverLauncher;
 import model.character.hero.Hero;
