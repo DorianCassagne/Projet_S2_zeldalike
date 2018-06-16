@@ -5,7 +5,10 @@ import java.util.Random;
 import model.PathFinder.BFS1;
 import model.character.GameCharacter;
 import model.character.attack.statics.Bomb;
+import model.character.attack.statics.Bommerang;
+import model.character.attack.statics.Missile;
 import model.gameMap.GameMap;
+import model.gameMap.additional.MapReader;
 import model.gameMap.additional.Statics;
 import model.gameMap.move.Move;
 import model.gameMap.move.Movement;
@@ -15,7 +18,7 @@ public class Fairy extends Enemy {
 	private final static int IMG=32;
 	private final static int DEF=30;
 	private final static int DMG=30;
-	private final static int HP=30;
+	private final static int HP=3000;
 	private boolean state;
 	private boolean att;
 	private int valImg;
@@ -26,12 +29,15 @@ public class Fairy extends Enemy {
 	public Fairy(GameMap map, int startRow, int startColumn) {
 		super(map, startRow, startColumn, CYCLE, IMG, HP, DEF, DMG);
 		state=ran.nextBoolean();
-		if (state)
-			valImg=0;
-		else
+		if (!state)
 			valImg=8;
+			
+		this.setImage(valImg);
 	}
-
+	/*
+	 * check if the character is in joinTab
+	 * return -1 if not or the index of the cell
+	 */
 	private int inPlace() {
 		int ret=-1;
 		for (int i = 0; i < joinTab.length; i++) {
@@ -45,24 +51,53 @@ public class Fairy extends Enemy {
 	@Override
 	protected Move act() {
 		if(att) {
+		att=false;
+			if (state) 
+				new Missile(this.getMyMap(), this.getRow(), this.getColumn(), attDir);
+			else
+				new Bommerang(getMyMap(), getRow(), getColumn(), attDir);
 			
-			
+			this.setWait(200);
 			att=false;
+			state=ran.nextBoolean();
+			if (!state)
+				valImg=8;
+			else
+				valImg=0;
 		}
 		else {
-			getAround((state)?1:5);
+			getAround((state)?2:5);
 			if(inPlace()!=-1) {
 				att=true;
 				this.attDir= Movement.values()[inPlace()];
-				this.setImage(attDir.getIndex()+valImg);
+				this.setImage(attDir.getIndex()+4+valImg);
+				setWait((state)?(CYCLE*3):(CYCLE*4));
 			}
 			else {
-				int nextCell= BFS1.simpleMove(this.getMyMap(), 
-						this.getCellId(),
-						joinTab, true, 0);
+				int nextCell= BFS1.simpleMove(this.getMyMap(), this.getCellId(), joinTab, true, 0);
+				int actualCell= this.getCellId();
 				if(this.getMyMap().changeCell(this,this.getRow(),this.getColumn(),Statics.convertToRow(nextCell),Statics.convertToColomn(nextCell))){
 					if (!state)
-						setWait(cycle*2);
+						setWait(CYCLE*2);
+					
+					if(actualCell + MapReader.MAPLENGTH == nextCell) {
+						this.setImage(valImg+2);
+					}
+					
+					else if(actualCell - MapReader.MAPLENGTH == nextCell) {
+						this.setImage(valImg);
+					}
+					
+					else if(actualCell + 1 == nextCell) {
+						this.setImage(valImg+1);
+					}
+					
+					else if(actualCell - 1 == nextCell) {
+						this.setImage(valImg+3);
+					}
+					else
+						System.out.println("merde"+actualCell+"  "+nextCell);
+					
 					return new Move(nextCell,this.getMoveCycle());
 				}
 			}
@@ -71,7 +106,10 @@ public class Fairy extends Enemy {
 		return null;
 	
 	}
-	
+	/**
+	 * put in jointtab all the cells around the hero
+	 * @param decal
+	 */
 	private void getAround(int decal) {
 		if(!att) {
 			int row = GameCharacter.getHero().getRow() ;
