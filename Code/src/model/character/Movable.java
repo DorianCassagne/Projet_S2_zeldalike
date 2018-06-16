@@ -49,7 +49,6 @@ public abstract class Movable {
 	
 	protected void setImage(Movement movement) {
 		this.imageValueProperty.set(this.defaultImage + movement.getIndex());
-		System.out.println("The new image is : " + this.imageValueProperty.get());
 	}
 	
 	protected void setImage(int i) {

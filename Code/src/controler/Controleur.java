@@ -44,7 +44,7 @@ public class Controleur implements Initializable,SceneLoader{
 	public final static String FXMLLOADMENUPATH = "menu/MenuChargerMap.fxml";
 	public final static String FXMLPAUSEPATH = "menu/MenuDePause.fxml";
 	public final static String FXMLGAMEOVERMENUPATH = "menu/GameOverMenu.fxml";
-	private final static String TILESETPATH = "src/resources/tileset/Image/vendredi15.png";
+	private final static String TILESETPATH = "src/resources/tileset/Image/samedi16.png";
 	private static GameStatus myGameStat ;
 
 	@FXML   private AnchorPane mainAnchorPane;

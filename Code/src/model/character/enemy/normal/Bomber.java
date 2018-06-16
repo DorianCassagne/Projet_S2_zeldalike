@@ -32,6 +32,7 @@ public class Bomber extends EnemyNormal{
 	public void launchAttack(Movement move) {
 		int nextRow ;
 		int nextColumn;
+		
 		for(Movement movement : Movement.values()) {
 
 			nextRow = this.getRow() + movement.getVerticalIncrement();
@@ -46,7 +47,9 @@ public class Bomber extends EnemyNormal{
 		if(this.counter == MAXCOUNTER) {
 			this.setImage(Movement.BOTTOM);
 			this.launchAttack(null);
+			this.removeCharacter();
 		}
+		
 		else if(this.counter % 2 == 0) {
 			this.setImage(Movement.RIGHT);
 		}

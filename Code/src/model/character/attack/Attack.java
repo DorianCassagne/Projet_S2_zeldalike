@@ -122,9 +122,7 @@ public abstract class Attack extends Movable {
 	public Movement getDirection() {
 		return this.direction;
 	}
-//	protected void setDirection(Movement dir) {
-//		this.direction = dir;
-//	}
+
 	
 	protected boolean handleMove(byte attackResult) {
 		return attackResult % Cell.NOTWALKABLE != 0;

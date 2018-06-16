@@ -181,7 +181,7 @@ public class GameLoop {
 	 */
 	private void addMovable(NewMovable newMovable) {
 		MovableView newMovableView ;
-		System.out.println("MY iD : " + newMovable.getKey() + " Me : "+newMovable);
+
 		if(newMovable != null) {
 			if(newMovable.getKey() == Game.HEROKEY) 
 				newMovableView = new HeroView(newMovable.getCellId(),newMovable.getImageValue(),this.workingData);
