@@ -13,6 +13,7 @@ import model.character.attack.dynamic.*;
 import model.GameStatus;
 import model.character.GameCharacter;
 import model.character.attack.Attack;
+import model.character.attack.Launcher;
 import model.gameMap.GameMap;
 import model.gameMap.move.Movement;
 

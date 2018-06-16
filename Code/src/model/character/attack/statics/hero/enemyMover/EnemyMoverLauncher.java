@@ -1,6 +1,6 @@
 package model.character.attack.statics.hero.enemyMover;
 
-import model.character.attack.dynamic.Launcher;
+import model.character.attack.Launcher;
 import model.gameMap.GameMap;
 import model.gameMap.move.Movement;
 
@@ -13,10 +13,6 @@ public class EnemyMoverLauncher implements Launcher{
 			return MPCONSUME;
 	}
 
-	@Override
-	public int getImage() {
-		return EnemyMover.DEFAULTIMAGE;
-	}
 
 	@Override
 	public int getDamage() {

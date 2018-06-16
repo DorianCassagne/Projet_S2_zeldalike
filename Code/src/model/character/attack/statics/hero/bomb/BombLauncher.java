@@ -1,6 +1,6 @@
 package model.character.attack.statics.hero.bomb;
 
-import model.character.attack.dynamic.Launcher;
+import model.character.attack.Launcher;
 import model.gameMap.GameMap;
 import model.gameMap.move.Movement;
 
@@ -13,10 +13,6 @@ public class BombLauncher implements Launcher{
 		return MANACONSUME;
 	}
 
-	@Override
-	public int getImage() {
-		return Bomb.DEFAULTIMAGE;
-	}
 
 	@Override
 	public int getDamage() {

@@ -1,6 +1,6 @@
 package model.character.attack.statics.hero.arrow;
 
-import model.character.attack.dynamic.Launcher;
+import model.character.attack.Launcher;
 import model.gameMap.GameMap;
 import model.gameMap.move.Movement;
 
@@ -20,11 +20,7 @@ public class SimpleArrowLauncher implements Launcher {
 		return manaPts;
 	}
 
-	@Override
-	public int getImage() {
-		return lastAttack.getImageValueProperty().get();
-	}
-
+	
 	@Override
 	public int getDamage() {
 		return this.lastAttack.getDamage();
