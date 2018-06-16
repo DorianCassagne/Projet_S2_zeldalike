@@ -2,7 +2,6 @@ package model.character.attack;
 import model.character.GameCharacter;
 import model.character.Movable;
 import model.gameMap.GameMap;
-import model.gameMap.additional.Statics;
 import model.gameMap.cell.Cell;
 import model.gameMap.move.Move;
 import model.gameMap.move.Movement;

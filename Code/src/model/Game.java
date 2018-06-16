@@ -5,6 +5,8 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.StringProperty;
 import model.character.enemy.MonkeyGuard;
+import model.character.enemy.normal.IntelligentTower;
+import model.character.enemy.normal.Tower;
 import model.character.hero.CopyOfHeroStats;
 import model.character.hero.Hero;
 import model.gameMap.GameMap;
@@ -33,7 +35,7 @@ public class Game {
 			this.changeMap(0);
 		else
 			this.changeMap(gameStat.getMapId());
-		new MonkeyGuard(myMap, 58, 26, 1);
+		new IntelligentTower(myMap, 58, 26);
 	}
 
 	
