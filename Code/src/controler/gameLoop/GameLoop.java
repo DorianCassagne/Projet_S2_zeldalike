@@ -1,8 +1,6 @@
 package controler.gameLoop;
 
 import java.util.HashMap;
-
-
 import controler.Controleur;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
@@ -25,6 +23,15 @@ public class GameLoop {
 	private ControlerEncoder workingData;
 	private boolean isStopped;
 	
+	
+	/*
+	 * Instancie la gameLoop
+	 * @param StringProperty messageZone : la propriété qui contiendra tous les messages générés dans le jeu
+	 * @param ControlerEncoder data : Contient les informations nécéssaires au déroulement continu du jeu
+	 * 
+	 * Sans excéption
+	 */
+	
 	public GameLoop(StringProperty messageZone,ControlerEncoder data) {
 		this.movableList = new HashMap<Integer,MovableView>();
 		this.gameLoop = new Timeline();
@@ -33,27 +40,46 @@ public class GameLoop {
 		initialiseLoop();
 
 	}
-	
-	/*Public Methods*/
+		
+	/*
+	 * démarre la gameloop
+	 */
 	public void start() {
 		this.gameLoop.play();
 		this.isStopped=false;
 	}
 	
-	
-	public boolean getIsStopped() {
-		return isStopped;
-	}
-
+	/*
+	 * Arrête la gameLoop
+	 */
 	public void stop() {
 		this.gameLoop.stop();
 		this.isStopped=true;
 	}
 	
+
+	
+	/*
+	 * Retourne le status de la gameLoop
+	 * 
+	 * @return boolean : - Retourne vrai si la gameLoop est en arrêt
+	 *					 - Retourne faux si la gameloop est en marche
+	 */
+	public boolean getIsStopped() {
+		return isStopped;
+	}
 	
 	/*
 	 * Private Methods
 	 */
+	
+	/*
+	 * Initialise la gameLoop
+	 * Dans cette méthode on définit : 
+	 * -> Le nombre de cycle de gameLoop : infini.
+	 * -> L'action a exécuté pendant chaque tour.
+	 */
+	
 	private void initialiseLoop() {
 		this.gameLoop.setCycleCount(Timeline.INDEFINITE);
 		KeyFrame frame = new KeyFrame(
@@ -63,10 +89,18 @@ public class GameLoop {
 		this.gameLoop.getKeyFrames().add(frame);
 	}
 	
+	/*
+	 * L'exécution prévu chaque tour : 
+	 * -Si le jeu s'arrête alors on arrête la gameLoop 
+	 * -On affiche les nouveaux personnages crées
+	 * -On supprime les personnages qui sont meurts
+	 * -On joue la liste des mouvement
+	 */
 	private void turn() {
 		
 		if(this.workingData.getMyGame().end()) {
 			gameLoop.stop();
+			//On affiche le menu du gameOver
 			this.workingData.getGround().addElement(Controleur.FXMLGAMEOVERMENUPATH);
 		}
 		else {
@@ -76,6 +110,14 @@ public class GameLoop {
 			allTick();
 		}
 	}
+	
+	/*
+	 * Supprime les joueurs au niveau visuel :
+	 * 
+	 *  @param int[] playersId : le tableau contenant tous les identifiants qui vont être supprimées
+	 * 
+	 *  La suppréssion d'un élément se fait par une animation (Fade)
+	 */
 	
 	private void removePlayers(int[] playersId) {
 		FadeTransition ft;
@@ -91,38 +133,68 @@ public class GameLoop {
 		}
 	}
 	
+	
+	/*
+	 * Fait jouer un tour à tous les éléments visuels
+	 */
 	private void allTick() {
 		for(MovableView viewMovabe : this.movableList.values()) {
 			viewMovabe.tick();
 		}
 	}
 	
+	/*
+	 * Joue la liste des mouvements effectués au model : Déplacements
+	 * 
+	 * @param Move[] moves : la liste des mouvements effectués (vérifiez la classe Move)
+	 * 
+	 * 
+	 */
 	private void playMoves(Move[] moves ) {
 		for (Move move : moves) {
 				MovableView movable = this.movableList.get(move.getMovableId());
-				movable.moveTo(move.getEndCellId(),move.getSpeed());
+				if(movable != null)
+					movable.moveTo(move.getEndCellId(),move.getSpeed());
 		}
 		
 		
 	}
 	
+	/*
+	 * Ajoute une liste de joueurs à la vue
+	 * 
+	 * @param NewMovable[] newPlayers: la liste des movables à synchroniser visuellement
+	 *
+	 */
 	private void addPlayers(NewMovable[] newPlayers) {
 		for(NewMovable newPlayer : newPlayers) {
 			addMovable(newPlayer);
 		}
 	}
 	
-	private void addMovable(NewMovable newCharacter) {
-		MovableView newMovable ;
-		if(newCharacter != null) {
-			if(newCharacter.getKey() == Game.HEROKEY) 
-				newMovable = new HeroView(newCharacter.getCellId(),newCharacter.getImageValue(),this.workingData);
+	
+	/*
+	 * Ajoute un movable unique à la vue en créant l'instance visuelle convenable (Héro ou autre)
+	 *  
+	 * @param NewMovable newCharacter : L'élément à afficher
+	 * 
+	 */
+	private void addMovable(NewMovable newMovable) {
+		MovableView newMovableView ;
+
+		if(newMovable != null) {
+			if(newMovable.getKey() == Game.HEROKEY) 
+				newMovableView = new HeroView(newMovable.getCellId(),newMovable.getImageValue(),this.workingData);
 			else
-				newMovable = new MovableView(newCharacter.getCellId(),newCharacter.getImageValue());
-			this.addToMovableList(newMovable,newCharacter.getKey());
+				newMovableView = new MovableView(newMovable.getCellId(),newMovable.getImageValue());
+			this.addToMovableList(newMovableView,newMovable.getKey());
 		}
 	}
 	
+	
+	/*
+	 * Ajoute un movable à la liste des éléments affichables
+	 */
 	private void addToMovableList(MovableView movable,Integer movableId) {
 		this.workingData.getCharacterAnchorPane().getChildren().add(movable);
 		this.movableList.put(movableId, movable);

@@ -9,8 +9,8 @@ import model.gameMap.move.Movement;
 public class SimpleArrow extends Attack {
  
 
-	private final static int DEFAULTCYCLE = 9;
-	private final static int DEFAULTCELLPERTURN = 1;
+	private final static int DEFAULTCYCLE = 1;
+	private final static int DEFAULTCELLPERTURN = 4;
 	private final static int DEFAULTIMAGE = 1616;
 	private final static double DEFAULTCOEFFICIENT = 2;
 	private final static int DEFAULTDAMAGE = 100;

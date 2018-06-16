@@ -14,6 +14,8 @@ import model.gameMap.move.Movement;
 
 public abstract class GameCharacter extends Movable{
 
+	
+	public final static double DEFAULTCOEFFICENT = 1.5;
 	private static Hero Hero;
 	
 	

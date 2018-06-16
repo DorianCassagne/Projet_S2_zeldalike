@@ -2,7 +2,6 @@ package controler.input;
 
 
 import controler.Controleur;
-
 import controler.gameLoop.GameLoop;
 import controler.mainGame.GroundControler;
 import javafx.beans.property.BooleanProperty;

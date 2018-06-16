@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.function.Function;
 import java.util.function.Supplier;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import controler.conversion.ConversionAndStatics;
@@ -43,7 +44,8 @@ public class Controleur implements Initializable,SceneLoader{
 	public final static String FXMLLOADMENUPATH = "menu/MenuChargerMap.fxml";
 	public final static String FXMLPAUSEPATH = "menu/MenuDePause.fxml";
 	public final static String FXMLGAMEOVERMENUPATH = "menu/GameOverMenu.fxml";
-	private final static String TILESETPATH = "src/resources/tileset/Image/mardi12.png";
+	private final static String TILESETPATH = "src/resources/tileset/Image/samedi16.png";
+	
 	private static GameStatus myGameStat ;
 
 	@FXML   private AnchorPane mainAnchorPane;

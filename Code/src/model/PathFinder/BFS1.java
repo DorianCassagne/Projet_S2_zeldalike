@@ -26,7 +26,7 @@ public final class BFS1 {
 	public final static int simpleMove(GameMap map, int cellStart, int[] cellEnd, boolean joinTheCell, int nbCycle) {
 		
 		for (int i : cellEnd) {
-			if(i==cellStart)
+			if(i == cellStart)
 				return cellStart;
 		}
 		
@@ -47,7 +47,6 @@ public final class BFS1 {
 				break;
 		}while (find==null && !last.isEmpty() && nbCycle != 0);
 		if (find==null) {
-			//System.out.println("no way to join him");
 			return cellStart;
 		}
 		if (find.getLast()==null)
@@ -55,6 +54,7 @@ public final class BFS1 {
 		while(find.getLast().getLast()!=null){
 			find=find.getLast();
 		}
+		
 		return find.getIdCell();
 					
 	}

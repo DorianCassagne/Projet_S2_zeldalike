@@ -15,8 +15,6 @@ public class Action {
 	private ArrayList<Integer> removedMovable;//Caract�re qui seront retir� au prochain tour
 	private ArrayList<PendingMovable> pendingMovable;//Caract�res qui vont �tre ajout� au prochain tour
 	private ArrayList<Move> pendingMoves;
-	
-	
 	private int movableId;
 	
 	public Action() {

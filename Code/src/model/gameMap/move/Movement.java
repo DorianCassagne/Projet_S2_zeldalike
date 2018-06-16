@@ -1,9 +1,6 @@
 package model.gameMap.move;
 
-import model.gameMap.additional.MapReader;
 import model.gameMap.additional.Statics;
-import resources.additionalClass.Conversion;
-import resources.additionalClass.UsefulMethods;
 
 public enum Movement {
 	
@@ -18,7 +15,7 @@ public enum Movement {
 	DIAGTL(-Statics.STEP,-Statics.STEP),
 	DIAGDR(Statics.STEP,Statics.STEP),
 	DIAGDL(Statics.STEP,-Statics.STEP);
-	private final static int MAXPOSSIBILERANGE = 66;
+	
 	
 	private int verticaly;
 	private int horizontaly;
@@ -41,39 +38,66 @@ public enum Movement {
 	}
 	
 	public static Movement getDirectionInto(int cellStart,int cellEnd) {
-		int diff = (cellStart - cellEnd);
-		int isNegative = Conversion.getNegatifCoefficient(diff);
-		diff = (Math.abs(cellStart - cellEnd))%(MAXPOSSIBILERANGE);
-		Movement movement;
 		
-		switch(diff * isNegative) {
-		case 64 :
-			movement = Movement.BOTTOM;
-		case -64 :
-			movement = Movement.TOP;
-		case 1 :
-			movement = Movement.RIGHT;
-		case -1 :
-			movement = Movement.LEFT;
-		case 65 :
-			movement = Movement.DIAGTR;
-		case 63 :
-			movement = Movement.DIAGTL;
-		case -65 :
-			movement = Movement.DIAGDR;
-		case -63 :
-			movement = Movement.DIAGDL;
-		case 0 :
-			movement = Movement.STAY;
-		default :
-			movement = null;
-		}
+		int rowDifference = Statics.convertToRow(cellEnd) - Statics.convertToRow(cellStart);
+		int columnDifference = Statics.convertToColomn(cellEnd) - Statics.convertToColomn(cellStart);
+		int verticalIncreement = 0;
+		int horizontalIncreement = 0;
+		int coefficient = 2;
 		
-		return movement;
+		
+		if(rowDifference < 0 && columnDifference > 0)
+			verticalIncreement = 0;
+		else if(columnDifference < 0 && rowDifference < 0)
+			verticalIncreement = 8;
+		else if(rowDifference > 0)
+			verticalIncreement = 4;
+				
+		if(columnDifference > 0)
+			horizontalIncreement = 2;
+		else if(columnDifference < 0)
+			horizontalIncreement = 6;
+		
+		int index = (horizontalIncreement + verticalIncreement) / coefficient ; 
+		
+		return Movement.getMovementInOrder(index);
 
 		
 	}
 	
-	
+	public static Movement getMovementInOrder(int order) {
+		Movement movement;
+		
+		switch(order ) {
+		case 0 :
+			movement = Movement.TOP;
+			break;
+		case 1 :
+			movement = Movement.DIAGTR;
+			break;
+		case 2 :
+			movement = Movement.RIGHT;
+			break;
+		case 3 :
+			movement = Movement.DIAGDR;
+			break;
+		case 4 :
+			movement = Movement.BOTTOM;
+			break;
+		case 5 :
+			movement = Movement.DIAGDL;
+			break;
+		case 6 :
+			movement = Movement.LEFT;
+			break;
+		case 7 :
+			movement = Movement.DIAGTL;
+			break;
+		default:
+			movement = Movement.STAY;
+		}
+		
+		return movement;
+	}
 
 }

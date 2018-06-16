@@ -50,12 +50,10 @@ public class ControlerEncoder {
 	}
 	
 	public GroundControler getGround() {
-		System.out.println(this.ground);
 		return this.ground;
 	}
 	
 	public void setGround(GroundControler ground) {
-		System.out.println("The ground is set " + ground);
 		this.ground= ground;
 	}	
 	

@@ -10,6 +10,7 @@ import java.util.function.Supplier;
 
 import app.Main;
 import controler.Controleur;
+import controler.gameLoop.GameLoop;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -89,8 +90,7 @@ public class GroundControler implements Initializable {
 		}
 
 	}
-		
-	
+			
 
 	private boolean loadNodeList(Node[] currentList) {
 		boolean loaded = currentList != null;
@@ -111,6 +111,9 @@ public class GroundControler implements Initializable {
 			this.mainStackPane.getChildren().remove(lastIndex);
 	}
 	
+	
+
+
 	
 
 

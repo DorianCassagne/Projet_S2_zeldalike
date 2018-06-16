@@ -8,7 +8,6 @@ import model.character.GameCharacter;
 import model.character.attack.Attack;
 import model.character.attack.dynamic.DefaultAttackLauncher;
 import model.character.attack.dynamic.Launcher;
-import model.character.item.attack.AttackItem;
 import model.character.item.attack.AttackItemEnum;
 import model.character.item.def.DefenseItemEnum;
 import model.character.item.hpPotion.HealEnum;

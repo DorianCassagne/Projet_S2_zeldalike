@@ -2,7 +2,6 @@ package model.character.attack;
 import model.character.GameCharacter;
 import model.character.Movable;
 import model.gameMap.GameMap;
-import model.gameMap.additional.Statics;
 import model.gameMap.cell.Cell;
 import model.gameMap.move.Move;
 import model.gameMap.move.Movement;
@@ -56,11 +55,13 @@ public abstract class Attack extends Movable {
 	private void clearLastAttack() {
 		int row = this.getRow();
 		int column = this.getColumn();
+		
 		for(int i = 0 ; i < this.cellPerTurn;i++) {
 			row -= this.direction.getVerticalIncrement();
 			column -= this.direction.getHorizontalIncrement();
 			this.getMyMap().clearAttack(row,column,this);
 		}
+		
 	}
 	
 	private void launchAttack() {
@@ -120,9 +121,7 @@ public abstract class Attack extends Movable {
 	public Movement getDirection() {
 		return this.direction;
 	}
-//	protected void setDirection(Movement dir) {
-//		this.direction = dir;
-//	}
+
 	
 	protected boolean handleMove(byte attackResult) {
 		return attackResult % Cell.NOTWALKABLE != 0;
