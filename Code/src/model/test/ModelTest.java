@@ -11,10 +11,10 @@ import model.gameMap.move.Movement;
 
 class ModelTest {
 
-	@Test
-	void AttackTest() {
-		GameMap map= new GameMap(0, "test");
-		Attack a = new Bommerang(map, 0, 0, Movement.STAY);
-	}
+//	@Test
+//	void AttackTest() {
+//		GameMap map= new GameMap(0, "test");
+//		Attack a = new Bommerang(map, 0, 0, Movement.STAY);
+//	}
 
 }
