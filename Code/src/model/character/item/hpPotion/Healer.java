@@ -1,5 +1,8 @@
 package model.character.item.hpPotion;
-
+/*
+ * Classe Healer qui etend item
+ * permet au joueur de regagner des points de vie
+ */
 import model.character.hero.Hero;
 import model.character.item.Item;
 

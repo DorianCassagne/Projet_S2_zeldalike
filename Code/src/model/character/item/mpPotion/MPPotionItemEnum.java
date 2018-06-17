@@ -1,5 +1,7 @@
 package model.character.item.mpPotion;
-
+/*
+ * enumeration des differentes potions de regeneration de mp
+ */
 import model.character.item.Item;
 import model.character.item.factory.ItemEnum;
 

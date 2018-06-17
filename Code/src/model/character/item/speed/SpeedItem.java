@@ -1,5 +1,8 @@
 package model.character.item.speed;
-
+/*
+ * Classe Speeditem qui etend item
+ * modifie la vitesse du joueur 
+ */
 import java.util.Timer;
 import java.util.TimerTask;
 

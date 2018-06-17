@@ -1,5 +1,7 @@
 package model.character.item.pvItem;
-
+/*
+ * enumeration des differents items qui permettront la modification des hp max
+ */
 import model.character.item.Item;
 import model.character.item.factory.ItemEnum;
 

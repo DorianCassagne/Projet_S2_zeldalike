@@ -3,7 +3,12 @@
  *  Lui donner de la def en plus c'est comme lui donner de la vie en plus, cela va juste rallonger les combats
  *  pas sur que la def soit un ajout pertinent 
  */
-
+/*
+ * super Classe GameCharacter (etendu par les ennemi et le heros) etend Movable
+ * un gameCharacter a une map une position de spawn, un cycle pour effectuer des actions, un coefficient de vitesse d'animation de deplacement, une image)  
+ * un gameCharacter a la possibilite d'attaque, de faire des degats
+ * le gamecharacter se rajoute a la map lui meme 
+ */
 
 package model.character;
 
@@ -44,6 +49,10 @@ public abstract class GameCharacter extends Movable{
 		}
 	}
 	
+	/*
+	 * methode qui permet de s'ajouter a la map 
+	 * exception si le personnage n'a pas pu etre placé ( place sur un obstacle, en dehors de la map) 
+	 */
 	protected void setMap(GameMap newMap,int row,int column) {
 
 		boolean put = newMap.addCharacter(this, row, column);

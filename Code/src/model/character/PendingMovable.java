@@ -1,5 +1,8 @@
 package model.character;
-
+/*
+ * Classe des PendingMovable
+ * 
+ */
 import javafx.beans.property.IntegerProperty;
 
 public class PendingMovable {
@@ -13,7 +16,6 @@ public class PendingMovable {
 		this.cellId = cellId;
 		this.imageChangeProperty = imageChangeProperty;
 	}
-	
 	
 	public PendingMovable(Movable movable) {
 		this.movable = movable;

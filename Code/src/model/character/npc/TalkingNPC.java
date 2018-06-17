@@ -1,13 +1,17 @@
 package model.character.npc;
-
+/*
+ * Classe des personnages non joueur, 
+ * peut parler avec le joueur lorsque le joueur tente l'action 
+ * texte défini 
+ */
 import javafx.beans.property.StringProperty;
 import model.gameMap.GameMap;
 
 public class TalkingNPC{
 
-	private StringProperty messageChannel;
-	private String message;
-	private Integer imageId;
+	private StringProperty messageChannel; 	// Property qui permettra l'affichage en vue
+	private String message;					//message original
+	private Integer imageId;				// Image du NPC
 	
 	public TalkingNPC(StringProperty messageChannel,String message,int imageId,GameMap map,int startRow,int startColumn) {
 		if(messageChannel != null && message != null && map != null) {
