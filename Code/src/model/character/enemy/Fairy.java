@@ -176,50 +176,6 @@ public class Fairy extends EnemyNormal {
 	}
 	
 	
-	
-//	@Override
-//	public Move act() {
-//		
-//		
-//		int actualCell= Statics.convertToCellId(this.getRow(), this.getColumn());
-//		//exmple pour attackmove attention a l'ordre des cases
-//		int[]tab= {
-//				Statics.convertToCellId(row+5,column),
-//				Statics.convertToCellId(row,column-5),
-//				Statics.convertToCellId(row-5,column),
-//				Statics.convertToCellId(row,column+5),
-////				Statics.convertToCellId(row+2,column),
-////				Statics.convertToCellId(row,column-2),
-////				Statics.convertToCellId(row-2,column),
-////				Statics.convertToCellId(row,column+2),
-//		};
-//		
-//		int inPlace= inPlace(tab, actualCell);
-//		if (inPlace != -1) {
-//			Movement currentMovement = Movement.values()[inPlace];
-//			this.setImage(currentMovement);
-//			//new DoomAttack(getMyMap(),this.getRow(),this.getColumn(),currentMovement, 10);
-//			new Bomb(getMyMap(),this.getRow(),this.getColumn(),currentMovement);
-//			//new NyanAttHori(getMyMap(), this.getRow(), this.getColumn());
-//			setWait(200);
-//			return null;
-//		}
-//		else {
-//	
-//			int nextCell= BFS1.simpleMove(this.getMyMap(), 
-//					actualCell,
-//					tab, true, 0);
-//			
-//			if (actualCell==nextCell) {
-//				return null;
-//			}
-//			if(this.getMyMap().changeCell(this,this.getRow(),this.getColumn(),Statics.convertToRow(nextCell),Statics.convertToColomn(nextCell))){
-//				return new Move(nextCell,this.getMoveCycle());
-//			}
-//			
-//			return null;
-//		}
-//	}
 
 	
 

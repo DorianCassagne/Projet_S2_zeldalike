@@ -35,6 +35,8 @@ public class NyaNyaNay  extends NyaSlave {
 	private int maxPos;
 	private boolean att;
 	private int positionLeft;
+	
+	//boss nyan cat l'ancant 3 attaque differentes mais ne se deplace que de coté il est compose de 2 block
 	public NyaNyaNay(GameMap map, int startRow, int startColumn, int sliderSize) {
 		super(map, startRow, startColumn, DEFAULTCYCLE, COEF, DEFALTIMG, hp, def, dead, DEFAULTCYCLE,DEFAULTSCORE);
 		this.slave1= new NyaSlave(map, startRow, startColumn+1, 1, COEF,DEFALTIMG+1, hp, def, dead, DEFAULTCYCLE,DEFAULTSCORE);

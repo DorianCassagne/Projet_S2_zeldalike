@@ -34,10 +34,6 @@ public class BadMonkey extends BlueFairy{
 				Statics.convertToCellId(row,column-1),
 				Statics.convertToCellId(row-1,column),
 				Statics.convertToCellId(row,column+1),
-//				Statics.convertToCellId(row+2,column),
-//				Statics.convertToCellId(row,column-2),
-//				Statics.convertToCellId(row-2,column),
-//				Statics.convertToCellId(row,column+2),
 		};
 		
 		int inPlace= inPlace(tab, actualCell);

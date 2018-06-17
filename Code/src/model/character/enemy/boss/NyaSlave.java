@@ -17,7 +17,7 @@ public class NyaSlave  extends Enemy{
 	private IntegerProperty hp;
 	private IntegerProperty def;
 	private int realcycle;
-	
+	//est utiliser par nyannyanyan pour avoir avoir une taille de deux ennemis
 	protected NyaSlave(GameMap map, int startRow, int startColumn, int cycle, double coefficient, int defaultImage, IntegerProperty hp, IntegerProperty def, BooleanProperty dead, int realCycle,int score) {
 		super(map, startRow, startColumn, cycle, coefficient, defaultImage,score);
 		this.dead=dead;		
