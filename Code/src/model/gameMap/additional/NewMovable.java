@@ -1,5 +1,10 @@
 package model.gameMap.additional;
-
+/*
+ * Classe NewMovable 
+ * un nouveau Movable a une position en cellId
+ * un Id propre (key)
+ * et une image
+ */
 import javafx.beans.property.IntegerProperty;
 
 public class NewMovable {

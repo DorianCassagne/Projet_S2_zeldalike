@@ -1,5 +1,8 @@
 package model.gameMap.move;
-
+/*
+ * Classe Action 
+ * contient les methodes d'ajouts et de deletion de Movable avec leur listes
+ */
 import java.util.ArrayList;
 
 import java.util.HashMap;
@@ -11,9 +14,9 @@ import model.gameMap.additional.Statics;
 
 public class Action {
 	private HashMap<Movable,Integer> movableList;
-	private ArrayList<NewMovable> addedCharacter;//Caract�res qui sont ajout�s r�cement mais pas encore r�cup�r�s
-	private ArrayList<Integer> removedMovable;//Caract�re qui seront retir� au prochain tour
-	private ArrayList<PendingMovable> pendingMovable;//Caract�res qui vont �tre ajout� au prochain tour
+	private ArrayList<NewMovable> addedCharacter;//Caracteres qui sont ajoute recemment mais pas encore recupere
+	private ArrayList<Integer> removedMovable;//Caractere qui seront retire au prochain tour
+	private ArrayList<PendingMovable> pendingMovable;//Caract�eres qui vont etre ajoute au prochain tour
 	private ArrayList<Move> pendingMoves;
 	private int movableId;
 	
@@ -35,7 +38,7 @@ public class Action {
 		}
 	}
 		
-	//Renvoie la liste des movements effectu�s pendant un tour
+	//Renvoie la liste des movements effectues pendant un tour
 	synchronized public Move[] turn() {
 		updateMovableList();
 		ArrayList<Move> moves = executeTurn();
@@ -46,7 +49,7 @@ public class Action {
 		return movesArray;
 	}
 	
-	//Renvoie la liste des nouveaux caract�res introduit dans le jeu
+	//Renvoie la liste des nouveaux caract�eres introduit dans le jeu
 	public NewMovable[] getNewCharList() {
 		NewMovable[] newChars = new NewMovable[this.addedCharacter.size()];
 		newChars = this.addedCharacter.toArray(newChars);
@@ -66,7 +69,7 @@ public class Action {
 	}
 	
 	/*
-	 * Cette méthode ajoute un déplaçable � la liste des d�pla�able en lui attribuant un identifiant unique
+	 * Cette methode ajoute un deplacable a la liste des deplacable en lui attribuant un identifiant unique
 	 */
 	public void addMovable(Movable movable,int cellId) {
 		this.pendingMovable.add(new PendingMovable(movable,cellId,movable.getImageValueProperty()));
@@ -88,8 +91,8 @@ public class Action {
 	
 	/*
 	 * Identifie un movableEnAttente et applique les actions suivant les conditions suivants : 
-	 * -Si Le déplaçable est d�j� sur la map, on l'enl�ve
-	 * -Si le déplaçable n'est pas d�j� dans la map, on l'ajoute
+	 * -Si Le deplacable est deja sur la map, on l'enleve
+	 * -Si le deplacable n'est pas deja dans la map, on l'ajoute
 	 */
 	
 	private void identifieMovable(PendingMovable pending) {
@@ -106,7 +109,7 @@ public class Action {
 	}
 
 	
-	//Met � jour la liste des d�pla�able en les ajoutants � la hashmap des d�pla�able courrants
+	//Met a jour la liste des deplacable en les ajoutants a la hashmap des deplacable courrants 
 	private void updateMovableList() {
 		for(PendingMovable movable : this.pendingMovable) {
 			identifieMovable(movable);
@@ -115,7 +118,7 @@ public class Action {
 	}
 	
 	/*
-	 * Fait jouer un tour � tous les d�pla�able sur la map et renvoie la liste de leurs actions
+	 * Fait jouer un tour a tous les deplacable sur la map et renvoie la liste de leurs actions
 	 */
 	private ArrayList<Move> executeTurn() {
 		ArrayList<Move> moves = new ArrayList<Move>();

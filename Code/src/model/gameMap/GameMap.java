@@ -1,6 +1,8 @@
 package model.gameMap;
 
-
+/*
+ * Classe GameMap
+ */
 import javafx.beans.binding.IntegerBinding;
 
 import javafx.beans.property.IntegerProperty;
@@ -68,9 +70,9 @@ public class GameMap {
 
 	
 	/*
-	 * Change la case du personnage, la case de d�part et d'arriv�s doivent �tre pass�es en param�tre pour r�duire le temps de calcul
-	 * Renvoie vrai si le changement a été bien effectu�, cela veut dire que la case destination accepte le personnage en movement
-	 * Renvoie faux si la case d'arrivée ou de départ n'est pas une case disponible ou incorrecte.
+	 * Change la case du personnage, la case de depart et d'arrives doivent etre passees en parametre pour reduire le temps de calcul
+	 * Renvoie vrai si le changement a ete bien effectue, cela veut dire que la case destination accepte le personnage en movement
+	 * Renvoie faux si la case d'arrive ou de depart n'est pas une case disponible ou incorrecte.
 	*/
 	
 	public boolean changeCell(GameCharacter character,int currentRow,int currentColumn,int endRow,int endColumn,ExternalMover mover) {
@@ -132,9 +134,9 @@ public class GameMap {
 
 	
 	/*
-	* Ajoute un caract�re � la Map,le caract�re s'ajoute � la map en s'ajoutant � une case
-	* Les caract�res � ajouter sont ajouter dans une liste qui doit �tre l� au moment du tour
-	* Renvoie faux si la case d'arriv�e n'est pas correcte ou non disponible
+	* Ajoute un caractere a la Map,le caractere s'ajoute a la map en s'ajoutant a une case
+	* Les caracteres a ajouter sont ajoute dans une liste qui doit etre la au moment du tour
+	* Renvoie faux si la case d'arrive n'est pas correcte ou non disponible
 	*/
 	
 	public boolean addCharacter(GameCharacter movable,int row,int column) {	
@@ -155,8 +157,8 @@ public class GameMap {
 	
 	
 	/*
-	 * Ajoute une attaque � la map en indiquant sa case de départ
-	 * D�clenche une erreur si l'attaque n'a pas p� autre place sur la case, car l'identifiant de case est incorrecte
+	 * Ajoute une attaque a la map en indiquant sa case de depart
+	 * Declenche une erreur si l'attaque n'a pas d autre place sur la case, car l'identifiant de case est incorrecte
 	 */
 	public boolean backWalkableAt(int id) {
 			return cells[id].backWalkable();
@@ -192,7 +194,7 @@ public class GameMap {
 	}
 	
 	/*
-	 * Renvoie une valeur qui représente l'effet emis par l'attaque dans une case donnée
+	 * Renvoie une valeur qui represente l'effet emis par l'attaque dans une case donnee
 	 */
 	public byte playAttack(Attack attack,int row,int column) {
 		
@@ -207,7 +209,7 @@ public class GameMap {
 	}
 
 	/*
-	 * Retire un caractère de la liste courante dans la map
+	 * Retire un caractere de la liste courante dans la map
 	 */
 	public void delEnemy(Enemy character,int row,int column) {
 		if(this.action.deleteMovableFromList(character)) {

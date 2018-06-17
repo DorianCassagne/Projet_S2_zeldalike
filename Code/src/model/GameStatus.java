@@ -1,5 +1,8 @@
 package model;
-
+/*
+ * Classe GameStatus 
+ * Utile pour la sauvegarde des donnees sur le hero la map le scenario et la position de hero
+ */
 
 
 
@@ -76,6 +79,10 @@ public class GameStatus {
 		
 	}
 	
+	/*
+	 * Permet d'encoder les donnees relatives caracteristiques, au scenario (map et position)
+	 * 
+	 */
 	
 	@Override
 	public String toString() {

@@ -11,7 +11,16 @@ import model.character.item.Item;
 import model.character.item.factory.ItemFactory;
 import model.character.npc.TalkingNPC;
 import resources.additionalClass.Fusion;
-
+/*
+ * Classe Cell, (cellule)
+ * Une cellule contient un background 
+ * peut contenir	- un item ou  
+ * 				 	- un Gamecharacter
+ * 					- un NPC
+ * 					- des attaques 
+ * 
+ * 
+ */					
 public class Cell {
 
 	public final static byte NOEFFECT = 1;
@@ -64,7 +73,7 @@ public class Cell {
 	
 		return isSet;
 	}
-
+	
 	public boolean backWalkable() {
 		return this.background.isWalkable();
 	}
@@ -100,7 +109,9 @@ public class Cell {
 		if(attack != null)
 			this.attackList.remove(attack);
 	}
-	
+	/*
+	 * a la fin d'un tour, nettoie sa case des attaques presentes
+	 */
 	public void turn() {
 		this.attackList.clear();
 	}
@@ -134,12 +145,17 @@ public class Cell {
 		return layers;
 	}
 	
-	
+	/*
+	 * Methode qui place le background correspondant
+	 */
 	public void setBackground(Integer[] backValue) {
         this.background = new Background(backValue);
         this.triggerChange();
 	}
 	
+	/*
+	 * methode qui amorce le changement
+	 */
 	private void triggerChange() {
 		if(mapProperty.get()==this.cellId)
 			this.mapProperty.set(-1);
