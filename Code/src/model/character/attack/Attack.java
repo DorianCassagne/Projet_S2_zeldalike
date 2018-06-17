@@ -1,5 +1,10 @@
 package model.character.attack;
 import model.character.GameCharacter;
+
+/*
+ * Super classe Attack 
+ * 
+ */
 import model.character.Movable;
 import model.gameMap.GameMap;
 import model.gameMap.cell.Cell;

@@ -1,5 +1,7 @@
 package model.character.item.def;
-
+/*
+ * enumeration de tous les items qui seront des armures
+ */
 import model.character.item.Item;
 import model.character.item.factory.ItemEnum;
 

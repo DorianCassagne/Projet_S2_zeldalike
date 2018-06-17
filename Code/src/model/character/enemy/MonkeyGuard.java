@@ -10,15 +10,11 @@ import model.gameMap.additional.Statics;
 import model.gameMap.move.Move;
 import model.gameMap.move.Movement;
 /*
- * ennemi qui lorsqu'il spawn marche tout droit devant lui jusqu'a atteindre un obstacle 
- * et retourne vers sa position initiale pour repeter le meme processus
- * tant que le joueur n'est pas a sa portee (5 par ex)
- * 
- * ou alors 
- * ennemi qui lorsqu'il spawn se dirige vers une position prï¿½cise puis ensuite retourne a sa position initiale
+ * Classe ennemi 
+ * qui lorsqu'il spawn se dirige vers une position precise puis ensuite retourne a sa position initiale
  * tant que le joueur n'est pas a sa portee 
  * 
- * lorsque le joueur est a sa portee, vitesse doublee et attaque au corps a corps
+ * lorsque le joueur est a sa portee, vitesse accrue et attaque 
  */
 
 public class MonkeyGuard extends EnemyNormal{
@@ -30,11 +26,20 @@ public class MonkeyGuard extends EnemyNormal{
 	private final static int DEFAULTIMAGE = 16;
 	private final static double DEFAULTCOEFFICIENT = 1.7;
 	private final static int SCORE = 100;
+	
+	/*
+	 * Selon les maps de jeu, un ennemi aura ou plusieurs aura un pattern de deplacement predetermine 
+	 * le int signifie l'idCell, 
+	 * le couple de int signifie les positions sur lesquelles l'ennemi devra faire des aller-retours 
+	 * l'indice du niveau supérieur donne l'indice de la map
+	 *  
+	 */
+	
 	private final static int[][][] POSITIONS = {
-			{{3740,3750},{3047,2967}},
-			{{6,4},{4,9}},
-			{{7,6},{4,9}},
-			{{4,5},{4,9}},
+			{{3740,3750},{3047,2967}},	//Map1
+			{{6,4},{4,9}},	//Map2
+			{{7,6},{4,9}},	//Map3
+			{{4,5},{4,9}},	//map3
 	};
 
 	private int choice;

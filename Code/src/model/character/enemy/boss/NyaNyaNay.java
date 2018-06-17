@@ -13,7 +13,14 @@ import model.character.attack.statics.hero.doomAttack.DoomAttack;
 import model.gameMap.GameMap;
 import model.gameMap.move.Move;
 import model.gameMap.move.Movement;
-
+/*
+ * Classe de boss Nyanyan
+ * 		
+ * 		se deplace de façon aleatoirement seulement horizontalement
+ * 		attaque de facon aleatoire devant lui selon 3 attaques : SimpleArrow, Bomb ou DoomAttack
+ * 		tout en attaquant constamment de façon horizontale avec NyanAttHori		
+ * 
+ */
 
 public class NyaNyaNay  extends NyaSlave {
 
@@ -45,6 +52,13 @@ public class NyaNyaNay  extends NyaSlave {
 		att=true;
 		randomInt= ran.nextInt(5);
 	}
+	
+	/*
+	 * Lance l'attaque horizontale 
+	 * et choisi une attaque aleatoirement
+	 * et choisi de se deplacement aleatoirement
+	 * @see model.character.enemy.boss.NyaSlave#act()
+	 */
 	@Override
 	protected Move act() {
 		if (attCote&&super.getMov()==Movement.STAY|| GameCharacter.getHero().getRow()==this.getRow()) {

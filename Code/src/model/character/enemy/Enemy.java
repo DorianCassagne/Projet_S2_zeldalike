@@ -3,6 +3,10 @@ package model.character.enemy;
 import model.character.GameCharacter;
 import model.gameMap.GameMap;
 
+/*
+ * Classe abstract Enemy qui étend GameCharacter
+ * Un ennemy donne un certain nombre de point (score) lors de sa mort
+ */
 public abstract class Enemy extends GameCharacter{
 
 	private int score;

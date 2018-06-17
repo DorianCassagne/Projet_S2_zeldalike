@@ -1,5 +1,9 @@
 package model.character.attack.statics.hero.bomb;
 
+/*
+ * classe launcher de Bomb, retire des points de mana a chaque utilisation
+ */
+
 import model.character.attack.Launcher;
 import model.gameMap.GameMap;
 import model.gameMap.move.Movement;

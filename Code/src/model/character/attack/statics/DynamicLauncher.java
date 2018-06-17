@@ -4,6 +4,9 @@ import model.character.attack.Launcher;
 import model.character.attack.statics.hero.enemyMover.EnemyMoverLauncher;
 import model.gameMap.GameMap;
 import model.gameMap.move.Movement;
+/*
+ * lance une attaque dynamique en la créant sur la map 
+ */
 
 public class DynamicLauncher implements Launcher {
 	

@@ -1,5 +1,8 @@
 package model.character.attack.statics.enemy;
-
+/*
+ * Classe d'attaque de type missile, attaque rectiligne horizontalement verticalement en diaognale  
+ * applique un malus de deplacement au heros 
+ */
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -9,6 +12,8 @@ import model.character.GameCharacter;
 import model.character.attack.Attack;
 import model.gameMap.GameMap;
 import model.gameMap.move.Movement;
+
+
 
 public class TowerAttack extends Attack{
 
@@ -25,7 +30,11 @@ public class TowerAttack extends Attack{
 	public TowerAttack(GameMap map,int row, int column, Movement direction) {
 		super(map, DEFAULTCYCLE, row, column, direction, DEFAULTDMG, CELLPERTURN, DEFAULTCOEFFICIENT, DEFAULTIMAGE, MAXDISTANCE);
 	}
-
+	/*
+	 * Applique des degats a applique un malus de deplacement pendant un lapse de temps
+	 * 
+	 */
+	
 	@Override
 	protected void establishAttack(GameCharacter gameCharacter) {
 		if(gameCharacter == GameCharacter.getHero()) {

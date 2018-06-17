@@ -1,5 +1,8 @@
 package model.character.attack.statics.hero.bomb;
-
+/*
+ * Classe d'attaque de type bomb qui invoque de nouvelles attack DoomAtack dans un rayon de 2 soit un diametre de 5 
+ * 
+ */
 import model.character.GameCharacter;
 import model.character.attack.Attack;
 import model.character.attack.statics.hero.doomAttack.DoomAttack;

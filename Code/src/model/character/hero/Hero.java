@@ -1,5 +1,9 @@
 package model.character.hero;
-
+/*
+ * Classe hero, 
+ * gere les mouvements du personnage
+ * definit les actions possible du joueur
+ */
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -16,7 +20,7 @@ public class Hero extends GameHero{
 	private char nextMove;
 	private Movement direction;
 	private IntegerProperty mapProperty;
-	
+
 	public static final char MOVEUP = 'u';
 	public static final char MOVEDOWN = 'd';
 	public static final char MOVELEFT = 'l';
@@ -28,11 +32,9 @@ public class Hero extends GameHero{
 	public static final char ATTACKLEFT = '4' ;
 	public static final char CHANGEATTACK = 'c';
 	public static final char TALK = 'x';
-	
-	
-	
 
-	
+
+
 	public Hero(GameMap map,int startRow,int startColumn,GameStatus gameStatus) {
 		super(map,startRow,startColumn,gameStatus);
 		GameCharacter.setHero(this);
@@ -40,15 +42,14 @@ public class Hero extends GameHero{
 		this.direction = Movement.TOP;
 		this.mapProperty = new SimpleIntegerProperty();
 	}
-	
+
 	public void setNextMove(char nextMove) {
 		this.nextMove = nextMove;
 	}
 
 	/*
-	 * Movements
+	 * Movements /actions
 	 */
-
 	private Move interpreteMove() {
 		Move myMove = null;
 
@@ -90,7 +91,6 @@ public class Hero extends GameHero{
 			break;
 		case CHANGEATTACK : 
 			this.setWait(1);
-			//this.changeAttack();
 			break;
 		case TALK : 
 			this.talk();
@@ -98,45 +98,47 @@ public class Hero extends GameHero{
 			break;
 		}
 		updateReference();
-		
+
 		if(attackLaunch) {
 			launchAttack(this.direction);
 		}
 		else {
 			myMove = movePerso(reachRow,reachColumn);
 		}
-		
+
 		return myMove;
 
 	}
-	
+
 	private void talk() {
 		int row = this.getRow() + this.direction.getVerticalIncrement();
 		int column = this.getColumn() + this.direction.getHorizontalIncrement();
 		this.getMyMap().talkTo(row,column);
 	}
-	
+
 	private void updateReference() {
 		this.nextMove = STAY;
 		this.setImage(this.direction);
 	}
-	
-		
-	
-	//TODO à vérifier
+
+
+
+	/*
+	 * Methode qui deplace le personnage
+	 */
 	private Move movePerso(int reachRow,int reachColumn) {
 		boolean changedCell;
 		Move myMove = null;
-		
+
 		changedCell = this.getMyMap().changeCell(this,this.getRow(),this.getColumn(),reachRow,reachColumn);
 		if(changedCell) {
 			myMove = new Move(Statics.convertToCellId(reachRow, reachColumn),this.getMoveCycle());
 		}
-		
+
 		return myMove;
-		
+
 	}
-	
+
 	public void changeMap(GameMap newMap,int newRow,int newColumn) {
 		this.setMap(newMap,newRow,newColumn);
 	}
@@ -144,14 +146,14 @@ public class Hero extends GameHero{
 	public final IntegerProperty mapChangerProperty() {
 		return this.mapProperty;
 	}
-	
-	
-	
+
+
+
 	@Override
 	public Move act() {
 		return interpreteMove();
 	}
-	
+
 	public void setMapChange(MapChangerEnum mapChanger) {
 		if(mapChanger == null)
 			throw new IllegalArgumentException("MAPCHANGER MUST NOT BE NULL");
@@ -160,14 +162,13 @@ public class Hero extends GameHero{
 
 	@Override
 	protected void removeCharacter() {
-		// TODO Auto-generated method stub
-		
+
 	}
 
-	
 
 
-	
+
+
 
 
 }

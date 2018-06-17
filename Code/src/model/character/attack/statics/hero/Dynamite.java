@@ -1,5 +1,8 @@
 package model.character.attack.statics.hero;
-
+/*
+ * Classe d'attaque Dynamite (explosion)
+ * attaque statique simple a qui l'image sera modifie pour permettre la visualisation d'une image 3x3 
+ */
 import model.character.GameCharacter;
 import model.character.attack.Attack;
 import model.gameMap.GameMap;

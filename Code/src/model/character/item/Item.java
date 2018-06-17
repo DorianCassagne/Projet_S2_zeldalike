@@ -4,13 +4,11 @@ import model.character.GameCharacter;
 import model.character.hero.Hero;
 
 /*
- * Item : abstract
-
-	public Item (int HP, int MP, int ATK) : crée un objet de type Item. Renvoie une erreure si l’une des valeurs est négatives
+ * 	Item�: classe abstract
+	Contient les index des differents types d'item 
+	Applique au hero ses effets propre, provoque une modification des caract�ristiques 
 	
-	public void applyTo(Hero hero) : modifie les caractéristique du personnage à partir des propriétés de l’item,
 	
-	public abstract int getImageName(): retourne le nom de l’imag
  */
 
 public abstract class Item {

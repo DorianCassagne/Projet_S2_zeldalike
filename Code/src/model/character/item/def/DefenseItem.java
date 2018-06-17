@@ -1,5 +1,8 @@
 package model.character.item.def;
-
+/*
+ * Classe defenseitem qui etend item
+ * modifie la defense du joueur 
+ */
 import model.character.hero.Hero;
 import model.character.item.Item;
 

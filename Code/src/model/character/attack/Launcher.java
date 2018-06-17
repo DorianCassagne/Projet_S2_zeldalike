@@ -5,7 +5,7 @@ import model.gameMap.move.Movement;
 
 public interface Launcher {
 	/*
-	 * Lance une attaque En la créant sur la map 
+	 * Lance une attaque En la creant sur la map 
 	 * 
 	 * @param GameMap map : la map sur laquelle va se lancer l'attaque
 	 * @param Movement direction : la direction initiale de l'attaque
@@ -20,9 +20,9 @@ public interface Launcher {
 	public int getImage();
 	
 	/*
-	 * Retourne le nombre de dégats infligée par l'attaque
+	 * Retourne le nombre de degats infligee par l'attaque
 	 * 
-	 * @return int : dégats infligé
+	 * @return int : degats inflige
 	 * 
 	 */
 	public int getDamage();

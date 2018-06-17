@@ -1,5 +1,11 @@
 package model.character.enemy.normal;
 
+/*
+ *  Classe d'ennemi usuel "badmonkey"
+ *  
+ *  
+ */
+
 import model.PathFinder.BFS1;
 import model.character.GameCharacter;
 import model.character.attack.statics.hero.bomb.Bomb;
@@ -7,6 +13,7 @@ import model.gameMap.GameMap;
 import model.gameMap.additional.Statics;
 import model.gameMap.move.Move;
 import model.gameMap.move.Movement;
+
 
 public class BadMonkey extends BlueFairy{
 	
@@ -28,25 +35,21 @@ public class BadMonkey extends BlueFairy{
 		int row = GameCharacter.getHero().getRow() ;
 		int column = GameCharacter.getHero().getColumn();
 		int actualCell= Statics.convertToCellId(this.getRow(), this.getColumn());
-		//exmple pour attackmove attention a l'ordre des cases
-		int[]tab= {
+		
+		// tableau contenant les cases sur lesquelles le monstre peut se placer par rapport au joueur
+		int[] tab= {
 				Statics.convertToCellId(row+1,column),
 				Statics.convertToCellId(row,column-1),
 				Statics.convertToCellId(row-1,column),
 				Statics.convertToCellId(row,column+1),
-//				Statics.convertToCellId(row+2,column),
-//				Statics.convertToCellId(row,column-2),
-//				Statics.convertToCellId(row-2,column),
-//				Statics.convertToCellId(row,column+2),
 		};
 		
 		int inPlace= inPlace(tab, actualCell);
+		// si le monstre est positionne sur une case du tableau tab il attaque sinon il continue a se deplacer
 		if (inPlace != -1) {
 			Movement currentMovement = Movement.values()[inPlace];
 			this.setImage(currentMovement);
-			//new DoomAttack(getMyMap(),this.getRow(),this.getColumn(),currentMovement, 10);
 			new Bomb(getMyMap(),this.getRow(),this.getColumn(),currentMovement,10);
-			//new NyanAttHori(getMyMap(), this.getRow(), this.getColumn());
 			setWait(200);
 			return null;
 		}
@@ -54,29 +57,24 @@ public class BadMonkey extends BlueFairy{
 			int nextCell= BFS1.simpleMove(this.getMyMap(), 
 					actualCell,
 					tab, true, 3);
-			
 			if (actualCell==nextCell) {
 				return null;
 			}
 			if(this.getMyMap().changeCell(this,this.getRow(),this.getColumn(),Statics.convertToRow(nextCell),Statics.convertToColomn(nextCell))){
 				return new Move(nextCell,this.getMoveCycle());
 			}
-			
 			return null;
 		}
 	}
-
 	
 	@Override
 	public void launchAttack(Movement movement) {
-		
 	}
 	
 	@Override
 	public String getName() {
 		return "BADMONKEY";
 	} 
-
 	
 	
 	private int inPlace(int[] tab, int actualCell) {

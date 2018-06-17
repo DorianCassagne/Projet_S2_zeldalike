@@ -4,7 +4,10 @@ import model.character.GameCharacter;
 import model.gameMap.GameMap;
 import model.gameMap.move.Move;
 import model.gameMap.move.Movement;
-
+/*
+ * Ennemi qui étend tower
+ * attaque la position du joueur et non sa direction
+ */
 public class IntelligentTower extends Tower{
 
 	public IntelligentTower(GameMap map, int startRow, int startColumn) {

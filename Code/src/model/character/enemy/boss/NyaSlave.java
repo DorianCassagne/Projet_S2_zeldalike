@@ -1,5 +1,9 @@
 package model.character.enemy.boss;
 
+/*
+ * classe faisant parti du boss Nyanya 
+ * block adjacent au bloc mere et suit le block mere lors des deplacements
+ */
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
 import model.character.GameCharacter;

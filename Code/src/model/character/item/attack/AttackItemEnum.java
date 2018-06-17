@@ -1,5 +1,7 @@
 package model.character.item.attack;
-
+/*
+ * enumeration de tous les items qui seront des armes
+ */
 import model.character.item.Item;
 import model.character.item.factory.ItemEnum;
 

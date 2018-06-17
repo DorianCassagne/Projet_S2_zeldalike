@@ -1,6 +1,9 @@
 
 package model.character.attack.statics.hero.arrow;
-
+/*
+ * Classe d'attaque simple
+ * fleche invoque devant le joueur et se deplacement de facon rectiligne jusqu'a atteindre un obstacle ou le maximum de sa portee
+ */
 import model.character.GameCharacter;
 import model.character.attack.Attack;
 import model.gameMap.GameMap;

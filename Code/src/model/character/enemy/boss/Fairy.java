@@ -1,5 +1,9 @@
 package model.character.enemy.boss;
-
+/*
+ * Ennemi qui possede deux etats differents associes a des couleurs
+ * avant de lancer une attaque, elle s'immobilise change de couleur et lance une attaque dependante de son etat
+ * change d etat aleatoirement  
+ */
 import model.character.enemy.normal.BlueFairy;
 import model.gameMap.GameMap;
 import model.gameMap.move.Move;

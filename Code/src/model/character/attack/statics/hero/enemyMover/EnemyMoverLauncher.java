@@ -3,6 +3,9 @@ package model.character.attack.statics.hero.enemyMover;
 import model.character.attack.Launcher;
 import model.gameMap.GameMap;
 import model.gameMap.move.Movement;
+/*
+ * classe launcher de EnemyMover, retire des points de mana a chaque utilisation
+ */
 
 public class EnemyMoverLauncher implements Launcher{
 	private final static int MPCONSUME = 50;

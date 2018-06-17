@@ -1,5 +1,12 @@
 package model.character.enemy.boss;
-
+/*
+ * Classe d'ennemi NyaBlock 
+ * Ennemi intuable ( se desactive / meurt lorsque le boss meurt ) 
+ * ne se déplace pas 
+ * Attaque horizontalement de type NyanAttHori
+ * animation: 2 images, la banane s'épluche lorsqu'elle est sur le point d'attaque 
+ *
+ */
 
 import java.util.Random;
 import model.character.attack.Attack;
