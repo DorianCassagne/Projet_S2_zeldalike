@@ -1,5 +1,8 @@
 package vue.gameClass;
-
+/*
+ * Classe qui s'occupe de la vue du Hero
+ * Vue centre sur le perso
+ */
 
 import controler.conversion.ConversionAndStatics;
 
@@ -16,8 +19,6 @@ import model.gameMap.additional.MapReader;
 public class HeroView extends MovableView{
 	public final static int ATTACKINDEX = 0;
 	public final static int DEFENSEINDEX = 1;
-	
-	
 	
 	private double shownRow;
 	private double shownColumn;
@@ -50,7 +51,9 @@ public class HeroView extends MovableView{
 
 	}
 	
-	
+	/*
+	 * methode qui lie le scrolling les HP, MP et les images des items d'attack de defense
+	 */
 	private void relateEveryThing(ControlerEncoder encoder) {
 		
 		this.layoutXProperty().addListener((obs,oldValue,newValue)->{
@@ -69,16 +72,25 @@ public class HeroView extends MovableView{
 	
 	}
 		
-		
+
+	/*
+	 * methode qui lie les HP property a la vue graphique
+	 */	
 	private void linkHP(IntegerBinding HPproperty,IntegerBinding maxHP ,Label HPlabel,ProgressBar HPprogress) {
 		ViewUsefulMethods.linkPropertyToLabelAndProgress(HPproperty,maxHP,HPlabel,HPprogress);
 	}
 	
+	/*
+	 * methode qui lie les MP property a la vue graphique
+	 */
 	private void linkMP(IntegerBinding MPProperty,IntegerBinding maxMP,Label MPLabel,ProgressBar MPProgress) {
 		ViewUsefulMethods.linkPropertyToLabelAndProgress(MPProperty,maxMP,MPLabel,MPProgress);	
 	}
 	
-	
+
+	/*
+	 * Methode qui deplace les abscisses 
+	 */
 	private void scrollX(double newValue) {
 		double diff = newValue - this.shownColumn/2;
 		boolean isNotAtLimit = (newValue - (ConversionAndStatics.TILEDIMENSION * MapReader.MAPLENGTH) < -this.shownColumn/2);
@@ -94,7 +106,9 @@ public class HeroView extends MovableView{
 
 		
 	}
-	
+	/*
+	 * Methode qui deplace les ordonnees
+	 */
 	private void scrollY(double newValue) {
 		double diff = newValue - this.shownRow/2;
 		boolean isNotAtLimit = (newValue - (ConversionAndStatics.TILEDIMENSION * MapReader.MAPLENGTH) < -this.shownRow/2);
