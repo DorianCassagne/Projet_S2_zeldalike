@@ -15,9 +15,11 @@ public class Action {
 	private ArrayList<Integer> removedMovable;//Caract�re qui seront retir� au prochain tour
 	private ArrayList<PendingMovable> pendingMovable;//Caract�res qui vont �tre ajout� au prochain tour
 	private ArrayList<Move> pendingMoves;
+	private int delay;
 	private int movableId;
 	
 	public Action() {
+		this.delay = 0;
 		this.movableId = 0;
 		this.movableList = new HashMap<Movable,Integer>();
 		this.addedCharacter = new ArrayList<NewMovable>();
@@ -37,13 +39,25 @@ public class Action {
 		
 	//Renvoie la liste des movements effectu�s pendant un tour
 	synchronized public Move[] turn() {
-		updateMovableList();
-		ArrayList<Move> moves = executeTurn();
-		moves.addAll(this.pendingMoves);
-		this.pendingMoves.clear();
-		Move[] movesArray = new Move[moves.size()];
-		movesArray = moves.toArray(movesArray);
+		this.updateDelay();
+		Move[] movesArray = new Move[0];
+		
+		if(this.delay > 0) {
+			
+			updateMovableList();
+			ArrayList<Move> moves = executeTurn();
+			moves.addAll(this.pendingMoves);
+			this.pendingMoves.clear();
+			movesArray = new Move[moves.size()];
+			
+			movesArray = moves.toArray(movesArray);
+		}
 		return movesArray;
+	}
+	
+	private void updateDelay() {
+		if(delay > 0)
+			delay--;
 	}
 	
 	//Renvoie la liste des nouveaux caract�res introduit dans le jeu
@@ -82,6 +96,10 @@ public class Action {
 			this.pendingMovable.add(new PendingMovable(movable));
 		}
 		return deleted;
+	}
+	
+	public void setNewDelay(int newDelay) {
+		this.delay = newDelay;
 	}
 	
 	
@@ -129,6 +147,7 @@ public class Action {
 		}
 		return moves;
 	}
+	
 
 
 }

@@ -1,0 +1,7 @@
+//AJout NPC
+N:55: :->S-m--Jeu : Bienvenue dans la salle de théâtre-->C-N-MARIO-Mario : Je suis mario, nous vous remercions pour le sauvetage du pays-1817->C-N-FAIRY1BACK-Fairy : Je suis Fairy, je vous remercions pour le sauvetage du pays-1818
+O:3: :A->D-H---1817->S-m--Mario : Quoi !!!, il est où Zelda,\n au secours quelqu'un nous aide svp-1817->d- - - -800
+
+//AJout Héro
+
+H:1824: :-AND-N:1824: :->S-m--Nya : Mes frères et soeurs réjouissez vous! \nVous qui en avait assez de vous faire taper dessus par des héros\n cherchant juste a loot, j’ai entendu votre appel, votre détresse .\nAujourd’hui je vous sauve-1817->C-M-NYANYANAY-boss-1952->S-m--Nya : Meurt toi qui s'apelle Héro-1817

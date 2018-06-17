@@ -3,9 +3,7 @@ package model;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import model.character.enemy.Fairy;
 import javafx.beans.property.StringProperty;
-import model.character.enemy.normal.IntelligentTower;
 import model.character.hero.CopyOfHeroStats;
 import model.character.hero.Hero;
 import model.gameMap.GameMap;
@@ -15,56 +13,77 @@ import model.gameMap.move.Move;
 import model.scenario.Scenario;
 
 public class Game {
+	
 	public final static int HEROKEY = 0;
+	private static boolean isABigMap ;
+	private static Scenario scenario;
+	
+	
 	
 	private BooleanProperty mapChangeProperty;
 	private GameMap myMap;
 	private Hero hero;
-	private Scenario scenario;
 	private StringProperty messageProperty;
 	private GameStatus gameStat;
 	
 	//Initialise le jeu avec une map
 	
 	
+	public void setBigMap(boolean isBig) {
+		isABigMap = isBig;
+	}
+	
+	
+	
+	public static String saveScenario() {
+		return scenario.saveScenario();
+	}
+	
 	public Game(StringProperty messageText,GameStatus gameStat ) {
 		
 		this.mapChangeProperty = new SimpleBooleanProperty(true);
 		this.messageProperty = messageText;
 		this.gameStat = gameStat;
-		if(gameStat == null)
-			this.changeMap(0);
-		else
-			this.changeMap(gameStat.getMapId());
 		
-		new IntelligentTower(myMap, 58, 26);
-		new Fairy(myMap, 54, 27);
+		if(gameStat == null)
+			this.changeMap(0,null);
+		else
+			this.changeMap(gameStat.getMapId(),this.gameStat.getScenarioPath());
+			
+			
 	}
 
 	
-	private void changeMap(int mapIndex) {
+	private void changeMap(int mapIndex,String scenarioSave) {
 		if(mapIndex >= 0 && mapIndex < MapEnum.values().length) {
+			
 			MapEnum mapHash = MapEnum.values()[mapIndex];
-			this.myMap = new GameMap(mapIndex,mapHash.getLayers());
-			this.scenario = new Scenario(mapHash.getScenario(),this.messageProperty,this.myMap);
-			this.mapChangeProperty.set(!this.mapChangeProperty.get());
+			setBigMap(mapHash.getIsBig());
 			
 			if(this.gameStat != null) {
+				this.myMap = new GameMap(this.gameStat.getScore(),mapIndex,mapHash.getLayers());
 				createHero(this.gameStat.getRow(), this.gameStat.getColumn());
+
 			}
 			else {
+				this.myMap = new GameMap(mapIndex,mapHash.getLayers());
 				createHero(mapHash.getPosY(),mapHash.getPosX());
 			}
+
+			scenario = new Scenario(mapHash.getScenario(),scenarioSave,this.messageProperty,this.myMap);
+			this.mapChangeProperty.set(!this.mapChangeProperty.get());
+			
 			
 		}
 	}
+	
 		
 	private void createHero(int startRow,int startColumn) {
 		
 		if(this.hero == null) {
 			this.hero = new Hero(this.myMap,startRow,startColumn,this.gameStat);
 			this.hero.mapChangerProperty().addListener(
-					(obs,oldValue,newValue)->changeMap(newValue.intValue())
+					(obs,oldValue,newValue)->changeMap(newValue.intValue(),null)
 			);
 		}
 		else {
@@ -90,7 +109,7 @@ public class Game {
 	//renvoie la liste des movements effectués pendant un tour
 	public Move[] turn() {
 		Move[] listMove = this.myMap.turn();
-		this.scenario.run();
+		scenario.run();
 		return listMove;
 	}
 	

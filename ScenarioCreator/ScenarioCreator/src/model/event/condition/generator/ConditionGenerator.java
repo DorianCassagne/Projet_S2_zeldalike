@@ -84,7 +84,6 @@ public class ConditionGenerator {
 	}
 	
 	public boolean isComplete() {
-		System.out.println(isComplete);
 		return this.isComplete;
 	}
 	

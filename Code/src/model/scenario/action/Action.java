@@ -7,6 +7,7 @@ import java.util.function.Supplier;
 import model.character.GameCharacter;
 import model.character.enemy.Enemy;
 import model.character.enemy.EnemyFactory;
+import model.character.hero.GameHero;
 import model.character.item.Item;
 import model.character.item.factory.ItemFactory;
 import model.character.npc.TalkingNPC;
@@ -29,6 +30,8 @@ public class Action {
 	public final static char ATTACK = 'A';
 	public final static char NOTHING = 'N';
 	public final static char NPC = 'N';
+	public final static char HERO = 'H';
+	public final static char DELAY = 'd';
 	
 	private static ActionData actionData;
 	private char generalType;
@@ -84,7 +87,7 @@ public class Action {
 		
 		try {	
 			Enemy enemy = EnemyFactory.MonsterFactory(this.specificType, actionData.getMap(), Statics.convertToRow(this.cellId),Statics.convertToColomn(this.cellId));
-			actionData.getElementsList().put(this.info,enemy);
+			actionData.getAttackList().put(this.info,enemy);
 		}catch(Exception e) {
 			added = false;
 			System.err.println("ENEMY FACTORY FAILED BECAUSE OF " + this.specificType + e.getMessage());
@@ -97,8 +100,7 @@ public class Action {
 	private boolean createNPC() {
 		
 		try {
-			int idImage = Integer.parseInt(this.specificType);
-			new TalkingNPC(actionData.messageProperty(), this.info,idImage,actionData.getMap(),Statics.convertToRow(this.cellId),Statics.convertToColomn(this.cellId));
+			new TalkingNPC(actionData.messageProperty(), this.info,this.specificType,actionData.getMap(),Statics.convertToRow(this.cellId),Statics.convertToColomn(this.cellId));
 		}catch(Exception e) {
 			System.err.println("ERROR ON TALKING NPC, MAYBE THE ID WAS NOT A NUMBER : " + this.specificType);
 		}
@@ -108,7 +110,13 @@ public class Action {
 	
 	private boolean createItem() {
 		Item item = ItemFactory.getItem(this.specificType.toUpperCase());
+
 		boolean created = actionData.getMap().addItem(item,this.cellId);
+
+		if(created) {
+			actionData.getItemList().put(this.cellId,this.specificType.toUpperCase());
+		}
+		
 		return created;
 	}
 	
@@ -117,7 +125,7 @@ public class Action {
 		switch(this.generalType) {
 		case MONSTER : 
 			supplier = ()->{
-				actionData.getElementsList().get(this.info).removeCharacter(this);
+				actionData.getAttackList().get(this.info).removeCharacter(this);
 				return true;
 			};
 			break;
@@ -126,11 +134,31 @@ public class Action {
 				try {
 					actionData.getMap().clearBackgroundConstraint(this.cellId,this,Integer.parseInt(this.info));
 				}catch(NumberFormatException e) {
+					e.printStackTrace();
 					System.err.println("ERROR ON ESTABLISH DROP() OF WALKABLE"); 
 				}
 				return true;
 			};
 			break;
+		case ITEM : 
+			supplier = ()-> {
+				actionData.getMap().removeItemAt(this.cellId);
+				return true;
+		};
+		
+		case HERO : 
+			supplier = ()-> {
+				GameHero.getHero().removeCharacter(this);
+				return true;
+			};
+		break;
+		
+		case NPC : 
+			supplier = () -> {
+				actionData.getMap().getCharacterAt(this.cellId).removeCharacter(this);
+				return true;
+			};
+
 		default : 
 				throw new IllegalArgumentException("DROP ACTION FAILED BECAUSE OF " + this.generalType);
 		}
@@ -163,6 +191,12 @@ public class Action {
 		return true;
 	}
 	
+	private boolean delay() {
+		int newCycle = 300;
+		actionData.getMap().setActionDelay(this,this.cellId);
+		return true;
+	}
+	
 	public static Supplier<Boolean> TakeAction(String[] action,ActionData data) {
 		ActionEncode encode = new ActionEncode(action);
 		Action actionParams = new Action(encode.getGeneralType(),encode.getSpecificType(),encode.getInfo(),encode.idCase());
@@ -183,6 +217,9 @@ public class Action {
 			break;
 		case NOTHING:
 			supplier = ()->(true);
+			break;
+		case DELAY:
+			supplier =()->actionParams.delay();
 			break;
 		default :
 			throw new IllegalArgumentException("UNKNOWN ACTION NAME : " + encode.getAction());

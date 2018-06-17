@@ -1,4 +1,4 @@
-package model.character.enemy;
+package model.character.enemy.normal;
 
 import java.util.Random;
 
@@ -7,7 +7,6 @@ import model.PathFinder.BFS1;
 import model.character.GameCharacter;
 import model.character.attack.statics.Bommerang;
 import model.character.attack.statics.boss.Missile;
-import model.character.enemy.normal.EnemyNormal;
 import model.gameMap.GameMap;
 import model.gameMap.additional.MapReader;
 import model.gameMap.additional.Statics;

@@ -13,6 +13,7 @@ import model.character.attack.statics.hero.doomAttack.DoomAttack;
 import model.gameMap.GameMap;
 import model.gameMap.move.Move;
 import model.gameMap.move.Movement;
+import model.scenario.action.Action;
 
 
 public class NyaNyaNay  extends NyaSlave {
@@ -35,7 +36,9 @@ public class NyaNyaNay  extends NyaSlave {
 	private int maxPos;
 	private boolean att;
 	private int positionLeft;
+	
 	public NyaNyaNay(GameMap map, int startRow, int startColumn, int sliderSize) {
+		
 		super(map, startRow, startColumn, DEFAULTCYCLE, COEF, DEFALTIMG, hp, def, dead, DEFAULTCYCLE,DEFAULTSCORE);
 		this.slave1= new NyaSlave(map, startRow, startColumn+1, 1, COEF,DEFALTIMG+1, hp, def, dead, DEFAULTCYCLE,DEFAULTSCORE);
 		setWait(200);
@@ -105,7 +108,10 @@ public class NyaNyaNay  extends NyaSlave {
 		slave1.setMov(mov);
 	}
 
-	
-	
+	@Override
+	public void removeCharacter(Action action) {
+		super.removeCharacter(action);
+		this.slave1.removeCharacter(action);
+	}
 
 }

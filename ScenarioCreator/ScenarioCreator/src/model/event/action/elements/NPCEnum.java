@@ -4,28 +4,31 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import model.event.condition.elements.ElementNames;
 
-public enum AttackEnum implements ElementNames,TypeAction {
-	BADMONKEY,
-	FAIRY,
-	MONKEYGUARD,
-	BOMBER,
-	INTELLIGENTTOWER,
-	TOWER,
-	NYANYANAY,
-	NYABLOCK;
+public enum NPCEnum implements TypeAction,ElementNames{
+	MARIO,
+	FAIRY1TOP,
+	FAIRY1RIGHT,
+	FAIRY1BACK,
+	FAIRY1LEFT,
+	FAIRY2TOP,
+	FAIRY2RIGHT,
+	FAIRY2BACK,
+	FAIRY2LEFT;
 	private StringProperty representationProperty;
 	
-	AttackEnum(){
+	NPCEnum(){
 		this.representationProperty = new SimpleStringProperty(this.name());
 	}
 	
-	@Override
-	public String getValue() {
-		return this.name();
-	}
 
 	public StringProperty representationProperty() {
 		return this.representationProperty;
+	}
+
+
+	@Override
+	public String getValue() {
+		return this.name();
 	}
 
 }

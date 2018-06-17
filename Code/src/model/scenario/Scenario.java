@@ -1,9 +1,13 @@
 package model.scenario;
 
 import java.io.BufferedReader;
-
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 import javafx.beans.property.StringProperty;
@@ -19,39 +23,80 @@ import resources.additionalClass.SeparatorFileWriter;
 public class Scenario {
 	
 	private final static String SCENARIOPATH = "/resources/Scenario/";
-	private final static String SCENARIOSAVEPATH = System.getProperty("user.dir") + "Scenario";
+	private final static String SCENARIOSAVEPATH = System.getProperty("user.home") + "/Scenario_";
 	public final static String EXTERNALSEPARATOR = "->";
 	public final static String INTERNALSEPARTOR = "-";
 	private final static int CONDITIONINDEX = 0;
+	private final static int EVENTSTOSKIPINDEX = 1;
 	private final static int CYCLE = 10;
 	private final static String CONDITIONINTERNALSEPARATOR = ":";
 	
 	private int counter;
 	private ArrayList<Evenement> events ;
-	private HashMap<String,Enemy> elementsList;
+	private HashMap<String,Enemy> enemyList;
+	private HashMap<Integer,String> itemList;
+	
 	private ActionData data;
 	private ArrayList<Integer> finishedEvents;
 	
-	public Scenario(String filename,StringProperty textMessages,GameMap map) {
-		this.elementsList = new HashMap<String,Enemy>();
+	public Scenario(String filename,String saveName,StringProperty textMessages,GameMap map) {
+		this.enemyList = new HashMap<String,Enemy>();
 		this.finishedEvents = new ArrayList<Integer>();
-		this.data = new ActionData(map,textMessages,elementsList,finishedEvents); 
+		this.itemList = new HashMap<Integer,String>();
+		initData(map,textMessages);
 		this.events = new ArrayList<Evenement>();
 		this.counter = 0;
-
-		BufferedReader reader = SeparatorFileReader.openTextFile(SCENARIOPATH + filename,true);
-		ArrayList<ArrayList<String[]>> scenario = SeparatorFileReader.readFileWithTwoSeparator(reader, EXTERNALSEPARATOR, INTERNALSEPARTOR);
-
-		readScenario(scenario);
+		
+		
+		readSave(writeScenario(saveName,false));
+		readScenario(writeScenario(SCENARIOPATH + filename,true),true);
+		
+	}
+	
+	private void initData(GameMap map,StringProperty textMessages) {
+		//N'accepte qu'une seule condition
+		BiConsumer<String,String> callBack = (conditionString,actionString)->{
+			
+			String[] condition= conditionString.split(Scenario.CONDITIONINTERNALSEPARATOR);
+			String[] action = actionString.split(INTERNALSEPARTOR);
+			try {
+				Supplier<Boolean> cond = Condition.createCondition(condition, data);
+				Supplier<Boolean>[] act = new Supplier[1];
+				
+				act[0] =  Action.TakeAction(action, data);
+				
+				events.add(new Evenement(events.size() ,cond,act));
+			}catch(Exception e) {
+				System.err.println("ACTION CREATION FAILED");
+			}
+		};
+		
+		this.data = new ActionData(map,textMessages,enemyList,itemList,finishedEvents,callBack); 
+		
+	}
+	
+	private ArrayList<ArrayList<String[]>> writeScenario(String fileName,boolean internal) {
+		ArrayList<ArrayList<String[]>> scenario = null;
+		
+		if(fileName != null) {
+			BufferedReader reader = SeparatorFileReader.openTextFile( fileName,internal);
+			scenario = SeparatorFileReader.readFileWithTwoSeparator(reader, EXTERNALSEPARATOR, INTERNALSEPARTOR);
+	
+		}
+	
+		return scenario;
 	}
 	
 	
-	private void readScenario(ArrayList<ArrayList<String[]>> scenario) {
+	
+	private void readScenario(ArrayList<ArrayList<String[]>> scenario,boolean toCheckOld) {
 		for(int i = 0; i < scenario.size();i++) {
 			try{
-				Supplier<Boolean> condition = getCondition(scenario.get(i));
-				Supplier<Boolean>[] actions = this.getActions(scenario.get(i));
-				this.events.add(new Evenement(i,condition,actions));
+				if(!this.finishedEvents.contains(i + 1) || !toCheckOld) {
+					Supplier<Boolean> condition = getCondition(scenario.get(i));
+					Supplier<Boolean>[] actions = this.getActions(scenario.get(i));
+					this.events.add(new Evenement(i,condition,actions));
+				}
 			}catch(Exception e) {
 				throw new IllegalArgumentException("ERROR FOUND AT LINE "+ (i+1) + " \nMessage : " + e.getMessage());
 			}
@@ -92,7 +137,7 @@ public class Scenario {
 		boolean canRun = false;
 		if(this.counter == CYCLE) {
 			this.counter = 0;
-			canRun =true;
+			canRun = true;
 		}
 		else
 			this.counter++;
@@ -118,22 +163,66 @@ public class Scenario {
 	}
 	
 	
-	public boolean saveScenario() {
+	public String saveScenario() {
 		final StringBuilder scenarioCode = new StringBuilder("N");
 		
-		elementsList.forEach((name,monster)->
-			scenarioCode.append(ActionEncode.encodeToMonster(name,monster))
-		);
+		DateFormat dateFormat = new SimpleDateFormat("HHmmssddMMyyyy");
+		String path = SCENARIOSAVEPATH + dateFormat.format(new Date()) + ".txt";
+		
+		enemyList.forEach((name,monster)->{
+			if(monster.isAlive()) {
+				scenarioCode.append( ActionEncode.encodeToMonster(name,monster) );
+			}
+		});
+		
+		itemList.forEach((cellId,itemName)->{
+			if(this.data.getMap().containsItemAt(cellId)){
+				scenarioCode.append(ActionEncode.encodeToItem(cellId,itemName));
+			}
+		});
 		
 		scenarioCode.append("\n");
+		
 		this.finishedEvents.forEach(e->{
 			scenarioCode.append(e + INTERNALSEPARTOR);
 		});
 		
-		return SeparatorFileWriter.writeToFile(SCENARIOSAVEPATH,scenarioCode.toString(),true);
+		
+		if(!SeparatorFileWriter.writeToFile(path,scenarioCode.toString(),false)) {
+			 path = null;
+		}
+		
+		return path;
 		
 				
 		
+	}
+	
+	
+	public void readSave(ArrayList<ArrayList<String[]>> savedScenario) {
+		
+		
+		if(savedScenario != null) {
+			
+			//J'enlève la deuxième ligne du scenario
+			String[] finishedLines = savedScenario.get(EVENTSTOSKIPINDEX).get(0);
+			
+			savedScenario.remove(EVENTSTOSKIPINDEX);
+			
+			try {
+				
+				for(String finishedEventLine : finishedLines) {
+					this.finishedEvents.add(Integer.parseInt(finishedEventLine));
+				}
+				
+			}catch(NumberFormatException e) {
+				System.err.println("Cannot read SaveFile" );
+			}
+			
+			
+			//Je crée les monstres déjà présents sur la map : 
+			this.readScenario(savedScenario,false);
+		}
 	}
 	
 	

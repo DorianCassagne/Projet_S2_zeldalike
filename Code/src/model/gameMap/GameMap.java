@@ -8,6 +8,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import model.character.GameCharacter;
 import model.character.attack.Attack;
 import model.character.enemy.Enemy;
+import model.character.hero.Hero;
 import model.character.item.Item;
 import model.character.npc.TalkingNPC;
 import model.gameMap.additional.MapReader;
@@ -60,6 +61,16 @@ public class GameMap {
 	
 	}
 	
+	public GameMap(int score,int idMap,String ... mapPath) {
+		
+		this(idMap,mapPath);
+		realScore.set(score);
+		System.out.println("Score : " + score);
+		
+	
+	}
+
+	
 
 	public IntegerProperty changeProperty() {
 		return this.safeChangeProperty;
@@ -84,6 +95,7 @@ public class GameMap {
 	public boolean changeCell(GameCharacter character,int currentRow,int currentColumn,int endRow,int endColumn) {
 		int endCellId = Statics.convertToCellId(endRow,endColumn);
 		boolean changed = false;
+		
 		if(Statics.isInMap(endRow,endColumn) ) {
 			changed = this.cells[endCellId].isWalkable();
 			if(changed ) {
@@ -97,12 +109,23 @@ public class GameMap {
 					changed = false;
 			}
 		}
+		
 		return changed;	
 	}
 	
 	public boolean addItem(Item item,int cellId ) {
-		boolean added = this.cells[cellId].setItem(item);
+		boolean added = false;
+		
+		if(Statics.isInMap(cellId))
+			added = this.cells[cellId].setItem(item);
+		
 		return added;
+	}
+	
+	public void removeItemAt(int cellId) {
+		if(Statics.isInMap(cellId)) {
+			this.cells[cellId].removeItem();
+		}
 	}
 	
 	public void clearBackgroundConstraint(int cellId,model.scenario.action.Action action,int replace) {
@@ -130,6 +153,7 @@ public class GameMap {
 		cells[cellId] = new Cell(backValue,itemValue,this.changeProperty,cellId);			
 	}
 
+	
 	
 	/*
 	* Ajoute un caract�re � la Map,le caract�re s'ajoute � la map en s'ajoutant � une case
@@ -209,12 +233,24 @@ public class GameMap {
 	/*
 	 * Retire un caractère de la liste courante dans la map
 	 */
-	public void delEnemy(Enemy character,int row,int column) {
-		if(this.action.deleteMovableFromList(character)) {
-			int cellId = Statics.convertToCellId(row, column);
-			this.cells[cellId].removeMovable();
+	public void delEnemy(Enemy character) {
+		if(this.delCharacter(character))
 			addScore(character);
+	}
+	
+	private boolean delCharacter(GameCharacter character) {
+		boolean removed = false;
+		if(this.action.deleteMovableFromList(character)) {
+			this.cells[character.getCellId()].removeMovable();
+			removed = true;
 		}
+		
+		return removed;
+
+	}
+	
+	public void delHero(Hero hero) {
+		this.delCharacter(hero);
 	}
 	
 	public void delAttack(Attack attack) {
@@ -246,6 +282,18 @@ public class GameMap {
 	
 	public int getMapId() {
 		return this.idMap;
+	}
+	
+	
+	public GameCharacter getCharacterAt(int cellId) {
+		
+		return this.cells[cellId].getCurrentCharacter();
+	
+	}
+	
+	public void setActionDelay(model.scenario.action.Action action,int delay) {
+		if(action.isActive())
+			this.action.setNewDelay(delay);
 	}
 	
 }

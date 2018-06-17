@@ -15,7 +15,7 @@ public abstract class Enemy extends GameCharacter{
 	
 	@Override
 	protected void removeCharacter() {
-		this.getMyMap().delEnemy(this, this.getRow(), this.getColumn());
+		this.getMyMap().delEnemy(this);
 	}
 
 	public int getScore() {

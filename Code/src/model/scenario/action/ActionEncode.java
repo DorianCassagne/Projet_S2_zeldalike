@@ -58,4 +58,16 @@ public class ActionEncode {
 		return value;
 	}
 	
+	public static String encodeToItem(int cellId,String itemName) {
+		
+		String value = Scenario.EXTERNALSEPARATOR + Action.CREATION;
+		value += Scenario.INTERNALSEPARTOR + Action.ITEM;
+		value += Scenario.INTERNALSEPARTOR + itemName;
+		value += Scenario.INTERNALSEPARTOR + " ";
+		value += Scenario.INTERNALSEPARTOR + cellId;
+		
+		return value;
+		
+	}
+	
 }

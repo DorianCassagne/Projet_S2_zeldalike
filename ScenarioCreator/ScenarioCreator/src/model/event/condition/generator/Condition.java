@@ -116,10 +116,12 @@ public class Condition {
 	
 	@Override
 	public String toString() {
+		
 		String text = getTypeText();
 		text += SEPARATOR + getIdText();
 		text += SEPARATOR + getValidityText();
 		text += SEPARATOR + getValueText();
+		
 		return text;
 	}
 	

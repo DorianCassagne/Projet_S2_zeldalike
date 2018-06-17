@@ -1,6 +1,7 @@
 package model;
 
 import java.io.BufferedReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -18,10 +19,15 @@ public class StatsLoader {
 	
 	//Pour recharger à chaque fois .
 	public static ObservableList<GameStatus> loadState() throws IOException {
-		BufferedReader reader = SeparatorFileReader.openTextFile(FILEPATH,false);
-		
-		ArrayList<String[]> stringList = SeparatorFileReader.readFileWithOneSeparator(reader, GameStatus.SEPARATOR);
-		
+		ArrayList<String[]> stringList = null;
+		try {
+			BufferedReader reader = SeparatorFileReader.openTextFile(FILEPATH,false);
+			
+			stringList = SeparatorFileReader.readFileWithOneSeparator(reader, GameStatus.SEPARATOR);
+		}catch(IllegalArgumentException e) {
+			FileWriter writer = new FileWriter(FILEPATH,true);
+			writer.close();
+		}
 		return createGameStatus(stringList);
 	
 	}

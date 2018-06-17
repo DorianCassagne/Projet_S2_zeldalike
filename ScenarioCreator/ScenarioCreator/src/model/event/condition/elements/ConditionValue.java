@@ -6,7 +6,8 @@ import javafx.beans.property.StringProperty;
 public enum ConditionValue implements ElementNames {
 
 	ITEM("item","I"),
-	WALKABLE("Deplaçable","W");
+	WALKABLE("Deplaçable","W"),
+	ABSOLUTE("Absolue","A");
 	
 	private String nom;
 	private String representation;

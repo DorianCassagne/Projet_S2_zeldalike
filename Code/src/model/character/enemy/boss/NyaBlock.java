@@ -3,7 +3,6 @@ package model.character.enemy.boss;
 
 import java.util.Random;
 import model.character.attack.Attack;
-import model.character.attack.statics.boss.Missile;
 import model.character.attack.statics.boss.NyanAttHori;
 import model.character.enemy.Enemy;
 import model.gameMap.GameMap;
@@ -14,40 +13,25 @@ public class NyaBlock  extends Enemy{
 	private final static int DEFAULTCYCLE = 3;
 	private final static double DEFAULTCOEF = 1;
 	private final static int DEFAULTIMG = 48;
+	private final static int SCORE = 600;
 	private boolean att;
 	private int img;
 	private Random ran = new Random();
 	private boolean mov;
 	
-	public NyaBlock(GameMap map, int startRow, int startColumn,Movement mov,int score) {
-		super(map, startRow, startColumn, DEFAULTCYCLE, DEFAULTCOEF, DEFAULTIMG+mov.getIndex(),score);
+	public NyaBlock(GameMap map, int startRow, int startColumn,Movement mov) {
+		super(map, startRow, startColumn, DEFAULTCYCLE, DEFAULTCOEF, DEFAULTIMG+mov.getIndex(),SCORE);
 		img=mov.getIndex()+1;
 		att=false;
 		this.mov=mov==Movement.LEFT;
 	}
-//
-//	public NyaBlock(GameMap map, int cycle, int row, int column, int damage, int cellPerTurn,
-//			double coefficient, int defaultImage, int maxDistance) {
-//		super(map, cycle, row, column, Movement.STAY, damage, cellPerTurn, coefficient, defaultImage, maxDistance);
-//		// TODO Auto-generated constructor stub
-//	}
-//
-//	@Override
-//	protected void establishAttack(GameCharacter gameCharacter) {
-//		// TODO Auto-generated method stub
-//		
-//	}
-//	
-//	@Override
-//	protected boolean handleMove(byte i) {
-//		
-//		return true;
-//		
-//	}
 
 	@Override
 	public void launchAttack(Movement move) {
-		// TODO Auto-generated method stub
+		setImage(img);
+		new NyanAttHori(getMyMap(), getRow(), getColumn(), mov);
+		//new Missile(getMyMap(), getRow(), getColumn(), Movement.RIGHT);
+		att = false;
 		
 	}
 
@@ -64,10 +48,7 @@ public class NyaBlock  extends Enemy{
 	@Override
 	protected Move act() {
 		if (att) {
-			setImage(img);
-			new NyanAttHori(getMyMap(), getRow(), getColumn(), mov);
-			//new Missile(getMyMap(), getRow(), getColumn(), Movement.RIGHT);
-			att = false;
+			this.launchAttack(null);
 		}
 		
 		else if (ran.nextInt(150)==0) {

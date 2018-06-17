@@ -160,8 +160,7 @@ public class Hero extends GameHero{
 
 	@Override
 	protected void removeCharacter() {
-		// TODO Auto-generated method stub
-		
+		this.getMyMap().delHero(this);
 	}
 
 	

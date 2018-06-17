@@ -5,10 +5,10 @@ import javafx.beans.property.StringProperty;
 
 
 public enum Type implements ElementNames{
-	CELL("Case","C",ConditionValue.values()),
+	CELL("Case","C",ConditionValue.ITEM,ConditionValue.WALKABLE),
 	MONSTER("Monstre","M"),
 	HERO("Hero","H"),
-	OLD("Ancienne condition","O"),
+	OLD("Ancienne condition","O",ConditionValue.ABSOLUTE),
 	NONE("Aucune","N");
 
 	private String nom;

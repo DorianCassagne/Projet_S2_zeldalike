@@ -1,10 +1,8 @@
-package model.character.enemy;
+package model.character.enemy.normal;
 
 import model.PathFinder.BFS1;
 import model.character.GameCharacter;
 import model.character.attack.statics.hero.bomb.Bomb;
-import model.character.enemy.normal.Bomber;
-import model.character.enemy.normal.EnemyNormal;
 import model.gameMap.GameMap;
 import model.gameMap.additional.Statics;
 import model.gameMap.move.Move;
