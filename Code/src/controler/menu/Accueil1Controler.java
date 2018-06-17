@@ -1,3 +1,9 @@
+/*
+ * Controleur du Menu d'accueil qui s'affiche lorsqu'aucune partie n'a ete sauvegarde
+ * possibilité de : - Creer une nouvelle partie
+ * 					- Charger le menu de chargement de partie
+ * 					- Quitter le jeu
+ */
 package controler.menu;
 
 import controler.Controleur;

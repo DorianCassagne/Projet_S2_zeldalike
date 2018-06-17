@@ -1,12 +1,11 @@
 package controler.conversion;
-
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import model.gameMap.additional.MapReader;
 
 /*
- * Cette classe contient les méthodes statiques utilisés par le controleur, cette classe peut servir à : 
- * 	->Convertir un identifiant de case en pixel
+ * Cette classe contient les méthodes statiques utilises par le controleur, cette classe peut servir a� : 
+ * 	->Convertir un identifiant de case coordonnee x,y
  *  ->fixer la hauteur et la largeur du tilePane et du Pane
  */
 
@@ -21,9 +20,9 @@ public class ConversionAndStatics {
 	/*
 	 * Convertit en pixel l'identifiant d'une case
 	 * @param int cellId : l'identifiant de la case 
-	 * @return int : l'identifiant de la case en pixel 
+	 * @return int[] : coordonn�e x,y associ� a l'id de la case 
 	 */
-	
+
 	public static int[] convertToViewSize(int cellId) {
 		int row = (cellId / MapReader.MAPLENGTH)*TILEDIMENSION;
 		int column = (cellId%MapReader.MAPLENGTH)*TILEDIMENSION;
@@ -34,8 +33,8 @@ public class ConversionAndStatics {
 
 	
 	/*
-	 * Fixe la dimension  du pane passé en paramètre et définit le nombre de case de TilePane passé en paramètre 
-	 * @param int : définit la dimension en pixel du pane et du tilepane
+	 * Fixe la dimension  du pane passee en parametre et definit le nombre de case de TilePane passe en parametre 
+	 * @param int : definit la dimension en pixel du pane et du tilepane
 	 * @param TilePane tile : c'est le tilePane à qui on définira le nombre de case
 	 * @param Pane container : c'est le pane contenant le tilePane
 	 */

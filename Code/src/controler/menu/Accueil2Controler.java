@@ -1,3 +1,10 @@
+/*
+ * Controleur du Menu d'accueil2 qui s'affiche lorsqu'une partie a deja ete sauvegarde
+ * possibilité de : - Continuer la partie precedente
+ * 					- Creer une nouvelle partie
+ * 					- Charger le menu de chargement de partie
+ * 					- Quitter le jeu
+ */
 package controler.menu;
 
 import controler.Controleur;
@@ -8,8 +15,6 @@ import javafx.fxml.FXML;
 
 public class Accueil2Controler implements SceneLoader{
 
-
-	
 	private GroundControler ground;
 	
     @FXML
@@ -18,7 +23,6 @@ public class Accueil2Controler implements SceneLoader{
     		ground.changeView(Controleur.FXMLGAMEPATH);
     	else
     		System.exit(1);
-    		
     }
     
     @FXML

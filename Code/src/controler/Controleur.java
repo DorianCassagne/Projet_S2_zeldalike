@@ -1,5 +1,13 @@
-package controler;
+/*
+ * Controleur principale qui contient : - les chemins vers toutes les autres vues
+ * 										- le chemin vers le tileset
+ * qui s'occupe de : 	- l'affichage de la TileMap
+ * 						- l'affichage de la barre contenant les informations relatives au Hero (HP,MP, items, score, ...)
+ * 
+ * 										
+ */
 
+package controler;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -144,6 +152,10 @@ public class Controleur implements Initializable,SceneLoader{
 
 	}
 
+	/*
+	 * Methode qui - initialise la gameloop et la demarre 
+	 * 			   - initialise le controleur de commande
+	 */
 	private void initGameInterpreterAndLoop() {
 		MessageView message = new MessageView(this.messageText, this.messageZone);
 		
@@ -154,6 +166,9 @@ public class Controleur implements Initializable,SceneLoader{
 	
 	}
 	
+	/*
+	 * Methode qui initialise la map avec les dimensions requises
+	 */
 	private void initMap() {
 		ConversionAndStatics.fixPaneDimension(MapReader.MAPLENGTH * ConversionAndStatics.TILEDIMENSION,this.mapTilePane,this.characterAnchorPane);
 		this.createMap();
@@ -163,6 +178,9 @@ public class Controleur implements Initializable,SceneLoader{
 	 * MapChange Handler
 	 */
 	 
+	/*
+	 * Methode qui creer la map
+	 */
 	private void createMap() {	
 		clearCharacterPane();
 		Function< Integer,Integer[]> backgroundSource = element->this.myGame.getLayerForCell(element);
@@ -170,6 +188,9 @@ public class Controleur implements Initializable,SceneLoader{
 		this.myMapView.initialise();
 	}
 	
+	/*
+	 * Methode qui nettoie le CharacterAnchorPane
+	 */
 	private void clearCharacterPane() {
 		int i = 0;
 		while(i < this.characterAnchorPane.getChildren().size()){

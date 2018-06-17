@@ -21,45 +21,47 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 
 /*
- * Cette classe représente d'une part le controleur de Ground.fxml et d'autre part
- * les éléments affichables dans la fenêtre du jeu et qui sont lu à partir des fichiers fxml
- * Responsabilités : -> Changer totalement les éléments de la fenêtre
- * 					 -> Charger 
- * 					 ->
+ * Cette classe represente d'une part le controleur de Ground.fxml et d'autre part
+ * les elements affichables dans la fenetre du jeu et qui sont lu a partir des fichiers fxml
+ * represente la couche initiale sur laquelle les autres vues se superposeront
+ * Responsabilites : -> Changer totalement les elements de la fenetre
  */
 
 public class GroundControler implements Initializable {
-	
-	
+
+
 	/*
 	 * Variables statiques : 
 	 * VIEWPATH : le chemin vers tous les fichiers du package de la vue.
 	 * FXMLPATH : le chemin vers le fichier dont GroundControler est un controleur.
 	 */
-	
+
 	public final static int ERRORSTATE = 1;
 	private static final String VIEWPATH = "/vue/"; 
 	public final static String FXMLPATH = "/vue/template/Ground.fxml";
 	public final static int DEFAULTWIDTH = 960;
 	public final static int DEFAULTHEIGHT = 640;
-	//Le stackPane qui contiendra l'ensemble des éléments ajouté à la fenêtre.
-	
+
+	//Le stackPane qui contiendra l'ensemble des elements ajoute a� la fenetre.
 	@FXML private StackPane mainStackPane; 
-	
+
 	private Stack<Node[]> anchorStack; 
 	private Supplier<Void> gameLoopStart;
 	private Scene scene;
-	
+
 	public GroundControler() {
 		this.anchorStack = new Stack<Node[]>();
 	}
-	
-	
+
+
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		this.changeView(Controleur.FXMLMAINMENUPATH);
 	}
 
-	
+	/* 
+	 * Methode qui retire les elements du stackpane et les stock dans un anchorStack 
+	 * permet de charger sur le StackPane une nouvelle Vue
+	 */
 	public void changeView(String  viewName ){
 		ObservableList<Node> children = this.mainStackPane.getChildren();
 		Node[] nodeList = new Node[children.size()];
@@ -69,29 +71,30 @@ public class GroundControler implements Initializable {
 		children.clear();
 		addElement(viewName);
 	}
-	
-	
+
+	/*
+	 * Methode qui permet d'ajouter un element au Stackpane 
+	 */
 	public void addElement(String viewName) {
 		try {
-			
+
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(Main.class.getResource(VIEWPATH + viewName));
 			AnchorPane newView = loader.load();
 			newView.setPrefHeight(DEFAULTHEIGHT);
 			newView.setPrefWidth(DEFAULTWIDTH);
-			
+
 			SceneLoader sceneLoader = loader.getController();
 			sceneLoader.loadScene(this);
 			this.mainStackPane.getChildren().add(newView);
-			
-			
+
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-	}
-			
-
+	}	
+	
 	private boolean loadNodeList(Node[] currentList) {
 		boolean loaded = currentList != null;
 		if(currentList != null) {
@@ -99,32 +102,25 @@ public class GroundControler implements Initializable {
 		}
 		return loaded;
 	}
-	
+
 	public boolean loadParent() {
 		Node[] currentList = this.anchorStack.pop();
 		return this.loadNodeList(currentList);
 	}
-	
+
 	public void removeLast() {
 		int lastIndex = this.mainStackPane.getChildren().size() - 1;
 		if(lastIndex > 0)
 			this.mainStackPane.getChildren().remove(lastIndex);
 	}
-	
-	
 
-
-	
-
-
-	
 	public void setScene(Scene scene) {
 		if(scene != null)
 			this.scene = scene;
 		else
 			throw new IllegalArgumentException("ERROR IN GROUND ");
 	}
-	
+
 	public Scene getScene() {
 		return this.scene;
 	}
@@ -134,14 +130,9 @@ public class GroundControler implements Initializable {
 			this.gameLoopStart = gameLoopStart;
 		}
 	}
-	
+
 	public void startGameLoop() {
 		if(this.gameLoopStart != null)
 			this.gameLoopStart.get();
 	}
-	
-	
-	
-	
-	
 }

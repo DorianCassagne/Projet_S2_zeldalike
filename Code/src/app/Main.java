@@ -1,8 +1,8 @@
+/*
+ * Classe qui lance le jeu
+ */
 package app;
-
-
 import java.io.IOException;
-
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -12,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+
 
 public class Main extends Application {
 

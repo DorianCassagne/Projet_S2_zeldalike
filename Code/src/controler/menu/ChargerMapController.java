@@ -1,3 +1,10 @@
+/*
+ * Controleur du Menu de chargement de partie
+ * qui permet de: 	- Selectionner une partie de la liste et de jouer sur la dite sauvegarde
+ * 					- Selectionner une partie de la liste et de supprimer celle ci
+ *	 				- le retour vers le menu precedent
+ */
+
 package controler.menu;
 
 import java.io.IOException;

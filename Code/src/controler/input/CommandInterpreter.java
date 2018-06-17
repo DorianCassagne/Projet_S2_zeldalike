@@ -1,5 +1,8 @@
+/*
+ * Classe relative a l'interpretation des entrees du clavier
+ * Associe une action a une touche du clavier
+ */
 package controler.input;
-
 
 import controler.Controleur;
 import controler.gameLoop.GameLoop;
@@ -82,6 +85,10 @@ public class CommandInterpreter {
 
 	}
 	
+	/*
+	 * Si la gameloop n'est pas a l'arret affiche le menu de pause et stop la gameloop
+	 * Si la gameloop est en arret, retire le menu de pause et active la gameloop
+	 */
 	private void showMenu(GroundControler ground) {
 		if(this.gameLoop.getIsStopped()) {
 			ground.removeLast();
