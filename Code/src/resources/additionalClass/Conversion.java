@@ -1,4 +1,9 @@
 package resources.additionalClass;
+/*
+ * classe Conversion qui permet de convertir un string en cha
+ * 											 un string en int
+ * 								   de recuperer un coefficient selon une dfference
+ */	
 
 public class Conversion {
 	public final static char toChar(String s) {

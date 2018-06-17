@@ -19,7 +19,8 @@ import model.gameMap.move.Movement;
  * 		se deplace de façon aleatoirement seulement horizontalement
  * 		attaque de facon aleatoire devant lui selon 3 attaques : SimpleArrow, Bomb ou DoomAttack
  * 		tout en attaquant constamment de façon horizontale avec NyanAttHori		
- * 
+ * 		est compose de 2 nyaslave qui partages des points de vie en commun
+ * 		qui bouge ensemble 
  */
 
 public class NyaNyaNay  extends NyaSlave {
