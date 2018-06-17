@@ -4,7 +4,7 @@ import javafx.scene.layout.TilePane;
 import model.gameMap.additional.MapReader;
 
 /*
- * Cette classe contient les méthodes statiques utilises par le controleur, cette classe peut servir a� : 
+ * Cette classe contient les methodes statiques utilises par le controleur, cette classe peut servir a� : 
  * 	->Convertir un identifiant de case coordonnee x,y
  *  ->fixer la hauteur et la largeur du tilePane et du Pane
  */
@@ -35,7 +35,7 @@ public class ConversionAndStatics {
 	/*
 	 * Fixe la dimension  du pane passee en parametre et definit le nombre de case de TilePane passe en parametre 
 	 * @param int : definit la dimension en pixel du pane et du tilepane
-	 * @param TilePane tile : c'est le tilePane à qui on définira le nombre de case
+	 * @param TilePane tile : c'est le tilePane à qui on definira le nombre de case
 	 * @param Pane container : c'est le pane contenant le tilePane
 	 */
 	
