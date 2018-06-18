@@ -12,7 +12,7 @@ O:10: :A->D-W--2613-1818->D-W--2613-1817->C-N-MARIO--2020->C-N-FAIRY1BACK--2019-
 O:11: :A->A-H->S-m--Héro : Attends Monstre je te tuerais
 O:12: :A->S-m--Héro : Pathétique, êtes vous vraiment un héro !!!! .Je vous laisse s'entrainer ->D-W--2613-2020->D-W--2613-2019->D-M--boss
 O:13: :A->D-W--2658-2656->D-W--2659-2657
-O:12: :A-AND-H:2656-OR-H:2657:->M-C-MAPFIN
+O:12: :A-AND-H:2656-OR-H:2657:->M-C-MAPFORET
 N->S-m--Pour vous déplacez utilisez les touches : \nZ: Pour aller en haut\nS:Pour aller en bas\nQ:Pour aller à gauche\nD:Pour aller à droite\nctrl + espace : pour passer le dialogue
 O:16: :A->S-m--Effectuez un mouvement
 H:2143-OR-H:2145-OR-H:2080-OR-H:2208->S-m--Vous avez réussi, bravo !

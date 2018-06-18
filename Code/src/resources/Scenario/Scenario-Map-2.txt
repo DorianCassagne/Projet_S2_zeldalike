@@ -7,4 +7,4 @@ M:boss: :700->C-M-FAIRY-fairy1-3555->S-m--Tu vas mourrir !!!!->A-A-LVL7_HP->A-A-
 M:boss: :500->C-M-BADMONKEY-badMonkey1-3044->C-M-TOWER-tower2-3032
 M:boss: :0->S-m--Bravo vous avez gagné, appuyez sur échap pour quitter
 O:8: :A->D-M--fairy->D-M--banana1->D-M--fairy1->D-M--tower2->D-M--badMonkey1->S-m--Vous avez réussi à tuer le boss bravo !!
-O:9: :A->M-C-MAPDEBUT
+O:9: :A->M-C-MAPFIN

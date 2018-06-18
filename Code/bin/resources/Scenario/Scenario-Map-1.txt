@@ -1,3 +1,4 @@
+
 N->S-m--Hero : Où suis Je ?->C-N-MARIO-Mario : Collectes une arme avant que je te laisse passer-1040->C-N-MARIO-Mario : Collectes une arme avant que je te laisse passer-1041->C-N-MARIO-Mario : Collectes une arme avant que je te laisse passer-1042->C-N-MARIO-Mario : Collectes une arme avant que je te laisse passer-1043
 N->C-I-LANCER--195->C-M-StaticBadMonkey-monkey1-2385->C-M-StaticBadMonkey-monkey3-2449->C-M-StaticBadMonkey-monkey4-2513->C-M-StaticBADMONKEY-monkey5-2577->C-M-StaticBADMONKEY-monkey6-2514
 N->C-N-FAIRY1TOP-Entrainez vous d'abord-2700->C-N-FAIRY1TOP-Entrainez vous d'abord-2701->C-N-FAIRY1TOP-Entrainez vous d'abord-2702
@@ -8,5 +9,5 @@ O:6: :A->C-M-BADMONKEY-bad1-3339->C-M-BADMONKEY-bad2-3792->C-M-BADMONKEY-bad3-35
 O:7: :A->S-m--Vous avez une nouvelle attaque->A-A-0
 O:7: :A->S-m--Cherchez le boss, il est situé en haut de la Map->A-I-EPEEMAXLEVEL->S-m--Vous avez changer d'item
 O:8: :A->C-M-NYANYANAY-boss-378
-M:boss: :1500->S-m--Tu m'a vaincu aujourd'hui je prendrais ma vengeance->D-W--2601-58S-m--Attrapez le boss, passez par cette porte
+M:boss: :1500->S-m--Tu m'a vaincu aujourd'hui je prendrais ma vengeance->D-W--2601-58->S-m--Attrapez le boss, passez par cette porte
 H:2601->M-C-MAPBOSS
