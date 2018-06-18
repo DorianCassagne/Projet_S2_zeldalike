@@ -49,7 +49,7 @@ public class BadMonkey extends EnemyNormal{
 		else {
 			int nextCell= BFS1.simpleMove(this.getMyMap(), 
 					actualCell,
-					tab, true, 2);
+					tab, true, 6);
 			
 			if (actualCell==nextCell) {
 				return null;

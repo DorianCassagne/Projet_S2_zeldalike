@@ -25,7 +25,7 @@ public class NyaNyaNay  extends NyaSlave {
 	private final static int DEFAULTSCORE = 350;
 	private static BooleanProperty dead = new SimpleBooleanProperty(false);
 	private static IntegerProperty def = new SimpleIntegerProperty(100);
-	private static IntegerProperty hp = new SimpleIntegerProperty(900);
+	private static IntegerProperty hp = new SimpleIntegerProperty(1200);
 	
 	
 	boolean attCote;

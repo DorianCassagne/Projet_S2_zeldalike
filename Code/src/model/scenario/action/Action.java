@@ -107,7 +107,6 @@ public class Action {
 		
 			new TalkingNPC(actionData.messageProperty(), this.info,this.specificType,actionData.getMap(),Statics.convertToRow(this.cellId),Statics.convertToColomn(this.cellId));
 			 actionData.getNPCList().put(this.cellId, this.specificType);
-			 System.out.println("CREATED IT");
 		}catch(Exception e) {
 			System.err.println("ERROR ON TALKING NPC, MAYBE THE ID WAS NOT A NUMBER : " + this.specificType);
 		}
@@ -132,8 +131,14 @@ public class Action {
 		switch(this.generalType) {
 		case MONSTER : 
 			supplier = ()->{
-				actionData.getAttackList().get(this.info).removeCharacter(this);
-				return true;
+				boolean isFound = actionData.getAttackList().get(this.info) != null;
+				if(isFound) {
+					Enemy enemy = actionData.getAttackList().get(this.info);
+					enemy.removeCharacter(this);
+					actionData.getAttackList().remove(enemy);
+				}
+				return isFound;
+			
 			};
 			break;
 			

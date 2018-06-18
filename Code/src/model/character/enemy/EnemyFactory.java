@@ -43,7 +43,7 @@ public class EnemyFactory {
 		}
 		
 		else if(monsterName.equalsIgnoreCase("NyaNyaNay"))
-			monster = new NyaNyaNay(map, row, column, 2);
+			monster = new NyaNyaNay(map, row, column, 6);
 		
 		else if(monsterName.equalsIgnoreCase("NyaBlock")) {
 			monster = new NyaBlock(map, row, column, Movement.RIGHT );

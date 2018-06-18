@@ -17,7 +17,7 @@ public class Fairy extends EnemyNormal {
 	private final static int CYCLE = 30;
 	private final static int IMG = 32;
 	private final static int DEF = 30;
-	private final static int HP = 3000;
+	private final static int HP = 300;
 	private final static int SCORE = 1000;
 	private final static double DEFAULTCOEFFICIENT = 1.7;
 	private final static Random RAND = new Random();

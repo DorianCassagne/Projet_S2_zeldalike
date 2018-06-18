@@ -4,7 +4,8 @@ package model.gameMap;
 public enum MapEnum {
 	
 	MAPDEBUT(false,32,33,"Scenario-Map-0.txt","DEFAULT-ITEM.csv","Theatre_1fond.csv","Theatre_2mur.csv","Theatre_3scene.csv","Theatre_4deco.csv"),
-    MAPFORET(true,10,22,"Scenario-Map-1.txt","DEFAULT-ITEM.csv","Foret1-2_1Fond.csv","Foret1-2_2chemin.csv","Foret1-2_3arbre.csv","Foret1-2_4arbre.csv","Foret1-2_5arbrerocher.csv","Foret1-2_6porte.csv");
+    MAPFORET(true,10,22,"Scenario-Map-1.txt","DEFAULT-ITEM.csv","Foret1-2_1Fond.csv","Foret1-2_2chemin.csv","Foret1-2_3arbre.csv","Foret1-2_4arbre.csv","Foret1-2_5arbrerocher.csv","Foret1-2_6porte.csv"),
+    MAPBOSS(true,31,50,"Scenario-Map-2.txt","DEFAULT-ITEM.csv","BossRoom1-1_1fond.csv","BossRoom1-1_2mur.csv","BossRoom1-1_3deco.csv");
 
 	private String[] layers;
 	private int heroPosX;

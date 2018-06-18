@@ -50,7 +50,7 @@ public class Game {
 		this.gameStat = gameStat;
 		
 		if(gameStat == null)
-			this.changeMap(1,null);
+			this.changeMap(0,null);
 		
 		else
 			this.changeMap(gameStat.getMapId(),this.gameStat.getScenarioPath());
