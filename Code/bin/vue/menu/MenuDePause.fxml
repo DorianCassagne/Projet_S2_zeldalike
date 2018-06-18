@@ -1,29 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.paint.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controler.menu.PauseControleur">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="960.0" styleClass="activityDetail" stylesheets="@../style/Application.css" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controler.menu.PauseControleur">
    <children>
       <VBox alignment="CENTER" layoutX="151.0" layoutY="76.0" prefHeight="248.0" prefWidth="299.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button fx:id="ContinueButton2" mnemonicParsing="false" onAction="#resumeGame" prefHeight="30.0" prefWidth="200.0" text="Continuer la partie">
+            <ImageView fitHeight="150.0" fitWidth="353.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../style/images/Background.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="ContinueButton2" mnemonicParsing="false" onAction="#resumeGame" prefHeight="30.0" prefWidth="200.0" styleClass="greenButton" text="Continuer la partie">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
             </Button>
-            <Button fx:id="SaveButton" mnemonicParsing="false" onAction="#saveGame" prefHeight="30.0" prefWidth="200.0" text="Sauvegarder">
+            <Button fx:id="SaveButton" mnemonicParsing="false" onAction="#saveGame" prefHeight="30.0" prefWidth="200.0" styleClass="orangeButton" text="Sauvegarder">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
             </Button>
-            <Button fx:id="LoadButton3" mnemonicParsing="false" onAction="#loadMenuGame" prefHeight="30.0" prefWidth="200.0" text="Charger une partie" />
-            <Button fx:id="LeaveButton" mnemonicParsing="false" onAction="#exit" prefHeight="30.0" prefWidth="200.0" text="Quitter" />
+            <Button fx:id="LoadButton3" mnemonicParsing="false" onAction="#loadMenuGame" prefHeight="30.0" prefWidth="200.0" styleClass="orangeButton" text="Charger une partie" />
+            <Button fx:id="LeaveButton" mnemonicParsing="false" onAction="#exit" prefHeight="30.0" prefWidth="200.0" styleClass="redButton" text="Quitter" />
          </children>
       </VBox>
    </children>

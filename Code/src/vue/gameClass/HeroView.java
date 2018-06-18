@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
+import model.Game;
 import model.character.hero.CopyOfHeroStats;
 import model.gameMap.additional.MapReader;
 
@@ -57,9 +58,14 @@ public class HeroView extends MovableView{
 	private void relateEveryThing(ControlerEncoder encoder) {
 		
 		this.layoutXProperty().addListener((obs,oldValue,newValue)->{
-			this.scrollX(newValue.doubleValue());
+			if(Game.isABigMap())
+				this.scrollX(newValue.doubleValue());
+		
 		});
-		this.layoutYProperty().addListener((obs,oldValue,newValue)->this.scrollY(newValue.doubleValue()));	
+		this.layoutYProperty().addListener((obs,oldValue,newValue)->{
+			if(Game.isABigMap())
+				this.scrollY(newValue.doubleValue());
+		});	
 		
 		CopyOfHeroStats heroStats = encoder.getMyGame().getHeroStats();
 		

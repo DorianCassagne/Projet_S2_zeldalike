@@ -15,8 +15,8 @@ public class Bomb extends Attack {
 	private boolean start;
 	public final static int DEFAULTIMAGE = 1620;
 	private final static int CELLPERTURN = 1;
-	private final static int MAXDISTANCE = 7;
-	final static int DEFAULTDAMAGE = 100;
+	private final static int MAXDISTANCE = 6;
+	final static int DEFAULTDAMAGE = 50;
 	private final static int DEFAULTCOEFFICIENT = 2; 
 	
 	

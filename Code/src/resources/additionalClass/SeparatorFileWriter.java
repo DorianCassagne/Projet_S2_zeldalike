@@ -7,16 +7,19 @@ import java.io.IOException;
  */
 public class SeparatorFileWriter {
 	public static boolean writeToFile(String path,String textToWrite,boolean append) {
-		boolean writeSuccess = true;
-		
+		boolean writeSuccess = false;
+				
 		try{
 			FileWriter writer = new FileWriter(path,append);
 			writer.write(textToWrite);
 			writer.close();
+			writeSuccess = true;
+
 		}catch(IOException e) {
-			writeSuccess = false;
 		}
 		
 		return writeSuccess;
 	}
+	
+	
 }

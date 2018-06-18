@@ -12,16 +12,15 @@ import model.gameMap.move.Movement;
 public class SimpleArrow extends Attack {
  
 
-	private final static int DEFAULTCYCLE = 1;
+	private final static int DEFAULTCYCLE = 20;
 	private final static int DEFAULTCELLPERTURN = 4;
-	private final static int DEFAULTIMAGE = 1616;
+	public final static int DEFAULTIMAGE = 1632;
 	private final static double DEFAULTCOEFFICIENT = 2;
-	private final static int DEFAULTDAMAGE = 100;
-	private final static int DAMAGEPERLEVEL = 5;
-	private final static int MAXDISTANCE = 2;
+	private final static int DEFAULTDAMAGE = 1000;
+	private final static int MAXDISTANCE = 10;
 	
 	public SimpleArrow(GameMap map, int row, int column, Movement direction, int level) {
-		super(map, DEFAULTCYCLE, row, column, direction, DEFAULTDAMAGE + level * DAMAGEPERLEVEL , DEFAULTCELLPERTURN, DEFAULTCOEFFICIENT,DEFAULTIMAGE,MAXDISTANCE + DAMAGEPERLEVEL);
+		super(map, DEFAULTCYCLE, row, column, direction, DEFAULTDAMAGE  , DEFAULTCELLPERTURN, DEFAULTCOEFFICIENT,DEFAULTIMAGE,MAXDISTANCE );
 	}
 
 	public void establishAttack(GameCharacter gameCharac) {

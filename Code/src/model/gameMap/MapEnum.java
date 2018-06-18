@@ -8,21 +8,26 @@ package model.gameMap;
  */
 public enum MapEnum {
 	
-	MAPDEBUT(40,47,"Scenario-Map-1.txt","Dungeon1-1_5item.csv","Dungeon1-1_1fond.csv","Dungeon1-1_2mur.csv","Dungeon1-1_3deco.csv","Dungeon1-1_4porte.csv"),
-    MAPFORET(10,22,"Scenario-Map-1.txt","newlevel_item.csv","newlevel_Calque1.csv","newlevel_Calque2.csv","newlevel_Calque3.csv","newlevel_Calque4.csv","newlevel_Calque5.csv");
-//	MAPDUNGEON();
-	//MAPBOSS();
-	
+	MAPDEBUT(false,32,33,"Scenario-Map-0.txt","DEFAULT-ITEM.csv","Theatre_1fond.csv","Theatre_2mur.csv","Theatre_3scene.csv","Theatre_4deco.csv"),
+    MAPFORET(true,10,22,"Scenario-Map-1.txt","DEFAULT-ITEM.csv","Foret1-2_1Fond.csv","Foret1-2_2chemin.csv","Foret1-2_3arbre.csv","Foret1-2_4arbre.csv","Foret1-2_5arbrerocher.csv","Foret1-2_6porte.csv"),
+    MAPBOSS(true,31,50,"Scenario-Map-2.txt","DEFAULT-ITEM.csv","BossRoom1-1_1fond.csv","BossRoom1-1_2mur.csv","BossRoom1-1_3deco.csv");
+
 	private String[] layers;
 	private int heroPosX;
 	private int heroPosY;
 	private String scenario;
+	private boolean isBig;
 	
-	MapEnum(int posX,int posY, String scenario,String ... layers) {
+	MapEnum(boolean isBig,int posX,int posY, String scenario,String ... layers) {
+		this.isBig = isBig ;
 		this.layers = layers;
 		this.heroPosX = posX;
 		this.heroPosY = posY;
 		this.scenario = scenario;
+	}
+	
+	public boolean getIsBig() {
+		return this.isBig;
 	}
 	
 	public String[] getLayers() {

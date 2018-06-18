@@ -6,14 +6,14 @@ import model.character.item.Item;
 import model.character.item.factory.ItemEnum;
 
 public enum MPPotionItemEnum implements ItemEnum{
-	LVL1_MP(20),
-	LVL2_MP(50),
-	LVL5_MP(350),
-	LVL3_MP(90),
-	LVL6_MP(150),
-	LVL7_MP(240),
-	LVL8_MP(500),
-	LVL4_MP(120);
+	LVL1_MPPOTION(20),
+	LVL2_MPPOTION(50),
+	LVL5_MPPOTION(350),
+	LVL3_MPPOTION(90),
+	LVL6_MPPOTION(150),
+	LVL7_MPPOTION(240),
+	LVL8_MPPOTION(500),
+	LVL4_MPPOTION(120);
 
 	private int mpHeal;
 	

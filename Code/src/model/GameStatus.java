@@ -11,6 +11,7 @@ import java.util.Date;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import model.character.hero.CopyOfHeroStats;
+import model.gameMap.GameMap;
 import resources.additionalClass.SeparatorFileWriter;
 
 public class GameStatus {
@@ -18,7 +19,7 @@ public class GameStatus {
 	static final String SEPARATOR = "-";
 	static final String ENDSEPARATOR = "\n";
     private final static SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
-    private final static int STATUSLENGTH = 11;
+    private final static int STATUSLENGTH = 12;
    
 	private int hp;
 	private int maxHP;
@@ -28,14 +29,15 @@ public class GameStatus {
 	private int defenseItem;
 	private int row;
 	private int column;
-	private int scenarioLine;
 	private int idMap;
 	private int score;
+	private String scenarioPath;
 	private StringProperty date;
 	
 	public GameStatus(CopyOfHeroStats heroStats,int row, int column, int scenarioLine,int idMap) {
 		
 		if(heroStats != null && row > 0 && column > 0 && scenarioLine >= 0) {
+			
 			this.hp = heroStats.getHPBinding().get();
 			this.maxHP = heroStats.getMaxHP().get();
 			this.mp = heroStats.getMPBinding().get();
@@ -44,8 +46,9 @@ public class GameStatus {
 			this.defenseItem = heroStats.getDefImage().get();
 			this.row = row;
 			this.column = column;
-			this.scenarioLine = scenarioLine;
 			this.idMap = idMap;
+			this.scenarioPath = Game.saveScenario();
+			this.score = GameMap.getScoreBinding().get();
 			
 			this.initDate();
 		}
@@ -66,9 +69,15 @@ public class GameStatus {
 				this.defenseItem =Integer.parseInt(status[5]);
 				this.row = Integer.parseInt(status[6]);
 				this.column = Integer.parseInt(status[7]);
-				this.scenarioLine = Integer.parseInt(status[8]);
 				this.idMap = Integer.parseInt(status[9]);
-				this.date = new SimpleStringProperty(status[10]);
+				this.score = Integer.parseInt(status[10]);
+				this.date = new SimpleStringProperty(status[11]);
+				
+				if(status[8].equals("null"))
+					this.scenarioPath = null;
+				else
+					this.scenarioPath = status[8];
+
 		
 			}catch(NumberFormatException e) {
 
@@ -96,8 +105,9 @@ public class GameStatus {
 		encode += this.defenseItem + SEPARATOR;
 		encode += this.row + SEPARATOR;
 		encode += this.column + SEPARATOR;
-		encode += this.scenarioLine + SEPARATOR ;
+		encode += this.scenarioPath + SEPARATOR ;
 		encode += this.idMap + SEPARATOR;
+		encode += this.score + SEPARATOR;
 		encode += this.date.get() + ENDSEPARATOR ;
 
 		return encode;
@@ -146,8 +156,8 @@ public class GameStatus {
 		return column;
 	}
 
-	public  int getScenarioLine() {
-		return scenarioLine;
+	public  String getScenarioPath() {
+		return this.scenarioPath;
 	}
 
 	public  StringProperty getDate() {
@@ -156,5 +166,10 @@ public class GameStatus {
 	
 	public int getMapId() {
 		return this.idMap;
+	}
+	
+	
+	public int getScore() {
+		return this.score;
 	}
 }

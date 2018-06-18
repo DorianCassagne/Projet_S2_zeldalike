@@ -7,9 +7,15 @@ import model.event.condition.elements.ElementNames;
 public enum SpecificType implements ElementNames{
 	ITEM("Item","I",ItemEnum.values()),
 	MONSTER("Monstre","M",AttackEnum.values()),
+	NPC("NPC","N",NPCEnum.values()),
 	MESSAGE("Message","m",null),
 	ATTACK("Attack","A",null),
-	WALKABLE("Déplaçable","W",null);
+	WALKABLE("Déplaçable","W",null),
+	HERO("Héro","H",null),
+	ITEMDROP("Item","I",null),
+	MONSTERDROP("Monstre","M",null),
+	NPCDROP("NPC","N",null);
+	;
 
 	private String nom;
 	private String representation;

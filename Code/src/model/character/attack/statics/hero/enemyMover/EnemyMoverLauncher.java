@@ -22,11 +22,14 @@ public class EnemyMoverLauncher implements Launcher{
 		return EnemyMover.DEFAULTDAMAGE;
 	}
 
+	
+	public int getManaConsume() {
+		return MPCONSUME;
+	}
 
 	@Override
 	public int getImage() {
-		// TODO Auto-generated method stub
-		return 0;
+		return EnemyMover.DEFAULTIMAGE;
 	}
 
 	

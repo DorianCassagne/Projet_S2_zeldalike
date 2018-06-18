@@ -85,7 +85,7 @@ public class Condition {
 		Supplier<Boolean> supplier = ()->{
 			boolean isGreater = false;
 			try {
-				isGreater = actionData.getElementsList().get(this.id).getHP() <= this.numberValue;
+				isGreater = actionData.getAttackList().get(this.id).getHP() <= this.numberValue;
 			}catch(NullPointerException e) {
 				
 			}
@@ -110,20 +110,14 @@ public class Condition {
 	}
 	
 	private Supplier<Boolean> handleOldCondtion() {
-		Supplier<Boolean> supplier = null;
-		switch(Conversion.toChar(this.id)) {
-		case ABSOLUTE :
-			supplier = ()->calculateFromAbsolute();
-			break;
-		default : 
-			throw new IllegalArgumentException("UNKNOWN CONDITION SYNTAX " + this.id);
-		}
+		Supplier<Boolean> supplier = ()->calculateFromAbsolute();
 		return supplier;
 	}
 	
 	
 	private boolean calculateFromAbsolute(){
-		return actionData.getFinishedvents().contains(this.numberValue) ^ this.conditionValue;
+		Integer integerId = Integer.parseInt(this.id);
+		return actionData.getFinishedvents().contains(integerId) ^ this.conditionValue;
 	}
 	
 	

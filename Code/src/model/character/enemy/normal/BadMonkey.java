@@ -7,6 +7,7 @@ package model.character.enemy.normal;
  */
 
 import model.PathFinder.BFS1;
+
 import model.character.GameCharacter;
 import model.character.attack.statics.hero.bomb.Bomb;
 import model.gameMap.GameMap;
@@ -14,19 +15,18 @@ import model.gameMap.additional.Statics;
 import model.gameMap.move.Move;
 import model.gameMap.move.Movement;
 
-
-public class BadMonkey extends BlueFairy{
+public class BadMonkey extends EnemyNormal{
 	
-	private final static int DEFAULTHP = 150;
-	private final static int DEFAULTDEF = 10;
+	private final static int DEFAULTHP = 450;
+	private final static int DEFAULTDEF = 30;
 	private final static int DEFAULTCYCLE = 40;
 	private final static int DEFAULTIMAGE = 16;
-	private final static int DEFAULTDMG = 90;
+	private final static double DEFAULTCOEFFICIENT = 1.7;
 	private final static int DEFAULTSCORE = 100;
 	
 	
 	public BadMonkey(GameMap map, int startRow, int startColumn) {
-		super(map, startRow, startColumn,DEFAULTCYCLE,DEFAULTIMAGE,DEFAULTHP, DEFAULTDEF,DEFAULTDMG,DEFAULTSCORE);
+		super(map, startRow, startColumn,DEFAULTCYCLE,DEFAULTCOEFFICIENT,DEFAULTIMAGE,DEFAULTHP, DEFAULTDEF,DEFAULTSCORE);
 	}
 
 	@Override
@@ -56,7 +56,8 @@ public class BadMonkey extends BlueFairy{
 		else {
 			int nextCell= BFS1.simpleMove(this.getMyMap(), 
 					actualCell,
-					tab, true, 3);
+					tab, true, 6);
+			
 			if (actualCell==nextCell) {
 				return null;
 			}

@@ -5,7 +5,6 @@ package model.character.item.pvItem;
  */
 import model.character.hero.Hero;
 import model.character.item.Item;
-import model.character.item.def.DefenseItemEnum;
 
 public class HealthItem extends Item{
 	
@@ -22,7 +21,7 @@ public class HealthItem extends Item{
 	}
 	
 	public HealthItem(String name) {
-		this(DefenseItemEnum.valueOf(name).getImage());
+		this(HealthEnum.valueOf(name).getImage());
 	}
 
 	@Override

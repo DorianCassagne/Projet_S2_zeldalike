@@ -5,7 +5,14 @@ import javafx.beans.property.StringProperty;
 import model.event.condition.elements.ElementNames;
 
 public enum AttackEnum implements ElementNames,TypeAction {
-	BADMONKEY;
+	BADMONKEY,
+	FAIRY,
+	MONKEYGUARD,
+	BOMBER,
+	INTELLIGENTTOWER,
+	TOWER,
+	NYANYANAY,
+	NYABLOCK;
 	private StringProperty representationProperty;
 	
 	AttackEnum(){

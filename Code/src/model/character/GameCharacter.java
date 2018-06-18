@@ -58,7 +58,7 @@ public abstract class GameCharacter extends Movable{
 		boolean put = newMap.addCharacter(this, row, column);
 
 		if(!put) {
-			throw new IllegalArgumentException("MAP UNDEFINED BECAUSE A PLAYER COULDN'T BE PLACED");
+			throw new IllegalArgumentException("MAP UNDEFINED BECAUSE A PLAYER COULDN'T BE PLACED AT ROW : " + row + " COLUMN: " + column);
 		}
 		else
 			this.setMap(newMap);

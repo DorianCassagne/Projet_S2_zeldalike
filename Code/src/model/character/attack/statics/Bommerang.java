@@ -47,7 +47,7 @@ public class Bommerang extends Attack {
 		if (count == 0) {
 			this.setDirection(backward);
 		}
-		
+
 		return super.handleMove(attackResult);
 	}
 	

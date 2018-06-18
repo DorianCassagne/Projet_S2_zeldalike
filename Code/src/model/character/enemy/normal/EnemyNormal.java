@@ -1,6 +1,6 @@
 package model.character.enemy.normal;
 /*
- * Classe EnemyNormal étendant Enemy,
+ * Classe EnemyNormal ï¿½tendant Enemy,
  * permet l'attribution des methodes GetDmg, setHp, isAlive, getHP,
  */
 import model.character.attack.Attack;
@@ -17,6 +17,7 @@ public abstract class EnemyNormal extends Enemy{
 	public EnemyNormal(GameMap map, int startRow, int startColumn, int cycle, double coefficient, int defaultImage,int hp,int def,int score) {
 		super(map, startRow, startColumn, cycle, coefficient, defaultImage,score);
 		if(hp > 0 && def > 0 ) {
+			
 			this.hp = hp;
 			this.def = def;
 		}else
@@ -48,4 +49,5 @@ public abstract class EnemyNormal extends Enemy{
 		return this.hp;
 	}
 
+	
 }

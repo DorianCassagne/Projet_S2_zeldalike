@@ -21,9 +21,9 @@ public class ItemFactory {
 		try {
 			item = new SpecialAttackItem(id);
 		}catch(IllegalArgumentException e) {
-			if(UsefulMethods.isBetween(id, Item.ATTACKITEMSTARTINDEX, Item.DEFENSEINTEMSTARTINDEX)) {
+						
+			if(UsefulMethods.isBetween(id, Item.ATTACKITEMSTARTINDEX, Item.DEFENSEINTEMSTARTINDEX)) 
 				item = new AttackItem(id);
-			}
 			else if(UsefulMethods.isBetween(id, Item.DEFENSEINTEMSTARTINDEX, Item.SPEEDITEMSTARTINDEX))
 				item = new DefenseItem(id);
 			else if(UsefulMethods.isBetween(id, Item.SPEEDITEMSTARTINDEX, Item.MPITEMSTARTINDEX))
@@ -38,34 +38,116 @@ public class ItemFactory {
 				item = new Healer(id);
 			else if(UsefulMethods.isBetween(id, Item.MPPOTIONSTARTINDEX, Item.MPPOTIONENDINDEX))
 				item = new MPItem(id);
-			else if(id == 864){
-				item = new MapChanger(1);
-			}
 		}
 					
 		return item;
 	}
 	
 	public static Item getItem(String name) {
+		Item item = createAttackItem(name);
+		
+		if(item == null) {
+			item = createDefenseItem(name);
+		}
+		
+		if(item == null)
+			item = createHealer(name);
+		
+		if(item == null)
+			item = createMapChange(name);
+		
+		if(item == null)
+			item = createMp(name);
+		
+		if(item == null) 
+			item = createMPPotion(name);
+		
+		if(item == null)
+			item = createPVItem(name);
+		
+		if(item == null)
+			item = createSpeedItem(name);
+				
+		return item;
+	}
+	
+	private static Item createAttackItem(String name) {
 		Item item = null;
 		
 		try {
 			item = new AttackItem(name);
-		}catch(IllegalArgumentException e1) {
-			try {
-				item = new DefenseItem(name);
-			}catch(IllegalArgumentException e2) {
-				try{
-					item = new Healer(name);
-				}catch(IllegalArgumentException e3) {
-					try {
-						item = new SpecialAttackItem(name);
-					}catch(IllegalArgumentException e4) {
-						item = new MapChanger(name);
-					}
-				}
-			}
-		}
+		}catch(IllegalArgumentException e) {}
+		
+		return item;
+	}
+	
+	private static Item createDefenseItem(String name) {
+		Item item = null;
+		
+		try {
+			item = new DefenseItem(name);
+		}catch(IllegalArgumentException e) {}
+		
+		return item;
+	}
+	
+	private static Item createHealer(String name) {
+		Item item = null;
+		
+		try {
+			item = new Healer(name);
+		}catch(IllegalArgumentException e) {}
+		
+		return item;
+	}
+	
+	private  static Item createMapChange(String name) {
+		Item item = null;
+		
+		try {
+			item = new MapChanger(name);
+		}catch(IllegalArgumentException e) {}
+		
+		return item;
+	}
+	
+	private static Item createMp(String name) {
+		Item item = null;
+		
+		try {
+			item = new MPIncrease(name);
+		}catch(IllegalArgumentException e) {}
+		
+		return item;
+	}
+	
+	private static Item createMPPotion(String name) {
+		Item item = null;
+		
+		try {
+			item = new MPItem(name);
+		}catch(IllegalArgumentException e) {}
+		
+		return item;
+	}
+	
+	private static Item createPVItem(String name) {
+		Item item = null;
+		
+		try {
+			item = new HealthItem(name);
+		}catch(IllegalArgumentException e) {}
+		
+		return item;
+	}
+	
+	private static Item createSpeedItem(String name) {
+		Item item = null;
+		
+		try {
+			item = new SpeedItem(name);
+		}catch(IllegalArgumentException e) {}
+		
 		return item;
 	}
 	

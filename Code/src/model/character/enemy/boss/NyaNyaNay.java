@@ -1,6 +1,7 @@
 package model.character.enemy.boss;
 
 import java.util.Random;
+
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -16,12 +17,14 @@ import model.gameMap.move.Movement;
 /*
  * Classe de boss Nyanyan
  * 		
- * 		se deplace de façon aleatoirement seulement horizontalement
+ * 		se deplace de faï¿½on aleatoirement seulement horizontalement
  * 		attaque de facon aleatoire devant lui selon 3 attaques : SimpleArrow, Bomb ou DoomAttack
- * 		tout en attaquant constamment de façon horizontale avec NyanAttHori		
+ * 		tout en attaquant constamment de faï¿½on horizontale avec NyanAttHori		
  * 		est compose de 2 nyaslave qui partages des points de vie en commun
  * 		qui bouge ensemble 
  */
+import model.scenario.action.Action;
+
 
 public class NyaNyaNay  extends NyaSlave {
 
@@ -29,11 +32,10 @@ public class NyaNyaNay  extends NyaSlave {
 	private final static double COEF=2.0;
 	private final static int DEFALTIMG=64;
 	private final static int DEFAULTCYCLE=4;
-	//private final static int COEF=2.0;
 	private final static int DEFAULTSCORE = 350;
-	private static BooleanProperty dead=new SimpleBooleanProperty(false);
-	private static IntegerProperty def =new SimpleIntegerProperty(10);
-	private static IntegerProperty hp=new SimpleIntegerProperty(200);
+	private static BooleanProperty dead = new SimpleBooleanProperty(false);
+	private static IntegerProperty def = new SimpleIntegerProperty(100);
+	private static IntegerProperty hp = new SimpleIntegerProperty(1200);
 	
 	
 	boolean attCote;
@@ -44,8 +46,9 @@ public class NyaNyaNay  extends NyaSlave {
 	private boolean att;
 	private int positionLeft;
 	
-	//boss nyan cat l'ancant 3 attaque differentes mais ne se deplace que de coté il est compose de 2 block
+	//boss nyan cat l'ancant 3 attaque differentes mais ne se deplace que de cotÃ© il est compose de 2 block
 	public NyaNyaNay(GameMap map, int startRow, int startColumn, int sliderSize) {
+		
 		super(map, startRow, startColumn, DEFAULTCYCLE, COEF, DEFALTIMG, hp, def, dead, DEFAULTCYCLE,DEFAULTSCORE);
 		this.slave1= new NyaSlave(map, startRow, startColumn+1, 1, COEF,DEFALTIMG+1, hp, def, dead, DEFAULTCYCLE,DEFAULTSCORE);
 		setWait(200);
@@ -97,10 +100,9 @@ public class NyaNyaNay  extends NyaSlave {
 					randomInt--;
 			}
 			else {
-				//System.out.println("mv"+randomInt+"  "+this.getColumn());
 				if (randomInt == this.getColumn()) {
 					setWait(30);
-					//randomInt=2;
+
 					randomInt= ran.nextInt(5)+1;//nb dattaque max
 					att=true;
 				}
@@ -122,7 +124,10 @@ public class NyaNyaNay  extends NyaSlave {
 		slave1.setMov(mov);
 	}
 
-	
-	
+	@Override
+	public void removeCharacter(Action action) {
+		super.removeCharacter(action);
+		this.slave1.removeCharacter(action);
+	}
 
 }

@@ -13,11 +13,12 @@ public class TalkingNPC{
 	private String message;					//message original
 	private Integer imageId;				// Image du NPC
 	
-	public TalkingNPC(StringProperty messageChannel,String message,int imageId,GameMap map,int startRow,int startColumn) {
-		if(messageChannel != null && message != null && map != null) {
+	public TalkingNPC(StringProperty messageChannel,String message,String NPCName,GameMap map,int startRow,int startColumn) {
+		NPCFactory npc = NPCFactory.valueOf(NPCName);
+		if(messageChannel != null && message != null && map != null && npc != null ) {
 			this.messageChannel = messageChannel;
 			this.message = message;
-			this.imageId = imageId;
+			this.imageId = npc.getId();
 			map.addNPC(this, startRow, startColumn);
 		}
 		else

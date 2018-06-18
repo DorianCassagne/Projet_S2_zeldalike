@@ -5,13 +5,13 @@ package model.character.hero;
  */
 
 import model.character.item.attack.*;
+
 import model.character.item.def.*;
 import model.character.item.mp.*;
 import model.character.item.hpPotion.*;
 import model.character.item.mpPotion.*;
 import model.character.item.pvItem.*;
 import model.character.item.speed.SpeedItemEnum;
-import model.character.attack.dynamic.*;
 import model.GameStatus;
 import model.character.GameCharacter;
 import model.character.attack.Attack;
@@ -23,9 +23,9 @@ public abstract class GameHero extends GameCharacter {
 	
 	 final static int DEFAULTCYCLE = 20;
 	 final static double DEFAULTCOEFFICIENT = 1.5;
-	 final static int DEFAULTHP = 30000;
+	 final static int DEFAULTHP = 400;
 	 final static int DEFAULTMP = 200;
-	 final static int DEFAULTDEF = 40;
+	 final static int DEFAULTDEF = 60;
 	 final static int DEFAULTATK = 50;
 	 final static int DEFAULTIMAGE = 8;
 	 final static AttackItemEnum DEFAULTATKITEM = AttackItemEnum.LANCER;
@@ -34,6 +34,7 @@ public abstract class GameHero extends GameCharacter {
 		
 	public GameHero(GameMap map, int startRow, int startColumn,GameStatus gameStatus) {
 		super(map, startRow, startColumn, DEFAULTCYCLE, DEFAULTCOEFFICIENT, DEFAULTIMAGE);
+		System.out.println("Start : " + this.getCellId());
 		this.heroStats = new HeroStats(gameStatus);
 		this.loadState(gameStatus);
 	}
@@ -82,7 +83,8 @@ public abstract class GameHero extends GameCharacter {
 	public void launchAttack(Movement direction) {
 		Launcher attack = this.heroStats.getCurrentAttack();
 		if(attack != null) {
-			attack.launch(this.getMyMap(), direction, this.getRow(), this.getColumn(),this.heroStats.getAtk());
+			int consumedMana = attack.launch(this.getMyMap(), direction, this.getRow(), this.getColumn(),this.heroStats.getAtk());
+			this.heroStats.reduceMP(consumedMana);
 		}
 	}
 	
@@ -112,6 +114,7 @@ public abstract class GameHero extends GameCharacter {
 	}
 	
 	
+	
 	//@throws IllegalArgumentException
 	private void loadState(GameStatus mapStat) {
 		
@@ -125,6 +128,8 @@ public abstract class GameHero extends GameCharacter {
 	
 	}
 
-	
+	protected void changeAttack() {
+		this.heroStats.changeAttack();
+	}
 	
 }

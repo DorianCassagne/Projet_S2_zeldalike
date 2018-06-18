@@ -46,14 +46,14 @@ public class Cell {
 	}
 
 	public boolean containsItem() {
-		return this.item == null;
+		return this.item != null;
 	}
 	
 	public void removeMovable() {
 		this.gameCharacter=null;
 	}
 	
-	public void setToWalkable(int replace) {
+	public void removeWalkable(int replace) {
 		this.background.setToWalkable(replace);
 		this.cellNPC = null;
 		this.triggerChange();
@@ -123,12 +123,17 @@ public class Cell {
 	}
 
 	public boolean setItem (Item item) {
-		boolean isSet = this.item == null;
+		boolean isSet = this.item == null && this.backWalkable();
 		if(isSet) {
 			this.item=item;
 			this.triggerChange();
 		}
 		return isSet;
+	}
+	
+	public void removeItem() {
+		this.item = null;
+		this.triggerChange();
 	}
 
 	public boolean isWalkable() {
@@ -175,5 +180,10 @@ public class Cell {
 		if(this.cellNPC != null)
 			this.triggerChange();
 	}
+	
+	public GameCharacter getCurrentCharacter() {
+		return this.gameCharacter;
+	}
+	
 	
 }

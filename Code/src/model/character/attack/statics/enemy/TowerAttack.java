@@ -4,8 +4,8 @@ package model.character.attack.statics.enemy;
  * applique un malus de deplacement au heros 
  */
 import java.util.concurrent.Executors;
+
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 import model.character.GameCharacter;

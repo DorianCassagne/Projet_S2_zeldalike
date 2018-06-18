@@ -23,6 +23,7 @@ public class NyaSlave  extends Enemy{
 	private int realcycle;
 	//est utiliser par nyannyanyan pour avoir avoir une taille de deux ennemis
 	protected NyaSlave(GameMap map, int startRow, int startColumn, int cycle, double coefficient, int defaultImage, IntegerProperty hp, IntegerProperty def, BooleanProperty dead, int realCycle,int score) {
+		
 		super(map, startRow, startColumn, cycle, coefficient, defaultImage,score);
 		this.dead=dead;		
 		this.hp=hp;
@@ -30,23 +31,23 @@ public class NyaSlave  extends Enemy{
 		this.realcycle=realCycle;
 		mov= Movement.STAY;
 		done = true;
-	}//
+	
+	}
 
 	
 
 	@Override
 	public void launchAttack(Movement move) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void getDmg(Attack attack) {
-		//System.out.println(hp.get());
-		//System.out.println(attack.getDamage());
+
 		this.hp.set(this.hp.get() - GameCharacter.calculateDamage(attack.getDamage(), def.get()));
 		if (hp.get()<=0)
 			this.kill();
+		
 	}
 	
 	protected void setMov(Movement mov) {
@@ -81,10 +82,7 @@ public class NyaSlave  extends Enemy{
 		this.setWait(1);
 		return null;
 	}
-	@Override
-	protected void setImage(Movement movement) {
-		 
-	}
+	
 
 	protected Movement getMov(){
 		return this.mov;

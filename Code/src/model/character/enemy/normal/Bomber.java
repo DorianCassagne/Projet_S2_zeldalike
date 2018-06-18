@@ -1,8 +1,9 @@
 package model.character.enemy.normal;
+
 /*
  * Classe d'ennemi Bomber 
- * Bomber est une bombe qui explose au bout d'un temps (MAXCOUNTER) dans un rayon de 3x3 centré sur bomber 
- * l'explosion est composé de 9 attacks de type Dynamite avec la direction associé pour afficher une image de 3x3
+ * Bomber est une bombe qui explose au bout d'un temps (MAXCOUNTER) dans un rayon de 3x3 centrï¿½ sur bomber 
+ * l'explosion est composï¿½ de 9 attacks de type Dynamite avec la direction associï¿½ pour afficher une image de 3x3
  * ne bouge pas et est intuable
  * 
  * 
@@ -10,7 +11,8 @@ package model.character.enemy.normal;
  * 				au joueur que la bombe va exploser au tour suivant
  * 
  */
-import model.character.attack.statics.hero.Dynamite;
+
+import model.character.attack.statics.hero.dynamite.Dynamite;
 import model.gameMap.GameMap;
 import model.gameMap.move.Move;
 import model.gameMap.move.Movement;
@@ -19,7 +21,7 @@ public class Bomber extends EnemyNormal{
 	
 	private final static int DEFAULTCYCLE = 80;
 	private final static int COEFFICIENT = 2;
-	private final static int DEFAULTIMAGE = 1680;
+	public final static int DEFAULTIMAGE = 1680;
 	private final static int DEFAULTHP = 800000;
 	private final static int DEFAULTDEF = Integer.MAX_VALUE;
 	private final static int SCORE = 0;

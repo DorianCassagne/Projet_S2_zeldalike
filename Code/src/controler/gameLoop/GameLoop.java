@@ -38,6 +38,7 @@ public class GameLoop {
 	 */
 	
 	public GameLoop(StringProperty messageZone,ControlerEncoder data) {
+
 		this.movableList = new HashMap<Integer,MovableView>();
 		this.gameLoop = new Timeline();
 		this.workingData = data;

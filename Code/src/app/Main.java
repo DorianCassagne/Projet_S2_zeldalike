@@ -46,6 +46,7 @@ public class Main extends Application {
         Scene  scene = new Scene(root,GroundControler.DEFAULTWIDTH,GroundControler.DEFAULTHEIGHT);
         GroundControler ground = loader.getController();
         ground.setScene(scene);
+        primaryStage.setResizable(false);
         primaryStage.setScene(scene);
         primaryStage.show();
     }

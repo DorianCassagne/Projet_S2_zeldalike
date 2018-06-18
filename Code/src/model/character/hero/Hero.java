@@ -91,6 +91,7 @@ public class Hero extends GameHero{
 			break;
 		case CHANGEATTACK : 
 			this.setWait(1);
+			this.changeAttack();
 			break;
 		case TALK : 
 			this.talk();
@@ -141,6 +142,7 @@ public class Hero extends GameHero{
 
 	public void changeMap(GameMap newMap,int newRow,int newColumn) {
 		this.setMap(newMap,newRow,newColumn);
+		this.setCellId(newRow, newColumn);
 	}
 
 	public final IntegerProperty mapChangerProperty() {
@@ -162,6 +164,8 @@ public class Hero extends GameHero{
 
 	@Override
 	protected void removeCharacter() {
+
+		this.getMyMap().delHero(this);
 
 	}
 

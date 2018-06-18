@@ -18,6 +18,7 @@ public class CommandInterpreter {
 	private BooleanProperty messagingProperty;
 
 	public CommandInterpreter(Game game,GameLoop gameLoop,BooleanProperty waitingForAnswer)  {
+		
 		this.myGame = game;
 		this.gameLoop = gameLoop;
 		this.initMessageProperty(waitingForAnswer);

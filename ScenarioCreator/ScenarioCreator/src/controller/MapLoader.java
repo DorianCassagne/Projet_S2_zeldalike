@@ -89,9 +89,9 @@ public class MapLoader implements Initializable{
 	}
 	
 	private void setCurrentCell(MouseEvent event) {
-		Double row = event.getY() / MapLoader.TILEPREFDIMENSION;
+		Double row = event.getY() / MapLoader.TILEPREFDIMENSION ;
 		Double column = event.getX() / MapLoader.TILEPREFDIMENSION;
-		System.out.printf("Mon x : %f and y : %f \n",row,column);
+		System.out.printf("Mon x : %f and y : %f \n",column,row);
 		this.cellId = Conversion.convertToCellId(row.intValue(), column.intValue());
 		this.stage.close();
 	}

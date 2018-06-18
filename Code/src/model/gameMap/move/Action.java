@@ -16,11 +16,13 @@ public class Action {
 	private HashMap<Movable,Integer> movableList;
 	private ArrayList<NewMovable> addedCharacter;//Caracteres qui sont ajoute recemment mais pas encore recupere
 	private ArrayList<Integer> removedMovable;//Caractere qui seront retire au prochain tour
-	private ArrayList<PendingMovable> pendingMovable;//Caractïeres qui vont etre ajoute au prochain tour
+	private ArrayList<PendingMovable> pendingMovable;//Caractï¿½eres qui vont etre ajoute au prochain tour
 	private ArrayList<Move> pendingMoves;
+	private int delay;
 	private int movableId;
 	
 	public Action() {
+		this.delay = 0;
 		this.movableId = 0;
 		this.movableList = new HashMap<Movable,Integer>();
 		this.addedCharacter = new ArrayList<NewMovable>();
@@ -32,24 +34,40 @@ public class Action {
 	
 	public void addMove(int endRow,int endColumn,int speed,Movable character) {
 		if(this.movableList.containsKey(character)) {
+			
 			character.setCellId(endRow, endColumn);
 			Move newMove = new Move(Statics.convertToCellId(endRow, endColumn),speed);
 			newMove.setMovableId(this.movableList.get(character));
+			pendingMoves.add(newMove);
 		}
 	}
 		
 	//Renvoie la liste des movements effectues pendant un tour
 	synchronized public Move[] turn() {
-		updateMovableList();
-		ArrayList<Move> moves = executeTurn();
-		moves.addAll(this.pendingMoves);
-		this.pendingMoves.clear();
-		Move[] movesArray = new Move[moves.size()];
-		movesArray = moves.toArray(movesArray);
+		this.updateDelay();
+		Move[] movesArray = new Move[0];
+		
+		if(this.delay <= 0) {
+			
+			updateMovableList();
+			ArrayList<Move> moves = executeTurn();
+			moves.addAll(this.pendingMoves);
+			this.pendingMoves.clear();
+			movesArray = new Move[moves.size()];
+			
+			movesArray = moves.toArray(movesArray);
+		}
 		return movesArray;
 	}
 	
-	//Renvoie la liste des nouveaux caractïeres introduit dans le jeu
+	//Renvoie la liste des nouveaux caractï¿½eres introduit dans le jeu
+	private void updateDelay() {
+		if(delay > 0)
+			delay--;
+	}
+	
+	//Renvoie la liste des nouveaux caractï¿½res introduit dans le jeu
+
 	public NewMovable[] getNewCharList() {
 		NewMovable[] newChars = new NewMovable[this.addedCharacter.size()];
 		newChars = this.addedCharacter.toArray(newChars);
@@ -85,6 +103,10 @@ public class Action {
 			this.pendingMovable.add(new PendingMovable(movable));
 		}
 		return deleted;
+	}
+	
+	public void setNewDelay(int newDelay) {
+		this.delay = newDelay;
 	}
 	
 	
@@ -132,6 +154,7 @@ public class Action {
 		}
 		return moves;
 	}
+	
 
 
 }

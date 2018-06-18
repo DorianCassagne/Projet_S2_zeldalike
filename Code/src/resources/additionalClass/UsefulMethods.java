@@ -42,7 +42,7 @@ public class UsefulMethods {
 	 * methode qui affiche le contenu d'un tableau
 	 */
 	public static void showIntegerTab(Integer[] tab) {
-		System.out.println("Start");
+
 		for(Integer i : tab) {
 			System.out.print(i + "\t" );
 		}

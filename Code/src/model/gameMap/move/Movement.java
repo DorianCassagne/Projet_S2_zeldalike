@@ -50,6 +50,9 @@ public enum Movement {
 		int horizontalIncreement = 0;
 		int coefficient = 2;
 		
+		if(columnDifference == 0 || rowDifference == 0)
+			coefficient = 1;
+		
 		
 		if(rowDifference < 0 && columnDifference > 0)
 			verticalIncreement = 0;

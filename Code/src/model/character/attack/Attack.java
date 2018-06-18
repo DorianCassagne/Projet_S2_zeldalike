@@ -83,11 +83,13 @@ public abstract class Attack extends Movable {
 	}
 	
 	private int establishMove() {
-
+		
+		this.launchAttack();
 		this.clearLastAttack();
 		int index = 0;
 
 		while(index < this.cellPerTurn && this.isAlive()) {
+			
 			this.moveAttack();
 			this.launchAttack();
 			index++;

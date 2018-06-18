@@ -8,6 +8,7 @@ package model.character.item.mp;
  */
 import model.character.hero.Hero;
 import model.character.item.Item;
+import model.character.item.mapChange.MapChangerEnum;
 
 public class MPIncrease extends Item{
 
@@ -22,6 +23,11 @@ public class MPIncrease extends Item{
 		else
 			throw new IllegalArgumentException("ITEM NOT A POTION");
 	}
+	
+	public MPIncrease(String mapName) throws IllegalArgumentException {
+		this(MPItemEnum.valueOf(mapName).getImage());
+	}
+
 	
 	@Override
 	protected void applyTo(Hero hero) {

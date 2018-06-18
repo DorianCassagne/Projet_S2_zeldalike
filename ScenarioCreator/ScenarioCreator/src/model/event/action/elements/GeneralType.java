@@ -6,10 +6,10 @@ import model.event.condition.elements.ElementNames;
 
 public enum GeneralType implements ElementNames{
 	SHOW("Afficher","S",SpecificType.MESSAGE),
-	CREATE("Créer","C",SpecificType.ITEM,SpecificType.MONSTER),
-	DROP("Retirer","D",SpecificType.WALKABLE),
-	ADD("Ajouter","A",SpecificType.ATTACK);
-	
+	CREATE("Créer","C",SpecificType.ITEM,SpecificType.MONSTER,SpecificType.NPC),
+	DROP("Retirer","D",SpecificType.WALKABLE,SpecificType.MONSTERDROP,SpecificType.ITEMDROP,SpecificType.HERO,SpecificType.NPCDROP),
+	ADD("Ajouter","A",SpecificType.ATTACK),
+	DELAY("Tarder","d");
 	private String nom;
 	private String representation;
 	private StringProperty representationProperty;
