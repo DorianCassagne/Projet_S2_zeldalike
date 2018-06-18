@@ -1,4 +1,3 @@
-
 N->S-m--Hero : Où suis Je ?->C-N-MARIO-Mario : Collectes une arme avant que je te laisse passer-1040->C-N-MARIO-Mario : Collectes une arme avant que je te laisse passer-1041->C-N-MARIO-Mario : Collectes une arme avant que je te laisse passer-1042->C-N-MARIO-Mario : Collectes une arme avant que je te laisse passer-1043
 N->C-I-LANCER--195->C-M-StaticBadMonkey-monkey1-2385->C-M-StaticBadMonkey-monkey3-2449->C-M-StaticBadMonkey-monkey4-2513->C-M-StaticBADMONKEY-monkey5-2577->C-M-StaticBADMONKEY-monkey6-2514
 N->C-N-FAIRY1TOP-Entrainez vous d'abord-2700->C-N-FAIRY1TOP-Entrainez vous d'abord-2701->C-N-FAIRY1TOP-Entrainez vous d'abord-2702
@@ -7,7 +6,6 @@ O:4-AND-C:642:!:I->S-m--Jeu: Faites attention y'a des monstres .->D-M--monkey1->
 O:5: :A->S-m--Vous avez réussi à collecter votre première item, bravo !!!->S-m-Maintenant vous pouvez attaquer en utilisant les touches ->S-m--Flêche bas:Pour attaquer un ennemi en bas\nFlêche haut:Pour attaquer un ennemi en haut\nFlêche Gauche:Pour attaquer l'ennemi à gauche\nFlêche droite:Pour attaquer l'ennemi à droite
 O:6: :A->C-M-BADMONKEY-bad1-3339->C-M-BADMONKEY-bad2-3792->C-M-BADMONKEY-bad3-3544->C-M-BADMONKEY-bad4-2581->C-M-BADMONKEY-bad5-2442->C-M-MonkeyGuard0-guard1-1104->C-M-MonkeyGuard1-guard2-314->C-M-MonkeyGuard2-guard3-2098->C-M-INTELLIGENTTOWER-tower1-345->C-M-TOWER-tower2-3404->C-M-StaticBadMonkey-static1-1135->C-M-StaticBadMonkey-static2-1199->C-M-StaticBadMonkey-static3-1263
 O:7: :A->S-m--Vous avez une nouvelle attaque\nCliquez sur E pour changer d'attaque->A-A-0
-O:7: :A->S-m--Cherchez le boss, il est situé en haut de la Map->A-I-EPEEMAXLEVEL->S-m--Vous avez changer d'item
-O:9: :A->C-M-NYANYANAY-boss-378
+O:8: :A->C-M-NYANYANAY-boss-374->S-m--Cherchez le boss, il est situé en haut de la Map->A-I-EPEEMAXLEVEL->S-m--Vous avez changer d'item
 M:boss: :1500->S-m--Tu m'a vaincu aujourd'hui je prendrais ma vengeance->D-W--2601-58->S-m--Attrapez le boss, passez par cette porte
 H:2601->M-C-MAPBOSS
