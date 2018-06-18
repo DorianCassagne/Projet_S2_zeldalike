@@ -1,5 +1,9 @@
 package vue.gameClass;
-
+/*
+ * Classe qui s'occupe de l'affichage de la cellule
+ * Cellview est un stackpane, il peut afficher plusieurs Pane 
+ * ce qui nous permet d'afficher plusieurs layers de background
+ */
 import controler.Controleur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

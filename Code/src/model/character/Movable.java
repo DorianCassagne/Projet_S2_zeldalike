@@ -1,5 +1,9 @@
 package model.character;
-
+/*
+ * Super Classe Movable
+ * Un Movable a une GameMap, une position row*column, un cycle d'action, un nombre de tour, un coefficient de deplacement 
+ * un Id de son image 
+ */
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -15,8 +19,8 @@ public abstract class Movable {
 	private int row;
 	private int column;
 	private GameMap map;
-	private int cycle;
-	private int tour ;
+	private int cycle;						// nombre de tour pour effectuer une action
+	private int tour ;						// est un compteur relatif a cycle
 	private double moveCoefficient;
 	private IntegerProperty safeImageValueProperty;
 	private IntegerProperty imageValueProperty;
@@ -36,6 +40,11 @@ public abstract class Movable {
 		initialiseImageProperty();
 	}
 	
+	/*
+	 * Methode qui permet la modification du temps de cycle 
+	 * plus la valeur de cycle est eleve plus le personnage prendra du temps a effectuer une action
+	 * plus la valeur de cycle est basss moins le personnage prendra du temps a effectuer une action
+	 */
 	protected void setWait(int cycle) {
 		if(cycle < 0 && moveCoefficient > 0)
 			throw new IllegalArgumentException("Speed must be greater than 0");
@@ -79,7 +88,6 @@ public abstract class Movable {
 	
 	public final void setCellId(int row,int column) {
 		
-
 		if(Statics.isInMap(row, column)) {
 			this.row = row;
 			this.column = column;
@@ -97,7 +105,10 @@ public abstract class Movable {
 			this.tour++;
 	}
 	
-	
+	/*
+	 *  permet de savoir si le personnage peut agir selon l'avancement du tour par rapport au cycle
+	 *  
+	 */
 	private boolean canAct() {
 		this.oneTurn();
 		boolean canAct = false;
@@ -107,7 +118,6 @@ public abstract class Movable {
 			this.cycle=this.baseCycle;
 			canAct = true;
 		}
-		
 		return canAct;
 	}
 	
@@ -131,6 +141,7 @@ public abstract class Movable {
 		}
 	}
 	
+	// methode qui permet au movable de se retirer du jeu
 	public void removeCharacter(Action action) {
 		if(action != null && action.isActive()) {
 			this.removeCharacter();
@@ -141,8 +152,8 @@ public abstract class Movable {
 		this.moveCoefficient = newCoefficient;
 	}
 	
-	protected abstract void removeCharacter();	
-	public abstract boolean isAlive();
-	protected abstract Move act();
+	protected abstract void removeCharacter();	// methode qui permet au movable de se retirer du jeu
+	public abstract boolean isAlive(); 			// methode qui determine si le personnage est toujours vivant 
+	protected abstract Move act();				// methode qui permet au personnage d'agir 
 	
 }

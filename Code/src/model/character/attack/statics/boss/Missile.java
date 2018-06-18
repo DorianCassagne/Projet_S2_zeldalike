@@ -1,3 +1,7 @@
+/*
+ * Classe attaque : Missile a tete chercheuse (utilise BFS)
+ */
+
 package model.character.attack.statics.boss;
 
 import model.PathFinder.BFS1;
@@ -15,9 +19,9 @@ public class Missile extends Attack{
 	private final static int DMG=20;
 	private final static int CELLPERTURN=1;
 	private final static double COEF=20;
-	private final static int IMG=1640;
-	private final static int MAXDIST=10;
-	private boolean change;
+	private final static int IMG=1640;		
+	private final static int MAXDIST=10;	// distance maximale de temps de vie
+	private boolean change;					// change son image
 	private int count;
 	public Missile(GameMap map, int row, int column, Movement direction) {
 		super(map, CYCLE, row, column, direction, DMG, CELLPERTURN, COEF, IMG, MAXDIST);

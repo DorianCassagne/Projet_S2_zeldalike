@@ -1,3 +1,11 @@
+/*
+ * Controleur du menu de pause
+ * qui permet de :	- Continuer la partie en cours
+ * 					- Charger une sauvegarde
+ * 					- Sauvegarde la partie en cours
+ * 					- Quitter le jeu
+ */
+
 package controler.menu;
 
 import controler.Controleur;

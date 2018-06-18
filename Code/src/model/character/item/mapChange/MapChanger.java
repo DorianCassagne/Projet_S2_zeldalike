@@ -1,5 +1,8 @@
 package model.character.item.mapChange;
-
+/*
+ * Objet qui vont permettre de basculer d'une map vers une autre 
+ * 
+ */
 import model.character.hero.Hero;
 import model.character.item.Item;
 

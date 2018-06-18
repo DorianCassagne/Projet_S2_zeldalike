@@ -1,5 +1,8 @@
 package model.character.attack.statics.boss;
-
+/*
+ * Classe d'attaque du Boss de fin qui se propage sur toute la ligne
+ * 
+ */
 import model.character.GameCharacter;
 import model.character.attack.Attack;
 import model.gameMap.GameMap;

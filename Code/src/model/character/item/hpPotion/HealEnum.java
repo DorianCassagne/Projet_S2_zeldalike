@@ -1,5 +1,8 @@
 package model.character.item.hpPotion;
 
+/*
+ * enumeration de tous les items qui pourront soigner le heros
+ */
 import model.character.item.Item;
 import model.character.item.factory.ItemEnum;
 

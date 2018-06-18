@@ -1,6 +1,8 @@
 
 package model.character.hero;
-
+/*
+ * Classe hero 
+ */
 
 import model.character.item.attack.*;
 import model.character.item.def.*;
@@ -84,10 +86,16 @@ public abstract class GameHero extends GameCharacter {
 		}
 	}
 	
+	/*
+	 * Methode qui retourne les statistiques du hero
+	 */
 	public CopyOfHeroStats getHeroStats() {
 		return this.heroStats.getHeroStats();
 	}
 	
+	/*
+	 * Methode qui permet de modifier la vitesse du joueur en fonction de l'item
+	 */
 	public void setSpeed(SpeedItemEnum speedItem) {
 		if(this.getMoveCycle() == DEFAULTCYCLE) {
 			int newSpeed = DEFAULTCYCLE * (1 - speedItem.getItemSpeed()/100);

@@ -1,5 +1,8 @@
 package model.character.item.pvItem;
-
+/*
+ * Classe Healthitem qui etend item
+ * uagmente les HP max du joueur
+ */
 import model.character.hero.Hero;
 import model.character.item.Item;
 import model.character.item.def.DefenseItemEnum;

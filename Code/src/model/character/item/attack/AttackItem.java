@@ -1,5 +1,8 @@
 package model.character.item.attack;
-
+/*
+ * Classe Attackitem qui etend item
+ * modifie l'arme du joueur 
+ */
 import model.character.hero.Hero;
 
 import model.character.item.Item;

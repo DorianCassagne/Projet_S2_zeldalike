@@ -1,5 +1,9 @@
 package model.character.attack.statics.hero.enemyMover;
 
+/*
+ * Classe d'attack EnnemyMover, permet de deplacer/pousser des ennemis dans une direction de la meme maniere que le deplacement d'une caisse
+ *  
+ */
 import model.character.GameCharacter;
 import model.character.attack.Attack;
 import model.gameMap.GameMap;

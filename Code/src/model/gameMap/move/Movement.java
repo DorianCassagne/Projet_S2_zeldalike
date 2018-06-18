@@ -1,5 +1,8 @@
 package model.gameMap.move;
-
+/*
+ * Enumeration Movement
+ * S'occupe des deplacements cases par cases
+ */
 import model.gameMap.additional.Statics;
 
 public enum Movement {
@@ -35,7 +38,10 @@ public enum Movement {
 	public int getIndex() {
 		return this.ordinal();
 	}
-	
+	/*
+	 * Methode qui retourne un int pour obtenir un mouvement
+	 * Int calcule selon la direction vers laquelle on se dirige
+	 */
 	public static Movement getDirectionInto(int cellStart,int cellEnd) {
 		
 		int rowDifference = Statics.convertToRow(cellEnd) - Statics.convertToRow(cellStart);
@@ -63,7 +69,9 @@ public enum Movement {
 
 		
 	}
-	
+	/*
+	 * Methode qui associe un chiffre a un mouvement pour le retourner
+	 */
 	public static Movement getMovementInOrder(int order) {
 		Movement movement;
 		
@@ -100,6 +108,9 @@ public enum Movement {
 	}
 	
 	
+	/*
+	 * Methode qui retourne le mouvement oppose a celui adjoint en parametre
+	 */
 	public static Movement getOppositeOf(Movement actualMovement) {
 		
 		Movement opposite = Movement.STAY;

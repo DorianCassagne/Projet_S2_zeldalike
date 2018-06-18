@@ -1,4 +1,11 @@
+
 package model.character.enemy;
+
+/*
+ * Ennemi qui possede deux etats differents associes a des couleurs
+ * avant de lancer une attaque, elle s'immobilise change de couleur et lance une attaque dependante de son etat
+ * change d etat aleatoirement  
+ */
 
 import java.util.Random;
 
@@ -139,10 +146,11 @@ public class Fairy extends EnemyNormal {
 		return BFSMove;
 	}
 	
-	/**
+	/*
 	 * put in jointtab all the cells around the hero
 	 * @param decal
 	 */
+	
 	private void getAround(int decal) {
 		if(!att) {
 			int row = GameCharacter.getHero().getRow() ;
@@ -158,28 +166,17 @@ public class Fairy extends EnemyNormal {
 		
 		return;
 	}
+	
 	@Override
 	public String getName() {
-		
 		return "Fairy";
-		
 	}
+	
 	@Override
 	public void launchAttack(Movement move) {
-		
 		if (state) 
 			new Missile(this.getMyMap(), this.getRow(), this.getColumn(), attDir);
 		else
-			new Bommerang(getMyMap(), getRow(), getColumn(), attDir);
-		
-		
+			new Bommerang(getMyMap(), getRow(), getColumn(), attDir);	
 	}
-	
-	
-
-	
-
-	
-
-
 }

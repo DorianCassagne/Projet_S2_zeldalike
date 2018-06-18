@@ -1,5 +1,7 @@
 package model.character.item.mapChange;
-
+/*
+ * Enumeration des indices de map
+ */
 import model.character.hero.Hero;
 
 public enum MapChangerEnum  {

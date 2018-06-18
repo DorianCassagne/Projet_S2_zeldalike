@@ -1,5 +1,8 @@
 package model.character.item.mpPotion;
-
+/*
+ * Classe MPitem qui etend item
+ * regenere des points de MP au hero 
+ */
 import model.character.hero.Hero;
 import model.character.item.Item;
 

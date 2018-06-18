@@ -1,3 +1,7 @@
+/*
+ * Classe qui qui controle l'affichage du héro etde la barre latérale comprenant les informations relatives a
+ * les hp, les MP, les équipements actifs
+ */
 package controler.gameLoop;
 
 import java.util.ArrayList;

@@ -13,7 +13,10 @@ import model.gameMap.MapEnum;
 import model.gameMap.additional.NewMovable;
 import model.gameMap.move.Move;
 import model.scenario.Scenario;
-
+/*
+ * Classe Jeu
+ *  
+ */
 public class Game {
 	public final static int HEROKEY = 0;
 	
@@ -25,7 +28,6 @@ public class Game {
 	private GameStatus gameStat;
 	
 	//Initialise le jeu avec une map
-	
 	
 	public Game(StringProperty messageText,GameStatus gameStat ) {
 		
@@ -41,7 +43,12 @@ public class Game {
 		new Fairy(myMap, 54, 27);
 	}
 
-	
+	/*
+	 * Methode qui recoit en parametre un index de map (valide dans l'enumeration) correspondant a la prochaine map
+	 *  change la map de la game
+	 * 	charge le scenario correspondant
+	 * 	place le hero a la case de spawn de la map 
+	 */
 	private void changeMap(int mapIndex) {
 		if(mapIndex >= 0 && mapIndex < MapEnum.values().length) {
 			MapEnum mapHash = MapEnum.values()[mapIndex];
@@ -58,7 +65,10 @@ public class Game {
 			
 		}
 	}
-		
+	
+	/*
+	 * Methode qui place le hero sur la map 
+	 */
 	private void createHero(int startRow,int startColumn) {
 		
 		if(this.hero == null) {

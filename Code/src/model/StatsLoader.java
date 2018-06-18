@@ -1,5 +1,8 @@
 package model;
-
+/*
+ * Classe qui permet de charger les statistiques
+ * permet de recuperer les sauvegardes de partie
+ */
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;

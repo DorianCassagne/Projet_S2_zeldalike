@@ -1,3 +1,8 @@
+/*
+ * Classe GameLoop (Boucle de Jeu)
+ * permet de determiner le rythme/ l'affichage du jeu 
+ */
+
 package controler.gameLoop;
 
 import java.util.HashMap;
@@ -18,18 +23,18 @@ public class GameLoop {
 	public final static int FRAMEDURATION = 10;
 	public final static int FADEDURATION = 200;
 	
-	private Timeline gameLoop ;
-	private HashMap<Integer,MovableView> movableList;
-	private ControlerEncoder workingData;
-	private boolean isStopped;
+	private Timeline gameLoop ;							
+	private HashMap<Integer,MovableView> movableList;	//liste des Movables 
+	private ControlerEncoder workingData;				//Contient les informations relatives au Heros
+	private boolean isStopped;							//statut de la gameloop
 	
 	
 	/*
 	 * Instancie la gameLoop
-	 * @param StringProperty messageZone : la propriété qui contiendra tous les messages générés dans le jeu
-	 * @param ControlerEncoder data : Contient les informations nécéssaires au déroulement continu du jeu
+	 * @param StringProperty messageZone : la propriete qui contiendra tous les messages generess dans le jeu
+	 * @param ControlerEncoder data : Contient les informations necessaires au deroulement continu du jeu
 	 * 
-	 * Sans excéption
+	 * Sans exception
 	 */
 	
 	public GameLoop(StringProperty messageZone,ControlerEncoder data) {
@@ -42,7 +47,7 @@ public class GameLoop {
 	}
 		
 	/*
-	 * démarre la gameloop
+	 * demarre la gameloop
 	 */
 	public void start() {
 		this.gameLoop.play();
@@ -50,7 +55,7 @@ public class GameLoop {
 	}
 	
 	/*
-	 * Arrête la gameLoop
+	 * Arrete la gameLoop
 	 */
 	public void stop() {
 		this.gameLoop.stop();
@@ -60,9 +65,9 @@ public class GameLoop {
 
 	
 	/*
-	 * Retourne le status de la gameLoop
+	 * Retourne le statut de la gameLoop
 	 * 
-	 * @return boolean : - Retourne vrai si la gameLoop est en arrêt
+	 * @return boolean : - Retourne vrai si la gameLoop est en arret
 	 *					 - Retourne faux si la gameloop est en marche
 	 */
 	public boolean getIsStopped() {
@@ -75,9 +80,9 @@ public class GameLoop {
 	
 	/*
 	 * Initialise la gameLoop
-	 * Dans cette méthode on définit : 
+	 * Dans cette methode on definit : 
 	 * -> Le nombre de cycle de gameLoop : infini.
-	 * -> L'action a exécuté pendant chaque tour.
+	 * -> L'action a execute pendant chaque tour.
 	 */
 	
 	private void initialiseLoop() {
@@ -90,10 +95,10 @@ public class GameLoop {
 	}
 	
 	/*
-	 * L'exécution prévu chaque tour : 
-	 * -Si le jeu s'arrête alors on arrête la gameLoop 
-	 * -On affiche les nouveaux personnages crées
-	 * -On supprime les personnages qui sont meurts
+	 * L'execution prevu pour chaque tour : 
+	 * -Si le jeu s'arrete alors on arrete la gameLoop 
+	 * -On affiche les nouveaux personnages crees
+	 * -On supprime les personnages qui sont mort
 	 * -On joue la liste des mouvement
 	 */
 	private void turn() {
@@ -114,9 +119,9 @@ public class GameLoop {
 	/*
 	 * Supprime les joueurs au niveau visuel :
 	 * 
-	 *  @param int[] playersId : le tableau contenant tous les identifiants qui vont être supprimées
+	 *  @param int[] playersId : le tableau contenant tous les identifiants qui vont etre supprimees
 	 * 
-	 *  La suppréssion d'un élément se fait par une animation (Fade)
+	 *  La suppression d'un ele�ment se fait par une animation (Fade) 
 	 */
 	
 	private void removePlayers(int[] playersId) {
@@ -135,7 +140,7 @@ public class GameLoop {
 	
 	
 	/*
-	 * Fait jouer un tour à tous les éléments visuels
+	 * Fait jouer un tour a� tous les elements visuels
 	 */
 	private void allTick() {
 		for(MovableView viewMovabe : this.movableList.values()) {
@@ -144,9 +149,9 @@ public class GameLoop {
 	}
 	
 	/*
-	 * Joue la liste des mouvements effectués au model : Déplacements
+	 * Joue la liste des mouvements effectues au model : Deplacements
 	 * 
-	 * @param Move[] moves : la liste des mouvements effectués (vérifiez la classe Move)
+	 * @param Move[] moves : la liste des mouvements effectues (verifiez la classe Move)
 	 * 
 	 * 
 	 */
@@ -161,9 +166,9 @@ public class GameLoop {
 	}
 	
 	/*
-	 * Ajoute une liste de joueurs à la vue
+	 * Ajoute une liste de joueurs a la vue
 	 * 
-	 * @param NewMovable[] newPlayers: la liste des movables à synchroniser visuellement
+	 * @param NewMovable[] newPlayers: la liste des movables a synchroniser visuellement
 	 *
 	 */
 	private void addPlayers(NewMovable[] newPlayers) {
@@ -174,9 +179,9 @@ public class GameLoop {
 	
 	
 	/*
-	 * Ajoute un movable unique à la vue en créant l'instance visuelle convenable (Héro ou autre)
+	 * Ajoute un movable unique a�la vue en creant l'instance visuelle convenable (Hero ou autre)
 	 *  
-	 * @param NewMovable newCharacter : L'élément à afficher
+	 * @param NewMovable newCharacter : L'element a afficher
 	 * 
 	 */
 	private void addMovable(NewMovable newMovable) {
@@ -193,7 +198,7 @@ public class GameLoop {
 	
 	
 	/*
-	 * Ajoute un movable à la liste des éléments affichables
+	 * Ajoute un movable a� la liste des elements affichables
 	 */
 	private void addToMovableList(MovableView movable,Integer movableId) {
 		this.workingData.getCharacterAnchorPane().getChildren().add(movable);

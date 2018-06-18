@@ -8,16 +8,16 @@ import model.gameMap.GameMap;
 import model.gameMap.move.Movement;
 
 /*
- * Cette classe représente un lanceur d'attaque par défaut : 
- * Ce type est déstiné au héro : Les attaques qui pourra toujours lancer sans se préoccuper de ses points de magie
+ * Cette classe represente un lanceur d'attaque par defaut : 
+ * Ce type est destine au hero : Les attaques qui pourra toujours lancer sans se preoccuper de ses points de magie
  * 
- * Résponsabilité : 
- * 	-Génère un type d'attaque par défaut
- *  -Lance l'attaque par défaut
+ * Responsabilitees : 
+ * 	-Genere un type d'attaque par defaut
+ *  -Lance l'attaque par defaut
  *
  * Attributs : 
- * lastAttack : la dernière attaque lancée, une deuxième attaque ne pourra se lancer que si la première est morte
- * type : le type d'attaque à lancer
+ * lastAttack : la derniere attaque lancee, une deuxieme attaque ne pourra se lancer que si la premiere est morte
+ * type : le type d'attaque a lancer
  */
 
 public class DefaultAttackLauncher implements Launcher{
@@ -28,7 +28,7 @@ public class DefaultAttackLauncher implements Launcher{
 
 	
 	/*
-	 * Crée un objet DefaultAttackLauncher à partir d'un item
+	 * Cree un objet DefaultAttackLauncher a partir d'un item
 	 * 
 	 * @param AttackItemEnum attackType : l'item d'attaque utilisé
 	 * 

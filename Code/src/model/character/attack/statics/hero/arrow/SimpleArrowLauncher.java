@@ -1,4 +1,7 @@
 package model.character.attack.statics.hero.arrow;
+/*
+ * classe launcher de SimpleArrow, retire des points de mana a cahque utilisation
+ */
 
 import model.character.attack.Launcher;
 import model.character.item.attack.AttackItemEnum;

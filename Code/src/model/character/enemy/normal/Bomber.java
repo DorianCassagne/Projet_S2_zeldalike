@@ -1,5 +1,15 @@
 package model.character.enemy.normal;
-
+/*
+ * Classe d'ennemi Bomber 
+ * Bomber est une bombe qui explose au bout d'un temps (MAXCOUNTER) dans un rayon de 3x3 centré sur bomber 
+ * l'explosion est composé de 9 attacks de type Dynamite avec la direction associé pour afficher une image de 3x3
+ * ne bouge pas et est intuable
+ * 
+ * 
+ * animation : bomber a 3 images, il clignote entre 2 images lorsque counter = MAXCOUNTER la 3eme image s'affiche pour signaler
+ * 				au joueur que la bombe va exploser au tour suivant
+ * 
+ */
 import model.character.attack.statics.hero.Dynamite;
 import model.gameMap.GameMap;
 import model.gameMap.move.Move;

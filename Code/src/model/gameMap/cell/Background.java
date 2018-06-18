@@ -1,5 +1,10 @@
 package model.gameMap.cell;
-
+/*
+ * Classe background
+ * designe les tiles entre les lignes 300 et 500
+ * un background est marchable tant qu'il ne contient pas de gamecharacter 
+ * et que son background de base n'est pas un background issu des lignes 400-500
+ */
 
 import model.gameMap.additional.Statics;
 

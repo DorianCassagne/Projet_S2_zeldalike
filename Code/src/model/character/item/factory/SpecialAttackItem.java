@@ -5,7 +5,10 @@ import model.character.attack.statics.hero.bomb.BombLauncher;
 import model.character.attack.statics.hero.enemyMover.EnemyMoverLauncher;
 import model.character.hero.Hero;
 import model.character.item.Item;
-
+/*
+ * Classe SpecialAttackitem
+ * 
+ */
 public class SpecialAttackItem extends Item{
 
 	private final static int LAUNCHERBOOMERANG = 816;

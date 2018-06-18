@@ -1,5 +1,7 @@
 package model.gameMap.move;
-
+/*
+ * Classe Move, relatif au mouvement des Movables
+ */
 public class Move {
 	private int movableId;
 	private int endCellId;
@@ -27,12 +29,9 @@ public class Move {
 		this.movableId = movableId;
 	}
 	
-	
-	
 	public int getMovableId() {
 		return this.movableId;
 	}
-	
 	
 	public int getEndCellId() {
 		return this.endCellId;

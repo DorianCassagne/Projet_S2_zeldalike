@@ -1,6 +1,11 @@
 package model.gameMap;
 
-
+/*
+ * Enumeration des maps du jeu 
+ * attrributs : - positionX et positionY (point de spawn du hero)
+ * 				- nom du fichier de scenario 
+ * 				- nom des differents calques de la map
+ */
 public enum MapEnum {
 	
 	MAPDEBUT(40,47,"Scenario-Map-1.txt","Dungeon1-1_5item.csv","Dungeon1-1_1fond.csv","Dungeon1-1_2mur.csv","Dungeon1-1_3deco.csv","Dungeon1-1_4porte.csv"),

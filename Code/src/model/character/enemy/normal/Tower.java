@@ -4,7 +4,9 @@ import model.character.attack.statics.enemy.TowerAttack;
 import model.gameMap.GameMap;
 import model.gameMap.move.Move;
 import model.gameMap.move.Movement;
-
+/*
+ * Classe ennemi qui attaque a l'aide de missile vers la direction du joueur mais pas forcement sa position
+ */
 public class Tower extends EnemyNormal{
 
 	private static int DEFAULTIMAGE = 80;

@@ -1,4 +1,8 @@
 package model.character.attack.statics;
+/*
+ * Classe d'attaque boomerang
+ * attaque rectiligne qui lorsque rencontre un obstacle ou atteint sa portee maximale retourne a sa case de depart
+ */
 
 import model.character.GameCharacter;
 import model.character.attack.Attack;

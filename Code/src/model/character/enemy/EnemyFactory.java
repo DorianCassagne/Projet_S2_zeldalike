@@ -1,8 +1,13 @@
 package model.character.enemy;
 
+/*
+ * classe facilitant la création d'ennemi
+ */
+
 import model.character.enemy.normal.BadMonkey;
 import model.character.enemy.normal.BlueFairy;
 import model.gameMap.GameMap;
+
 
 public class EnemyFactory {
 	

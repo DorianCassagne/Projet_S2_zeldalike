@@ -1,5 +1,11 @@
 package model.character.item.mp;
-
+/*
+ * 
+ */
+/*
+ * Classe MPincrease qui etend item
+ * modifie le points de MP max du hero 
+ */
 import model.character.hero.Hero;
 import model.character.item.Item;
 

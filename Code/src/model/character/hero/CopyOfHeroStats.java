@@ -1,16 +1,21 @@
 package model.character.hero;
 import javafx.beans.binding.IntegerBinding;
+
+/*
+ * Classe qui permet la copie des statistiques du hero, 
+ * classe utile pour la sauvegarde des donnees
+ */
 import javafx.beans.property.IntegerProperty;
 public class CopyOfHeroStats {
 
-	private IntegerBinding hp;
-	private IntegerBinding atk;
-	private IntegerBinding atkImage;
-	private IntegerBinding MP;
-	private IntegerBinding def;
-	private IntegerBinding defImage;
-	private IntegerBinding maxHp;
-	private IntegerBinding maxMp;
+	private IntegerBinding hp;			// point de vie
+	private IntegerBinding atk;			// attaque active
+	private IntegerBinding atkImage;	// image de l'item d'attaque
+	private IntegerBinding MP;			// point de mana
+	private IntegerBinding def;			// point de defense
+	private IntegerBinding defImage;	// image de l'item defensif
+	private IntegerBinding maxHp;		// maximum de point de vie
+	private IntegerBinding maxMp;		// maximum de mana
 	
 	public CopyOfHeroStats(IntegerProperty hp,IntegerProperty def,IntegerProperty defImage,IntegerProperty atkImage,IntegerProperty atkValue,IntegerProperty MP,IntegerProperty maxHP,IntegerProperty maxMP) {
 

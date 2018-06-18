@@ -1,3 +1,10 @@
+/*
+ * Controleur du menu de GameOver 
+ * qui permet de : 	- Rejouer
+ * 					- Afficher le menu principale 
+ * 					- Naviguer dans le menu de chargement de sauvegarde
+ * 					- Quittez le jeu 
+ */
 package controler.menu;
 
 import controler.Controleur;

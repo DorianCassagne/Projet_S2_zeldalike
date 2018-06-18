@@ -1,5 +1,8 @@
 package model.gameMap.additional;
-
+/*
+ * Classe Statics contenant les constantes relatives aux index des differents "objets" present dans le tileset
+ * contient des methodes utiles pour les conversions d'id d'objet, de position relative au la map 
+ */
 import model.gameMap.MapEnum;
 
 public class Statics {
@@ -13,7 +16,7 @@ public class Statics {
 	public final static int STARTNONWALKABLEINDEX = 400 * LINELENGTH;
 	public final static int CHANGEPARTWITHCELLID = 9;
 	public final static int STEP = 1;
-	public final static int MAPFULLSIZE = MapReader.MAPLENGTH * MapReader.MAPLENGTH;
+	public final static int MAPFULLSIZE = MapReader.MAPLENGTH * MapReader.MAPLENGTH; // taille de la map complete
 
 	
 	public final static int convertFromRelativeMapIndex(int newMapIndex) {
@@ -41,7 +44,7 @@ public class Statics {
 	}
 	
 	/*
-	 * V�rifie si les param�tres en entr�s d�signe une case avaible sur la map
+	 * Verifie si les parametres en entrees designe une case libre sur la map
 	 */
 	public static boolean isInMap(int row,int column) {
 		return row >= 0 && row < MapReader.MAPLENGTH && column >= 0 && row < MapReader.MAPLENGTH;

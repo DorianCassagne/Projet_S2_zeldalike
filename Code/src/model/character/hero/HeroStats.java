@@ -1,5 +1,8 @@
 package model.character.hero;
-
+/*
+ * Classe contenant les statistiques du heros 
+ * et les methodes permettant leur modifications
+ */
 import java.util.ArrayList;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;

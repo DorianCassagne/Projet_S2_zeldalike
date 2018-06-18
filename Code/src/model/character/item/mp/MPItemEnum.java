@@ -2,7 +2,9 @@ package model.character.item.mp;
 
 import model.character.item.Item;
 import model.character.item.factory.ItemEnum;
-
+/*
+ * Enumeration des differents items permettant la modification des MP MAX
+ */
 public enum MPItemEnum implements ItemEnum{
 	LVL1_MP(10),
 	LVL2_MP(20),

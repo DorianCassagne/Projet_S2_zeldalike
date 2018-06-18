@@ -1,5 +1,7 @@
 package model.character.item.speed;
-
+/*
+ * enumration des differents objets qui modifieront la vitesse
+ */
 import java.util.TimerTask;
 
 import model.character.item.Item;

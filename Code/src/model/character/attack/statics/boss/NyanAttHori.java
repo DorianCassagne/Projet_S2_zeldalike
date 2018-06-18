@@ -1,5 +1,8 @@
 package model.character.attack.statics.boss;
-
+/*
+ * Classe d'attaque du Boss de fin
+ * 
+ */
 
 import model.gameMap.GameMap;
 import model.gameMap.move.Movement;

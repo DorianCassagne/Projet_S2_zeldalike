@@ -1,5 +1,8 @@
 package model.character.enemy.normal;
-
+/*
+ * Classe EnemyNormal étendant Enemy,
+ * permet l'attribution des methodes GetDmg, setHp, isAlive, getHP,
+ */
 import model.character.attack.Attack;
 import model.character.enemy.Enemy;
 import model.gameMap.GameMap;
@@ -16,7 +19,6 @@ public abstract class EnemyNormal extends Enemy{
 		if(hp > 0 && def > 0 ) {
 			this.hp = hp;
 			this.def = def;
-			System.out.println("I got the image : "+defaultImage + " and i am " + this.getName());
 		}else
 			throw new IllegalArgumentException("ENEMY HP AND DEF MUST BE > 0");
 	}
