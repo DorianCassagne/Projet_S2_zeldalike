@@ -7,6 +7,8 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import model.character.GameCharacter;
 import model.character.attack.Attack;
+import model.character.attack.statics.hero.dynamite.Dynamite;
+import model.character.attack.statics.hero.dynamite.DynamiteLauncher;
 import model.character.enemy.Enemy;
 import model.character.hero.Hero;
 import model.character.item.Item;
@@ -132,6 +134,12 @@ public class GameMap {
 		if(action != null && action.isActive())
 			this.cells[cellId].removeWalkable(replace);
 	}
+	
+	public void clearBackgroundConstraint(int cellId,Dynamite action,int replace) {
+		if(action != null && action != null)
+			this.cells[cellId].removeWalkable(replace);
+	}
+
 	
 	public boolean containsItemAt(int cellId) {
 		return this.cells[cellId].containsItem();

@@ -23,6 +23,7 @@ public class Dynamite extends Attack {
 	@Override
 	protected void establishAttack(GameCharacter gameCharacter) {
 		gameCharacter.getDmg(this);
+		this.getMyMap().clearBackgroundConstraint(this.getCellId(), this, 2516);
 	}
 	
 	@Override 
