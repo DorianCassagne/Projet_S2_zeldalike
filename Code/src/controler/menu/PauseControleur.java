@@ -14,6 +14,7 @@ import controler.mainGame.SceneLoader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import model.character.GameCharacter;
+import vue.gameClass.AlertMessage;
 
 public class PauseControleur implements SceneLoader{
 
@@ -43,7 +44,14 @@ public class PauseControleur implements SceneLoader{
 
 	@FXML
 	void saveGame(ActionEvent event) {
-		GameCharacter.getHero().getGameStatus().saveState();
+		
+		if(GameCharacter.getHero().getGameStatus().saveState()) {
+			AlertMessage.showInfo("Sauvegarde réussie");
+		}else {
+			AlertMessage.showError("Attention: sauvegarde échouée");
+		}
+		
+		
 	}
 
 	@Override
