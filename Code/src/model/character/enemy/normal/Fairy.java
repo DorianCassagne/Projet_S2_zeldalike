@@ -40,7 +40,6 @@ public class Fairy extends EnemyNormal {
 		
 		state = RAND.nextBoolean();
 		
-		System.out.println("My Image is : " + this.getImageValueProperty().get());
 		if (!state)
 			valImg = 0;
 			
@@ -135,8 +134,6 @@ public class Fairy extends EnemyNormal {
 			else if(actualCell - 1 == nextCell) {
 				this.setImage(valImg+3);
 			}
-			else
-				System.out.println("PAS A COTÉ : "+actualCell+"  "+nextCell);
 			
 			BFSMove = new Move(nextCell,this.getMoveCycle());
 		}

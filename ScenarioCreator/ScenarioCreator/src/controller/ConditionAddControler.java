@@ -1,19 +1,8 @@
 package controller;
 
-
-import model.event.condition.elements.ConditionValidity;
-
-import model.event.condition.elements.*;
-import model.event.condition.generator.Condition;
-import model.event.condition.generator.ConditionGenerator;
-import model.event.Evenement;
-import model.event.Scenario;
-import model.event.action.elements.*;
-import model.event.action.generator.*;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
-
 
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
@@ -29,6 +18,13 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
+import model.event.Evenement;
+import model.event.Scenario;
+import model.event.action.elements.*;
+import model.event.action.generator.Action;
+import model.event.action.generator.ActionGenerator;
+import model.event.condition.elements.*;
+import model.event.condition.generator.*;
 
 public class ConditionAddControler implements Initializable{
 

@@ -17,7 +17,6 @@ public class SeparatorFileReader {
 		try {
 			File file;
 
-			System.out.println("Path : " + path);
 			
 			if(localFile )
 				file = new File(SeparatorFileReader.class.getResource(path).toURI().toURL().getPath());

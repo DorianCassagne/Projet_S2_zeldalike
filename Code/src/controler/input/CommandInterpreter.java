@@ -79,7 +79,6 @@ public class CommandInterpreter {
 			nextMove = Hero.TALK;
 			break;
 		default :
-			System.out.println("Unknown key");
 		}
 		this.myGame.communiquerMovement(nextMove);
 

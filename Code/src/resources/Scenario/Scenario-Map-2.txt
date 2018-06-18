@@ -2,8 +2,9 @@ N->S---Je suis le boss final, tu dois me vaincre.
 N->C-M-NYANYANAY-boss-2975->A-I-LVL16_DEF->A-I-EPEEROUGE
 M:boss: :600->C-M-FAIRY-fairy-3544
 M:boss: :800->C-M-NyaBlock-banana1-3156
-M:fairy: :0->A-M- -boss->A-A-2->A-A-1->A-A-0
+M:fairy: :0->A-A-2->A-A-1->A-A-0
 M:boss: :700->C-M-FAIRY-fairy1-3555->S-m--Tu vas mourrir !!!!->A-A-LVL7_HP->A-A-LVL8_HEAL
 M:boss: :500->C-M-BADMONKEY-badMonkey1-3044->C-M-TOWER-tower2-3032
 M:boss: :0->S-m--Bravo vous avez gagné, appuyez sur échap pour quitter
-O:8: :A->D-M--fairy->D-M--banana1->D-M--fairy1->D-M--tower2->D-M--badMonkey1
+O:8: :A->D-M--fairy->D-M--banana1->D-M--fairy1->D-M--tower2->D-M--badMonkey1->S-m--Vous avez réussi à tuer le boss bravo !!
+O:9: :A->M-C-MAPDEBUT

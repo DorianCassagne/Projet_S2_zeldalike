@@ -1,7 +1,7 @@
-N->C-N-MARIO-Mario : Bonjour, je suis mario ! ravis de vous voir héro !-1817->C-N-FAIRY1BACK-Fée : Je vous remercie d'avoir sauver notre pays-1818->C-N-FAIRY2BACK-Fée : La fête commencera bientôt-1831->C-N-FAIRY2TOP-Fée : Veuillez monter sur scène bientôt commencera la distribution des recommpenses-2592->C-N-FAIRY1BACK-Fée : Merci-2203->C-N-FAIRY1BACK-Fée : Bravo pour votre courage-2341->C-N-FAIRY1BACK-Fée : Comment puis je vous aider ?-2085
-O:3: :A->S-m--Jeu : Attention on recoit une attaque de l'extérieur-2085
-H:2528: :->S-m--Jeu : Parlez à la fèe devant vous-2085->d---200-0
-O:2: :A-AND-H:1824: :->C-M-NYANYANAY-boss-2016->d---40-35
+N->C-N-MARIO-Mario : Bonjour, je suis mario ! ravis de vous voir héro !-1817->C-N-FAIRY1TOP-Fée : Je vous remercie d'avoir sauver notre pays-1818->C-N-FAIRY2BACK-Fée : La fête commencera bientôt-1831->C-N-FAIRY2TOP-Fée : Veuillez monter sur scène bientôt commencera la distribution des recommpenses-2592->C-N-FAIRY1TOP-Fée : Merci-2203->C-N-FAIRY1TOP-Fée : Bravo pour votre courage-2341->C-N-FAIRY1TOP-Fée : Comment puis je vous aider ?-2085
+H:2528: :->S-m--Jeu : Parlez à la fèe devant vous-2085->d---300-10
+O:2: :A->S-m--Jeu : Attention on recoit une attaque de l'extérieur-2085
+O:3: :A-AND-H:1824: :->C-M-NYANYANAY-boss-2016->d---40-35
 O:4: :A->S-m--Fairy : Il se passe qoui, c'est qui ce type !!!!
 O:5: :A->S-m--BOSS : Mes frères et soeurs réjouissez vous! Vous qui en avait assez de vous faire taper dessus par des héros cherchant juste a lot, \n j’ai entendu votre appel, votre détresse , aujourd’hui je vous sauve -30->D-H---4->S-m--Je suis Dormino votre sauveur.\n Joignez vous à moi et prenez la place de ceux que vous appelliez jadis héros
 O:6: :A->d- - -60-700
@@ -12,7 +12,7 @@ O:10: :A->D-W--2613-1818->D-W--2613-1817->C-N-MARIO--2020->C-N-FAIRY1BACK--2019-
 O:11: :A->A-H->S-m--Héro : Attends Monstre je te tuerais
 O:12: :A->S-m--Héro : Pathétique, êtes vous vraiment un héro !!!! .Je vous laisse s'entrainer ->D-W--2613-2020->D-W--2613-2019->D-M--boss
 O:13: :A->D-W--2658-2656->D-W--2659-2657
-O:12: :A-AND-H:2656-OR-H:2657:->M-C-MAPBOSS
+O:12: :A-AND-H:2656-OR-H:2657:->M-C-MAPFIN
 N->S-m--Pour vous déplacez utilisez les touches : \nZ: Pour aller en haut\nS:Pour aller en bas\nQ:Pour aller à gauche\nD:Pour aller à droite\nctrl + espace : pour passer le dialogue
 O:16: :A->S-m--Effectuez un mouvement
 H:2143-OR-H:2145-OR-H:2080-OR-H:2208->S-m--Vous avez réussi, bravo !

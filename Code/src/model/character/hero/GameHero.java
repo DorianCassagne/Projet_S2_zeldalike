@@ -34,7 +34,6 @@ public abstract class GameHero extends GameCharacter {
 		
 	public GameHero(GameMap map, int startRow, int startColumn,GameStatus gameStatus) {
 		super(map, startRow, startColumn, DEFAULTCYCLE, DEFAULTCOEFFICIENT, DEFAULTIMAGE);
-		System.out.println("Start : " + this.getCellId());
 		this.heroStats = new HeroStats(gameStatus);
 		this.loadState(gameStatus);
 	}

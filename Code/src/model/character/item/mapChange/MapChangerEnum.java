@@ -7,7 +7,8 @@ import model.character.hero.Hero;
 public enum MapChangerEnum  {
 	MAPDEBUT(0),
 	MAPFORET(1),
-	MAPBOSS(2);
+	MAPBOSS(2),
+	MAPFIN(3);
 	private int mapIndex ;
 	
 	MapChangerEnum(int mapIndex){

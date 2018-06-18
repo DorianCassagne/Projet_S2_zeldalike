@@ -62,7 +62,6 @@ public class DoomAttack extends Attack {
 
 	@Override
 	protected void establishAttack(GameCharacter gameCharacter) {
-		//System.out.println("Damage is " + this.getDamage());
 		gameCharacter.getDmg(this);
 		
 	}

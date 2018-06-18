@@ -23,7 +23,6 @@ public class Condition {
 	private final static char CONTAINSITEM = 'I';
 	private final static char WALKABLE = 'W';
 	private final static char OLDCONDITION = 'O';
-	private final static char ABSOLUTE = 'A';
 	public final static char NOTHING = 'N';
 	
 	private static ActionData actionData;

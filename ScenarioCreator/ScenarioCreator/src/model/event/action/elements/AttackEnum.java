@@ -1,6 +1,7 @@
 package model.event.action.elements;
 
 import javafx.beans.property.SimpleStringProperty;
+
 import javafx.beans.property.StringProperty;
 import model.event.condition.elements.ElementNames;
 

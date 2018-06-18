@@ -1,0 +1,2 @@
+N->C-N-MARIO-Mario : Bonjour, je suis mario ! ravis de vous voir héro !-1817->C-N-FAIRY1BACK-Fée : Je vous remercie d'avoir sauver notre pays-1818->C-N-FAIRY2BACK-Fée : La fête commencera bientôt-1831->C-N-FAIRY2TOP-Fée : Vous allez être récompensé pour votre courage-2592->C-N-FAIRY1TOP-Fée : Merci-2203->C-N-FAIRY1TOP-Fée : Bravo pour votre courage-2341->C-N-FAIRY1TOP-Fée : Comment puis je vous aider ?-2085
+N->S-m--Vous avez réussi à tuer le boss, vous êtes vraiment un héro !!!!
