@@ -31,9 +31,11 @@ public class Action {
 	
 	public void addMove(int endRow,int endColumn,int speed,Movable character) {
 		if(this.movableList.containsKey(character)) {
+			
 			character.setCellId(endRow, endColumn);
 			Move newMove = new Move(Statics.convertToCellId(endRow, endColumn),speed);
 			newMove.setMovableId(this.movableList.get(character));
+			pendingMoves.add(newMove);
 		}
 	}
 		
@@ -42,7 +44,7 @@ public class Action {
 		this.updateDelay();
 		Move[] movesArray = new Move[0];
 		
-		if(this.delay > 0) {
+		if(this.delay <= 0) {
 			
 			updateMovableList();
 			ArrayList<Move> moves = executeTurn();

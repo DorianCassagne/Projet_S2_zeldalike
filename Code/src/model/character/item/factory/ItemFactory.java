@@ -18,9 +18,9 @@ public class ItemFactory {
 		try {
 			item = new SpecialAttackItem(id);
 		}catch(IllegalArgumentException e) {
-			if(UsefulMethods.isBetween(id, Item.ATTACKITEMSTARTINDEX, Item.DEFENSEINTEMSTARTINDEX)) {
+						
+			if(UsefulMethods.isBetween(id, Item.ATTACKITEMSTARTINDEX, Item.DEFENSEINTEMSTARTINDEX)) 
 				item = new AttackItem(id);
-			}
 			else if(UsefulMethods.isBetween(id, Item.DEFENSEINTEMSTARTINDEX, Item.SPEEDITEMSTARTINDEX))
 				item = new DefenseItem(id);
 			else if(UsefulMethods.isBetween(id, Item.SPEEDITEMSTARTINDEX, Item.MPITEMSTARTINDEX))
@@ -35,10 +35,6 @@ public class ItemFactory {
 				item = new Healer(id);
 			else if(UsefulMethods.isBetween(id, Item.MPPOTIONSTARTINDEX, Item.MPPOTIONENDINDEX))
 				item = new MPItem(id);
-			else if(id == 864){
-				//TODO
-				item = new MapChanger(1);
-			}
 		}
 					
 		return item;

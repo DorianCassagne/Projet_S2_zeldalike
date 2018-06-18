@@ -33,6 +33,7 @@ public class Background {
 	
 	public void setToWalkable(int replace) {
 		int i = 0;
+		
 		while(i < backgroundList.length){
 			if(backgroundList[i] >= Statics.STARTNONWALKABLEINDEX)
 				backgroundList[i] = replace;

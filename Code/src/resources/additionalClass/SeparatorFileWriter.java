@@ -11,7 +11,7 @@ public class SeparatorFileWriter {
 			FileWriter writer = new FileWriter(path,append);
 			writer.write(textToWrite);
 			writer.close();
-			writeSuccess = false;
+			writeSuccess = true;
 
 		}catch(IOException e) {
 		}

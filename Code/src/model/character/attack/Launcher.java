@@ -26,4 +26,7 @@ public interface Launcher {
 	 * 
 	 */
 	public int getDamage();
+	
+	public int getManaConsume();
+	
 }

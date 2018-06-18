@@ -1,13 +1,13 @@
 package model.scenario;
 
 import java.io.BufferedReader;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 import javafx.beans.property.StringProperty;
@@ -28,24 +28,27 @@ public class Scenario {
 	public final static String INTERNALSEPARTOR = "-";
 	private final static int CONDITIONINDEX = 0;
 	private final static int EVENTSTOSKIPINDEX = 1;
-	private final static int CYCLE = 10;
+	public final static int CYCLE = 10;
 	private final static String CONDITIONINTERNALSEPARATOR = ":";
 	
-	private int counter;
 	private ArrayList<Evenement> events ;
 	private HashMap<String,Enemy> enemyList;
 	private HashMap<Integer,String> itemList;
+	private HashMap<Integer,String> NPCList;
 	
 	private ActionData data;
 	private ArrayList<Integer> finishedEvents;
 	
 	public Scenario(String filename,String saveName,StringProperty textMessages,GameMap map) {
+		
 		this.enemyList = new HashMap<String,Enemy>();
 		this.finishedEvents = new ArrayList<Integer>();
 		this.itemList = new HashMap<Integer,String>();
+		this.NPCList = new HashMap<Integer,String>();
 		initData(map,textMessages);
+		
 		this.events = new ArrayList<Evenement>();
-		this.counter = 0;
+		
 		
 		
 		readSave(writeScenario(saveName,false));
@@ -71,7 +74,8 @@ public class Scenario {
 			}
 		};
 		
-		this.data = new ActionData(map,textMessages,enemyList,itemList,finishedEvents,callBack); 
+		
+		this.data = new ActionData(map,textMessages,enemyList,itemList,finishedEvents,callBack,this.NPCList); 
 		
 	}
 	
@@ -95,12 +99,17 @@ public class Scenario {
 				if(!this.finishedEvents.contains(i + 1) || !toCheckOld) {
 					Supplier<Boolean> condition = getCondition(scenario.get(i));
 					Supplier<Boolean>[] actions = this.getActions(scenario.get(i));
-					this.events.add(new Evenement(i,condition,actions));
+					if(toCheckOld)
+						this.events.add(0,new Evenement(Integer.MAX_VALUE,condition,actions));
+					else
+						this.events.add(0,new Evenement(i,condition,actions));
 				}
 			}catch(Exception e) {
 				throw new IllegalArgumentException("ERROR FOUND AT LINE "+ (i+1) + " \nMessage : " + e.getMessage());
 			}
+			
 		}
+
 	}
 	
 	private Supplier<Boolean> getCondition(ArrayList<String[]> scenarioPart){
@@ -135,23 +144,25 @@ public class Scenario {
 	
 	private boolean canRun() {
 		boolean canRun = false;
-		if(this.counter == CYCLE) {
-			this.counter = 0;
+		if(this.data.getCounter() == CYCLE) {
+			this.data.setScenarioCounter(0);
 			canRun = true;
 		}
 		else
-			this.counter++;
+			this.data.increaseCounter();
 		return canRun;
 	}
 	
 	public void run() {
 		Evenement currentEvent;
+
 		if(this.canRun()) {
 			int i = 0;
 			while(i < events.size()) {
 				currentEvent = events.get(i);  
-				if(currentEvent.evaluate()) {
 
+				if(currentEvent.evaluate()) {
+					
 					this.events.remove(i);
 					this.finishedEvents.add(currentEvent.getId());
 				
@@ -181,11 +192,17 @@ public class Scenario {
 			}
 		});
 		
+		this.NPCList.forEach((cellId,NPCPers)->{
+			scenarioCode.append(ActionEncode.encodeToNPC(cellId,NPCPers));
+		});
+
+		
 		scenarioCode.append("\n");
 		
 		this.finishedEvents.forEach(e->{
 			scenarioCode.append(e + INTERNALSEPARTOR);
 		});
+		
 		
 		
 		if(!SeparatorFileWriter.writeToFile(path,scenarioCode.toString(),false)) {

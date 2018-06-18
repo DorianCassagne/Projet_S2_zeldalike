@@ -7,6 +7,7 @@ import model.character.enemy.normal.Bomber;
 import model.character.enemy.normal.Fairy;
 import model.character.enemy.normal.IntelligentTower;
 import model.character.enemy.normal.MonkeyGuard;
+import model.character.enemy.normal.StaticBadMonkey;
 import model.character.enemy.normal.Tower;
 import model.gameMap.GameMap;
 import model.gameMap.move.Movement;
@@ -26,7 +27,7 @@ public class EnemyFactory {
 		
 		else if(monsterName.startsWith("MonkeyGuard")) {
 			String choice = monsterName.substring(monsterName.length() - 1 , monsterName.length());
-			monster = new MonkeyGuard(map, column, row, Integer.parseInt(choice));
+			monster = new MonkeyGuard(map, row, column, Integer.parseInt(choice));
 		}
 
 		else if(monsterName.equalsIgnoreCase("Bomber")) {
@@ -46,6 +47,10 @@ public class EnemyFactory {
 		
 		else if(monsterName.equalsIgnoreCase("NyaBlock")) {
 			monster = new NyaBlock(map, row, column, Movement.RIGHT );
+		}
+		
+		else if(monsterName.equalsIgnoreCase("StaticBadMonkey")) {
+			monster = new StaticBadMonkey(map, row, column);
 		}
 		
 		else {

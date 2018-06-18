@@ -29,8 +29,12 @@ public class Game {
 	//Initialise le jeu avec une map
 	
 	
-	public void setBigMap(boolean isBig) {
+	private void setBigMap(boolean isBig) {
 		isABigMap = isBig;
+	}
+	
+	public static boolean isABigMap() {
+		return isABigMap;
 	}
 	
 	
@@ -46,7 +50,8 @@ public class Game {
 		this.gameStat = gameStat;
 		
 		if(gameStat == null)
-			this.changeMap(0,null);
+			this.changeMap(1,null);
+		
 		else
 			this.changeMap(gameStat.getMapId(),this.gameStat.getScenarioPath());
 			
@@ -63,11 +68,13 @@ public class Game {
 			if(this.gameStat != null) {
 				this.myMap = new GameMap(this.gameStat.getScore(),mapIndex,mapHash.getLayers());
 				createHero(this.gameStat.getRow(), this.gameStat.getColumn());
-
 			}
+			
 			else {
+				
 				this.myMap = new GameMap(mapIndex,mapHash.getLayers());
 				createHero(mapHash.getPosY(),mapHash.getPosX());
+			
 			}
 
 			scenario = new Scenario(mapHash.getScenario(),scenarioSave,this.messageProperty,this.myMap);

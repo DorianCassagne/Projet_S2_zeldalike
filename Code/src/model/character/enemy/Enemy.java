@@ -21,7 +21,9 @@ public abstract class Enemy extends GameCharacter{
 	public int getScore() {
 		return this.score;
 	}
-
+	
+	
+	
 	public abstract int getHP() ;
 	
 	public abstract String getName();

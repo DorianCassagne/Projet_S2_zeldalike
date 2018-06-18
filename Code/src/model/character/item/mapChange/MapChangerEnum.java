@@ -3,10 +3,8 @@ package model.character.item.mapChange;
 import model.character.hero.Hero;
 
 public enum MapChangerEnum  {
-	MAP1(0),
-	MAP2(1),
-	MAP3(2);
-	
+	MAPDEBUT(0),
+	MAPFORET(1);	
 	private int mapIndex ;
 	
 	MapChangerEnum(int mapIndex){

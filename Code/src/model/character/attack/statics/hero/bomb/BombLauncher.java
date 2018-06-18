@@ -22,8 +22,13 @@ public class BombLauncher implements Launcher{
 
 	@Override
 	public int getImage() {
-		// TODO Auto-generated method stub
-		return 0;
+		return Bomb.DEFAULTIMAGE;
 	}
 
+
+	@Override
+	public int getManaConsume() {
+		return MANACONSUME;
+	}
+		
 }

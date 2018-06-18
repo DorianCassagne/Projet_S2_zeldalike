@@ -93,6 +93,12 @@ public class DefaultAttackLauncher implements Launcher{
 	public int getImage() {
 		return this.type.getImage();
 	}
+
+
+	@Override
+	public int getManaConsume() {
+		return MANACONSUME;
+	}
 	
 
 }

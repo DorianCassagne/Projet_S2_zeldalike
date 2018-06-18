@@ -3,8 +3,8 @@ package model.gameMap;
 
 public enum MapEnum {
 	
-	MAPDEBUT(false,39,33,"Scenario-Map-0.txt","DEFAULT-ITEM.csv","Theatre_1fond.csv","Theatre_2mur.csv","Theatre_3scene.csv","Theatre_4deco.csv"),
-    MAPFORET(true,10,22,"Scenario-Map-1.txt","newlevel_item.csv","newlevel_Calque1.csv","newlevel_Calque2.csv","newlevel_Calque3.csv","newlevel_Calque4.csv","newlevel_Calque5.csv");
+	MAPDEBUT(false,32,33,"Scenario-Map-0.txt","DEFAULT-ITEM.csv","Theatre_1fond.csv","Theatre_2mur.csv","Theatre_3scene.csv","Theatre_4deco.csv"),
+    MAPFORET(true,10,22,"Scenario-Map-1.txt","DEFAULT-ITEM.csv","Foret1-2_1Fond.csv","Foret1-2_2chemin.csv","Foret1-2_3arbre.csv","Foret1-2_4arbre.csv","Foret1-2_5arbrerocher.csv","Foret1-2_6porte.csv");
 
 	private String[] layers;
 	private int heroPosX;

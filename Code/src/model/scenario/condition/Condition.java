@@ -111,19 +111,11 @@ public class Condition {
 	
 	private Supplier<Boolean> handleOldCondtion() {
 		Supplier<Boolean> supplier = ()->calculateFromAbsolute();
-//		switch(Conversion.toChar(this.id)) {
-//		case ABSOLUTE :
-//			supplier = ()->calculateFromAbsolute();
-//			break;
-//		default : 
-//			throw new IllegalArgumentException("UNKNOWN CONDITION SYNTAX " + this.id);
-//		}
 		return supplier;
 	}
 	
 	
 	private boolean calculateFromAbsolute(){
-		System.out.println(this.id);
 		Integer integerId = Integer.parseInt(this.id);
 		return actionData.getFinishedvents().contains(integerId) ^ this.conditionValue;
 	}

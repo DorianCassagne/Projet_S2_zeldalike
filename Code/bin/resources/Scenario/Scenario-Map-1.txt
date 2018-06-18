@@ -1,1 +1,10 @@
-N->S-m- -Omar->S-m- -Salam->S-m- -Je suis le méchant Dormino préparez vous hahahaha
+N->S-m--Hero : Où suis Je ?->C-N-MARIO-Mario : Collectes une arme avant que je te laisse passer-1040->C-N-MARIO-Mario : Collectes une arme avant que je te laisse passer-1041->C-N-MARIO-Mario : Collectes une arme avant que je te laisse passer-1042->C-N-MARIO-Mario : Collectes une arme avant que je te laisse passer-1043
+N->C-I-LANCER--195->C-M-StaticBadMonkey-monkey1-2385->C-M-StaticBadMonkey-monkey3-2449->C-M-StaticBadMonkey-monkey4-2513->C-M-StaticBADMONKEY-monkey5-2577->C-M-StaticBADMONKEY-monkey6-2514
+N->C-N-FAIRY1TOP-Entrainez vous d'abord-2700->C-N-FAIRY1TOP-Entrainez vous d'abord-2701->C-N-FAIRY1TOP-Entrainez vous d'abord-2702
+N->C-I-AXE--642->C-I-LVL1_MP--578
+O:4-AND-C:195:!:I->S-m--Jeu: Faites attention y'a des monstres .->D-M--monkey1->D-M--monkey3->D-M--monkey4->D-M--monkey5->D-M--monkey6->D-W--2498-1040->D-W--2498-1041->D-W--2498-1042->D-W--2498-1043->D-W--2498-2700->D-W--2498-2701->D-W--2498-2702
+O:5: :A->S-m--Vous avez réussi à collecter votre première item, bravo !!!->S-m-Maintenant vous pouvez attaquer en utilisant les touches ->S-m--Flêche bas:Pour attaquer un ennemi en bas\nFlêche haut:Pour attaquer un ennemi en haut\nFlêche Gauche:Pour attaquer l'ennemi à gauche\nFlêche droite:Pour attaquer l'ennemi à droite
+O:6: :A->C-M-BADMONKEY-bad1-3339->C-M-BADMONKEY-bad2-3792->C-M-BADMONKEY-bad3-3544->C-M-BADMONKEY-bad4-2581->C-M-BADMONKEY-bad5-2442->C-M-MONKEYGUARD0-guard1-1104->C-M-MONKEYGUARD1-guard2-314->C-M-MONKEYGUARD2-guard3-2098->C-M-INTELLIGENTTOWER-tower1-345->C-M-TOWER-tower2-3404->C-M-StaticBadMonkey-static1-1135->C-M-StaticBadMonkey-static2-1199->C-M-StaticBadMonkey-static3-1263
+O:8: :A->C-M-NYANYANAY-boss-380
+O:7: :A->S-m--Vous avez une nouvelle attaque->A-A-0->A-A-1->A-A-2
+M:boss: :0->S-m--Vous avez gagné

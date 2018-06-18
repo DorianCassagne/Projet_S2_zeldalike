@@ -13,7 +13,8 @@ public enum SpecificType implements ElementNames{
 	WALKABLE("Déplaçable","W",null),
 	HERO("Héro","H",null),
 	ITEMDROP("Item","I",null),
-	MONSTERDROP("Monstre","M",null);
+	MONSTERDROP("Monstre","M",null),
+	NPCDROP("NPC","N",null);
 	;
 
 	private String nom;

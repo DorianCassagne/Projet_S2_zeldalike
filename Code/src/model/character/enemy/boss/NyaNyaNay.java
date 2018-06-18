@@ -22,11 +22,10 @@ public class NyaNyaNay  extends NyaSlave {
 	private final static double COEF=2.0;
 	private final static int DEFALTIMG=64;
 	private final static int DEFAULTCYCLE=4;
-	//private final static int COEF=2.0;
 	private final static int DEFAULTSCORE = 350;
-	private static BooleanProperty dead=new SimpleBooleanProperty(false);
-	private static IntegerProperty def =new SimpleIntegerProperty(10);
-	private static IntegerProperty hp=new SimpleIntegerProperty(200);
+	private static BooleanProperty dead = new SimpleBooleanProperty(false);
+	private static IntegerProperty def = new SimpleIntegerProperty(100);
+	private static IntegerProperty hp = new SimpleIntegerProperty(900);
 	
 	
 	boolean attCote;
@@ -83,10 +82,9 @@ public class NyaNyaNay  extends NyaSlave {
 					randomInt--;
 			}
 			else {
-				//System.out.println("mv"+randomInt+"  "+this.getColumn());
 				if (randomInt == this.getColumn()) {
 					setWait(30);
-					//randomInt=2;
+
 					randomInt= ran.nextInt(5)+1;//nb dattaque max
 					att=true;
 				}

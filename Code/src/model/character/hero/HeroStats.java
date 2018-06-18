@@ -97,7 +97,7 @@ public class HeroStats {
 	}
 
 	public void changeAttack() {
-		
+
 		setAttackIndex(this.attackType + 1);
 	
 	}
@@ -193,7 +193,10 @@ public class HeroStats {
 	public Launcher getCurrentAttack() {
 		Launcher currentAttack = null;
 		if(this.attackType >= 0) {
+			
 			currentAttack = this.attackList.get(this.attackType);
+			if(this.mp.get() < currentAttack.getManaConsume())
+				currentAttack = null;
 		}
 		return currentAttack;
 	}
@@ -218,4 +221,13 @@ public class HeroStats {
 	}
 
 
+	
+	public void reduceMP(int consumedMP) {
+		int newMP = this.mp.get() - consumedMP;
+		
+		if(newMP < 0)
+			newMP = 0;
+		
+		this.mp.set(newMP);
+	}
 }

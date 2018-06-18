@@ -14,9 +14,10 @@ public abstract class EnemyNormal extends Enemy{
 	public EnemyNormal(GameMap map, int startRow, int startColumn, int cycle, double coefficient, int defaultImage,int hp,int def,int score) {
 		super(map, startRow, startColumn, cycle, coefficient, defaultImage,score);
 		if(hp > 0 && def > 0 ) {
+			
 			this.hp = hp;
 			this.def = def;
-			System.out.println("I got the image : "+defaultImage + " and i am " + this.getName());
+
 		}else
 			throw new IllegalArgumentException("ENEMY HP AND DEF MUST BE > 0");
 	}
@@ -46,4 +47,5 @@ public abstract class EnemyNormal extends Enemy{
 		return this.hp;
 	}
 
+	
 }

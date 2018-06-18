@@ -5,11 +5,13 @@ import java.util.function.Supplier;
 
 
 import model.character.GameCharacter;
+import model.character.attack.statics.DynamicLauncher;
 import model.character.enemy.Enemy;
 import model.character.enemy.EnemyFactory;
 import model.character.hero.GameHero;
 import model.character.item.Item;
 import model.character.item.factory.ItemFactory;
+import model.character.item.mapChange.MapChangerEnum;
 import model.character.npc.TalkingNPC;
 import model.gameMap.additional.Statics;
 
@@ -32,6 +34,8 @@ public class Action {
 	public final static char NPC = 'N';
 	public final static char HERO = 'H';
 	public final static char DELAY = 'd';
+	public final static char MAP = 'M';
+	
 	
 	private static ActionData actionData;
 	private char generalType;
@@ -100,7 +104,10 @@ public class Action {
 	private boolean createNPC() {
 		
 		try {
+		
 			new TalkingNPC(actionData.messageProperty(), this.info,this.specificType,actionData.getMap(),Statics.convertToRow(this.cellId),Statics.convertToColomn(this.cellId));
+			 actionData.getNPCList().put(this.cellId, this.specificType);
+			 System.out.println("CREATED IT");
 		}catch(Exception e) {
 			System.err.println("ERROR ON TALKING NPC, MAYBE THE ID WAS NOT A NUMBER : " + this.specificType);
 		}
@@ -129,17 +136,19 @@ public class Action {
 				return true;
 			};
 			break;
+			
 		case WALKABLE : 
 			supplier = () -> {
 				try {
 					actionData.getMap().clearBackgroundConstraint(this.cellId,this,Integer.parseInt(this.info));
+					actionData.getNPCList().remove(this.cellId);
 				}catch(NumberFormatException e) {
-					e.printStackTrace();
 					System.err.println("ERROR ON ESTABLISH DROP() OF WALKABLE"); 
 				}
 				return true;
 			};
 			break;
+		
 		case ITEM : 
 			supplier = ()-> {
 				actionData.getMap().removeItemAt(this.cellId);
@@ -153,12 +162,6 @@ public class Action {
 			};
 		break;
 		
-		case NPC : 
-			supplier = () -> {
-				actionData.getMap().getCharacterAt(this.cellId).removeCharacter(this);
-				return true;
-			};
-
 		default : 
 				throw new IllegalArgumentException("DROP ACTION FAILED BECAUSE OF " + this.generalType);
 		}
@@ -175,10 +178,21 @@ public class Action {
 		case ATTACK:
 			supplier = ()->addAttackToHero();
 			break;
+		case MONSTER :
+			supplier = ()->addCharacter(actionData.getAttackList().get(this.info));
+			break;
+		case HERO :
+			supplier = ()->addCharacter(GameHero.getHero());
+			break;
 		default :
 			throw new IllegalArgumentException("ERROR GENERAL TYPE AT ADD :  "+this.generalType);
 		}
 		return supplier;
+	}
+	
+	private boolean addCharacter(GameCharacter character) {
+		boolean added = character != null && actionData.getMap().addCharacter(character, character.getRow(), character.getColumn());
+		return added;
 	}
 	
 	private boolean addItemToHero() {
@@ -187,13 +201,29 @@ public class Action {
 	}
 	
 	private boolean addAttackToHero() {
-		//TODO
+		
+		try {
+			DynamicLauncher dynamicLaunch = new DynamicLauncher(Integer.parseInt(this.specificType));
+			GameHero.getHero().addLauncher(dynamicLaunch);
+		}catch(Exception e) {
+			System.err.println("ERROR ON ADD ATTACK TO HERO BECAUSE OF SPECIFIC TYPE : " + this.specificType);
+		}
+		return true;
+	}
+	
+	private boolean changeMap() {
+		GameHero.getHero().setMapChange(MapChangerEnum.valueOf(this.specificType));
 		return true;
 	}
 	
 	private boolean delay() {
-		int newCycle = 300;
+		
 		actionData.getMap().setActionDelay(this,this.cellId);
+		try {
+			actionData.setScenarioCounter(Integer.parseInt(this.info));
+		}catch(NumberFormatException e) {
+			System.err.println("ERROR ON DELAY BECAUSE THE INFO IS NOT AN INT " + this.info);
+		}
 		return true;
 	}
 	
@@ -217,6 +247,9 @@ public class Action {
 			break;
 		case NOTHING:
 			supplier = ()->(true);
+			break;
+		case MAP:
+			supplier = ()->actionParams.changeMap();
 			break;
 		case DELAY:
 			supplier =()->actionParams.delay();

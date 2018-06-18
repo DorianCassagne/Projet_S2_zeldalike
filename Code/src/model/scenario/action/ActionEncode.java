@@ -70,4 +70,17 @@ public class ActionEncode {
 		
 	}
 	
+	public static String encodeToNPC(int cellId,String NPCType) {
+		
+		String value = Scenario.EXTERNALSEPARATOR + Action.CREATION;
+		value += Scenario.INTERNALSEPARTOR + Action.NPC;
+		value += Scenario.INTERNALSEPARTOR + NPCType;
+		value += Scenario.INTERNALSEPARTOR + " ";
+		value += Scenario.INTERNALSEPARTOR + cellId;
+		
+		return value;
+
+		
+	}
+	
 }

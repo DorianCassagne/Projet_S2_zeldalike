@@ -25,7 +25,7 @@ public class GameMap {
 	
 	private static IntegerProperty realScore;
 	private static IntegerBinding safeScore;
-
+	
 	private final IntegerProperty changeProperty;
 	private final IntegerProperty safeChangeProperty;
 	private Cell[] cells ;
@@ -46,6 +46,7 @@ public class GameMap {
 			realScore.set(realScore.get() + enemy.getScore());
 	}
 	
+	
 
 	
 	//Cr�e une map en se r�f�rant � un fichier csv qui initilialise les fond des cases
@@ -65,7 +66,6 @@ public class GameMap {
 		
 		this(idMap,mapPath);
 		realScore.set(score);
-		System.out.println("Score : " + score);
 		
 	
 	}
@@ -130,7 +130,7 @@ public class GameMap {
 	
 	public void clearBackgroundConstraint(int cellId,model.scenario.action.Action action,int replace) {
 		if(action != null && action.isActive())
-			this.cells[cellId].setToWalkable(replace);
+			this.cells[cellId].removeWalkable(replace);
 	}
 	
 	public boolean containsItemAt(int cellId) {

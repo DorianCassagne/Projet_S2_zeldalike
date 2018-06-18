@@ -2,7 +2,7 @@ package model.character.enemy.normal;
 
 import model.PathFinder.BFS1;
 import model.character.GameCharacter;
-import model.character.attack.statics.hero.bomb.Bomb;
+import model.character.attack.statics.boss.Missile;
 import model.gameMap.GameMap;
 import model.gameMap.additional.Statics;
 import model.gameMap.move.Move;
@@ -21,16 +21,15 @@ import model.gameMap.move.Movement;
 
 public class MonkeyGuard extends EnemyNormal{
 
-	private final static int DEFAULTATK = 50;
-	private final static int DEFAULTHP = 150;
-	private final static int DEFAULTDEF = 10;
+	private final static int DEFAULTHP = 350;
+	private final static int DEFAULTDEF = 60;
 	private final static int DEFAULTCYCLE = 40;
 	private final static int DEFAULTIMAGE = 16;
 	private final static double DEFAULTCOEFFICIENT = 1.7;
 	private final static int SCORE = 100;
 	private final static int[][][] POSITIONS = {
 			{{3740,3750},{3047,2967}},
-			{{6,4},{4,9}},
+			{{2226,2994},{1042,249}},
 			{{7,6},{4,9}},
 			{{4,5},{4,9}},
 	};
@@ -42,6 +41,7 @@ public class MonkeyGuard extends EnemyNormal{
 		super(map, startRow, startColumn, DEFAULTCYCLE, DEFAULTCOEFFICIENT, DEFAULTIMAGE, DEFAULTHP, DEFAULTDEF, SCORE);
 		this.choice = choice ;
 		updateDestination();
+		
 		
 	}
 
@@ -60,7 +60,11 @@ public class MonkeyGuard extends EnemyNormal{
 				Statics.convertToCellId(row+2,column),
 				Statics.convertToCellId(row,column-2),
 				Statics.convertToCellId(row-2,column),
-				Statics.convertToCellId(row,column+2)
+				Statics.convertToCellId(row,column+2),
+				Statics.convertToCellId(row+1,column),
+				Statics.convertToCellId(row,column-1),
+				Statics.convertToCellId(row-1,column),
+				Statics.convertToCellId(row,column+1)
 		};
 
 		int[] tab2 = {
@@ -72,7 +76,7 @@ public class MonkeyGuard extends EnemyNormal{
 			Movement currentMovement = Movement.values()[inPlace];
 			this.setImage(currentMovement);
 			this.launchAttack(currentMovement);
-			setWait(200);
+			setWait(40);
 		}
 		else {
 
@@ -93,6 +97,7 @@ public class MonkeyGuard extends EnemyNormal{
 		return nextMove;
 	}
 
+	
 	
 	private void updateDestination() {
 		int mapId = this.getMyMap().getMapId();
@@ -117,15 +122,11 @@ public class MonkeyGuard extends EnemyNormal{
 
 	@Override
 	public void launchAttack(Movement movement) {
-		new Bomb(getMyMap(),this.getRow(),this.getColumn(),movement,DEFAULTATK);
+		
 		int row = this.getRow() + movement.getVerticalIncrement();
 		int column = this.getColumn() + movement.getHorizontalIncrement();
-		try{
-			new Bomber(getMyMap(), row, column);
-		}catch(Exception e) {
-			
-		}
 		
+		new Missile(getMyMap(), row, column, movement);
 	}
 
 

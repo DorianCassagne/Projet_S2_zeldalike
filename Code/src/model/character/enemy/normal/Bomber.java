@@ -1,6 +1,6 @@
 package model.character.enemy.normal;
 
-import model.character.attack.statics.hero.Dynamite;
+import model.character.attack.statics.hero.dynamite.Dynamite;
 import model.gameMap.GameMap;
 import model.gameMap.move.Move;
 import model.gameMap.move.Movement;
@@ -9,7 +9,7 @@ public class Bomber extends EnemyNormal{
 	
 	private final static int DEFAULTCYCLE = 80;
 	private final static int COEFFICIENT = 2;
-	private final static int DEFAULTIMAGE = 1680;
+	public final static int DEFAULTIMAGE = 1680;
 	private final static int DEFAULTHP = 800000;
 	private final static int DEFAULTDEF = Integer.MAX_VALUE;
 	private final static int SCORE = 0;

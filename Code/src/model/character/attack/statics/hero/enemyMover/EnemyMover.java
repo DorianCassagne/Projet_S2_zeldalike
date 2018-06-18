@@ -12,7 +12,7 @@ public class EnemyMover extends Attack implements ExternalMover{
 	private static final int DEFAULTCYCLE = 10;
 	static final int DEFAULTDAMAGE = 0;
 	private static final double COEFFICIENT = 1.3;
-	public static final int DEFAULTIMAGE = 1624 ;
+	public static final int DEFAULTIMAGE = 1628 ;
 	private final static int DEFAULTCELLPERTURN = 1;
 	private final static int DEFAULTMAXDISTANCE = 4;
 	
@@ -37,8 +37,9 @@ public class EnemyMover extends Attack implements ExternalMover{
 		Movement direction = this.getDirection();
 		int newRow = gameCharacter.getRow() + direction.getVerticalIncrement() ;
 		int newColumn = gameCharacter.getColumn() + direction.getHorizontalIncrement();
-		this.getMyMap().changeCell(gameCharacter, gameCharacter.getRow(), gameCharacter.getColumn(), newRow, newColumn,this);
 		
+		this.getMyMap().changeCell(gameCharacter, gameCharacter.getRow(), gameCharacter.getColumn(), newRow, newColumn,this);
+		gameCharacter.setCellId(newRow, newColumn);
 	}
 
 }

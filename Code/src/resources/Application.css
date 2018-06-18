@@ -1,8 +1,8 @@
 .rootBackground{
-	-fx-background-color:#f9bfff;
+	-fx-background-color:#f00;
 }
 .rootChild{
-	-fx-background-color:#FF420E;
+	-fx-background-color:#111;
 	-fx-background-radius : 20px;
 	-fx-border-radius : 20px;
 }
@@ -10,7 +10,7 @@
 	-fx-background-color:#80BD9E;
 }
 .activityDetail{
-	-fx-background-color:#89DA59;
+	-fx-background-color:rgba(10,10,10,0.5);
 }
 .greenButton{
 	-fx-background-color:inherit;

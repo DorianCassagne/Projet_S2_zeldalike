@@ -1,6 +1,7 @@
 package model.character.enemy.normal;
 
 import model.PathFinder.BFS1;
+
 import model.character.GameCharacter;
 import model.character.attack.statics.hero.bomb.Bomb;
 import model.gameMap.GameMap;
@@ -8,18 +9,18 @@ import model.gameMap.additional.Statics;
 import model.gameMap.move.Move;
 import model.gameMap.move.Movement;
 
-public class BadMonkey extends BlueFairy{
+public class BadMonkey extends EnemyNormal{
 	
-	private final static int DEFAULTHP = 150;
-	private final static int DEFAULTDEF = 10;
+	private final static int DEFAULTHP = 450;
+	private final static int DEFAULTDEF = 30;
 	private final static int DEFAULTCYCLE = 40;
 	private final static int DEFAULTIMAGE = 16;
-	private final static int DEFAULTDMG = 90;
+	private final static double DEFAULTCOEFFICIENT = 1.7;
 	private final static int DEFAULTSCORE = 100;
 	
 	
 	public BadMonkey(GameMap map, int startRow, int startColumn) {
-		super(map, startRow, startColumn,DEFAULTCYCLE,DEFAULTIMAGE,DEFAULTHP, DEFAULTDEF,DEFAULTDMG,DEFAULTSCORE);
+		super(map, startRow, startColumn,DEFAULTCYCLE,DEFAULTCOEFFICIENT,DEFAULTIMAGE,DEFAULTHP, DEFAULTDEF,DEFAULTSCORE);
 	}
 
 	@Override
@@ -34,26 +35,21 @@ public class BadMonkey extends BlueFairy{
 				Statics.convertToCellId(row,column-1),
 				Statics.convertToCellId(row-1,column),
 				Statics.convertToCellId(row,column+1),
-//				Statics.convertToCellId(row+2,column),
-//				Statics.convertToCellId(row,column-2),
-//				Statics.convertToCellId(row-2,column),
-//				Statics.convertToCellId(row,column+2),
 		};
 		
 		int inPlace= inPlace(tab, actualCell);
 		if (inPlace != -1) {
 			Movement currentMovement = Movement.values()[inPlace];
 			this.setImage(currentMovement);
-			//new DoomAttack(getMyMap(),this.getRow(),this.getColumn(),currentMovement, 10);
+
 			new Bomb(getMyMap(),this.getRow(),this.getColumn(),currentMovement,10);
-			//new NyanAttHori(getMyMap(), this.getRow(), this.getColumn());
 			setWait(200);
 			return null;
 		}
 		else {
 			int nextCell= BFS1.simpleMove(this.getMyMap(), 
 					actualCell,
-					tab, true, 3);
+					tab, true, 2);
 			
 			if (actualCell==nextCell) {
 				return null;

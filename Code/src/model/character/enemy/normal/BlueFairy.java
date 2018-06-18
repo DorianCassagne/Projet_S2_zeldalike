@@ -2,6 +2,8 @@ package model.character.enemy.normal;
 
 import model.PathFinder.BFS1;
 import model.character.GameCharacter;
+import model.character.attack.dynamic.DefaultAttack;
+import model.character.item.attack.AttackItem;
 import model.gameMap.GameMap;
 import model.gameMap.move.Move;
 import model.gameMap.move.Movement;

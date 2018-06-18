@@ -1,0 +1,1368 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.2" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
+  realizations="true" associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="model.character.Movable" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/Movable.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="601" width="224" x="3279" y="1989"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="model.character.GameCharacter" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/GameCharacter.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="205" width="252" x="3279" y="2630"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="model.character.enemy.Enemy" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/enemy/Enemy.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="169" width="222" x="1068" y="2983"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="model.character.hero.GameHero" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/hero/GameHero.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="475" width="227" x="3570" y="2983"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="model.character.hero.Hero" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/hero/Hero.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="493" width="220" x="4130" y="3498"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="model.character.hero.HeroStats" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/hero/HeroStats.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="619" width="255" x="3364" y="3498"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="model.character.hero.CopyOfHeroStats" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/hero/CopyOfHeroStats.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="385" width="688" x="4666" y="4157"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="model.character.enemy.EnemyFactory" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/enemy/EnemyFactory.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="97" width="254" x="1132" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="model.character.enemy.normal.Fairy" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/enemy/normal/Fairy.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="403" width="184" x="949" y="4157"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="model.character.enemy.normal.BlueFairy" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/enemy/normal/BlueFairy.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="169" width="241" x="1173" y="4157"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="model.character.enemy.normal.MonkeyGuard" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/enemy/normal/MonkeyGuard.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="331" width="193" x="510" y="4157"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="model.character.enemy.normal.Tower" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/enemy/normal/Tower.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="259" width="184" x="265" y="4157"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="model.character.enemy.normal.Bomber" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/enemy/normal/Bomber.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="277" width="166" x="743" y="4157"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="model.character.enemy.normal.EnemyNormal" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/enemy/normal/EnemyNormal.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="187" width="285" x="743" y="3498"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="model.character.enemy.normal.IntelligentTower" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/enemy/normal/IntelligentTower.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="97" width="187" x="265" y="4600"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="model.character.enemy.normal.BadMonkey" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/enemy/normal/BadMonkey.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="259" width="184" x="41" y="4157"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="model.character.enemy.boss.NyaSlave" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/enemy/boss/NyaSlave.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="331" width="484" x="219" y="3498"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="model.character.enemy.boss.NyaNyaNay" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/enemy/boss/NyaNyaNay.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="367" width="183" x="219" y="2983"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="model.character.enemy.boss.NyaBlock" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/enemy/boss/NyaBlock.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="331" width="209" x="1068" y="3498"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="model.character.attack.Attack" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/attack/Attack.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="493" width="299" x="3025" y="3498"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="21" language="java" name="model.character.attack.Launcher" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/attack/Launcher.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="133" width="224" x="1454" y="4157"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="22" language="java" name="model.character.attack.statics.Bommerang" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/attack/statics/Bommerang.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="259" width="224" x="1986" y="4157"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="model.character.attack.statics.DynamicLauncher" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/attack/statics/DynamicLauncher.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="205" width="224" x="1866" y="3498"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="model.character.attack.statics.hero.enemyMover.EnemyMover" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/attack/statics/hero/enemyMover/EnemyMover.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="241" width="228" x="1718" y="4157"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="25" language="java" name="model.character.attack.statics.hero.dynamite.Dynamite" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/attack/statics/hero/dynamite/Dynamite.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="223" width="204" x="3631" y="4157"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="26" language="java" name="model.character.attack.statics.hero.enemyMover.EnemyMoverLauncher" 
+    project="Zelda-Like" file="/Zelda-Like/src/model/character/attack/statics/hero/enemyMover/EnemyMoverLauncher.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="169" width="224" x="1581" y="3498"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="27" language="java" name="model.character.attack.statics.hero.doomAttack.DoomAttack" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/attack/statics/hero/doomAttack/DoomAttack.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="241" width="347" x="2638" y="4157"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="28" language="java" name="model.character.attack.statics.hero.bomb.BombLauncher" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/attack/statics/hero/bomb/BombLauncher.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="169" width="224" x="1317" y="3498"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="29" language="java" name="model.character.attack.statics.hero.bomb.Bomb" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/attack/statics/hero/bomb/Bomb.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="259" width="207" x="4419" y="4157"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="30" language="java" name="model.character.attack.statics.hero.arrow.SimpleArrow" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/attack/statics/hero/arrow/SimpleArrow.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="205" width="240" x="3875" y="4157"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="31" language="java" name="model.character.attack.statics.hero.arrow.SimpleArrowLauncher" 
+    project="Zelda-Like" file="/Zelda-Like/src/model/character/attack/statics/hero/arrow/SimpleArrowLauncher.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="169" width="224" x="2151" y="3498"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="32" language="java" name="model.character.attack.statics.enemy.TowerAttack" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/attack/statics/enemy/TowerAttack.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="223" width="224" x="4155" y="4157"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="33" language="java" name="model.character.attack.statics.boss.NyanHorRainbow" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/attack/statics/boss/NyanHorRainbow.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="133" width="327" x="2271" y="4157"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="34" language="java" name="model.character.attack.statics.boss.NyanAttHori" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/attack/statics/boss/NyanAttHori.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="151" width="211" x="2271" y="4600"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="35" language="java" name="model.character.attack.statics.boss.Missile" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/attack/statics/boss/Missile.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="259" width="203" x="3025" y="4157"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="36" language="java" name="model.character.attack.dynamic.DefaultAttack" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/attack/dynamic/DefaultAttack.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="151" width="323" x="3268" y="4157"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="37" language="java" name="model.character.attack.dynamic.DefaultAttackLauncher" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/attack/dynamic/DefaultAttackLauncher.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="187" width="224" x="3306" y="2983"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="38" language="java" name="model.character.item.attack.AttackItem" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/item/attack/AttackItem.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="115" width="126" x="4078" y="2983"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="39" language="java" name="model.character.item.Item" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/item/Item.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="313" width="196" x="4176" y="2630"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="40" language="java" name="model.character.item.attack.AttackItemEnum" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/item/attack/AttackItemEnum.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="493" width="209" x="3659" y="3498"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="41" language="java" name="model.character.item.def.DefenseItem" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/item/def/DefenseItem.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="115" width="123" x="4592" y="2983"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="42" language="java" name="model.character.item.def.DefenseItemEnum" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/item/def/DefenseItemEnum.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="421" width="179" x="4791" y="3498"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="43" language="java" name="model.character.item.factory.SpecialAttackItem" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/item/factory/SpecialAttackItem.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="169" width="180" x="3086" y="2983"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="44" language="java" name="model.character.item.factory.ItemEnum" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/item/factory/ItemEnum.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="79" width="129" x="5415" y="4157"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="45" language="java" name="model.character.item.factory.ItemFactory" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/item/factory/ItemFactory.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="259" width="177" x="3156" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="46" language="java" name="model.character.item.hpPotion.HealEnum" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/item/hpPotion/HealEnum.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="277" width="140" x="5440" y="3498"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="47" language="java" name="model.character.item.hpPotion.Healer" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/item/hpPotion/Healer.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="115" width="136" x="5103" y="2983"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="48" language="java" name="model.character.item.mapChange.MapChangerEnum" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/item/mapChange/MapChangerEnum.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="169" width="182" x="3908" y="3498"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="49" language="java" name="model.character.item.mapChange.MapChanger" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/item/mapChange/MapChanger.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="133" width="180" x="3837" y="2983"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="50" language="java" name="model.character.item.mp.MPItemEnum" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/item/mp/MPItemEnum.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="277" width="143" x="4608" y="3498"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="51" language="java" name="model.character.item.mp.MPIncrease" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/item/mp/MPIncrease.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="115" width="119" x="4433" y="2983"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="52" language="java" name="model.character.item.mpPotion.MPItem" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/item/mpPotion/MPItem.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="115" width="139" x="4924" y="2983"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="53" language="java" name="model.character.item.mpPotion.MPPotionItemEnum" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/item/mpPotion/MPPotionItemEnum.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="277" width="214" x="5186" y="3498"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <enumeration id="54" language="java" name="model.character.item.pvItem.HealthEnum" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/item/pvItem/HealthEnum.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="277" width="136" x="5010" y="3498"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="55" language="java" name="model.character.item.pvItem.HealthItem" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/item/pvItem/HealthItem.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="115" width="129" x="4755" y="2983"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="56" language="java" name="model.character.item.speed.SpeedItem" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/item/speed/SpeedItem.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="187" width="128" x="4244" y="2983"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="57" language="java" name="model.character.item.speed.SpeedItemEnum" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/item/speed/SpeedItemEnum.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="313" width="178" x="4390" y="3498"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="58" language="java" name="model.character.npc.TalkingNPC" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/npc/TalkingNPC.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="169" width="301" x="2703" y="2630"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="59" language="java" name="model.character.npc.NPCFactory" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/npc/NPCFactory.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="277" width="161" x="2535" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="60" language="java" name="model.character.PendingMovable" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/character/PendingMovable.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="187" width="245" x="3065" y="1708"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="61" language="java" name="model.gameMap.additional.NewMovable" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/gameMap/additional/NewMovable.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="187" width="199" x="2805" y="1708"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="62" language="java" name="model.gameMap.additional.Statics" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/gameMap/additional/Statics.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="457" width="232" x="1844" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="63" language="java" name="model.gameMap.additional.MapReader" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/gameMap/additional/MapReader.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="151" width="234" x="5049" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="64" language="java" name="model.gameMap.cell.Background" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/gameMap/cell/Background.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="187" width="165" x="2498" y="2630"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="65" language="java" name="model.gameMap.cell.Cell" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/gameMap/cell/Cell.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="547" width="214" x="3025" y="1989"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="66" language="java" name="model.gameMap.move.Action" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/gameMap/move/Action.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="367" width="226" x="2778" y="1301"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="67" language="java" name="model.gameMap.move.Move" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/gameMap/move/Move.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="241" width="130" x="2635" y="1708"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="68" language="java" name="model.gameMap.move.ExternalMover" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/gameMap/move/ExternalMover.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="79" width="108" x="1718" y="4600"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <enumeration id="69" language="java" name="model.gameMap.move.Movement" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/gameMap/move/Movement.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="385" width="205" x="2026" y="4600"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="70" language="java" name="model.gameMap.GameMap" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/gameMap/GameMap.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="727" width="332" x="3331" y="534"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="71" language="java" name="model.gameMap.MapEnum" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/gameMap/MapEnum.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="295" width="217" x="458" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="72" language="java" name="model.GameStatus" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/GameStatus.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="655" width="233" x="3058" y="534"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="73" language="java" name="model.StatsLoader" project="Zelda-Like" 
+    file="/Zelda-Like/src/model/StatsLoader.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="133" width="355" x="4357" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="74" language="java" name="model.Game" project="Zelda-Like" file="/Zelda-Like/src/model/Game.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="421" width="227" x="3794" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="75">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="76" name="attDir">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="77" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="69" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="78">    
+    <end type="SOURCE" refId="57"/>    
+    <end type="TARGET" refId="44"/>  
+  </realization>  
+  <generalization id="79">    
+    <end type="SOURCE" refId="52"/>    
+    <end type="TARGET" refId="39"/>  
+  </generalization>  
+  <generalization id="80">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
+  <realization id="81">    
+    <end type="SOURCE" refId="40"/>    
+    <end type="TARGET" refId="44"/>  
+  </realization>  
+  <generalization id="82">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="14"/>  
+  </generalization>  
+  <generalization id="83">    
+    <end type="SOURCE" refId="56"/>    
+    <end type="TARGET" refId="39"/>  
+  </generalization>  
+  <realization id="84">    
+    <end type="SOURCE" refId="50"/>    
+    <end type="TARGET" refId="44"/>  
+  </realization>  
+  <realization id="85">    
+    <end type="SOURCE" refId="54"/>    
+    <end type="TARGET" refId="44"/>  
+  </realization>  
+  <generalization id="86">    
+    <end type="SOURCE" refId="30"/>    
+    <end type="TARGET" refId="20"/>  
+  </generalization>  
+  <association id="87">    
+    <bendpoint x="3340" y="1708"/>    
+    <bendpoint x="3340" y="1301"/>    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="88" name="map">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="89" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="70" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="90">    
+    <bendpoint x="4047" y="2983"/>    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="91" name="Hero">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="92" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="93">    
+    <end type="SOURCE" refId="49" navigable="false">      
+      <attribute id="94" name="changer">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="95" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="48" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="96">    
+    <end type="SOURCE" refId="65" navigable="false">      
+      <attribute id="97" name="background">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="98" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="64" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="99">    
+    <end type="SOURCE" refId="56" navigable="false">      
+      <attribute id="100" name="speedEnum">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="101" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="57" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="102">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="14"/>  
+  </generalization>  
+  <association id="103">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="104" name="slave1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="105" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="106">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
+  <realization id="107">    
+    <end type="SOURCE" refId="42"/>    
+    <end type="TARGET" refId="44"/>  
+  </realization>  
+  <association id="108">    
+    <bendpoint x="5384" y="4157"/>    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="109" name="direction">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="110" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="69" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="111">    
+    <end type="SOURCE" refId="28"/>    
+    <end type="TARGET" refId="21"/>  
+  </realization>  
+  <generalization id="112">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
+  <association id="113">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="114" name="safeStats">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="115" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="116">    
+    <end type="SOURCE" refId="38" navigable="false">      
+      <attribute id="117" name="attackItem">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="118" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="40" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="119">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="2"/>  
+  </generalization>  
+  <generalization id="120">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
+  <association id="121">    
+    <bendpoint x="479" y="4157"/>    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="122" name="mov">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="123" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="69" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="124">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <generalization id="125">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="14"/>  
+  </generalization>  
+  <association id="126">    
+    <bendpoint x="3034" y="2630"/>    
+    <bendpoint x="3034" y="2983"/>    
+    <end type="SOURCE" refId="65" navigable="false">      
+      <attribute id="127" name="attackList">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="128" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="129">    
+    <end type="SOURCE" refId="47" navigable="false">      
+      <attribute id="130" name="healType">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="131" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="46" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="132">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="133" name="launcher">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="134" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="135">    
+    <end type="SOURCE" refId="38"/>    
+    <end type="TARGET" refId="39"/>  
+  </generalization>  
+  <association id="136">    
+    <bendpoint x="3034" y="1301"/>    
+    <bendpoint x="3034" y="1708"/>    
+    <end type="SOURCE" refId="70" navigable="false">      
+      <attribute id="137" name="cells">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="138" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="65" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="139">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="140" name="type">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="141" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="40" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="142">    
+    <bendpoint x="2240" y="4157"/>    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="143" name="direction">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="144" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="69" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="145">    
+    <end type="SOURCE" refId="66" navigable="false">      
+      <attribute id="146" name="pendingMovable">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="147" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="60" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="148">    
+    <end type="SOURCE" refId="66" navigable="false">      
+      <attribute id="149" name="addedCharacter">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="150" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="61" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="151">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="21"/>  
+  </realization>  
+  <association id="152">    
+    <end type="SOURCE" refId="65" navigable="false">      
+      <attribute id="153" name="cellNPC">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="154" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="58" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="155">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="156" name="backward">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="157" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="69" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="158">    
+    <bendpoint x="1835" y="3498"/>    
+    <end type="SOURCE" refId="37"/>    
+    <end type="TARGET" refId="21"/>  
+  </realization>  
+  <realization id="159">    
+    <end type="SOURCE" refId="24"/>    
+    <end type="TARGET" refId="68"/>  
+  </realization>  
+  <association id="160">    
+    <end type="SOURCE" refId="65" navigable="false">      
+      <attribute id="161" name="item">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="162" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="39" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="163">    
+    <end type="SOURCE" refId="51"/>    
+    <end type="TARGET" refId="39"/>  
+  </generalization>  
+  <generalization id="164">    
+    <bendpoint x="3055" y="2983"/>    
+    <bendpoint x="3055" y="2630"/>    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <generalization id="165">    
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="20"/>  
+  </generalization>  
+  <association id="166">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="167" name="heroStats">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="168" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="169">    
+    <end type="SOURCE" refId="41"/>    
+    <end type="TARGET" refId="39"/>  
+  </generalization>  
+  <generalization id="170">    
+    <end type="SOURCE" refId="43"/>    
+    <end type="TARGET" refId="39"/>  
+  </generalization>  
+  <generalization id="171">    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="20"/>  
+  </generalization>  
+  <generalization id="172">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="17"/>  
+  </generalization>  
+  <generalization id="173">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="14"/>  
+  </generalization>  
+  <association id="174">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="175" name="attackList">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="176" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="177">    
+    <end type="SOURCE" refId="33"/>    
+    <end type="TARGET" refId="20"/>  
+  </generalization>  
+  <association id="178">    
+    <end type="SOURCE" refId="74" navigable="false">      
+      <attribute id="179" name="myMap">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="180" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="70" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="181">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="20"/>  
+  </generalization>  
+  <generalization id="182">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="12"/>  
+  </generalization>  
+  <association id="183">    
+    <end type="SOURCE" refId="74" navigable="false">      
+      <attribute id="184" name="gameStat">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="185" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="72" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="186">    
+    <end type="SOURCE" refId="52" navigable="false">      
+      <attribute id="187" name="mpPotion">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="188" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="53" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="189">    
+    <end type="SOURCE" refId="55" navigable="false">      
+      <attribute id="190" name="healthItem">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="191" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="54" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="192">    
+    <end type="SOURCE" refId="60" navigable="false">      
+      <attribute id="193" name="movable">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="194" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="195">    
+    <end type="SOURCE" refId="56" navigable="false">      
+      <attribute id="196" name="hero">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="197" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="198">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="20"/>  
+  </generalization>  
+  <association id="199">    
+    <end type="SOURCE" refId="41" navigable="false">      
+      <attribute id="200" name="defenseItem">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="201" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="42" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="202">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="203" name="lastAttack">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="204" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="205">    
+    <end type="SOURCE" refId="49"/>    
+    <end type="TARGET" refId="39"/>  
+  </generalization>  
+  <realization id="206">    
+    <end type="SOURCE" refId="53"/>    
+    <end type="TARGET" refId="44"/>  
+  </realization>  
+  <association id="207">    
+    <bendpoint x="4402" y="534"/>    
+    <bendpoint x="4402" y="1301"/>    
+    <bendpoint x="4402" y="1708"/>    
+    <bendpoint x="4402" y="1989"/>    
+    <bendpoint x="4402" y="2630"/>    
+    <bendpoint x="4402" y="2983"/>    
+    <end type="SOURCE" refId="74" navigable="false">      
+      <attribute id="208" name="hero">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="209" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="210">    
+    <end type="SOURCE" refId="24"/>    
+    <end type="TARGET" refId="20"/>  
+  </generalization>  
+  <generalization id="211">    
+    <end type="SOURCE" refId="55"/>    
+    <end type="TARGET" refId="39"/>  
+  </generalization>  
+  <realization id="212">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="21"/>  
+  </realization>  
+  <generalization id="213">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="14"/>  
+  </generalization>  
+  <generalization id="214">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="2"/>  
+  </generalization>  
+  <association id="215">    
+    <end type="SOURCE" refId="65" navigable="false">      
+      <attribute id="216" name="gameCharacter">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="217" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="218">    
+    <bendpoint x="2120" y="3498"/>    
+    <end type="SOURCE" refId="43" navigable="false">      
+      <attribute id="219" name="launcher">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="220" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="221">    
+    <end type="SOURCE" refId="46"/>    
+    <end type="TARGET" refId="44"/>  
+  </realization>  
+  <association id="222">    
+    <end type="SOURCE" refId="51" navigable="false">      
+      <attribute id="223" name="mpItem">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="224" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="50" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="225">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="226" name="DEFAULTATKITEM">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="227" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="40" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="228">    
+    <end type="SOURCE" refId="47"/>    
+    <end type="TARGET" refId="39"/>  
+  </generalization>  
+  <association id="229">    
+    <end type="SOURCE" refId="66" navigable="false">      
+      <attribute id="230" name="pendingMoves">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="231" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="67" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="232">    
+    <end type="SOURCE" refId="32"/>    
+    <end type="TARGET" refId="20"/>  
+  </generalization>  
+  <generalization id="233">    
+    <end type="SOURCE" refId="36"/>    
+    <end type="TARGET" refId="20"/>  
+  </generalization>  
+  <association id="234">    
+    <end type="SOURCE" refId="70" navigable="false">      
+      <attribute id="235" name="action">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="236" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="66" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="237">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="14"/>  
+  </generalization>  
+  <generalization id="238">    
+    <end type="SOURCE" refId="35"/>    
+    <end type="TARGET" refId="20"/>  
+  </generalization>  
+  <realization id="239">    
+    <end type="SOURCE" refId="26"/>    
+    <end type="TARGET" refId="21"/>  
+  </realization>  
+  <generalization id="240">    
+    <end type="SOURCE" refId="34"/>    
+    <end type="TARGET" refId="33"/>  
+  </generalization>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

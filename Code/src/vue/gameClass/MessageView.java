@@ -47,7 +47,7 @@ public class MessageView {
 	}
 	
 	private void addText(String newText) {
-		if(newText.length() > 0) {
+		if(newText != null && newText.length() > 0 ) {
 			this.messagesToShow.add(format(newText));
 			this.showNext();
 			this.textProperty.set("");
