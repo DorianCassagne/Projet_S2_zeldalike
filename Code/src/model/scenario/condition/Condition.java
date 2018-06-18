@@ -117,6 +117,7 @@ public class Condition {
 	
 	private boolean calculateFromAbsolute(){
 		Integer integerId = Integer.parseInt(this.id);
+		System.out.println("The current id : " + actionData.getFinishedvents());
 		return actionData.getFinishedvents().contains(integerId) ^ this.conditionValue;
 	}
 	

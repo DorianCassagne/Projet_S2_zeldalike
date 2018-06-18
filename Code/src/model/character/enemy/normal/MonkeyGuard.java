@@ -29,7 +29,7 @@ public class MonkeyGuard extends EnemyNormal{
 	private final static int SCORE = 100;
 	private final static int[][][] POSITIONS = {
 			{{3740,3750},{3047,2967}},
-			{{2226,2994},{1042,249}},
+			{{3734,1417},{1298,1554},{310,318}},
 			{{7,6},{4,9}},
 			{{4,5},{4,9}},
 	};

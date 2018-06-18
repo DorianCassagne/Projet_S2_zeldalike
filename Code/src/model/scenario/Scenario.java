@@ -99,7 +99,7 @@ public class Scenario {
 				if(!this.finishedEvents.contains(i + 1) || !toCheckOld) {
 					Supplier<Boolean> condition = getCondition(scenario.get(i));
 					Supplier<Boolean>[] actions = this.getActions(scenario.get(i));
-					if(toCheckOld)
+					if(!toCheckOld)
 						this.events.add(0,new Evenement(Integer.MAX_VALUE,condition,actions));
 					else
 						this.events.add(0,new Evenement(i,condition,actions));
